@@ -10,7 +10,20 @@ use Symfony\Component\Console\Input\ArgvInput;
 $input = new ArgvInput();
 $env = $input->getParameterOption(array('--env', '-e'), getenv('SYMFONY_ENV') ?: 'dev');
 
-$app = require __DIR__.'/../src/app.php';
-require __DIR__.'/../config/'.$env.'.php';
-$console = require __DIR__.'/../src/console.php';
+$app = require __DIR__.'/../app/bootstrap.php';
+require __DIR__.'/../app/config/'.$env.'.php';
+
+$console = new Application('Honeylex - Cqrs+Es App Boilerplate', 'n/a');
+$console->getDefinition()->addOption(new InputOption('--env', '-e', InputOption::VALUE_REQUIRED, 'The Environment name.', 'dev'));
+$console->setDispatcher($app['dispatcher']);
+$console
+    ->register('my-command')
+    ->setDefinition(array(
+        // new InputOption('some-option', null, InputOption::VALUE_NONE, 'Some help'),
+    ))
+    ->setDescription('Honeylex command-line interface')
+    ->setCode(function (InputInterface $input, OutputInterface $output) use ($app) {
+        // do something
+    });
+
 $console->run();

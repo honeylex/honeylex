@@ -1,10 +1,11 @@
 {
-    "name": "honeybee/honeybee-silex-cmf-vendor",
+    "name": "honeybee/honeylex",
     "description": "Vendor library that is used in the honeybee-silex-cmf-project.",
     "license": "MIT",
     "type": "library",
     "require": {
         "php": ">=5.6.1",
+        "rdlowrey/auryn": "~1.1",
         "silex/silex": "~2.0",
         "silex/web-profiler": "~2.0",
         "symfony/asset": "~2.8|3.0.*",
@@ -30,7 +31,7 @@
     "prefer-stable": true,
     "minimum-stability": "dev",
     "autoload": {
-        "psr-0": { "Honeybee\\FrameworkBinding\\Silex\\": "src/" }
+        "psr-4": { "Honeybee\\FrameworkBinding\\Silex\\": "app/lib/" }
     },
     "scripts": {
         "run": [
