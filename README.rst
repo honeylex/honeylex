@@ -31,7 +31,6 @@ The Silex Skeleton is configured with the following service providers:
 Read the `Providers`_ documentation for more details about Silex Service
 Providers.
 
-Enjoy!
 
 .. _Composer: http://getcomposer.org/
 .. _Documentation: http://silex.sensiolabs.org/documentation
