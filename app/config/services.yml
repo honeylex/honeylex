@@ -11,7 +11,7 @@ honeybee.environment:
 #    class: My\Namespace\MyServiceProvisioner
 #    alias: My\Namespace\MyServiceInterface
 #    share: true
-#    setting:
+#    settings:
 #        base_url: http://api.example.com
 #        verify_ssl: false
 
