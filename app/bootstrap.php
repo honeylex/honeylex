@@ -1,19 +1,28 @@
 <?php
 
-use Silex\Application;
+use Auryn\Injector;
+use Auryn\StandardReflector;
+use Honeybee\FrameworkBinding\Silex\App;
+use Honeybee\FrameworkBinding\Silex\ConfigHandler\ServiceConfigHandler;
+use Honeybee\FrameworkBinding\Silex\ServiceProvisioner;
 use Silex\Provider\AssetServiceProvider;
-use Silex\Provider\TwigServiceProvider;
-use Silex\Provider\ServiceControllerServiceProvider;
 use Silex\Provider\HttpFragmentServiceProvider;
+use Silex\Provider\ServiceControllerServiceProvider;
+use Silex\Provider\TwigServiceProvider;
+use Symfony\Component\Yaml\Parser;
 
-$app = new Application();
+$serviceConfigHandler = new ServiceConfigHandler(new Parser);
+$serviceDefinitions = $serviceConfigHandler->handle(realpath(__DIR__ . '/config/services.yml'));
+$serviceProvisioner = new ServiceProvisioner(new Injector(new StandardReflector), $serviceDefinitions);
+
+$app = new App($serviceProvisioner->provision());
 $app->register(new ServiceControllerServiceProvider());
 $app->register(new AssetServiceProvider());
 $app->register(new TwigServiceProvider());
 $app->register(new HttpFragmentServiceProvider());
+
 $app['twig'] = $app->extend('twig', function ($twig, $app) {
     // add custom globals, filters, tags, ...
-
     return $twig;
 });
 

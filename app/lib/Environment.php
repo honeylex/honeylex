@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Silex\Environment;
+namespace Honeybee\FrameworkBinding\Silex;
 
 use Honeybee\EnvironmentInterface;
 use Honeybee\Infrastructure\Config\ConfigInterface;
