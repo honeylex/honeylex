@@ -1,0 +1,2 @@
+system_account:
+  class: Honeybee\SystemAccount\SystemAccountCrate

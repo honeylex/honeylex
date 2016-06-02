@@ -1,27 +1,23 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Silex\Provisioner;
+namespace Honeybee\FrameworkBinding\Silex\Service\Provisioner;
 
 use Auryn\Injector;
 use Honeybee\Common\Error\ConfigError;
-use Honeybee\FrameworkBinding\Silex\App;
 use Honeybee\Infrastructure\Config\SettingsInterface;
 use Honeybee\ServiceDefinitionInterface;
-use Symfony\Component\Security\Core\User\User;
+use Pimple\Container;
 
-class EnvironmentProvisioner implements ProvisionerInterface
+class DefaultProvisioner implements ProvisionerInterface
 {
     public function provision(
-        App $app,
+        Container $app,
         Injector $injector,
         ServiceDefinitionInterface $serviceDefinition,
         SettingsInterface $provisionerSettings
     ) {
         $service = $serviceDefinition->getClass();
-        $state = [
-            ':config' => $serviceDefinition->getConfig(),
-            ':user' => new User('hodor', 'srsly?', [ 'default' ], true, true, true, true)
-        ];
+        $state = [ ':config' => $serviceDefinition->getConfig() ];
         $injector->define($service, $state);
         // there will only be one instance of the service when the "share" setting is true
         if ($provisionerSettings->get('share', true) === true) {

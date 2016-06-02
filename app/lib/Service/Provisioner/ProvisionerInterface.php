@@ -1,16 +1,16 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Silex\Provisioner;
+namespace Honeybee\FrameworkBinding\Silex\Service\Provisioner;
 
 use Auryn\Injector;
-use Honeybee\FrameworkBinding\Silex\App;
 use Honeybee\Infrastructure\Config\SettingsInterface;
 use Honeybee\ServiceDefinitionInterface;
+use Pimple\Container;
 
 interface ProvisionerInterface
 {
     public function provision(
-        App $app,
+        Container $app,
         Injector $injector,
         ServiceDefinitionInterface $serviceDefinition,
         SettingsInterface $provisionerSettings

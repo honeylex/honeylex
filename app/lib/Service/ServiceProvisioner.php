@@ -1,14 +1,12 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Silex;
+namespace Honeybee\FrameworkBinding\Silex\Service;
 
 use Auryn\Injector;
 use Closure;
 use Honeybee\Common\Error\ConfigError;
-use Honeybee\FrameworkBinding\Silex\Provisioner\DefaultProvisioner;
-use Honeybee\FrameworkBinding\Silex\Provisioner\EnvironmentProvisioner;
-use Honeybee\FrameworkBinding\Silex\Provisioner\ProvisionerInterface;
-use Honeybee\FrameworkBinding\Silex\Provisioner\TemplateRendererProvisioner;
+use Honeybee\FrameworkBinding\Silex\Service\Provisioner\DefaultProvisioner;
+use Honeybee\FrameworkBinding\Silex\Service\Provisioner\ProvisionerInterface;
 use Honeybee\Infrastructure\Config\Settings;
 use Honeybee\Model\Aggregate\AggregateRootTypeMap;
 use Honeybee\Projection\ProjectionTypeMap;
@@ -17,6 +15,7 @@ use Honeybee\ServiceDefinitionMap;
 use Honeybee\ServiceLocator;
 use Honeybee\ServiceLocatorInterface;
 use Honeybee\ServiceProvisionerInterface;
+use Pimple\Container;
 
 class ServiceProvisioner implements ServiceProvisionerInterface
 {
@@ -34,7 +33,7 @@ class ServiceProvisioner implements ServiceProvisionerInterface
 
     protected $provisionedServices = [];
 
-    public function __construct(App $app, Injector $injector, ServiceDefinitionMap $serviceDefinitions)
+    public function __construct(Container $app, Injector $injector, ServiceDefinitionMap $serviceDefinitions)
     {
         $this->app = $app;
         $this->injector = $injector;
@@ -45,7 +44,6 @@ class ServiceProvisioner implements ServiceProvisionerInterface
 
     public function provision()
     {
-        $this->injector->share($this->serviceDefinitions);
         $this->injector->share($this->aggregateRootTypeMap);
         $this->injector->share($this->projectionTypeMap);
 
@@ -56,19 +54,27 @@ class ServiceProvisioner implements ServiceProvisionerInterface
             $this->injector->share($projectionType);
         }
 
-        $this->provisionServices();
+        $this->evaluateServiceDefinitions();
 
-        return $this->createServiceLocator();
+        $serviceLocatorState = [
+            ':service_definition_map' => $this->serviceDefinitions,
+            ':di_container' => $this->injector
+        ];
+
+        return $this->injector
+            ->share(ServiceLocator::CLASS)
+            ->alias(ServiceLocatorInterface::CLASS, ServiceLocator::CLASS)
+            ->make(ServiceLocator::CLASS, $serviceLocatorState);
     }
 
-    protected function provisionServices()
+    protected function evaluateServiceDefinitions()
     {
         $remainingServices = array_diff($this->serviceDefinitions->getKeys(), $this->provisionedServices);
         $defaultProvisioner = static::$defaultProvisionerClass;
 
         foreach ($remainingServices as $serviceKey) {
             $serviceDefinition = $this->serviceDefinitions->getItem($serviceKey);
-            $this->provisionService(
+            $this->evaluateServiceDefinition(
                 $serviceKey,
                 function (ServiceDefinitionInterface $serviceDefinition) use ($defaultProvisioner) {
                     $this->injector
@@ -79,7 +85,7 @@ class ServiceProvisioner implements ServiceProvisionerInterface
         }
     }
 
-    protected function provisionService($serviceAlias, Closure $default_provisioning, array $settings = [])
+    protected function evaluateServiceDefinition($serviceAlias, Closure $default_provisioning, array $settings = [])
     {
         if (!$this->serviceDefinitions->hasKey($serviceAlias)) {
             throw new RuntimeError(
@@ -129,13 +135,5 @@ class ServiceProvisioner implements ServiceProvisionerInterface
                 )
             );
         }
-    }
-
-    protected function createServiceLocator()
-    {
-        return $this->injector
-            ->share(ServiceLocator::CLASS)
-            ->alias(ServiceLocatorInterface::CLASS, ServiceLocator::CLASS)
-            ->make(ServiceLocator::CLASS);
     }
 }

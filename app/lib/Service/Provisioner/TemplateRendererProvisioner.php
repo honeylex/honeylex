@@ -1,18 +1,19 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Silex\Provisioner;
+namespace Honeybee\FrameworkBinding\Silex\Service\Provisioner;
 
 use Auryn\Injector;
-use Honeybee\FrameworkBinding\Silex\App;
 use Honeybee\Infrastructure\Config\SettingsInterface;
 use Honeybee\Infrastructure\Template\TemplateRendererInterface;
 use Honeybee\ServiceDefinitionInterface;
+use Pimple\Container;
 use Silex\Provider\TwigServiceProvider;
+use Symfony\Component\Filesystem\Filesystem;
 
 class TemplateRendererProvisioner implements ProvisionerInterface
 {
     public function provision(
-        App $app,
+        Container $app,
         Injector $injector,
         ServiceDefinitionInterface $serviceDefinition,
         SettingsInterface $provisionerSettings
@@ -30,8 +31,8 @@ class TemplateRendererProvisioner implements ProvisionerInterface
             ->alias(TemplateRendererInterface::CLASS, $service)
             ->delegate(
                 $service,
-                function () use ($service, $app) {
-                    return new $service([ ':twig' => $app['twig'] ]);
+                function (Filesystem $filesystem) use ($service, $app) {
+                    return new $service($app['twig'], $filesystem);
                 }
             );
     }

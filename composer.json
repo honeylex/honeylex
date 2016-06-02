@@ -23,6 +23,7 @@
         "symfony/translation": "~2.8|3.0.*",
         "symfony/twig-bridge": "~2.8|3.0.*",
         "symfony/validator": "~2.8|3.0.*",
+        "beberlei/assert": "~2.5",
         "honeybee/honeybee": "master@dev"
     },
     "require-dev": {
@@ -31,7 +32,10 @@
     "prefer-stable": true,
     "minimum-stability": "dev",
     "autoload": {
-        "psr-4": { "Honeybee\\FrameworkBinding\\Silex\\": "app/lib/" }
+        "psr-4": {
+            "Honeybee\\FrameworkBinding\\Silex\\": "app/lib/",
+            "Honeybee\\SystemAccount\\": "app/crates/SystemAccount/lib/"
+        }
     },
     "scripts": {
         "run": [

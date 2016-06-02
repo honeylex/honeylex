@@ -1,18 +1,24 @@
 <?php
 
-use Honeybee\FrameworkBinding\Silex\App;
+use Honeybee\FrameworkBinding\Silex\Bootstrap;
+use Honeybee\FrameworkBinding\Silex\ConfigHandler\CrateConfigHandler;
 use Honeybee\FrameworkBinding\Silex\ConfigHandler\ServiceConfigHandler;
-use Silex\Provider\AssetServiceProvider;
-use Silex\Provider\HttpFragmentServiceProvider;
-use Silex\Provider\ServiceControllerServiceProvider;
+use Honeybee\FrameworkBinding\Silex\Crate\CrateLoader;
+use Honeybee\Infrastructure\Config\ArrayConfig;
+use Silex\Application;
 use Symfony\Component\Yaml\Parser;
 
 $serviceConfigHandler = new ServiceConfigHandler(new Parser);
-$serviceDefinitions = $serviceConfigHandler->handle(realpath(__DIR__ . '/config/services.yml'));
+$serviceDefinitionMap = $serviceConfigHandler->handle(__DIR__ . '/config/services.yml');
 
-$app = new App($serviceDefinitions);
-$app->register(new ServiceControllerServiceProvider());
-$app->register(new AssetServiceProvider());
-$app->register(new HttpFragmentServiceProvider());
+$crateConfigHandler = new CrateConfigHandler(new Parser);
+$crateMetadataMap = $crateConfigHandler->handle(__DIR__ . '/config/crates.yml');
+
+$bootstrapConfig = new ArrayConfig([ 'app' => Application::CLASS ]);
+$bootstrap = new Bootstrap($bootstrapConfig, new CrateLoader());
+
+$app = $bootstrap($crateMetadataMap, $serviceDefinitionMap);
+
+require __DIR__ . '/config/' . $appEnv . '.php';
 
 return $app;
