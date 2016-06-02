@@ -13,13 +13,10 @@ class Environment implements EnvironmentInterface
 
     protected $config;
 
-    protected $logger;
-
-    public function __construct(User $user, ConfigInterface $config, LoggerInterface $logger)
+    public function __construct(ConfigInterface $config, User $user)
     {
         $this->user = $user;
         $this->config = $config;
-        $this->logger = $logger;
     }
 
     public function getUser()

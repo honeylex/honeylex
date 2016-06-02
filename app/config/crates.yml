@@ -1,2 +1,5 @@
+#
+# define the crates that are used by the app (must be known to the autoloader).
+---
 system_account:
   class: Honeybee\SystemAccount\SystemAccountCrate

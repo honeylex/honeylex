@@ -3,18 +3,22 @@
 namespace Honeybee\SystemAccount\User\Controller;
 
 use Honeybee\Infrastructure\Template\TemplateRendererInterface;
+use Honeybee\SystemAccount\User\HelloService;
 
 class UserDefaultController
 {
-    protected $template_renderer;
+    protected $templateRenderer;
 
-    public function __construct(TemplateRendererInterface $template_renderer)
+    protected $helloService;
+
+    public function __construct(TemplateRendererInterface $templateRenderer, HelloService $helloService)
     {
-        $this->template_renderer = $template_renderer;
+        $this->templateRenderer = $templateRenderer;
+        $this->helloService = $helloService;
     }
 
     public function indexAction()
     {
-        return $this->template_renderer->render('user_index.twig', []);
+        return $this->templateRenderer->render('user_index.twig', [ 'message' => $this->helloService->greet() ]);
     }
 }

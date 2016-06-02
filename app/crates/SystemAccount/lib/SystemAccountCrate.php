@@ -2,13 +2,11 @@
 
 namespace Honeybee\SystemAccount;
 
-use Honeybee\FrameworkBinding\Silex\Crate\CrateInterface;
-use Honeybee\SystemAccount\User\Controller\UserControllerProvider;
+use Honeybee\FrameworkBinding\Silex\Crate\Crate;
 use Honeybee\SystemAccount\User\Controller\UserDefaultController;
-use Silex\Api\ControllerProviderInterface;
 use Silex\Application;
 
-class SystemAccountCrate implements CrateInterface
+class SystemAccountCrate extends Crate
 {
     public function getPrefix()
     {

@@ -4,17 +4,11 @@ namespace Honeybee\FrameworkBinding\Silex;
 
 use Auryn\Injector;
 use Auryn\StandardReflector;
-use Honeybee\Common\Error\ConfigError;
 use Honeybee\FrameworkBinding\Silex\Config\ConfigLoader;
 use Honeybee\FrameworkBinding\Silex\Controller\ControllerResolverServiceProvider;
 use Honeybee\FrameworkBinding\Silex\Crate\CrateLoaderInterface;
-use Honeybee\FrameworkBinding\Silex\Crate\CrateMap;
-use Honeybee\FrameworkBinding\Silex\Crate\CrateMetadataMap;
 use Honeybee\FrameworkBinding\Silex\Service\ServiceProvider;
 use Honeybee\FrameworkBinding\Silex\Service\ServiceProvisioner;
-use Honeybee\Infrastructure\Config\ConfigInterface;
-use Honeybee\ServiceDefinitionMap;
-use Pimple\Container;
 use Silex\Application;
 use Silex\Provider\AssetServiceProvider;
 use Silex\Provider\HttpFragmentServiceProvider;
@@ -37,7 +31,7 @@ class Bootstrap
         $crates = $this->crateLoader->loadCrates($app, $crateMetadataMap);
 
         $injector = new Injector(new StandardReflector);
-        $serviceDefinitionMap = $this->configLoader->loadConfig('services.yml');
+        $serviceDefinitionMap = $this->configLoader->loadConfig('services.yml', $crates);
         $serviceProvisioner = new ServiceProvisioner($app, $injector, $serviceDefinitionMap);
 
         $app->register(new ServiceProvider($serviceProvisioner));

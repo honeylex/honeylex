@@ -2,6 +2,8 @@
 
 namespace Honeybee\FrameworkBinding\Silex\Config;
 
+use Honeybee\FrameworkBinding\Silex\Crate\CrateMap;
+use Honeybee\Infrastructure\Config\ArrayConfig;
 use Honeybee\Infrastructure\Config\ConfigInterface;
 
 class ConfigLoader
@@ -13,12 +15,23 @@ class ConfigLoader
         $this->config = $config;
     }
 
-    public function loadConfig($name)
+    public function loadConfig($name, CrateMap $crateMap = null)
     {
-        $handlerClass = $this->config->get($name)->get('handler');
-        $handler = new $handlerClass;
-        $filePath = $this->config->get('core.config_dir') . '/' . $name;
+        $config = $this->config->get($name);
+        $handlerClass = $config->get('handler');
+        $handlerConfig = (array)$config->get('settings', []);
+        $handler = new $handlerClass(new ArrayConfig($handlerConfig));
+        $configFiles = [ $this->config->get('core.config_dir') . '/' . $name ];
 
-        return $handler->handle($filePath);
+        if ($crateMap) {
+            foreach ($crateMap as $prefix => $crate) {
+                $configFile = $crate->getConfigDir() . '/' . $name;
+                if (is_readable($configFile)) {
+                    $configFiles[] = $configFile;
+                }
+            }
+        }
+
+        return $handler->handle($configFiles);
     }
 }

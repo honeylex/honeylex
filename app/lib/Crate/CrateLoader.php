@@ -22,6 +22,6 @@ class CrateLoader implements CrateLoaderInterface
     {
         $crateClass = $crateMetadata->getClass();
 
-        return new $crateClass;
+        return new $crateClass($crateMetadata);
     }
 }

@@ -12,11 +12,11 @@ class CrateMetadata implements CrateMetadataInterface
 
     private $settings;
 
-    public function __construct($prefix, $class, SettingsInterface $settings)
+    public function __construct($prefix, $class, SettingsInterface $manifest)
     {
         $this->class = $class;
         $this->prefix = $prefix;
-        $this->settings = $settings;
+        $this->manifest = $manifest;
     }
 
     public function getClass()
