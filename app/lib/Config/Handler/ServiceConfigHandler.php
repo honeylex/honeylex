@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Silex\ConfigHandler;
+namespace Honeybee\FrameworkBinding\Silex\Config\Handler;
 
 use Honeybee\Common\Error\ConfigError;
 use Honeybee\ServiceDefinition;
@@ -10,15 +10,11 @@ use Symfony\Component\Yaml\Parser;
 
 class ServiceConfigHandler
 {
-    public function __construct(Parser $parser)
-    {
-        $this->parser = $parser;
-    }
-
     public function handle($configFile)
     {
+        $parser = new Parser;
         $serviceDefinitionMap = new ServiceDefinitionMap;
-        $serviceConfigs = $this->parser->parse(file_get_contents($configFile));
+        $serviceConfigs = $parser->parse(file_get_contents($configFile));
 
         foreach ($serviceConfigs as $serviceKey => $serviceDefState) {
             $serviceDefState['name'] = $serviceKey;

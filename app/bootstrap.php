@@ -1,23 +1,18 @@
 <?php
 
 use Honeybee\FrameworkBinding\Silex\Bootstrap;
-use Honeybee\FrameworkBinding\Silex\ConfigHandler\CrateConfigHandler;
-use Honeybee\FrameworkBinding\Silex\ConfigHandler\ServiceConfigHandler;
+use Honeybee\FrameworkBinding\Silex\Config\ConfigLoader;
 use Honeybee\FrameworkBinding\Silex\Crate\CrateLoader;
 use Honeybee\Infrastructure\Config\ArrayConfig;
 use Silex\Application;
 use Symfony\Component\Yaml\Parser;
 
-$serviceConfigHandler = new ServiceConfigHandler(new Parser);
-$serviceDefinitionMap = $serviceConfigHandler->handle(__DIR__ . '/config/services.yml');
+$loaderConfig = (new Parser)->parse(file_get_contents(__DIR__ . '/config/configs.yml'));
+$loaderConfig['core.config_dir'] = __DIR__ . '/config';
+$configLoader = new ConfigLoader(new ArrayConfig($loaderConfig));
 
-$crateConfigHandler = new CrateConfigHandler(new Parser);
-$crateMetadataMap = $crateConfigHandler->handle(__DIR__ . '/config/crates.yml');
-
-$bootstrapConfig = new ArrayConfig([ 'app' => Application::CLASS ]);
-$bootstrap = new Bootstrap($bootstrapConfig, new CrateLoader());
-
-$app = $bootstrap($crateMetadataMap, $serviceDefinitionMap);
+$bootstrap = new Bootstrap($configLoader, new CrateLoader);
+$app = $bootstrap(new Application);
 
 require __DIR__ . '/config/' . $appEnv . '.php';
 

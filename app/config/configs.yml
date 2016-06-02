@@ -1,0 +1,5 @@
+crates.yml:
+  handler: Honeybee\FrameworkBinding\Silex\Config\Handler\CrateConfigHandler
+
+services.yml:
+  handler: Honeybee\FrameworkBinding\Silex\Config\Handler\ServiceConfigHandler

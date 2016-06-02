@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Silex\ConfigHandler;
+namespace Honeybee\FrameworkBinding\Silex\Config\Handler;
 
 use Honeybee\Common\Error\ConfigError;
 use Honeybee\FrameworkBinding\Silex\Crate\CrateMetadata;
@@ -13,15 +13,11 @@ use Symfony\Component\Yaml\Parser;
 
 class CrateConfigHandler
 {
-    public function __construct(Parser $parser)
-    {
-        $this->parser = $parser;
-    }
-
     public function handle($configFile)
     {
+        $parser = new Parser;
         $crateMetadataMap = new CrateMetadataMap;
-        $cratesConfig = $this->parser->parse(file_get_contents($configFile));
+        $cratesConfig = $parser->parse(file_get_contents($configFile));
 
         foreach ($cratesConfig as $cratePrefix => $crateConfig) {
             $crateClass = $crateConfig['class'];
