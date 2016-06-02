@@ -1,7 +1,7 @@
 Honeylex App Skeleton
 ==============
 
-Test integration of the honeybee cqrs+es lib into the silex app-framework.
+Test integration of the honeybee cqrs+es lib with the silex app-framework.
 
 What silex stuff is included?
 ---------------
