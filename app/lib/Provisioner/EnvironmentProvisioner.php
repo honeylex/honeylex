@@ -4,6 +4,7 @@ namespace Honeybee\FrameworkBinding\Silex\Provisioner;
 
 use Auryn\Injector;
 use Honeybee\Common\Error\ConfigError;
+use Honeybee\FrameworkBinding\Silex\App;
 use Honeybee\Infrastructure\Config\SettingsInterface;
 use Honeybee\ServiceDefinitionInterface;
 use Symfony\Component\Security\Core\User\User;
@@ -11,6 +12,7 @@ use Symfony\Component\Security\Core\User\User;
 class EnvironmentProvisioner implements ProvisionerInterface
 {
     public function provision(
+        App $app,
         Injector $injector,
         ServiceDefinitionInterface $serviceDefinition,
         SettingsInterface $provisionerSettings

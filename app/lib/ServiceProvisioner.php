@@ -8,11 +8,13 @@ use Honeybee\Common\Error\ConfigError;
 use Honeybee\FrameworkBinding\Silex\Provisioner\DefaultProvisioner;
 use Honeybee\FrameworkBinding\Silex\Provisioner\EnvironmentProvisioner;
 use Honeybee\FrameworkBinding\Silex\Provisioner\ProvisionerInterface;
+use Honeybee\FrameworkBinding\Silex\Provisioner\TemplateRendererProvisioner;
 use Honeybee\Infrastructure\Config\Settings;
 use Honeybee\Model\Aggregate\AggregateRootTypeMap;
 use Honeybee\Projection\ProjectionTypeMap;
 use Honeybee\ServiceDefinitionInterface;
 use Honeybee\ServiceDefinitionMap;
+use Honeybee\ServiceLocator;
 use Honeybee\ServiceLocatorInterface;
 use Honeybee\ServiceProvisionerInterface;
 
@@ -20,9 +22,7 @@ class ServiceProvisioner implements ServiceProvisionerInterface
 {
     protected static $defaultProvisionerClass = DefaultProvisioner::CLASS;
 
-    protected static $defaultProvisioners = [
-        'honeybee.environment' => EnvironmentProvisioner::CLASS,
-    ];
+    protected $app;
 
     protected $injector;
 
@@ -34,8 +34,9 @@ class ServiceProvisioner implements ServiceProvisionerInterface
 
     protected $provisionedServices = [];
 
-    public function __construct(Injector $injector, ServiceDefinitionMap $serviceDefinitions)
+    public function __construct(App $app, Injector $injector, ServiceDefinitionMap $serviceDefinitions)
     {
+        $this->app = $app;
         $this->injector = $injector;
         $this->serviceDefinitions = $serviceDefinitions;
         $this->aggregateRootTypeMap = new AggregateRootTypeMap;
@@ -55,15 +56,6 @@ class ServiceProvisioner implements ServiceProvisionerInterface
             $this->injector->share($projectionType);
         }
 
-        foreach (self::$defaultProvisioners as $serviceKey => $defaultProvisioner) {
-            $this->provisionService(
-                $serviceKey,
-                function (ServiceDefinitionInterface $serviceDefinition) use ($defaultProvisioner) {
-                    $this->injector->make($defaultProvisioner)->provision($this->injector, $serviceDefinition, new Settings([]));
-                }
-            );
-        }
-
         $this->provisionServices();
 
         return $this->createServiceLocator();
@@ -79,7 +71,9 @@ class ServiceProvisioner implements ServiceProvisionerInterface
             $this->provisionService(
                 $serviceKey,
                 function (ServiceDefinitionInterface $serviceDefinition) use ($defaultProvisioner) {
-                    $this->injector->make($defaultProvisioner)->provision($this->injector, $serviceDefinition, new Settings([]));
+                    $this->injector
+                        ->make($defaultProvisioner)
+                        ->provision($this->app, $this->injector, $serviceDefinition, new Settings([]));
                 }
             );
         }
@@ -126,7 +120,7 @@ class ServiceProvisioner implements ServiceProvisionerInterface
         if (!empty($provisionerMethod) && is_callable($provisionerCallable)) {
             $provisioner->$provisionerMethod($serviceDefinition, $provisioner_settings);
         } elseif ($provisioner instanceof ProvisionerInterface) {
-            $provisioner->provision($this->injector, $serviceDefinition, $provisioner_settings);
+            $provisioner->provision($this->app, $this->injector, $serviceDefinition, $provisioner_settings);
         } else {
             throw new ConfigError(
                 sprintf(
@@ -139,11 +133,9 @@ class ServiceProvisioner implements ServiceProvisionerInterface
 
     protected function createServiceLocator()
     {
-        $serviceDefinition = $this->serviceDefinitions->getItem('honeybee.service_locator');
-        $service = $serviceDefinition->getClass();
-
-        $this->injector->share($service)->alias(ServiceLocatorInterface::CLASS, $service);
-
-        return $this->injector->make($service);
+        return $this->injector
+            ->share(ServiceLocator::CLASS)
+            ->alias(ServiceLocatorInterface::CLASS, ServiceLocator::CLASS)
+            ->make(ServiceLocator::CLASS);
     }
 }

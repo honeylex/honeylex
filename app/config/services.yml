@@ -1,8 +1,12 @@
-honeybee.service_locator:
-  class: Honeybee\ServiceLocator
-
 honeybee.environment:
   class: Honeybee\FrameworkBinding\Silex\Environment
+  provisioner:
+      class: Honeybee\FrameworkBinding\Silex\Provisioner\EnvironmentProvisioner
+
+honeybee.template_renderer:
+  class: Honeybee\Infrastructure\Template\Twig\TwigRenderer
+  provisioner:
+      class: Honeybee\FrameworkBinding\Silex\Provisioner\TemplateRendererProvisioner
 
 #my.service:
 #  class: My\Namespace\MyService
