@@ -27,8 +27,8 @@ class Bootstrap
 
     public function __invoke(Application $app)
     {
-        $crateMetadataMap = $this->configLoader->loadConfig('crates.yml');
-        $crates = $this->crateLoader->loadCrates($app, $crateMetadataMap);
+        $crateManifestMap = $this->configLoader->loadConfig('crates.yml');
+        $crates = $this->crateLoader->loadCrates($app, $crateManifestMap);
 
         $injector = new Injector(new StandardReflector);
         $serviceDefinitionMap = $this->configLoader->loadConfig('services.yml', $crates);

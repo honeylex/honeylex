@@ -8,11 +8,6 @@ use Silex\Application;
 
 class SystemAccountCrate extends Crate
 {
-    public function getPrefix()
-    {
-        return 'system_account';
-    }
-
     public function connect(Application $app)
     {
         $controllers = $app['controllers_factory'];

@@ -2,10 +2,10 @@
 
 namespace Honeybee\FrameworkBinding\Silex\Crate;
 
-use Honeybee\FrameworkBinding\Silex\Crate\CrateMetadataMap;
+use Honeybee\FrameworkBinding\Silex\Crate\CrateManifestMap;
 use Silex\Application;
 
 interface CrateLoaderInterface
 {
-    public function loadCrates(Application $app, CrateMetadataMap $crateMetadataMap);
+    public function loadCrates(Application $app, CrateManifestMap $crateManifestMap);
 }

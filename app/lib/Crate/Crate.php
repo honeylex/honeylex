@@ -2,37 +2,42 @@
 
 namespace Honeybee\FrameworkBinding\Silex\Crate;
 
+use Honeybee\Common\Error\RuntimeError;
 use ReflectionClass;
 use Silex\Application;
 
 abstract class Crate implements CrateInterface
 {
-    private $rootDir;
+    private $manifest;
 
-    private $metadata;
-
-    public function __construct(CrateMetadataInterface $metadata)
+    public function __construct(CrateManifestInterface $manifest)
     {
-        $this->metadata = $metadata;
+        $this->manifest = $manifest;
     }
 
-    public function getMetadata()
+    public function getManifest()
     {
-        return $this->metadata;
-    }
-
-    public function getRootDir()
-    {
-        if (!$this->rootDir) {
-            $reflector = new ReflectionClass(static::CLASS);
-            $this->rootDir = dirname(dirname($reflector->getFileName()));
-        }
-
-        return $this->rootDir;
+        return $this->manifest;
     }
 
     public function getConfigDir()
     {
         return $this->getRootDir() . '/config';
+    }
+
+    public function __call($method, $arguments)
+    {
+        if (!method_exists($this->manifest, $method)) {
+            throw new RuntimeError(
+                sprintf(
+                    'Method "%s" does not exist on "%s" or "%s".',
+                    get_class($this),
+                    get_class($this->manifest),
+                    $method
+                )
+            );
+        }
+
+        return call_user_func_array(array($this->manifest, $method), $arguments);
     }
 }

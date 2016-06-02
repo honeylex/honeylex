@@ -1,3 +1,4 @@
+---
 name: SystemAccount
-author: thorsten schmitt-rink
-email: schmittrink@gmail.com
+prefix: system_account
+description: Standard crate for managing system-accounts, users and roles.

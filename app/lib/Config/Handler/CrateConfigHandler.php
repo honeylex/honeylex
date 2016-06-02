@@ -2,9 +2,10 @@
 
 namespace Honeybee\FrameworkBinding\Silex\Config\Handler;
 
+use ReflectionClass;
 use Honeybee\Common\Error\ConfigError;
-use Honeybee\FrameworkBinding\Silex\Crate\CrateMetadata;
-use Honeybee\FrameworkBinding\Silex\Crate\CrateMetadataMap;
+use Honeybee\FrameworkBinding\Silex\Crate\CrateManifest;
+use Honeybee\FrameworkBinding\Silex\Crate\CrateManifestMap;
 use Honeybee\Infrastructure\Config\ConfigInterface;
 use Honeybee\Infrastructure\Config\Settings;
 use Honeybee\ServiceDefinition;
@@ -27,30 +28,32 @@ class CrateConfigHandler
 
     public function handle(array $configFiles)
     {
-        return array_reduce(
-            array_map([ $this, 'handlConfigFile' ], $configFiles), [ $this, 'mergeConfigs' ],
-            new CrateMetadataMap
-        );
+        if (count($configFiles) !== 1) {
+            throw new ConfigError('Unsupported number of crate.yml config files given.');
+        }
+
+        return $this->handlConfigFile($configFiles[0]);
     }
 
     protected function handlConfigFile($configFile)
     {
-        $crateMetadataMap = new CrateMetadataMap;
-        $cratesConfig = $this->yamlParser->parse(file_get_contents($configFile));
+        $manifestMap = new CrateManifestMap;
+        $crates = $this->yamlParser->parse(file_get_contents($configFile));
 
-        foreach ($cratesConfig as $cratePrefix => $crateConfig) {
-            $crateClass = $crateConfig['class'];
-            unset($crateConfig['class']);
-            $crateSettings = new Settings($crateConfig);
-            $crateMetadata = new CrateMetadata($cratePrefix, $crateClass, $crateSettings);
-            $crateMetadataMap->setItem($cratePrefix, $crateMetadata);
+        foreach ($crates as $implementor) {
+            $reflector = new ReflectionClass($implementor);
+            $root = dirname(dirname($reflector->getFileName()));
+            $manifestFile = $root . '/manifest.yml';
+            $manifest = $this->yamlParser->parse(file_get_contents($manifestFile));
+
+            $name = $manifest['name'];
+            $prefix = $manifest['prefix'];
+            $description = isset($manifest['description']) ? $manifest['description'] : '';
+
+            $metadata = new CrateManifest($root, $name, $prefix, $implementor, $description);
+            $manifestMap->setItem($manifest['prefix'], $metadata);
         }
 
-        return $crateMetadataMap;
-    }
-
-    protected function mergeConfigs(CrateMetadataMap $out, CrateMetadataMap $in)
-    {
-        return $out->append($in);
+        return $manifestMap;
     }
 }

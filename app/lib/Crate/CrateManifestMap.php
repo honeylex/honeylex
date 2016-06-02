@@ -2,14 +2,14 @@
 
 namespace Honeybee\FrameworkBinding\Silex\Crate;
 
-use Honeybee\FrameworkBinding\Silex\Crate\CrateMetadataInterface;
+use Honeybee\FrameworkBinding\Silex\Crate\CrateManifestInterface;
 use Trellis\Common\Collection\MandatoryKeyInterface;
 use Trellis\Common\Collection\TypedMap;
 
-class CrateMetadataMap extends TypedMap implements MandatoryKeyInterface
+class CrateManifestMap extends TypedMap implements MandatoryKeyInterface
 {
     public function getItemImplementor()
     {
-        return CrateMetadataInterface::CLASS;
+        return CrateManifestInterface::CLASS;
     }
 }

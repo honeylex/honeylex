@@ -2,11 +2,11 @@
 
 namespace Honeybee\FrameworkBinding\Silex\Crate;
 
-interface CrateMetadataInterface
+interface CrateManifestInterface
 {
     public function getClass();
 
     public function getPrefix();
 
-    public function getSettings();
+    public function getName();
 }

@@ -6,22 +6,22 @@ use Silex\Application;
 
 class CrateLoader implements CrateLoaderInterface
 {
-    public function loadCrates(Application $app, CrateMetadataMap $crateMetadataMap)
+    public function loadCrates(Application $app, CrateManifestMap $crateManifestMap)
     {
         $crateMap = new CrateMap;
-        foreach ($crateMetadataMap as $crateMetadata) {
-            $crate = $this->load($crateMetadata);
-            $crateMap->setItem($crateMetadata->getPrefix(), $crate);
-            $app->mount($crateMetadata->getPrefix(), $crate);
+        foreach ($crateManifestMap as $crateManifest) {
+            $crate = $this->load($crateManifest);
+            $crateMap->setItem($crateManifest->getPrefix(), $crate);
+            $app->mount($crateManifest->getPrefix(), $crate);
         }
 
         return $crateMap;
     }
 
-    protected function load(CrateMetadataInterface $crateMetadata)
+    protected function load(CrateManifestInterface $crateManifest)
     {
-        $crateClass = $crateMetadata->getClass();
+        $crateClass = $crateManifest->getClass();
 
-        return new $crateClass($crateMetadata);
+        return new $crateClass($crateManifest);
     }
 }
