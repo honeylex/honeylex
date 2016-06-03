@@ -5,6 +5,7 @@ namespace Honeybee\FrameworkBinding\Silex\Service;
 use Auryn\Injector;
 use Closure;
 use Honeybee\Common\Error\ConfigError;
+use Honeybee\Common\Util\StringToolkit;
 use Honeybee\FrameworkBinding\Silex\Config\ConfigProvider;
 use Honeybee\FrameworkBinding\Silex\Service\Provisioner\DefaultProvisioner;
 use Honeybee\FrameworkBinding\Silex\Service\Provisioner\ProvisionerInterface;
@@ -17,6 +18,11 @@ use Honeybee\ServiceLocator;
 use Honeybee\ServiceLocatorInterface;
 use Honeybee\ServiceProvisionerInterface;
 use Pimple\Container;
+use SplFileInfo;
+use Trellis\CodeGen\Parser\Config\ConfigIniParser;
+use Trellis\CodeGen\Parser\Schema\EntityTypeSchemaXmlParser;
+use Trellis\CodeGen\Schema\EntityTypeDefinition;
+use Workflux\Builder\XmlStateMachineBuilder;
 
 class ServiceProvisioner implements ServiceProvisionerInterface
 {
@@ -46,22 +52,11 @@ class ServiceProvisioner implements ServiceProvisionerInterface
         $this->injector = $injector;
         $this->configProvider = $configProvider;
         $this->serviceDefinitions = $serviceDefinitions;
-        $this->aggregateRootTypeMap = new AggregateRootTypeMap;
-        $this->projectionTypeMap = new ProjectionTypeMap;
     }
 
     public function provision()
     {
-        $this->injector->share($this->aggregateRootTypeMap);
-        $this->injector->share($this->projectionTypeMap);
-
-        foreach ($this->aggregateRootTypeMap as $aggregateRootType) {
-            $this->injector->share($aggregateRootType);
-        }
-        foreach ($this->projectionTypeMap as $projectionType) {
-            $this->injector->share($projectionType);
-        }
-
+        $this->registerEntityTypeMaps();
         $this->evaluateServiceDefinitions();
 
         $serviceLocatorState = [
@@ -73,6 +68,32 @@ class ServiceProvisioner implements ServiceProvisionerInterface
             ->share(ServiceLocator::CLASS)
             ->alias(ServiceLocatorInterface::CLASS, ServiceLocator::CLASS)
             ->make(ServiceLocator::CLASS, $serviceLocatorState);
+    }
+
+    protected function registerEntityTypeMaps()
+    {
+        $aggregateRootTypeMap = new AggregateRootTypeMap;
+        $projectionTypeMap = new ProjectionTypeMap;
+
+        foreach ($this->configProvider->getCrateMap() as $crate) {
+            foreach (glob($crate->getConfigDir() . '/*/entity_schema/aggregate_root.xml') as $schemaFile) {
+                $aggregateRootType = $this->loadEntityType($crate->getConfigDir(), $schemaFile);
+                $aggregateRootTypeMap->setItem($aggregateRootType->getPrefix(), $aggregateRootType);
+            }
+            foreach (glob($crate->getConfigDir() . '/*/entity_schema/projection/*.xml') as $schemaFile) {
+                $projectionType = $this->loadEntityType($crate->getConfigDir(), $schemaFile);
+                $projectionTypeMap->setItem($projectionType->getPrefix(), $projectionType);
+            }
+        }
+        $this->injector->share($aggregateRootTypeMap);
+        $this->injector->share($projectionTypeMap);
+
+        foreach ($aggregateRootTypeMap as $aggregateRootType) {
+            $this->injector->share($aggregateRootType);
+        }
+        foreach ($projectionTypeMap as $projectionType) {
+            $this->injector->share($projectionType);
+        }
     }
 
     protected function evaluateServiceDefinitions()
@@ -155,5 +176,43 @@ class ServiceProvisioner implements ServiceProvisionerInterface
                 )
             );
         }
+    }
+
+    protected function loadEntityType($crateConfigDir, $schemaFile)
+    {
+        $schemaFile = new SplFileInfo($schemaFile);
+        $iniParser = new ConfigIniParser;
+        $config = $iniParser->parse(sprintf('%s/%s.ini', $schemaFile->getPath(), $schemaFile->getBasename('.xml')));
+        $schema = (new EntityTypeSchemaXmlParser)->parse($schemaFile->getRealPath());
+        $entityType = $schema->getEntityTypeDefinition();
+
+        $class = sprintf('%s\\%s%s', $schema->getNamespace(), $entityType->getName(), $config->getTypeSuffix('Type'));
+        $workflowFile = sprintf('%s/%s/workflows.xml', $crateConfigDir, $entityType->getName());
+        $workflow = $this->loadWorkflow($entityType, $workflowFile);
+
+        return new $class($workflow);
+    }
+
+    protected function loadWorkflow(EntityTypeDefinition $entityType, $workflowFile)
+    {
+        $vendor = $entityType->getOptions()->filterByName('vendor');
+        $package = $entityType->getOptions()->filterByName('package');
+        if (!$vendor || !$package) {
+            throw new RuntimeError(
+                'Missing vendor- and/or package-option for entity-type: ' . $entityType->getName()
+            );
+        }
+
+        $builderConfig = [
+            'state_machine_definition' => $workflowFile,
+            'name' => sprintf(
+                '%s_%s_%s_workflow_default',
+                strtolower($vendor->getValue()),
+                StringToolkit::asSnakeCase($package->getValue()),
+                StringToolkit::asSnakeCase($entityType->getName())
+            )
+        ];
+
+        return (new XmlStateMachineBuilder($builderConfig))->build();
     }
 }
