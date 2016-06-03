@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Silex\Console\Command;
+namespace Honeybee\FrameworkBinding\Silex\Console\Command\Crate;
 
 use Honeybee\FrameworkBinding\Silex\Crate\CrateInterface;
 use Symfony\Component\Console\Input\InputArgument;

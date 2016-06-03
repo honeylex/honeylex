@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Silex\Console\Command;
+namespace Honeybee\FrameworkBinding\Silex\Console\Command\Crate;
 
 use Honeybee\Common\Util\StringToolkit;
 use Honeybee\FrameworkBinding\Silex\Config\ConfigProviderInterface;
@@ -50,13 +50,13 @@ class MakeCrate extends CrateCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $name = $input->getArgument('name');
-        $fqns = $input->getArgument('namespace');
+        $fqns = trim($input->getArgument('namespace'), "\\");
         $targetPath = $input->getArgument('path');
         if ($name && $targetPath && $fqns) {
-            $fqns = trim($fqns, "\\");
+            $prefix = StringToolkit::asSnakecase($name);
             $description = $input->getOption('description');
             $locations = $input->getOption('location') ?: 'not set';
-            $prefix = StringToolkit::asSnakecase($name);
+
             if (!is_array($locations)) {
                 $skeletonLocations = [
                     $this->configProvider->getCoreDir() . '/var/skeletons',
@@ -71,7 +71,7 @@ class MakeCrate extends CrateCommand
             $output->writeln('Crate prefix: ' . $prefix);
             $output->writeln('Crate namespace: ' . $fqns);
             $output->writeln('Crate description: ' . $description);
-            $output->writeln('Targetpath: ' . $targetPath);
+            $output->writeln('Crate dir: ' . $targetPath.'/'.$name);
             $output->writeln('Skeleton locations: ' . implode(', ', $skeletonLocations));
 
             $data = [

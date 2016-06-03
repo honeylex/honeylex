@@ -2,11 +2,11 @@
 <?php
 
 use Honeybee\FrameworkBinding\Silex\Console\App;
-use Honeybee\FrameworkBinding\Silex\Console\Command\CrateInfo;
+use Honeybee\FrameworkBinding\Silex\Console\Command\Crate\CrateInfo;
+use Honeybee\FrameworkBinding\Silex\Console\Command\Crate\ListCrates;
+use Honeybee\FrameworkBinding\Silex\Console\Command\Crate\MakeCrate;
+use Honeybee\FrameworkBinding\Silex\Console\Command\Crate\RemoveCrate;
 use Honeybee\FrameworkBinding\Silex\Console\Command\Hello;
-use Honeybee\FrameworkBinding\Silex\Console\Command\ListCrates;
-use Honeybee\FrameworkBinding\Silex\Console\Command\MakeCrate;
-use Honeybee\FrameworkBinding\Silex\Console\Command\RemoveCrate;
 use Symfony\Component\Console\Input\ArgvInput;
 
 $appContext = 'console';

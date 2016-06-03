@@ -1,26 +1,13 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Silex\Console\Command;
+namespace Honeybee\FrameworkBinding\Silex\Console\Command\Crate;
 
-use Honeybee\FrameworkBinding\Silex\Config\ConfigProviderInterface;
-use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Output\OutputInterface;
+use Honeybee\FrameworkBinding\Silex\Console\Command\Command;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Yaml\Yaml;
 
 abstract class CrateCommand extends Command
 {
-    protected $configProvider;
-
-    public function __construct(ConfigProviderInterface $configProvider)
-    {
-        $this->configProvider = $configProvider;
-
-        parent::__construct();
-    }
-
     protected function addAutoloadConfig($fqns, $cratePath)
     {
         $composerFile = $this->configProvider->getProjectDir().'/composer.json';
@@ -61,10 +48,10 @@ abstract class CrateCommand extends Command
     protected function updateCratesConfig(array $crates)
     {
         $cratesFile = $this->configProvider->getConfigDir().'/crates.yml';
-        (new Filesystem)->dumpFile($cratesFile, sprintf($this->getCratesFileTpl(), Yaml::dump($crates)));
+        (new Filesystem)->dumpFile($cratesFile, sprintf($this->getCratesConfigTemplate(), Yaml::dump($crates)));
     }
 
-    protected function getCratesFileTpl()
+    protected function getCratesConfigTemplate()
     {
         return <<<CRATES
 #
