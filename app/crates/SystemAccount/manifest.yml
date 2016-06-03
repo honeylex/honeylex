@@ -1,4 +1,5 @@
 ---
 name: SystemAccount
 prefix: system_account
+namespace: Honeybee\SystemAccount
 description: Standard crate for managing system-accounts, users and roles.

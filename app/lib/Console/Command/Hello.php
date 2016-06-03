@@ -10,20 +10,10 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class Hello extends Command
 {
-    const NAME = 'honeylex:hello';
-
-    protected $configProvider;
-
-    public function __construct(ConfigProviderInterface $configProvider)
-    {
-        $this->configProvider = $configProvider;
-
-        parent::__construct(self::NAME);
-    }
-
     protected function configure()
     {
         $this
+            ->setName('honeylex:hello')
             ->setDescription('Displays infos about the current setup.')
             ->addOption(
                 'info',

@@ -18,7 +18,7 @@ class ConfigProvider implements ConfigProviderInterface
     public function getVersion()
     {
         if (!$this->version) {
-            $versionFile = dirname(dirname($this->getCoreConfigDir())) . '/VERSION.txt';
+            $versionFile = $this->getCoreDir().'/VERSION.txt';
             $this->version = trim(file_get_contents($versionFile));
         }
         return $this->version;

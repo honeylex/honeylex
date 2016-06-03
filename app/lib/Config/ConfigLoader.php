@@ -31,6 +31,16 @@ class ConfigLoader implements ConfigLoaderInterface
         return $this->appEnv;
     }
 
+    public function getProjectDir()
+    {
+        return $this->config->get('project.dir');
+    }
+
+    public function getCoreDir()
+    {
+        return $this->config->get('core.dir');
+    }
+
     public function getConfigDir()
     {
         return $this->config->get('project.config_dir');

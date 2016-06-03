@@ -5,29 +5,17 @@ namespace Honeybee\FrameworkBinding\Silex\Console\Command;
 use Honeybee\Common\Util\StringToolkit;
 use Honeybee\FrameworkBinding\Silex\Config\ConfigProviderInterface;
 use Honeybee\FrameworkBinding\Silex\Console\Scafold\SkeletonGenerator;
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Yaml\Yaml;
 
-class MakeCrate extends Command
+class MakeCrate extends CrateCommand
 {
-    const NAME = 'honeylex:crate:mk';
-
-    protected $configProvider;
-
-    public function __construct(ConfigProviderInterface $configProvider)
-    {
-        $this->configProvider = $configProvider;
-
-        parent::__construct(self::NAME);
-    }
-
     protected function configure()
     {
         $this
+            ->setName('honeylex:crate:mk')
             ->setDescription('Makes a vanilla crate from a crate-template.')
             ->addOption(
                 'description',
@@ -72,8 +60,8 @@ class MakeCrate extends Command
             $prefix = StringToolkit::asSnakecase($name);
             if (!is_array($locations)) {
                 $skeletonLocations = [
-                    dirname(dirname($this->configProvider->getCoreConfigDir())) . '/var/skeletons',
-                    dirname(dirname($this->configProvider->getConfigDir())) . '/var/skeletons'
+                    $this->configProvider->getCoreDir() . '/var/skeletons',
+                    $this->configProvider->getProjectDir() . '/var/skeletons'
                 ];
             } else {
                 $skeletonLocations = $locations;
@@ -97,26 +85,16 @@ class MakeCrate extends Command
             ];
             $skeletonGenerator = new SkeletonGenerator('crate', $skeletonLocations, $targetPath, $data);
             $skeletonGenerator->generate();
+            $this->addAutoloadConfig($fqns, $targetPath.'/lib/');
 
-            $cratesFile = $this->configProvider->getConfigDir().'/crates.yml';
-            $cratesToLoad = [];
+            $crates = [];
             foreach ($this->configProvider->getCrateMap() as $crateToLoad) {
-                $cratesToLoad[] = get_class($crateToLoad);
+                $crates[] = get_class($crateToLoad);
             }
-            $cratesToLoad[] = $fqns.'\\'.$name.'Crate';
-            file_put_contents($cratesFile, sprintf($this->getCratesFileTpl(), Yaml::dump($cratesToLoad)));
+            $crates[] = $fqns.'\\'.$name.'Crate';
+            $this->updateCratesConfig($crates);
         } else {
             $output->writeln('<error>you must specify a crate name</error>');
         }
-    }
-
-    protected function getCratesFileTpl()
-    {
-        return <<<CRATES
-#
-# list of crates that will be loaded into the app.
----
-%s
-CRATES;
     }
 }

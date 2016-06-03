@@ -3,7 +3,6 @@
 namespace Honeybee\FrameworkBinding\Silex\Console\Scafold;
 
 use Symfony\Component\Finder\Finder;
-use AgaviConfig;
 
 /**
  * Finder that searches for skeletons in the given or default locations.

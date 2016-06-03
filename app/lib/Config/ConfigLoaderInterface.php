@@ -10,6 +10,10 @@ interface ConfigLoaderInterface
 
     public function getAppEnv();
 
+    public function getProjectDir();
+
+    public function getCoreDir();
+
     public function getConfigDir();
 
     public function getCoreConfigDir();

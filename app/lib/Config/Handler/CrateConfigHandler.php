@@ -42,15 +42,16 @@ class CrateConfigHandler implements ConfigHandlerInterface
 
         foreach ($crates as $implementor) {
             $reflector = new ReflectionClass($implementor);
-            $root = dirname(dirname($reflector->getFileName()));
-            $manifestFile = $root . '/manifest.yml';
+            $crateDir = dirname(dirname($reflector->getFileName()));
+            $manifestFile = $crateDir . '/manifest.yml';
             $manifest = $this->yamlParser->parse(file_get_contents($manifestFile));
 
             $name = $manifest['name'];
             $prefix = $manifest['prefix'];
+            $namespace = $manifest['namespace'];
             $description = isset($manifest['description']) ? $manifest['description'] : '';
 
-            $metadata = new CrateManifest($root, $name, $prefix, $implementor, $description);
+            $metadata = new CrateManifest($crateDir, $name, $prefix, $namespace, $implementor, $description);
             $manifestMap->setItem($manifest['prefix'], $metadata);
         }
 

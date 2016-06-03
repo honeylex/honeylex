@@ -12,6 +12,8 @@ $loaderConfig = array_merge(
     $loaderConfig, // @todo figure out if we are loaded within vendor and adjust dynamically
     [
         'core.config_dir' => __DIR__.'/config',
+        'core.dir' => dirname(__DIR__),
+        'project.dir' => dirname(__DIR__),
         'project.config_dir' => __DIR__.'/config'
     ]
 );

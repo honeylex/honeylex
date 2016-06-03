@@ -10,13 +10,16 @@ class CrateManifest implements CrateManifestInterface
 
     private $class;
 
+    private $namespace;
+
     private $description;
 
-    public function __construct($rootDir, $name, $prefix, $class, $description = '')
+    public function __construct($rootDir, $name, $prefix, $namespace, $class, $description = '')
     {
         $this->rootDir = $rootDir;
         $this->name = $name;
         $this->prefix = $prefix;
+        $this->namespace = $namespace;
         $this->class = $class;
         $this->description = $description;
     }
@@ -39,6 +42,11 @@ class CrateManifest implements CrateManifestInterface
     public function getName()
     {
         return $this->name;
+    }
+
+    public function getNamespace()
+    {
+        return $this->namespace;
     }
 
     public function getDescription()

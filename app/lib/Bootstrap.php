@@ -48,19 +48,24 @@ class Bootstrap
         $app->register(new HttpFragmentServiceProvider);
 
         $envConfig = $configProvider->getEnvConfigPath();
-        if ($envConfig) {
+        if (is_readable($envConfig)) {
             require $envConfig;
         }
 
         if ($configProvider->getAppContext() === 'web') {
             $this->registerWebErrorHandler($app);
-            $projectRouting = dirname(__DIR__).'/config/routing.php';
-            if (is_readable($projectRouting)) {
-                require $projectRouting;
-            }
+            $this->loadProjectRoutes($configProvider->getConfigDir().'/routing.php', $app);
         }
 
         return $app;
+    }
+
+    protected function loadProjectRoutes($routesFile, Application $routing)
+    {
+        if (is_readable($routesFile)) {
+            $app = $routing;
+            require $routesFile;
+        }
     }
 
     protected function registerWebErrorHandler(Application $app)
