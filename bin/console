@@ -1,6 +1,9 @@
 #!/usr/bin/env php
 <?php
 
+$appEnv = null;
+$appContext = 'console';
+
 require_once __DIR__.'/../vendor/autoload.php';
 
 set_time_limit(0);
@@ -8,11 +11,9 @@ set_time_limit(0);
 use Symfony\Component\Console\Input\ArgvInput;
 
 $input = new ArgvInput();
-$env = $input->getParameterOption(array('--env', '-e'), getenv('SYMFONY_ENV') ?: 'dev');
+$appEnv = $input->getParameterOption([ '--env', '-e' ], getenv('APP_ENV') ?: 'dev');
 
 $app = require __DIR__.'/../app/bootstrap.php';
-require __DIR__.'/../app/config/'.$env.'.php';
-
 $console = new Application('Honeylex - Cqrs+Es App Boilerplate', 'n/a');
 $console->getDefinition()->addOption(new InputOption('--env', '-e', InputOption::VALUE_REQUIRED, 'The Environment name.', 'dev'));
 $console->setDispatcher($app['dispatcher']);

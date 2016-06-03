@@ -12,6 +12,6 @@ $loaderConfig['core.config_dir'] = __DIR__.'/config';
 $configLoader = new ConfigLoader(new ArrayConfig($loaderConfig));
 
 $bootstrap = new Bootstrap($configLoader, new CrateLoader);
-$app = $bootstrap(new Application, __DIR__.'/config/'.$appEnv.'.php');
+$app = $bootstrap(new Application, $appContext, $appEnv);
 
 return $app;
