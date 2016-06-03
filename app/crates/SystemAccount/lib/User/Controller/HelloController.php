@@ -5,7 +5,7 @@ namespace Honeybee\SystemAccount\User\Controller;
 use Honeybee\Infrastructure\Template\TemplateRendererInterface;
 use Honeybee\SystemAccount\User\HelloService;
 
-class UserDefaultController
+class HelloController
 {
     protected $templateRenderer;
 
@@ -17,12 +17,7 @@ class UserDefaultController
         $this->helloService = $helloService;
     }
 
-    public function index()
-    {
-        return $this->templateRenderer->render('@SystemAccount/user/index.twig');
-    }
-
-    public function hello()
+    public function read()
     {
         return $this->templateRenderer->render('@SystemAccount/user/hello.twig', [ 'message' => $this->helloService->greet() ]);
     }
