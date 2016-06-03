@@ -26,7 +26,7 @@ class Bootstrap
         $this->crateLoader = $crateLoader;
     }
 
-    public function __invoke(Application $app)
+    public function __invoke(Application $app, $envConfig = null)
     {
         $crateManifestMap = $this->configLoader->loadConfig('crates.yml');
         $crateMap = $this->crateLoader->loadCrates($app, $crateManifestMap);
@@ -37,9 +37,13 @@ class Bootstrap
         $serviceProvisioner = new ServiceProvisioner($app, $injector, $configProvider, $serviceDefinitionMap);
 
         $app->register(new ServiceProvider($serviceProvisioner));
-        $app->register(new ControllerResolverServiceProvider());
-        $app->register(new AssetServiceProvider());
-        $app->register(new HttpFragmentServiceProvider());
+        $app->register(new ControllerResolverServiceProvider);
+        $app->register(new AssetServiceProvider);
+        $app->register(new HttpFragmentServiceProvider);
+
+        if ($envConfig) {
+            require $envConfig;
+        }
 
         return $app;
     }

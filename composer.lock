@@ -481,16 +481,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeybee/honeybee.git",
-                "reference": "8b1927e60175c306b5f7078567ae51ab7e9f7056"
+                "reference": "2fd1ab52f3795054acd27aa7d8cf193da308f6b7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/8b1927e60175c306b5f7078567ae51ab7e9f7056",
-                "reference": "8b1927e60175c306b5f7078567ae51ab7e9f7056",
+                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/2fd1ab52f3795054acd27aa7d8cf193da308f6b7",
+                "reference": "2fd1ab52f3795054acd27aa7d8cf193da308f6b7",
                 "shasum": ""
             },
             "require": {
-                "beberlei/assert": "~2.4",
+                "beberlei/assert": "~2.5",
                 "elasticsearch/elasticsearch": "~2.0",
                 "honeybee/trellis": "master@dev",
                 "league/flysystem": "~1.0",
@@ -499,7 +499,7 @@
                 "php": ">=5.6.0",
                 "psr/log": "~1.0.0",
                 "ql/uri-template": "~1.0",
-                "rdlowrey/auryn": "1.1.*",
+                "rdlowrey/auryn": "1.4.*",
                 "shrink0r/monatic": "master@dev",
                 "shrink0r/workflux": "master@dev",
                 "swiftmailer/swiftmailer": "5.4.*",
@@ -511,8 +511,8 @@
             "require-dev": {
                 "mockery/mockery": "master@dev",
                 "phpmd/phpmd": "^2.3",
-                "phpunit/phpunit": "^4.5 || ^5.0.5",
-                "sami/sami": "^3.0.8",
+                "phpunit/phpunit": "^5.0.5",
+                "sami/sami": "~3.2",
                 "satooshi/php-coveralls": "master@dev",
                 "sebastian/phpcpd": "~2.0.2",
                 "squizlabs/php_codesniffer": "^2.3.3"
@@ -567,7 +567,7 @@
                 "hexagonal",
                 "messaging"
             ],
-            "time": "2016-06-02 15:22:25"
+            "time": "2016-06-03 09:29:56"
         },
         {
             "name": "honeybee/trellis",
@@ -1170,16 +1170,16 @@
         },
         {
             "name": "rdlowrey/auryn",
-            "version": "v1.1.0",
+            "version": "v1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rdlowrey/auryn.git",
-                "reference": "d6e03a7026a1724965c921f4fbd8351ab8f0a9f1"
+                "reference": "2e4240791162dfe073d59654d8dc06df0eb0b73f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rdlowrey/auryn/zipball/d6e03a7026a1724965c921f4fbd8351ab8f0a9f1",
-                "reference": "d6e03a7026a1724965c921f4fbd8351ab8f0a9f1",
+                "url": "https://api.github.com/repos/rdlowrey/auryn/zipball/2e4240791162dfe073d59654d8dc06df0eb0b73f",
+                "reference": "2e4240791162dfe073d59654d8dc06df0eb0b73f",
                 "shasum": ""
             },
             "require": {
@@ -1227,7 +1227,7 @@
                 "dic",
                 "ioc"
             ],
-            "time": "2015-12-09 16:44:14"
+            "time": "2016-03-14 20:10:19"
         },
         {
             "name": "react/promise",
@@ -3804,16 +3804,16 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "3.3.3",
+            "version": "4.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "44cd8e3930e431658d1a5de7d282d5cb37837fd5"
+                "reference": "900370c81280cc0d942ffbc5912d80464eaee7e9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/44cd8e3930e431658d1a5de7d282d5cb37837fd5",
-                "reference": "44cd8e3930e431658d1a5de7d282d5cb37837fd5",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/900370c81280cc0d942ffbc5912d80464eaee7e9",
+                "reference": "900370c81280cc0d942ffbc5912d80464eaee7e9",
                 "shasum": ""
             },
             "require": {
@@ -3827,7 +3827,7 @@
             },
             "require-dev": {
                 "ext-xdebug": ">=2.1.4",
-                "phpunit/phpunit": "~5"
+                "phpunit/phpunit": "^5.4"
             },
             "suggest": {
                 "ext-dom": "*",
@@ -3837,7 +3837,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.3.x-dev"
+                    "dev-master": "4.0.x-dev"
                 }
             },
             "autoload": {
@@ -3863,7 +3863,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2016-05-27 16:24:29"
+            "time": "2016-06-03 05:03:56"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -4048,16 +4048,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "5.3.4",
+            "version": "5.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "00dd95ffb48805503817ced06399017df315fe5c"
+                "reference": "32428748cee28724d24e7d3b5fb3151170a1aed2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/00dd95ffb48805503817ced06399017df315fe5c",
-                "reference": "00dd95ffb48805503817ced06399017df315fe5c",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/32428748cee28724d24e7d3b5fb3151170a1aed2",
+                "reference": "32428748cee28724d24e7d3b5fb3151170a1aed2",
                 "shasum": ""
             },
             "require": {
@@ -4069,11 +4069,11 @@
                 "myclabs/deep-copy": "~1.3",
                 "php": "^5.6 || ^7.0",
                 "phpspec/prophecy": "^1.3.1",
-                "phpunit/php-code-coverage": "^3.3.0",
+                "phpunit/php-code-coverage": "^4.0",
                 "phpunit/php-file-iterator": "~1.4",
                 "phpunit/php-text-template": "~1.2",
                 "phpunit/php-timer": "^1.0.6",
-                "phpunit/phpunit-mock-objects": "^3.1",
+                "phpunit/phpunit-mock-objects": "^3.2",
                 "sebastian/comparator": "~1.1",
                 "sebastian/diff": "~1.2",
                 "sebastian/environment": "~1.3",
@@ -4093,7 +4093,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "5.3.x-dev"
+                    "dev-master": "5.4.x-dev"
                 }
             },
             "autoload": {
@@ -4119,30 +4119,30 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2016-05-11 13:28:45"
+            "time": "2016-06-03 05:05:35"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
-            "version": "3.1.3",
+            "version": "3.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit-mock-objects.git",
-                "reference": "151c96874bff6fe61a25039df60e776613a61489"
+                "reference": "314f8c44019b4dfece2571b98938574e6342be59"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/151c96874bff6fe61a25039df60e776613a61489",
-                "reference": "151c96874bff6fe61a25039df60e776613a61489",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/314f8c44019b4dfece2571b98938574e6342be59",
+                "reference": "314f8c44019b4dfece2571b98938574e6342be59",
                 "shasum": ""
             },
             "require": {
                 "doctrine/instantiator": "^1.0.2",
-                "php": ">=5.6",
-                "phpunit/php-text-template": "~1.2",
-                "sebastian/exporter": "~1.2"
+                "php": "^5.6 || ^7.0",
+                "phpunit/php-text-template": "^1.2",
+                "sebastian/exporter": "^1.2"
             },
             "require-dev": {
-                "phpunit/phpunit": "~5"
+                "phpunit/phpunit": "^5.4"
             },
             "suggest": {
                 "ext-soap": "*"
@@ -4150,7 +4150,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.1.x-dev"
+                    "dev-master": "3.2.x-dev"
                 }
             },
             "autoload": {
@@ -4175,7 +4175,7 @@
                 "mock",
                 "xunit"
             ],
-            "time": "2016-04-20 14:39:26"
+            "time": "2016-06-03 05:01:30"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",

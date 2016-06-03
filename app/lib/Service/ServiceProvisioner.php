@@ -36,8 +36,6 @@ class ServiceProvisioner implements ServiceProvisionerInterface
 
     protected $serviceDefinitions;
 
-    protected $provisionedServices = [];
-
     public function __construct(
         Container $app,
         Injector $injector,
@@ -114,7 +112,7 @@ class ServiceProvisioner implements ServiceProvisionerInterface
         }
     }
 
-    protected function evaluateServiceDefinition($serviceAlias, Closure $default_provisioning, array $settings = [])
+    protected function evaluateServiceDefinition($serviceAlias, Closure $defaultProvisioning, array $settings = [])
     {
         if (!$this->serviceDefinitions->hasKey($serviceAlias)) {
             throw new RuntimeError(
@@ -126,10 +124,8 @@ class ServiceProvisioner implements ServiceProvisionerInterface
         if ($serviceDefinition->hasProvisioner()) {
             $this->runServiceProvisioner($serviceDefinition, $settings);
         } else {
-            $default_provisioning($serviceDefinition);
+            $defaultProvisioning($serviceDefinition);
         }
-
-        $this->provisionedServices[] = $serviceAlias;
     }
 
     protected function runServiceProvisioner(ServiceDefinitionInterface $serviceDefinition, array $settings)
@@ -150,17 +146,17 @@ class ServiceProvisioner implements ServiceProvisionerInterface
         if (isset($provisionerConfig['settings']) && is_array($provisionerConfig['settings'])) {
             $settings = array_merge($provisionerConfig['settings'], $settings);
         }
-        $provisioner_settings = new Settings($settings);
+        $provisionerSettings = new Settings($settings);
 
         if (!empty($provisionerMethod) && is_callable($provisionerCallable)) {
-            $provisioner->$provisionerMethod($serviceDefinition, $provisioner_settings);
+            $provisioner->$provisionerMethod($serviceDefinition, $provisionerSettings);
         } elseif ($provisioner instanceof ProvisionerInterface) {
             $provisioner->provision(
                 $this->app,
                 $this->injector,
                 $this->configProvider,
                 $serviceDefinition,
-                $provisioner_settings
+                $provisionerSettings
             );
         } else {
             throw new ConfigError(
