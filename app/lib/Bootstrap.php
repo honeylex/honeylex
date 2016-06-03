@@ -6,6 +6,7 @@ use Auryn\Injector;
 use Auryn\StandardReflector;
 use Honeybee\FrameworkBinding\Silex\Config\ConfigLoader;
 use Honeybee\FrameworkBinding\Silex\Config\ConfigProvider;
+use Honeybee\FrameworkBinding\Silex\Config\ConfigProviderInterface;
 use Honeybee\FrameworkBinding\Silex\Controller\ControllerResolverServiceProvider;
 use Honeybee\FrameworkBinding\Silex\Crate\CrateLoaderInterface;
 use Honeybee\FrameworkBinding\Silex\Service\ServiceProvider;
@@ -28,26 +29,30 @@ class Bootstrap
         $this->crateLoader = $crateLoader;
     }
 
-    public function __invoke(Application $app, $appContext, $appEnv)
+    public function __invoke(Application $app)
     {
         $crateManifestMap = $this->configLoader->loadConfig('crates.yml');
         $crateMap = $this->crateLoader->loadCrates($app, $crateManifestMap);
         $configProvider = new ConfigProvider($this->configLoader, $crateMap);
 
         $injector = new Injector(new StandardReflector);
+        $injector->share($configProvider)->alias(ConfigProviderInterface::CLASS, get_class($configProvider));
+
         $serviceDefinitionMap = $configProvider->provide('services.yml');
         $serviceProvisioner = new ServiceProvisioner($app, $injector, $configProvider, $serviceDefinitionMap);
 
+        $app['version'] = $configProvider->getVersion();
         $app->register(new ServiceProvider($serviceProvisioner));
         $app->register(new ControllerResolverServiceProvider);
         $app->register(new AssetServiceProvider);
         $app->register(new HttpFragmentServiceProvider);
 
-        $envConfig = dirname(__DIR__).'/config/'.$appEnv.'.php';
+        $envConfig = $configProvider->getEnvConfigPath();
         if ($envConfig) {
             require $envConfig;
         }
-        if ($appContext === 'web') {
+
+        if ($configProvider->getAppContext() === 'web') {
             $this->registerWebErrorHandler($app);
             $projectRouting = dirname(__DIR__).'/config/routing.php';
             if (is_readable($projectRouting)) {

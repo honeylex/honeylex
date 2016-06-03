@@ -31,9 +31,9 @@ abstract class Crate implements CrateInterface
             throw new RuntimeError(
                 sprintf(
                     'Method "%s" does not exist on "%s" or "%s".',
+                    $method,
                     get_class($this),
-                    get_class($this->manifest),
-                    $method
+                    get_class($this->manifest)
                 )
             );
         }

@@ -9,4 +9,8 @@ interface CrateManifestInterface
     public function getPrefix();
 
     public function getName();
+
+    public function getRootDir();
+
+    public function getDescription();
 }

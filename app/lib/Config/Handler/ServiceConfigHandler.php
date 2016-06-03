@@ -33,7 +33,7 @@ class ServiceConfigHandler implements ConfigHandlerInterface
 
     protected function handlConfigFile($configFile)
     {
-        $serviceConfigs = $this->yamlParser->parse(file_get_contents($configFile));
+        $serviceConfigs = $this->yamlParser->parse(file_get_contents($configFile)) ?: [];
         $serviceDefinitionMap = new ServiceDefinitionMap;
 
         foreach ($serviceConfigs as $serviceKey => $serviceDefState) {

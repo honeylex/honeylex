@@ -6,5 +6,13 @@ use Honeybee\FrameworkBinding\Silex\Crate\CrateMap;
 
 interface ConfigLoaderInterface
 {
+    public function getAppContext();
+
+    public function getAppEnv();
+
+    public function getConfigDir();
+
+    public function getCoreConfigDir();
+
     public function loadConfig($name, CrateMap $crateMap = null);
 }

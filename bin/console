@@ -1,6 +1,9 @@
 #!/usr/bin/env php
 <?php
 
+use Honeybee\FrameworkBinding\Silex\Console\Command\Hello;
+use Honeybee\FrameworkBinding\Silex\Console\Command\MakeCrate;
+use Honeybee\FrameworkBinding\Silex\Console\Command\RemoveCrate;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Console\Input\InputInterface;
@@ -9,26 +12,26 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 $appEnv = null;
 $appContext = 'console';
+$commandsToLoad = [
+    Hello::CLASS,
+    MakeCrate::CLASS,
+    RemoveCrate::CLASS
+];
 
 require_once __DIR__.'/../vendor/autoload.php';
 
 set_time_limit(0);
 
-$input = new ArgvInput();
+$input = new ArgvInput;
 $appEnv = $input->getParameterOption([ '--env', '-e' ], getenv('APP_ENV') ?: 'dev');
 
 $app = require __DIR__.'/../app/bootstrap.php';
-$console = new Application('Honeylex - Cqrs+Es App Boilerplate', 'n/a');
-$console->getDefinition()->addOption(new InputOption('--env', '-e', InputOption::VALUE_REQUIRED, 'The Environment name.', 'dev'));
+$console = new Application('Honeylex Cli', $app['version']);
+$console->getDefinition()->addOption(
+    new InputOption('--env', '-e', InputOption::VALUE_REQUIRED, 'The Environment name.', 'dev')
+);
 $console->setDispatcher($app['dispatcher']);
-$console
-    ->register('my-command')
-    ->setDefinition(array(
-        // new InputOption('some-option', null, InputOption::VALUE_NONE, 'Some help'),
-    ))
-    ->setDescription('Honeylex command-line interface')
-    ->setCode(function (InputInterface $input, OutputInterface $output) use ($app) {
-        // do something
-    });
-
+foreach (array_map([ $app['honeybee.service_locator'], 'createEntity'], $commandsToLoad) as $command) {
+    $console->add($command);
+}
 $console->run();
