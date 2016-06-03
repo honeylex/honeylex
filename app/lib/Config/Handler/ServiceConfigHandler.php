@@ -3,13 +3,14 @@
 namespace Honeybee\FrameworkBinding\Silex\Config\Handler;
 
 use Honeybee\Common\Error\ConfigError;
+use Honeybee\FrameworkBinding\Silex\Service\Provisioner\DefaultProvisioner;
 use Honeybee\Infrastructure\Config\ConfigInterface;
 use Honeybee\ServiceDefinition;
 use Honeybee\ServiceDefinitionInterface;
 use Honeybee\ServiceDefinitionMap;
 use Symfony\Component\Yaml\Parser;
 
-class ServiceConfigHandler
+class ServiceConfigHandler implements ConfigHandlerInterface
 {
     protected $config;
 
@@ -37,8 +38,13 @@ class ServiceConfigHandler
 
         foreach ($serviceConfigs as $serviceKey => $serviceDefState) {
             $serviceDefState['name'] = $serviceKey;
-            if (isset($serviceDefState['provisioner']) && !isset($serviceDefState['provisioner']['method'])) {
-                $serviceDefState['provisioner']['method'] = '';
+            if (isset($serviceDefState['provisioner'])) {
+                if (!isset($serviceDefState['provisioner']['method'])) {
+                    $serviceDefState['provisioner']['method'] = '';
+                }
+                if (!isset($serviceDefState['provisioner']['class'])) {
+                    $serviceDefState['provisioner']['class'] = DefaultProvisioner::CLASS;
+                }
             }
             $serviceDefinitionMap->setItem($serviceKey, new ServiceDefinition($serviceDefState));
         }

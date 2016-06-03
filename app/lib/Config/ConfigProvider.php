@@ -4,9 +4,9 @@ namespace Honeybee\FrameworkBinding\Silex\Config;
 
 use Honeybee\FrameworkBinding\Silex\Crate\CrateMap;
 
-class ConfigProvider
+class ConfigProvider implements ConfigProviderInterface
 {
-    public function __construct(ConfigLoader $configLoader, CrateMap $crateMap)
+    public function __construct(ConfigLoaderInterface $configLoader, CrateMap $crateMap)
     {
         $this->configLoader = $configLoader;
         $this->crateMap = $crateMap;

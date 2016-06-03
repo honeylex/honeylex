@@ -6,7 +6,7 @@ use Honeybee\FrameworkBinding\Silex\Crate\CrateMap;
 use Honeybee\Infrastructure\Config\ArrayConfig;
 use Honeybee\Infrastructure\Config\ConfigInterface;
 
-class ConfigLoader
+class ConfigLoader implements ConfigLoaderInterface
 {
     protected $config;
 

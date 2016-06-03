@@ -6,7 +6,7 @@ use Honeybee\Infrastructure\Config\ConfigInterface;
 use Honeybee\Infrastructure\DataAccess\Connector\ConnectorMap;
 use Symfony\Component\Yaml\Parser;
 
-class ConnectionConfigHandler
+class ConnectionConfigHandler implements ConfigHandlerInterface
 {
     protected $config;
 

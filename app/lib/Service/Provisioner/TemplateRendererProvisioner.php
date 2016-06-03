@@ -3,7 +3,7 @@
 namespace Honeybee\FrameworkBinding\Silex\Service\Provisioner;
 
 use Auryn\Injector;
-use Honeybee\FrameworkBinding\Silex\Config\ConfigProvider;
+use Honeybee\FrameworkBinding\Silex\Config\ConfigProviderInterface;
 use Honeybee\Infrastructure\Config\SettingsInterface;
 use Honeybee\Infrastructure\Template\TemplateRendererInterface;
 use Honeybee\ServiceDefinitionInterface;
@@ -16,7 +16,7 @@ class TemplateRendererProvisioner implements ProvisionerInterface
     public function provision(
         Container $app,
         Injector $injector,
-        ConfigProvider $configProvider,
+        ConfigProviderInterface $configProvider,
         ServiceDefinitionInterface $serviceDefinition,
         SettingsInterface $provisionerSettings
     ) {

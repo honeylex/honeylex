@@ -6,7 +6,7 @@ use Auryn\Injector;
 use Closure;
 use Honeybee\Common\Error\ConfigError;
 use Honeybee\Common\Util\StringToolkit;
-use Honeybee\FrameworkBinding\Silex\Config\ConfigProvider;
+use Honeybee\FrameworkBinding\Silex\Config\ConfigProviderInterface;
 use Honeybee\FrameworkBinding\Silex\Service\Provisioner\DefaultProvisioner;
 use Honeybee\FrameworkBinding\Silex\Service\Provisioner\ProvisionerInterface;
 use Honeybee\Infrastructure\Config\Settings;
@@ -36,16 +36,12 @@ class ServiceProvisioner implements ServiceProvisionerInterface
 
     protected $serviceDefinitions;
 
-    protected $aggregateRootTypeMap;
-
-    protected $projectionTypeMap;
-
     protected $provisionedServices = [];
 
     public function __construct(
         Container $app,
         Injector $injector,
-        ConfigProvider $configProvider,
+        ConfigProviderInterface $configProvider,
         ServiceDefinitionMap $serviceDefinitions
     ) {
         $this->app = $app;
@@ -98,11 +94,9 @@ class ServiceProvisioner implements ServiceProvisionerInterface
 
     protected function evaluateServiceDefinitions()
     {
-        $remainingServices = array_diff($this->serviceDefinitions->getKeys(), $this->provisionedServices);
         $defaultProvisioner = static::$defaultProvisionerClass;
 
-        foreach ($remainingServices as $serviceKey) {
-            $serviceDefinition = $this->serviceDefinitions->getItem($serviceKey);
+        foreach ($this->serviceDefinitions as $serviceKey => $serviceDefinition) {
             $this->evaluateServiceDefinition(
                 $serviceKey,
                 function (ServiceDefinitionInterface $serviceDefinition) use ($defaultProvisioner) {

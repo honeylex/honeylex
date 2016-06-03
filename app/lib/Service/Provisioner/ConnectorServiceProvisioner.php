@@ -4,7 +4,7 @@ namespace Honeybee\FrameworkBinding\Silex\Service\Provisioner;
 
 use Auryn\Injector;
 use Honeybee\Common\Error\RuntimeError;
-use Honeybee\FrameworkBinding\Silex\Config\ConfigProvider;
+use Honeybee\FrameworkBinding\Silex\Config\ConfigProviderInterface;
 use Honeybee\Infrastructure\Config\ArrayConfig;
 use Honeybee\Infrastructure\Config\SettingsInterface;
 use Honeybee\Infrastructure\DataAccess\Connector\ConnectorMap;
@@ -19,7 +19,7 @@ class ConnectorServiceProvisioner implements ProvisionerInterface
     public function provision(
         Container $app,
         Injector $injector,
-        ConfigProvider $configProvider,
+        ConfigProviderInterface $configProvider,
         ServiceDefinitionInterface $serviceDefinition,
         SettingsInterface $provisionerSettings
     ) {

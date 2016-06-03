@@ -13,7 +13,7 @@ use Honeybee\ServiceDefinitionInterface;
 use Honeybee\ServiceDefinitionMap;
 use Symfony\Component\Yaml\Parser;
 
-class CrateConfigHandler
+class CrateConfigHandler implements ConfigHandlerInterface
 {
     protected $config;
 
