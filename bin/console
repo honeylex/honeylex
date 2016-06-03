@@ -1,19 +1,19 @@
 #!/usr/bin/env php
 <?php
 
+use Honeybee\FrameworkBinding\Silex\Console\App;
+use Honeybee\FrameworkBinding\Silex\Console\Command\CrateInfo;
 use Honeybee\FrameworkBinding\Silex\Console\Command\Hello;
+use Honeybee\FrameworkBinding\Silex\Console\Command\ListCrates;
 use Honeybee\FrameworkBinding\Silex\Console\Command\MakeCrate;
 use Honeybee\FrameworkBinding\Silex\Console\Command\RemoveCrate;
-use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Input\ArgvInput;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Output\OutputInterface;
 
-$appEnv = null;
 $appContext = 'console';
-$commandsToLoad = [
+$appCommands = [
+    CrateInfo::CLASS,
     Hello::CLASS,
+    ListCrates::CLASS,
     MakeCrate::CLASS,
     RemoveCrate::CLASS
 ];
@@ -22,16 +22,9 @@ require_once __DIR__.'/../vendor/autoload.php';
 
 set_time_limit(0);
 
-$input = new ArgvInput;
-$appEnv = $input->getParameterOption([ '--env', '-e' ], getenv('APP_ENV') ?: 'dev');
+$appEnv = (new ArgvInput)->getParameterOption([ '--env', '-e' ], getenv('APP_ENV') ?: 'dev');
 
 $app = require __DIR__.'/../app/bootstrap.php';
-$console = new Application('Honeylex Cli', $app['version']);
-$console->getDefinition()->addOption(
-    new InputOption('--env', '-e', InputOption::VALUE_REQUIRED, 'The Environment name.', 'dev')
-);
-$console->setDispatcher($app['dispatcher']);
-foreach (array_map([ $app['honeybee.service_locator'], 'createEntity'], $commandsToLoad) as $command) {
-    $console->add($command);
-}
-$console->run();
+
+$appState = [ ':app' => $app, ':appCommands' => $appCommands ];
+$app['honeybee.service_locator']->createEntity(App::CLASS, $appState)->run();

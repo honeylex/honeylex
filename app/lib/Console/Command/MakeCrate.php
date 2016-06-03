@@ -15,7 +15,7 @@ class MakeCrate extends CrateCommand
     protected function configure()
     {
         $this
-            ->setName('honeylex:crate:mk')
+            ->setName('hlx:crate:mk')
             ->setDescription('Makes a vanilla crate from a crate-template.')
             ->addOption(
                 'description',
@@ -44,8 +44,7 @@ class MakeCrate extends CrateCommand
                 null,
                 InputArgument::REQUIRED,
                 "directory where the crate will be created"
-            )
-        ;
+            );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)

@@ -16,7 +16,7 @@ class RemoveCrate extends CrateCommand
     protected function configure()
     {
         $this
-            ->setName('honeylex:crate:rm')
+            ->setName('hlx:crate:rm')
             ->setDescription('Removes a crate from the project. ' . PHP_EOL .
                 'Cant be used to remove crates that are loaded from the vendor directory via composer.'
             )
@@ -24,8 +24,7 @@ class RemoveCrate extends CrateCommand
                 'crate',
                 InputArgument::REQUIRED,
                 'prefix of the crate to remove'
-            )
-        ;
+            );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
