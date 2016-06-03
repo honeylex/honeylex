@@ -1,14 +1,18 @@
 #!/usr/bin/env php
 <?php
 
+use Symfony\Component\Console\Application;
+use Symfony\Component\Console\Input\ArgvInput;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Output\OutputInterface;
+
 $appEnv = null;
 $appContext = 'console';
 
 require_once __DIR__.'/../vendor/autoload.php';
 
 set_time_limit(0);
-
-use Symfony\Component\Console\Input\ArgvInput;
 
 $input = new ArgvInput();
 $appEnv = $input->getParameterOption([ '--env', '-e' ], getenv('APP_ENV') ?: 'dev');
