@@ -17,8 +17,13 @@ class UserDefaultController
         $this->helloService = $helloService;
     }
 
-    public function indexAction()
+    public function index()
     {
-        return $this->templateRenderer->render('user_index.twig', [ 'message' => $this->helloService->greet() ]);
+        return $this->templateRenderer->render('@SystemAccount/user/index.twig');
+    }
+
+    public function hello()
+    {
+        return $this->templateRenderer->render('@SystemAccount/user/hello.twig', [ 'message' => $this->helloService->greet() ]);
     }
 }

@@ -6,4 +6,6 @@ use Honeybee\SystemAccount\User\Controller\UserDefaultController;
 
 require __DIR__.'/User/routing.php';
 
-$routing->get('/', [ UserDefaultController::CLASS, 'indexAction' ])->bind('system_account.index');
+$routing->get('/', function () use ($app) {
+    return $app['twig']->render('@SystemAccount/index.twig');
+});
