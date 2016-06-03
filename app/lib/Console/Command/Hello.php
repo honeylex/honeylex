@@ -21,7 +21,7 @@ class Hello extends Command
     {
         $this
             ->setName('hlx:hello')
-            ->setDescription('Uses DI to obtain the HelloService and calls its greet method.');
+            ->setDescription('Command example showing custom service injection (HelloService).');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
