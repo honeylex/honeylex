@@ -11,4 +11,8 @@ honeybee.template_renderer:
   provisioner:
     class: Honeybee\FrameworkBinding\Silex\Service\Provisioner\TemplateRendererProvisioner
 
-# @todo continue with the connector-service
+honeybee.infrastructure.connector_service:
+  class: Honeybee\Infrastructure\DataAccess\Connector\ConnectorService
+  provisioner:
+    class: Honeybee\FrameworkBinding\Silex\Service\Provisioner\ConnectorServiceProvisioner
+

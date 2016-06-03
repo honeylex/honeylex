@@ -5,6 +5,7 @@ namespace Honeybee\FrameworkBinding\Silex;
 use Auryn\Injector;
 use Auryn\StandardReflector;
 use Honeybee\FrameworkBinding\Silex\Config\ConfigLoader;
+use Honeybee\FrameworkBinding\Silex\Config\ConfigProvider;
 use Honeybee\FrameworkBinding\Silex\Controller\ControllerResolverServiceProvider;
 use Honeybee\FrameworkBinding\Silex\Crate\CrateLoaderInterface;
 use Honeybee\FrameworkBinding\Silex\Service\ServiceProvider;
@@ -28,11 +29,12 @@ class Bootstrap
     public function __invoke(Application $app)
     {
         $crateManifestMap = $this->configLoader->loadConfig('crates.yml');
-        $crates = $this->crateLoader->loadCrates($app, $crateManifestMap);
+        $crateMap = $this->crateLoader->loadCrates($app, $crateManifestMap);
+        $configProvider = new ConfigProvider($this->configLoader, $crateMap);
 
         $injector = new Injector(new StandardReflector);
-        $serviceDefinitionMap = $this->configLoader->loadConfig('services.yml', $crates);
-        $serviceProvisioner = new ServiceProvisioner($app, $injector, $serviceDefinitionMap);
+        $serviceDefinitionMap = $configProvider->provide('services.yml');
+        $serviceProvisioner = new ServiceProvisioner($app, $injector, $configProvider, $serviceDefinitionMap);
 
         $app->register(new ServiceProvider($serviceProvisioner));
         $app->register(new ControllerResolverServiceProvider());

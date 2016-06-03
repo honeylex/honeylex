@@ -1,0 +1,10 @@
+#
+# Project connections, these are used by the ConnectorServiceProvisioner.
+---
+view_store:
+  class: Honeybee\Infrastructure\DataAccess\Connector\ElasticsearchConnector
+  settings:
+    transport: http
+    host: localhost
+    port: 9200
+    index: honeylux.domain_events

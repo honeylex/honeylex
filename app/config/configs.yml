@@ -17,3 +17,9 @@ services.yml:
   handler: Honeybee\FrameworkBinding\Silex\Config\Handler\ServiceConfigHandler
   settings:
     parser: Symfony\Component\Yaml\Parser
+
+# merge behaviour: lastone-wins
+connections.yml:
+  handler: Honeybee\FrameworkBinding\Silex\Config\Handler\ConnectionConfigHandler
+  settings:
+    parser: Symfony\Component\Yaml\Parser

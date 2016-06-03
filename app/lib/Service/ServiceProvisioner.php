@@ -5,6 +5,7 @@ namespace Honeybee\FrameworkBinding\Silex\Service;
 use Auryn\Injector;
 use Closure;
 use Honeybee\Common\Error\ConfigError;
+use Honeybee\FrameworkBinding\Silex\Config\ConfigProvider;
 use Honeybee\FrameworkBinding\Silex\Service\Provisioner\DefaultProvisioner;
 use Honeybee\FrameworkBinding\Silex\Service\Provisioner\ProvisionerInterface;
 use Honeybee\Infrastructure\Config\Settings;
@@ -25,6 +26,8 @@ class ServiceProvisioner implements ServiceProvisionerInterface
 
     protected $injector;
 
+    protected $configProvider;
+
     protected $serviceDefinitions;
 
     protected $aggregateRootTypeMap;
@@ -33,10 +36,15 @@ class ServiceProvisioner implements ServiceProvisionerInterface
 
     protected $provisionedServices = [];
 
-    public function __construct(Container $app, Injector $injector, ServiceDefinitionMap $serviceDefinitions)
-    {
+    public function __construct(
+        Container $app,
+        Injector $injector,
+        ConfigProvider $configProvider,
+        ServiceDefinitionMap $serviceDefinitions
+    ) {
         $this->app = $app;
         $this->injector = $injector;
+        $this->configProvider = $configProvider;
         $this->serviceDefinitions = $serviceDefinitions;
         $this->aggregateRootTypeMap = new AggregateRootTypeMap;
         $this->projectionTypeMap = new ProjectionTypeMap;
@@ -79,7 +87,13 @@ class ServiceProvisioner implements ServiceProvisionerInterface
                 function (ServiceDefinitionInterface $serviceDefinition) use ($defaultProvisioner) {
                     $this->injector
                         ->make($defaultProvisioner)
-                        ->provision($this->app, $this->injector, $serviceDefinition, new Settings([]));
+                        ->provision(
+                            $this->app,
+                            $this->injector,
+                            $this->configProvider,
+                            $serviceDefinition,
+                            new Settings([])
+                        );
                 }
             );
         }
@@ -126,7 +140,13 @@ class ServiceProvisioner implements ServiceProvisionerInterface
         if (!empty($provisionerMethod) && is_callable($provisionerCallable)) {
             $provisioner->$provisionerMethod($serviceDefinition, $provisioner_settings);
         } elseif ($provisioner instanceof ProvisionerInterface) {
-            $provisioner->provision($this->app, $this->injector, $serviceDefinition, $provisioner_settings);
+            $provisioner->provision(
+                $this->app,
+                $this->injector,
+                $this->configProvider,
+                $serviceDefinition,
+                $provisioner_settings
+            );
         } else {
             throw new ConfigError(
                 sprintf(
