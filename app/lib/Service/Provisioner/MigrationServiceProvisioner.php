@@ -51,7 +51,7 @@ class MigrationServiceProvisioner implements ProvisionerInterface
                 ':name' => $targetName,
                 ':is_activated' => $targetConfig['active'],
                 ':migration_loader' => $this->buildMigrationLoader($injector, $targetConfig['migration_loader']),
-                ':config' => new ArrayConfig(isset($targetConfig['settings']) ? $targetConfig['settings'] : [])
+                ':config' => new ArrayConfig($targetConfig['settings'])
             ];
 
             $migrationTarget = $injector->make(MigrationTarget::CLASS, $state);

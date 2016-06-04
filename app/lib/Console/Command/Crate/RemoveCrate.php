@@ -23,7 +23,7 @@ class RemoveCrate extends CrateCommand
             ->addArgument(
                 'crate',
                 InputArgument::REQUIRED,
-                'prefix of the crate to remove'
+                'The prefix of the crate to remove.'
             );
     }
 

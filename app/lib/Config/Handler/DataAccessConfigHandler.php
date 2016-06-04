@@ -40,6 +40,19 @@ class DataAccessConfigHandler implements ConfigHandlerInterface
         return $dataAccessConfig;
     }
 
+    protected function expandConfigDirectives(array $config)
+    {
+        foreach ($config as $key => $value) {
+            if (is_array($value)) {
+                $config[$key] = $this->expandConfigDirectives($value);
+            } else if (is_string($value)) {
+                $config[$key] = $value; // @todo
+            } else {
+                $config[$key] = $value;
+            }
+        }
+    }
+
     protected function mergeConfigs(array $out, array $in)
     {
         foreach ($in as $key => $value) {

@@ -14,8 +14,8 @@ msg_queue:
   settings:
     host: localhost
     port: 5762
-    user: bo
-    password: secret
+    user: ${rabbitmq.user}
+    password: ${rabbitmq.password}
 
 mailer:
   class: Honeybee\Infrastructure\DataAccess\Connector\SwiftMailer\LocalSendmailConnector
@@ -26,17 +26,17 @@ mailer.null:
 files.local:
   class: Honeybee\Infrastructure\DataAccess\Connector\Flysystem\LocalConnector
   settings:
-    directory: data/files
+    directory: ${project.dir}/data/files
 
 files.local.tmp:
   class: Honeybee\Infrastructure\DataAccess\Connector\Flysystem\LocalConnector
   settings:
-    directory: data/tmp_files
+    directory: ${project.dir}/data/tmp_files
 
 process_state.store:
   class: Honeybee\Infrastructure\DataAccess\Connector\Flysystem\LocalConnector
   settings:
-    directory: data/process_states
+    directory: ${project.dir}/data/process_states
 
 process_state.cache:
   class: Honeybee\Infrastructure\DataAccess\Connector\Memory\ArrayConnector

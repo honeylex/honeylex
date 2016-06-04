@@ -23,6 +23,7 @@
         "symfony/translation": "~2.8|3.0.*",
         "symfony/twig-bridge": "~2.8|3.0.*",
         "symfony/validator": "~2.8|3.0.*",
+        "guzzlehttp/guzzle": "~6.2",
         "beberlei/assert": "~2.5",
         "honeybee/honeybee": "master@dev"
     },

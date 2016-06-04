@@ -17,7 +17,6 @@ class ListCrates extends CrateCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $output->writeln('<info>Listing installed crates (project+vendor)</info>');
         foreach ($this->configProvider->getCrateMap() as $crate) {
             $this->printCrateInfo($crate, $output);
         }

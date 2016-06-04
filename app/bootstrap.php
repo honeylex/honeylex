@@ -8,7 +8,7 @@ use Silex\Application;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Yaml\Parser;
 
-$loaderConfig = (new Parser)->parse(file_get_contents(__DIR__.'/config/configs.yml'));
+$loaderConfig = (new Parser)->parse(file_get_contents(__DIR__.'/config/config_handlers.yml'));
 $loaderConfig = array_merge(
     $loaderConfig, // @todo figure out if we are loaded within vendor and adjust dynamically
     [

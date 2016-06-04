@@ -17,7 +17,7 @@ class CrateInfo extends CrateCommand
             ->addArgument(
                 'crate',
                 InputArgument::REQUIRED,
-                'prefix of the crate to show the details for'
+                'The prefix of the crate to show the details for.'
             );
     }
 
@@ -35,9 +35,8 @@ class CrateInfo extends CrateCommand
     protected function printCrateInfo(CrateInterface $crate, OutputInterface $output)
     {
         $output->writeln($crate->getName().": ".$crate->getDescription());
-        $output->writeln('---------------------');
-        $output->writeln('prefix: '.$crate->getPrefix());
-        $output->writeln('namespace: '.$crate->getNamespace());
-        $output->writeln('directory: '.$crate->getRootDir());
+        $output->writeln('  prefix: '.$crate->getPrefix());
+        $output->writeln('  namespace: '.$crate->getNamespace());
+        $output->writeln('  directory: '.$crate->getRootDir());
     }
 }

@@ -21,29 +21,29 @@ class MakeCrate extends CrateCommand
                 'description',
                 null,
                 InputOption::VALUE_REQUIRED,
-                "short text describing the crate's purpose"
+                "A short text describing the crate's purpose."
             )
             ->addOption(
                 'location',
                 null,
                 InputOption::VALUE_IS_ARRAY | InputOption::VALUE_REQUIRED,
-                "optional override of the locations that will be searched for skeletons"
+                "Optional override of the locations that will be searched for (crate)skeletons."
             )
             ->addArgument(
                 'name',
                 InputArgument::REQUIRED,
-                'name of the crate'
+                'The name of the crate to make.'
             )
             ->addArgument(
                 'namespace',
                 InputArgument::REQUIRED,
-                "fully-qualified php namespace of the crate"
+                "The crates fully-qualified php namespace."
             )
             ->addArgument(
                 'path',
                 null,
                 InputArgument::REQUIRED,
-                "directory where the crate will be created"
+                "The directory path where the crate shall be created."
             );
     }
 

@@ -3,18 +3,23 @@
 ---
 honeybee.system_account::migration::event_source:
   active: true
-  version_list_reader: honeybee.system_account::version_list::event_source::reader
-  version_list_writer: honeybee.system_account::version_list::event_source::writer
+  settings:
+    version_list_reader: honeybee.system_account::version_list::event_source::reader
+    version_list_writer: honeybee.system_account::version_list::event_source::writer
+    target_connection: system_account.event_source
   migration_loader:
     class: Honeybee\Infrastructure\Migration\FileSystemLoader
-    directory: migration/couchdb
+    settings:
+      directory: /srv/www/honeybee-silex-cmf-vendor/app/crates/SystemAccount/migration/couchdb
 
 honeybee.system_account::migration::view_store:
   active: true
-  version_list_reader: honeybee.system_account::version_list::view_store::reader
-  version_list_writer: honeybee.system_account::version_list::view_store::writer
-  index: honeybee-system_account
-  target_connection: Default.ViewStore
+  settings:
+    version_list_reader: honeybee.system_account::version_list::view_store::reader
+    version_list_writer: honeybee.system_account::version_list::view_store::writer
+    target_connection: view_store
+    index: honeybee-system_account
   migration_loader:
     class: Honeybee\Infrastructure\Migration\FileSystemLoader
-    directory: migration/elasticsearch
+    settings:
+      directory: /srv/www/honeybee-silex-cmf-vendor/app/crates/SystemAccount/migration/elasticsearch
