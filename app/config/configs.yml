@@ -24,8 +24,14 @@ connections.yml:
   settings:
     parser: Symfony\Component\Yaml\Parser
 
-# merge behaviour: lastone-wins
+# merge behaviour: lastone-wins (topmost keys are merged)
 data_access.yml:
   handler: Honeybee\FrameworkBinding\Silex\Config\Handler\DataAccessConfigHandler
+  settings:
+    parser: Symfony\Component\Yaml\Parser
+
+# merge behaviour: lastone-wins
+migration.yml:
+  handler: Honeybee\FrameworkBinding\Silex\Config\Handler\MigrationConfigHandler
   settings:
     parser: Symfony\Component\Yaml\Parser

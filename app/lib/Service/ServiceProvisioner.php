@@ -132,12 +132,12 @@ class ServiceProvisioner implements ServiceProvisionerInterface
     {
         $provisionerConfig = $serviceDefinition->getProvisioner();
         if (!$provisionerConfig) {
-            throw new RuntimeError(
+            throw new ConfigError(
                 'Missing provisioner meta-data (at least "class" plus optional a "method" and some "settings").'
             );
         }
         if (!class_exists($provisionerConfig['class'])) {
-            throw new RuntimeError('Unable to load provisioner class: ' . $provisionerConfig['class']);
+            throw new ConfigError('Unable to load provisioner class: ' . $provisionerConfig['class']);
         }
 
         $provisioner = $this->injector->make($provisionerConfig['class']);

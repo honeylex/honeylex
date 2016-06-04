@@ -20,3 +20,8 @@ honeybee.infrastructure.data_access_service:
   class: Honeybee\Infrastructure\DataAccess\DataAccessService
   provisioner:
     class: Honeybee\FrameworkBinding\Silex\Service\Provisioner\DataAccessServiceProvisioner
+
+honeybee.infrastructure.migration_service:
+  class: Honeybee\Infrastructure\Migration\MigrationService
+  provisioner:
+    class: Honeybee\FrameworkBinding\Silex\Service\Provisioner\MigrationServiceProvisioner

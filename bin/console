@@ -7,6 +7,7 @@ use Honeybee\FrameworkBinding\Silex\Console\Command\Crate\ListCrates;
 use Honeybee\FrameworkBinding\Silex\Console\Command\Crate\MakeCrate;
 use Honeybee\FrameworkBinding\Silex\Console\Command\Crate\RemoveCrate;
 use Honeybee\FrameworkBinding\Silex\Console\Command\Hello;
+use Honeybee\FrameworkBinding\Silex\Console\Command\Migrate\ListMigrations;
 use Symfony\Component\Console\Input\ArgvInput;
 
 $appContext = 'console';
@@ -14,8 +15,9 @@ $appCommands = [
     CrateInfo::CLASS,
     Hello::CLASS,
     ListCrates::CLASS,
+    ListMigrations::CLASS,
     MakeCrate::CLASS,
-    RemoveCrate::CLASS
+    RemoveCrate::CLASS,
 ];
 
 require_once __DIR__.'/../vendor/autoload.php';
