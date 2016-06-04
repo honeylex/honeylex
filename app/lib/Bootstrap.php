@@ -11,9 +11,11 @@ use Honeybee\FrameworkBinding\Silex\Controller\ControllerResolverServiceProvider
 use Honeybee\FrameworkBinding\Silex\Crate\CrateLoaderInterface;
 use Honeybee\FrameworkBinding\Silex\Service\ServiceProvider;
 use Honeybee\FrameworkBinding\Silex\Service\ServiceProvisioner;
+use Psr\Log\LoggerInterface;
 use Silex\Application;
 use Silex\Provider\AssetServiceProvider;
 use Silex\Provider\HttpFragmentServiceProvider;
+use Silex\Provider\MonologServiceProvider;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -31,27 +33,39 @@ class Bootstrap
 
     public function __invoke(Application $app)
     {
+        // load crates and init config-provider
         $crateManifestMap = $this->configLoader->loadConfig('crates.yml');
         $crateMap = $this->crateLoader->loadCrates($app, $crateManifestMap);
         $configProvider = new ConfigProvider($this->configLoader, $crateMap);
-
+        // enable the debug mode
+        if ($configProvider->getAppEnv() === 'dev') {
+            $app['debug'] = true;
+        }
+        // register logger as first item within the DI chain
+        $app->register(new MonologServiceProvider(), [
+            'monolog.logfile' => $configProvider->getProjectDir().'/var/logs/silex_dev.log'
+        ]);
+        $logger = $app['logger'];
         $injector = new Injector(new StandardReflector);
+        $injector
+            ->share($logger)
+            ->alias(LoggerInterface::CLASS, get_class($logger));
+        // then kick off service provisioning
         $injector->share($configProvider)->alias(ConfigProviderInterface::CLASS, get_class($configProvider));
-
         $serviceDefinitionMap = $configProvider->provide('services.yml');
         $serviceProvisioner = new ServiceProvisioner($app, $injector, $configProvider, $serviceDefinitionMap);
-
+        // and register some standard service providers.
         $app['version'] = $configProvider->getVersion();
         $app->register(new ServiceProvider($serviceProvisioner));
         $app->register(new ControllerResolverServiceProvider);
         $app->register(new AssetServiceProvider);
         $app->register(new HttpFragmentServiceProvider);
-
+        // load environment specific configuration (this has to change badly)
         $envConfig = $configProvider->getEnvConfigPath();
         if (is_readable($envConfig)) {
             require $envConfig;
         }
-
+        // load context specific configuration (well, only web atm. needs to change too)
         if ($configProvider->getAppContext() === 'web') {
             $this->registerWebErrorHandler($app);
             $this->loadProjectRoutes($configProvider->getConfigDir().'/routing.php', $app);

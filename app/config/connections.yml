@@ -1,5 +1,5 @@
 #
-# Project connections, these are used by the ConnectorServiceProvisioner.
+# Project level connection configuration.
 ---
 view_store:
   class: Honeybee\Infrastructure\DataAccess\Connector\ElasticsearchConnector
@@ -8,3 +8,35 @@ view_store:
     host: localhost
     port: 9200
     index: honeylux.domain_events
+
+msg_queue:
+  class: Honeybee\Infrastructure\DataAccess\Connector\RabbitMqConnector
+  settings:
+    host: localhost
+    port: 5762
+    user: bo
+    password: secret
+
+mailer:
+  class: Honeybee\Infrastructure\DataAccess\Connector\SwiftMailer\LocalSendmailConnector
+
+mailer.null:
+  class: Honeybee\Infrastructure\DataAccess\Connector\SwiftMailer\NullConnector
+
+files.local:
+  class: Honeybee\Infrastructure\DataAccess\Connector\Flysystem\LocalConnector
+  settings:
+    directory: data/files
+
+files.local.tmp:
+  class: Honeybee\Infrastructure\DataAccess\Connector\Flysystem\LocalConnector
+  settings:
+    directory: data/tmp_files
+
+process_state.store:
+  class: Honeybee\Infrastructure\DataAccess\Connector\Flysystem\LocalConnector
+  settings:
+    directory: data/process_states
+
+process_state.cache:
+  class: Honeybee\Infrastructure\DataAccess\Connector\Memory\ArrayConnector

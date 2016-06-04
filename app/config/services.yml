@@ -6,7 +6,7 @@ honeybee.environment:
   provisioner:
     class: Honeybee\FrameworkBinding\Silex\Service\Provisioner\EnvironmentProvisioner
 
-honeybee.template_renderer:
+honeybee.infrastructure.template_renderer:
   class: Honeybee\Infrastructure\Template\Twig\TwigRenderer
   provisioner:
     class: Honeybee\FrameworkBinding\Silex\Service\Provisioner\TemplateRendererProvisioner
@@ -16,3 +16,7 @@ honeybee.infrastructure.connector_service:
   provisioner:
     class: Honeybee\FrameworkBinding\Silex\Service\Provisioner\ConnectorServiceProvisioner
 
+honeybee.infrastructure.data_access_service:
+  class: Honeybee\Infrastructure\DataAccess\DataAccessService
+  provisioner:
+    class: Honeybee\FrameworkBinding\Silex\Service\Provisioner\DataAccessServiceProvisioner

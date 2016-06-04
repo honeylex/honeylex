@@ -14,7 +14,7 @@ use Pimple\Container;
 
 class ConnectorServiceProvisioner implements ProvisionerInterface
 {
-    const CONNECTIONS_CONFIG_NAME = 'connections.yml';
+    const CONFIG_NAME = 'connections.yml';
 
     public function provision(
         Container $app,
@@ -28,7 +28,7 @@ class ConnectorServiceProvisioner implements ProvisionerInterface
             ->prepare(
                 ConnectorMap::CLASS,
                 function (ConnectorMap $map) use ($injector, $configProvider) {
-                    $configs = $configProvider->provide(self::CONNECTIONS_CONFIG_NAME);
+                    $configs = $configProvider->provide(self::CONFIG_NAME);
                     $this->registerConnectors($injector, $configs, $map);
                 }
             );
@@ -36,7 +36,7 @@ class ConnectorServiceProvisioner implements ProvisionerInterface
         $connectorService = $serviceDefinition->getClass();
         $serviceState = [ 'connector_map' => ConnectorMap::CLASS];
 
-        $injector
+        return $injector
             ->define($connectorService, $serviceState)
             ->share($connectorService)
             ->alias(ConnectorServiceInterface::CLASS, $connectorService);

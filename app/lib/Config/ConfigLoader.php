@@ -5,6 +5,7 @@ namespace Honeybee\FrameworkBinding\Silex\Config;
 use Honeybee\FrameworkBinding\Silex\Crate\CrateMap;
 use Honeybee\Infrastructure\Config\ArrayConfig;
 use Honeybee\Infrastructure\Config\ConfigInterface;
+use Symfony\Component\Finder\Finder;
 
 class ConfigLoader implements ConfigLoaderInterface
 {
@@ -14,11 +15,14 @@ class ConfigLoader implements ConfigLoaderInterface
 
     protected $config;
 
-    public function __construct($appContext, $appEnv, ConfigInterface $config)
+    protected $fileFinder;
+
+    public function __construct($appContext, $appEnv, ConfigInterface $config, Finder $fileFinder)
     {
         $this->appContext = $appContext;
         $this->appEnv = $appEnv;
         $this->config = $config;
+        $this->fileFinder = $fileFinder;
     }
 
     public function getAppContext()
@@ -64,9 +68,10 @@ class ConfigLoader implements ConfigLoaderInterface
 
         if ($crateMap) {
             foreach ($crateMap as $prefix => $crate) {
-                $configFile = $crate->getConfigDir() . '/' . $name;
-                if (is_readable($configFile)) {
-                    $configFiles[] = $configFile;
+                $finder = clone $this->fileFinder;
+                $foundConfigs = $finder->in($crate->getConfigDir())->name($name);
+                foreach (iterator_to_array($foundConfigs, true) as $fileInfo) {
+                    $configFiles[] = $fileInfo->getPathname();
                 }
             }
         }

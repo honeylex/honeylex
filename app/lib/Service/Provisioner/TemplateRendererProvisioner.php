@@ -25,7 +25,7 @@ class TemplateRendererProvisioner implements ProvisionerInterface
 
         $this->registerTwig($app, $configProvider);
 
-        $injector
+        return $injector
             ->share($service)
             ->alias(TemplateRendererInterface::CLASS, $service)
             ->delegate(

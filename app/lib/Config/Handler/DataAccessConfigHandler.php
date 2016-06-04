@@ -6,7 +6,7 @@ use Honeybee\Infrastructure\Config\ConfigInterface;
 use Honeybee\Infrastructure\DataAccess\Connector\ConnectorMap;
 use Symfony\Component\Yaml\Parser;
 
-class ConnectionConfigHandler implements ConfigHandlerInterface
+class DataAccessConfigHandler implements ConfigHandlerInterface
 {
     protected $config;
 
@@ -29,18 +29,26 @@ class ConnectionConfigHandler implements ConfigHandlerInterface
 
     protected function handlConfigFile($configFile)
     {
-        $connectionConfigs = $this->yamlParser->parse(file_get_contents($configFile));
-        foreach ($connectionConfigs as &$connectionConfig) {
-            if (!isset($connectionConfig['settings'])) {
-                $connectionConfig['settings'] = [];
+        $dataAccessConfig = $this->yamlParser->parse(file_get_contents($configFile));
+
+        $keys = [ 'units_of_work', 'storage_writers', 'storage_readers', 'finders', 'query_services' ];
+        foreach ($keys as $key) {
+            if (!isset($dataAccessConfig[$key])) {
+                $dataAccessConfig[$key] = [];
             }
         }
-        return $connectionConfigs;
+        return $dataAccessConfig;
     }
 
     protected function mergeConfigs(array $out, array $in)
     {
-        return array_merge($out, $in);
+        foreach ($in as $key => $value) {
+            if (!isset($out[$key])) {
+                $out[$key] = [];
+            }
+            $out[$key] = array_merge($out[$key], $value);
+        }
+        return $out;
     }
 
     protected function createParser()

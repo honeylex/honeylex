@@ -1,0 +1,24 @@
+#
+# Connections that are used within the SystemAccount crate.
+---
+storage_writers:
+  honeybee.system_account::version_list::event_source::writer:
+    class: Honeybee\Infrastructure\DataAccess\Storage\CouchDb\StructureVersionList\StructureVersionListWriter
+    connection: system_account.event_source
+  honeybee.system_account::version_list::view_store::writer:
+    class: Honeybee\Infrastructure\DataAccess\Storage\Elasticsearch\StructureVersionList\StructureVersionListWriter
+    connection: view_store
+    settings:
+      index: honeybee-system_account
+      type: version_list
+
+storage_readers:
+  honeybee.system_account::version_list::event_source::reader:
+    class: Honeybee\Infrastructure\DataAccess\Storage\CouchDb\StructureVersionList\StructureVersionListReader
+    connection: system_account.event_source
+  honeybee.system_account::version_list::view_store::reader:
+    class: Honeybee\Infrastructure\DataAccess\Storage\Elasticsearch\StructureVersionList\StructureVersionListReader
+    connection: view_store
+    settings:
+      index: honeybee-system_account
+      type: version_list
