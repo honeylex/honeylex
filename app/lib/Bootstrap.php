@@ -16,6 +16,7 @@ use Silex\Application;
 use Silex\Provider\AssetServiceProvider;
 use Silex\Provider\HttpFragmentServiceProvider;
 use Silex\Provider\MonologServiceProvider;
+use Silex\Provider\WebProfilerServiceProvider;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -37,10 +38,6 @@ class Bootstrap
         $crateManifestMap = $this->configLoader->loadConfig('crates.yml');
         $crateMap = $this->crateLoader->loadCrates($app, $crateManifestMap);
         $configProvider = new ConfigProvider($this->configLoader, $crateMap);
-        // enable the debug mode
-        if ($configProvider->getAppEnv() === 'dev') {
-            $app['debug'] = true;
-        }
         // register logger as first item within the DI chain
         $app->register(new MonologServiceProvider(), [
             'monolog.logfile' => $configProvider->getProjectDir().'/var/logs/silex_dev.log'
@@ -60,15 +57,23 @@ class Bootstrap
         $app->register(new ControllerResolverServiceProvider);
         $app->register(new AssetServiceProvider);
         $app->register(new HttpFragmentServiceProvider);
-        // load environment specific configuration (this has to change badly)
-        $envConfig = $configProvider->getEnvConfigPath();
-        if (is_readable($envConfig)) {
-            require $envConfig;
-        }
         // load context specific configuration (well, only web atm. needs to change too)
         if ($configProvider->getAppContext() === 'web') {
             $this->registerWebErrorHandler($app);
             $this->loadProjectRoutes($configProvider->getConfigDir().'/routing.php', $app);
+            // dev specific switches
+            if ($configProvider->getAppEnv() === 'dev') {
+                $app['debug'] = true;
+                $app->register(
+                    new WebProfilerServiceProvider(),
+                    [ 'profiler.cache_dir' => $configProvider->getProjectDir().'/var/cache/profiler' ]
+                );
+            }
+        }
+        // load environment specific configuration (this has to change badly)
+        $envConfig = $configProvider->getEnvConfigPath();
+        if (is_readable($envConfig)) {
+            require $envConfig;
         }
 
         return $app;
