@@ -34,7 +34,7 @@ class MakeResource extends ResourceCommand
                 "The prefix of the crate to make the resource in."
             )
             ->addArgument(
-                'name',
+                'resource',
                 null,
                 InputArgument::REQUIRED,
                 "The name of the resource to make."
@@ -44,7 +44,7 @@ class MakeResource extends ResourceCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $cratePrefix = $input->getArgument('crate');
-        $resourceName = $input->getArgument('name');
+        $resourceName = $input->getArgument('resource');
         $crate = $this->configProvider->getCrateMap()->getItem($cratePrefix);
         if (!$resourceName || !$cratePrefix || !$crate) {
             $output->writeln('<error>You must specify at least a crate-prefix and resource-name.</error>');

@@ -41,7 +41,7 @@ class ResourceInfo extends ResourceCommand
                 "The prefix of the crate that contains the target resource."
             )
             ->addArgument(
-                'name',
+                'resource',
                 null,
                 InputArgument::REQUIRED,
                 "The name of the resource to display the details for."
@@ -51,7 +51,7 @@ class ResourceInfo extends ResourceCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $cratePrefix = $input->getArgument('crate');
-        $resourceName = $input->getArgument('name');
+        $resourceName = $input->getArgument('resource');
         $crate = $this->configProvider->getCrateMap()->getItem($cratePrefix);
         if (!$resourceName || !$cratePrefix || !$crate) {
             $output->writeln('<error>You must specify at least a crate-prefix and resource-name.</error>');

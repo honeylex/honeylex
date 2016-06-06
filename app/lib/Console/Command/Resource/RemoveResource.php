@@ -23,7 +23,7 @@ class RemoveResource extends ResourceCommand
                 "The prefix of the crate to remove the resource from."
             )
             ->addArgument(
-                'name',
+                'resource',
                 null,
                 InputArgument::REQUIRED,
                 "The name of the resource to remove."
@@ -33,9 +33,9 @@ class RemoveResource extends ResourceCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $cratePrefix = $input->getArgument('crate');
-        $resourceName = $input->getArgument('name');
+        $resourceName = $input->getArgument('resource');
         $crate = $this->configProvider->getCrateMap()->getItem($cratePrefix);
-        if ($resourceName || !$cratePrefix || !$crate) {
+        if (!$resourceName || !$cratePrefix || !$crate) {
             $output->writeln('<error>You must specify at least a crate-prefix and resource-name.</error>');
             return false;
         }

@@ -149,6 +149,6 @@ abstract class UserType extends AggregateRootType
      */
     public static function getEntityImplementor()
     {
-        return '\\Honeybee\\SystemAccount\\User\\Model\\Aggregate\\User';
+        return '\\Foh\\SystemAccount\\User\\Model\\Aggregate\\User';
     }
 }

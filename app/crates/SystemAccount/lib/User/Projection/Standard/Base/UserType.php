@@ -149,6 +149,6 @@ abstract class UserType extends ProjectionType
      */
     public static function getEntityImplementor()
     {
-        return '\\Honeybee\\SystemAccount\\User\\Projection\\Standard\\User';
+        return '\\Foh\\SystemAccount\\User\\Projection\\Standard\\User';
     }
 }
