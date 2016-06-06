@@ -75,6 +75,7 @@ class MakeCrate extends CrateCommand
             $output->writeln('Skeleton locations: ' . implode(', ', $skeletonLocations));
 
             $data = [
+                'timestamp' => date('YmdHis'),
                 'crate' => [
                     'name' => $name,
                     'prefix' => $prefix,
@@ -84,7 +85,7 @@ class MakeCrate extends CrateCommand
             ];
             $skeletonGenerator = new SkeletonGenerator('crate', $skeletonLocations, $targetPath, $data);
             $skeletonGenerator->generate();
-            $this->addAutoloadConfig($fqns, $targetPath.'/lib/');
+            $this->addAutoloadConfig($fqns, $targetPath.'/'.$name.'/lib/');
 
             $crates = [];
             foreach ($this->configProvider->getCrateMap() as $crateToLoad) {

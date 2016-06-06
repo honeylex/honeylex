@@ -1,0 +1,25 @@
+#
+# {{ crate.name }} migration targets
+---
+{{ crate.prefix }}::migration::event_source:
+  active: true
+  settings:
+    version_list_reader: {{ crate.prefix }}::version_list::event_source::reader
+    version_list_writer: {{ crate.prefix }}::version_list::event_source::writer
+    target_connection: {{ crate.prefix }}
+  migration_loader:
+    class: Honeybee\Infrastructure\Migration\FileSystemLoader
+    settings:
+      directory: ${project.dir}/app/crates/SystemAccount/migration/couchdb
+
+{{ crate.prefix }}::migration::view_store:
+  active: true
+  settings:
+    version_list_reader: {{ crate.prefix }}::version_list::view_store::reader
+    version_list_writer: {{ crate.prefix }}::version_list::view_store::writer
+    target_connection: view_store
+    index: {{ crate.prefix }}
+  migration_loader:
+    class: Honeybee\Infrastructure\Migration\FileSystemLoader
+    settings:
+      directory: ${project.dir}/app/crates/SystemAccount/migration/elasticsearch
