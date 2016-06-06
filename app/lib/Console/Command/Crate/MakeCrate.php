@@ -9,6 +9,7 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Process\Process;
 
 class MakeCrate extends CrateCommand
 {
@@ -41,7 +42,6 @@ class MakeCrate extends CrateCommand
             )
             ->addArgument(
                 'path',
-                null,
                 InputArgument::REQUIRED,
                 "The directory path where the crate shall be created."
             );
@@ -79,7 +79,7 @@ class MakeCrate extends CrateCommand
         $output->writeln('Crate description: ' . $description);
         $output->writeln('Crate dir: ' . $targetPath);
         $output->writeln('Skeleton locations: ' . implode(', ', $skeletonLocations));
-
+        // variables that will be available within skeleton file- and directory-names and within file-contents.
         $data = [
             'timestamp' => date('YmdHis'),
             'crate' => [
@@ -90,15 +90,25 @@ class MakeCrate extends CrateCommand
                 'description' => $description
             ]
         ];
+        // generate crate from skeleton and deploy the resulting code to the target-path
         $skeletonGenerator = new SkeletonGenerator('crate', $skeletonLocations, $targetPath, $data);
         $skeletonGenerator->generate();
+        // update the composer.json's autoload
         $this->addAutoloadConfig($fqns, $targetPath.'/lib/');
-
+        // update the crates.yml
         $crates = [];
         foreach ($this->configProvider->getCrateMap() as $crateToLoad) {
             $crates[] = get_class($crateToLoad);
         }
         $crates[] = $fqns.'\\'.$name.'Crate';
         $this->updateCratesConfig($crates);
+        // have composer dump it's autoloading
+        $process = new Process('composer dumpautoload');
+        $process->run();
+        if (!$process->isSuccessful()) {
+            $output->writeln('<error>Failed to dump composer autoloads.</error>');
+        } else {
+            $output->writeln('<info>'.$process->getOutput().'</info>');
+        }
     }
 }

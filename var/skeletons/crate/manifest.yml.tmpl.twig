@@ -1,4 +1,4 @@
 ---
 vendor: {{ crate.vendor }}
 name: {{ crate.name }}
-description: {{ crate.description|'none' }}
+description: {{ crate.description|default('none') }}

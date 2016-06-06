@@ -10,6 +10,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Process\Process;
 
 class RemoveCrate extends CrateCommand
 {
@@ -34,16 +35,30 @@ class RemoveCrate extends CrateCommand
         $crateDir = $crate->getRootDir();
         $appDir = $this->configProvider->getProjectDir().'/app/';
         if (strpos($crateDir, $appDir) === 0) {
-            $output->writeln('<info>removing crate: '.$crate->getName().'</info>');
-            (new Filesystem)->remove($crateDir);
+            try {
+                if ((new Filesystem)->remove($crateDir)) {
+                    $output->writeln('<info>Removed crate: '.$crate->getVendor().'/'.$crate->getName().'</info>');
+                }
+            } catch (\Exception $e) {
+                $output->writeln('<error>Failed to remove crate: '.$crate->getVendor().'/'.$crate->getName().'</error>');
+            }
             $this->configProvider->getCrateMap()->removeItem($crate);
             $this->removeAutoloadConfig($crate->getNamespace().'\\');
-
+            $output->writeln('<info>Removed crate from composer autoload.</info>');
             $crates = [];
             foreach ($this->configProvider->getCrateMap() as $crateToLoad) {
                 $crates[] = get_class($crateToLoad);
             }
             $this->updateCratesConfig($crates);
+            $output->writeln('<info>Removed crate from crates.yml config.</info>');
+            // have composer dump it's autoloading
+            $process = new Process('composer dumpautoload');
+            $process->run();
+            if (!$process->isSuccessful()) {
+                $output->writeln('<error>Failed to dump composer autoloads.</error>');
+            } else {
+                $output->writeln('<info>'.$process->getOutput().'</info>');
+            }
         } else {
             $output->writeln('<error>not allowed to remove crate</error>');
         }
