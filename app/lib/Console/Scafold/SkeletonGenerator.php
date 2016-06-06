@@ -52,6 +52,7 @@ class SkeletonGenerator implements SkeletonGeneratorInterface
 
         $this->twigStringRenderer = TwigRenderer::create(
             [
+                'twig_extensions' => [ TwigExtension::CLASS ],
                 'twig_options' => [
                     'autoescape' => false,
                     'cache' => false,
