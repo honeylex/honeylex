@@ -1,5 +1,5 @@
 #
-# Connections that are used within the SystemAccount crate.
+# Connections that are used within the {{ crate.name }} crate.
 ---
 storage_writers:
   {{ crate.prefix }}::version_list::event_source::writer:
@@ -7,9 +7,9 @@ storage_writers:
     connection: {{ crate.prefix }}.event_source
   {{ crate.prefix }}::version_list::view_store::writer:
     class: Honeybee\Infrastructure\DataAccess\Storage\Elasticsearch\StructureVersionList\StructureVersionListWriter
-    connection: view_store
+    connection: honeybee.view_store
     settings:
-      index: {{ crate.prefix }}
+      index: {{ crate.vendor|snake }}-{{ crate.name|snake }}
       type: version_list
 
 storage_readers:
@@ -18,7 +18,7 @@ storage_readers:
     connection: {{ crate.prefix }}.event_source
   {{ crate.prefix }}::version_list::view_store::reader:
     class: Honeybee\Infrastructure\DataAccess\Storage\Elasticsearch\StructureVersionList\StructureVersionListReader
-    connection: view_store
+    connection: honeybee.view_store
     settings:
-      index: {{ crate.prefix }}
+      index: {{ crate.vendor|snake }}-{{ crate.name|snake }}
       type: version_list

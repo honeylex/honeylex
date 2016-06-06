@@ -30,14 +30,14 @@ class MakeCrate extends CrateCommand
                 "Optional override of the locations that will be searched for (crate)skeletons."
             )
             ->addArgument(
-                'name',
+                'vendor',
                 InputArgument::REQUIRED,
-                'The name of the crate to make.'
+                'The vendor that ships this crate.'
             )
             ->addArgument(
-                'namespace',
+                'name',
                 InputArgument::REQUIRED,
-                "The crates fully-qualified php namespace."
+                "The name of the crate to make"
             )
             ->addArgument(
                 'path',
@@ -50,51 +50,55 @@ class MakeCrate extends CrateCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $name = $input->getArgument('name');
-        $fqns = trim($input->getArgument('namespace'), "\\");
+        $vendor = $input->getArgument('vendor');
         $targetPath = $input->getArgument('path');
-        if ($name && $targetPath && $fqns) {
-            $prefix = StringToolkit::asSnakecase($name);
-            $description = $input->getOption('description');
-            $locations = $input->getOption('location') ?: 'not set';
-
-            if (!is_array($locations)) {
-                $skeletonLocations = [
-                    $this->configProvider->getCoreDir() . '/var/skeletons',
-                    $this->configProvider->getProjectDir() . '/var/skeletons'
-                ];
-            } else {
-                $skeletonLocations = $locations;
-            }
-            $skeletonLocations = array_unique($skeletonLocations);
-
-            $output->writeln('Crate name: ' . $name);
-            $output->writeln('Crate prefix: ' . $prefix);
-            $output->writeln('Crate namespace: ' . $fqns);
-            $output->writeln('Crate description: ' . $description);
-            $output->writeln('Crate dir: ' . $targetPath.'/'.$name);
-            $output->writeln('Skeleton locations: ' . implode(', ', $skeletonLocations));
-
-            $data = [
-                'timestamp' => date('YmdHis'),
-                'crate' => [
-                    'name' => $name,
-                    'prefix' => $prefix,
-                    'namespace' => $fqns,
-                    'description' => $description
-                ]
-            ];
-            $skeletonGenerator = new SkeletonGenerator('crate', $skeletonLocations, $targetPath, $data);
-            $skeletonGenerator->generate();
-            $this->addAutoloadConfig($fqns, $targetPath.'/'.$name.'/lib/');
-
-            $crates = [];
-            foreach ($this->configProvider->getCrateMap() as $crateToLoad) {
-                $crates[] = get_class($crateToLoad);
-            }
-            $crates[] = $fqns.'\\'.$name.'Crate';
-            $this->updateCratesConfig($crates);
-        } else {
+        if (!$vendor || !$name || !$targetPath) {
             $output->writeln('<error>you must specify a crate name</error>');
+            return false;
         }
+
+        $targetPath .= '/'.$name;
+        $fqns = sprintf('%s\%s', trim($vendor), trim($name));
+        $prefix = StringToolkit::asSnakecase($vendor).'.'StringToolkit::asSnakecase($name);
+        $description = $input->getOption('description');
+        $locations = $input->getOption('location') ?: 'not set';
+
+        if (!is_array($locations)) {
+            $skeletonLocations = [
+                $this->configProvider->getCoreDir() . '/var/skeletons',
+                $this->configProvider->getProjectDir() . '/var/skeletons'
+            ];
+        } else {
+            $skeletonLocations = $locations;
+        }
+        $skeletonLocations = array_unique($skeletonLocations);
+
+        $output->writeln('Crate vendor/name: ' . $vendor.'/'.$name);
+        $output->writeln('Crate prefix: ' . $prefix);
+        $output->writeln('Crate namespace: ' . $fqns);
+        $output->writeln('Crate description: ' . $description);
+        $output->writeln('Crate dir: ' . $targetPath);
+        $output->writeln('Skeleton locations: ' . implode(', ', $skeletonLocations));
+
+        $data = [
+            'timestamp' => date('YmdHis'),
+            'crate' => [
+                'vendor' => $vendor,
+                'name' => $name,
+                'prefix' => $prefix,
+                'namespace' => $fqns,
+                'description' => $description
+            ]
+        ];
+        $skeletonGenerator = new SkeletonGenerator('crate', $skeletonLocations, $targetPath, $data);
+        $skeletonGenerator->generate();
+        $this->addAutoloadConfig($fqns, $targetPath.'/lib/');
+
+        $crates = [];
+        foreach ($this->configProvider->getCrateMap() as $crateToLoad) {
+            $crates[] = get_class($crateToLoad);
+        }
+        $crates[] = $fqns.'\\'.$name.'Crate';
+        $this->updateCratesConfig($crates);
     }
 }

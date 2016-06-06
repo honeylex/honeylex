@@ -1,6 +1,6 @@
 <?php
 
-namespace {{ crate.namespace }}\Controller;
+namespace {{ crate.namespace }}\{{ resource.name }}\Controller;
 
 use Honeybee\Infrastructure\Template\TemplateRendererInterface;
 
@@ -15,6 +15,6 @@ class IndexController
 
     public function read()
     {
-        return $this->templateRenderer->render('@{{ crate.name }}/index.twig', [ 'crate' => '{{ crate.name}}' ]);
+        return $this->templateRenderer->render('@{{ crate.name }}/{{ resource.name|snake }}/index.twig', [ 'title' => __METHOD__ ]);
     }
 }

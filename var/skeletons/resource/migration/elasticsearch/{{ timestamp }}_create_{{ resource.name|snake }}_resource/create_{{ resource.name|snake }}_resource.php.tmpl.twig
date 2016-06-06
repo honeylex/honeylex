@@ -1,48 +1,42 @@
 <?php
 
-namespace Honeybee\SystemAccount\Migration\Elasticsearch;
+namespace {{ crate.namespace }}\Migration\Elasticsearch;
 
 use Honeybee\Infrastructure\Migration\ElasticsearchMigration;
 use Honeybee\Infrastructure\Migration\MigrationTargetInterface;
 use Honeybee\Infrastructure\Migration\MigrationInterface;
 
-class Migration_{{ timestamp }}_InitViewStore extends ElasticsearchMigration
+class Migration_{{ timestamp }}_Create{{ resource.name }}Resource extends ElasticsearchMigration
 {
     protected function up(MigrationTargetInterface $migration_target)
     {
-        $this->createIndexIfNotExists($migration_target);
-        $this->updateIndexTemplates(
-            $migration_target,
-            [
-                'domain_events' => __DIR__ . DIRECTORY_SEPARATOR . 'domain_events-template.json'
-            ]
-        );
+        $this->updateMappings($migration_target);
     }
 
     protected function down(MigrationTargetInterface $migration_target)
     {
-        $this->deleteIndex($migration_target);
     }
 
     public function getDescription($direction = MigrationInterface::MIGRATE_UP)
     {
         if ($direction === MigrationInterface::MIGRATE_UP) {
-            return 'Will create the elasticsearch index for the {{ crate.name }} context\'s view data.';
+            return 'Will create the elasticsearch type for the {{ resource.name }}\'s view data.';
         }
-        return 'Will delete the elasticsearch index for the {{ crate.name }} context.';
     }
 
     public function isReversible()
     {
-        return true;
+        return false;
     }
 
     protected function getIndexSettingsPath(MigrationTargetInterface $migration_target)
     {
-        return __DIR__ . DIRECTORY_SEPARATOR . 'index-settings.json';
     }
 
     protected function getTypeMappingPaths(MigrationTargetInterface $migration_target)
     {
+        return [
+            '{{ crate.vendor|snake }}-{{ crate.name|snake }}-{{ resource.name|snake }}-standard' => __DIR__ . DIRECTORY_SEPARATOR . '{{ resource.name|snake }}-standard-{{ timestamp }}-mapping.json'
+        ];
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Honeybee\FrameworkBinding\Silex\Console\Scafold;
 
+use Honeybee\FrameworkBinding\Silex\Twig\TwigExtension;
 use Honeybee\Infrastructure\Template\Twig\TwigRenderer;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
@@ -170,6 +171,7 @@ class SkeletonGenerator implements SkeletonGeneratorInterface
 
         $twigRenderer = TwigRenderer::create(
             [
+                'twig_extensions' => [ TwigExtension::CLASS ],
                 'twig_options' => [
                     'autoescape' => false,
                     'cache' => false,

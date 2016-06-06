@@ -10,6 +10,9 @@ honeybee.infrastructure.template_renderer:
   class: Honeybee\Infrastructure\Template\Twig\TwigRenderer
   provisioner:
     class: Honeybee\FrameworkBinding\Silex\Service\Provisioner\TemplateRendererProvisioner
+    settings:
+      extensions:
+        - Honeybee\FrameworkBinding\Silex\Twig\TwigExtension
 
 honeybee.infrastructure.connector_service:
   class: Honeybee\Infrastructure\DataAccess\Connector\ConnectorService

@@ -1,5 +1,5 @@
 #
-# SystemAccount specific connections.
+# {{ crate.name }} specific connections.
 ---
 {{ crate.prefix }}.event_source:
   class: Honeybee\Infrastructure\DataAccess\Connector\GuzzleConnector
@@ -7,5 +7,5 @@
     host: 127.0.0.1
     port: 5984
     transport: http
-    database: {{ crate.prefix }}
+    database: {{ crate.vendor|snake }}-{{ crate.name|snake }}
     status_test: /

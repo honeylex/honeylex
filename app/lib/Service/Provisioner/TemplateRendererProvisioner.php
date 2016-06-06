@@ -3,14 +3,17 @@
 namespace Honeybee\FrameworkBinding\Silex\Service\Provisioner;
 
 use Auryn\Injector;
+use Honeybee\Common\Util\StringToolkit;
 use Honeybee\FrameworkBinding\Silex\Config\ConfigProviderInterface;
 use Honeybee\FrameworkBinding\Silex\Crate\CrateMap;
+use Honeybee\FrameworkBinding\Silex\Twig\TwigExtension;
 use Honeybee\Infrastructure\Config\SettingsInterface;
 use Honeybee\Infrastructure\Template\TemplateRendererInterface;
 use Honeybee\ServiceDefinitionInterface;
 use Pimple\Container;
 use Silex\Provider\TwigServiceProvider;
 use Symfony\Component\Filesystem\Filesystem;
+use Twig_SimpleFilter;
 
 class TemplateRendererProvisioner implements ProvisionerInterface
 {
@@ -23,7 +26,7 @@ class TemplateRendererProvisioner implements ProvisionerInterface
     ) {
         $service = $serviceDefinition->getClass();
 
-        $this->registerTwig($app, $configProvider);
+        $this->registerTwig($app, $provisionerSettings, $configProvider);
 
         return $injector
             ->share($service)
@@ -36,8 +39,11 @@ class TemplateRendererProvisioner implements ProvisionerInterface
             );
     }
 
-    protected function registerTwig(Container $app, ConfigProviderInterface $configProvider)
-    {
+    protected function registerTwig(
+        Container $app,
+        SettingsInterface $provisionerSettings,
+        ConfigProviderInterface $configProvider
+    ) {
         $app->register(new TwigServiceProvider);
 
         $namespacedPaths = $this->getCrateTemplatesPaths($configProvider->getCrateMap());
@@ -54,8 +60,11 @@ class TemplateRendererProvisioner implements ProvisionerInterface
             return $filesystem;
         };
 
-        $app['twig'] = $app->extend('twig', function ($twig, $app) {
-            // add custom globals, filters, tags, ...
+        $app['twig'] = $app->extend('twig', function ($twig, $app) use ($provisionerSettings) {
+            foreach ($provisionerSettings->get('extensions', []) as $extension) {
+                $twig->addExtension(new $extension);
+            }
+
             return $twig;
         });
     }

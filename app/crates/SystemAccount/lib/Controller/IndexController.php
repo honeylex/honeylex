@@ -15,6 +15,6 @@ class IndexController
 
     public function read()
     {
-        return $this->templateRenderer->render('@SystemAccount/index.twig');
+        return $this->templateRenderer->render('@SystemAccount/index.twig', [ 'title' => __METHOD__ ]);
     }
 }
