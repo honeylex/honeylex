@@ -2,16 +2,8 @@
 
 namespace Honeybee\FrameworkBinding\Silex\Config\Handler;
 
-class DataAccessConfigHandler extends YamlConfigHandler
+class DataAccessConfigHandler extends ArrayConfigHandler
 {
-    public function handle(array $configFiles)
-    {
-        return array_reduce(
-            array_map([ $this, 'handlConfigFile' ], $configFiles), [ $this, 'mergeConfigs' ],
-            []
-        );
-    }
-
     protected function handlConfigFile($configFile)
     {
         $dataAccessConfig = $this->parse($configFile);
@@ -21,7 +13,6 @@ class DataAccessConfigHandler extends YamlConfigHandler
             if (!isset($dataAccessConfig[$key])) {
                 $dataAccessConfig[$key] = [];
             }
-            // @todo interpolate dbal component setting with $this->interpolateConfigValues(...)
         }
         return $dataAccessConfig;
     }

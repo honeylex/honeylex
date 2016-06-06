@@ -3,23 +3,9 @@
 namespace Honeybee\FrameworkBinding\Silex\Config\Handler;
 
 use Honeybee\Common\Error\ConfigError;
-use Honeybee\FrameworkBinding\Silex\Config\ConfigProviderInterface;
-use Honeybee\Infrastructure\Config\ConfigInterface;
 
-class SettingConfigHandler implements ConfigHandlerInterface
+class SettingConfigHandler extends YamlConfigHandler
 {
-    protected $config;
-
-    protected $yamlParser;
-
-    public function __construct(ConfigInterface $config, ConfigProviderInterface $configProvider)
-    {
-        $this->config = $config;
-        $parserClass = $this->config->get('parser');
-        $this->yamlParser = new $parserClass;
-        $this->configProvider = $configProvider;
-    }
-
     public function handle(array $configFiles)
     {
         return $this->interpolateConfigValues(

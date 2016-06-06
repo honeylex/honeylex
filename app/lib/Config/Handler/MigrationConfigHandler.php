@@ -2,23 +2,11 @@
 
 namespace Honeybee\FrameworkBinding\Silex\Config\Handler;
 
-class MigrationConfigHandler extends YamlConfigHandler
+class MigrationConfigHandler extends ArrayConfigHandler
 {
-    public function handle(array $configFiles)
-    {
-        return $this->interpolateConfigValues(
-            array_reduce(
-                array_map([ $this, 'handlConfigFile' ], $configFiles), [ $this, 'mergeConfigs' ],
-                []
-            )
-        );
-    }
-
     protected function handlConfigFile($configFile)
     {
-        $migrationTargetConfigs = $this->parse($configFile);
-
-        return $migrationTargetConfigs;
+        return $this->parse($configFile);
     }
 
     protected function mergeConfigs(array $out, array $in)

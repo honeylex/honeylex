@@ -7,9 +7,11 @@ storage_writers:
     connection: honeybee.view_store
     settings:
       type: domain_event
+
   honeybee.core::process_state::process_store::writer:
     class: Honeybee\Infrastructure\DataAccess\Storage\Filesystem\ProcessState\ProcessStateWriter
     connection: honeybee.process_state.store
+
   honeybee.core::process_state::process_cache::writer:
     class: Honeybee\Infrastructure\DataAccess\Storage\Memory\ProcessState\ProcessStateWriter
     connection: honeybee.process_state.cache
@@ -18,6 +20,7 @@ storage_readers:
   honeybee.core::process_state::process_store::reader:
     class: Honeybee\Infrastructure\DataAccess\Storage\Filesystem\ProcessState\ProcessStateReader
     connection: honeybee.process_state.store
+
   honeybee.core::process_state::process_cache::reader:
     class: Honeybee\Infrastructure\DataAccess\Storage\Memory\ProcessState\ProcessStateReader
     connection: honeybee.process_state.cache

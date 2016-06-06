@@ -5,6 +5,7 @@ storage_writers:
   foh.system_account::version_list::event_source::writer:
     class: Honeybee\Infrastructure\DataAccess\Storage\CouchDb\StructureVersionList\StructureVersionListWriter
     connection: foh.system_account.event_source
+
   foh.system_account::version_list::view_store::writer:
     class: Honeybee\Infrastructure\DataAccess\Storage\Elasticsearch\StructureVersionList\StructureVersionListWriter
     connection: honeybee.view_store
@@ -16,6 +17,7 @@ storage_readers:
   foh.system_account::version_list::event_source::reader:
     class: Honeybee\Infrastructure\DataAccess\Storage\CouchDb\StructureVersionList\StructureVersionListReader
     connection: foh.system_account.event_source
+
   foh.system_account::version_list::view_store::reader:
     class: Honeybee\Infrastructure\DataAccess\Storage\Elasticsearch\StructureVersionList\StructureVersionListReader
     connection: honeybee.view_store

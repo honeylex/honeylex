@@ -2,16 +2,8 @@
 
 namespace Honeybee\FrameworkBinding\Silex\Config\Handler;
 
-class ConnectionConfigHandler extends YamlConfigHandler
+class ConnectionConfigHandler extends ArrayConfigHandler
 {
-    public function handle(array $configFiles)
-    {
-        return array_reduce(
-            array_map([ $this, 'handlConfigFile' ], $configFiles), [ $this, 'mergeConfigs' ],
-            []
-        );
-    }
-
     protected function handlConfigFile($configFile)
     {
         $connectionConfigs = $this->parse($configFile);
