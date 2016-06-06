@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\SystemAccount;
+namespace Foh\SystemAccount;
 
 use Honeybee\FrameworkBinding\Silex\Crate\Crate;
 use Silex\Application;

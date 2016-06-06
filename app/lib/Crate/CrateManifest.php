@@ -2,26 +2,25 @@
 
 namespace Honeybee\FrameworkBinding\Silex\Crate;
 
+use Honeybee\Common\Util\StringToolkit;
+
 class CrateManifest implements CrateManifestInterface
 {
-    private $name;
+    private $vendor;
 
-    private $prefix;
+    private $name;
 
     private $class;
 
-    private $namespace;
-
     private $description;
 
-    public function __construct($rootDir, $name, $prefix, $namespace, $class, $description = '')
+    public function __construct($rootDir, $vendor, $name, $class, $description = '')
     {
         $this->rootDir = $rootDir;
+        $this->vendor = $vendor;
         $this->name = $name;
-        $this->prefix = $prefix;
-        $this->namespace = $namespace;
-        $this->class = $class;
         $this->description = $description;
+        $this->class = $class;
     }
 
     public function getRootDir()
@@ -36,7 +35,12 @@ class CrateManifest implements CrateManifestInterface
 
     public function getPrefix()
     {
-        return $this->prefix;
+        return StringToolkit::asSnakecase($this->getVendor()).'.'.StringToolkit::asSnakecase($this->getName());
+    }
+
+    public function getVendor()
+    {
+        return $this->vendor;
     }
 
     public function getName()
@@ -46,7 +50,7 @@ class CrateManifest implements CrateManifestInterface
 
     public function getNamespace()
     {
-        return $this->namespace;
+        return $this->getVendor().'\\'.$this->getName();
     }
 
     public function getDescription()

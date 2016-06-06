@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\SystemAccount\User\Controller;
+namespace Foh\SystemAccount\User\Controller;
 
 use Honeybee\Infrastructure\Template\TemplateRendererInterface;
 

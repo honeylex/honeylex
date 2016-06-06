@@ -1,8 +1,8 @@
 <?php
 
-namespace Honeybee\SystemAccount\User\Projection\Standard;
+namespace Foh\SystemAccount\User\Projection\Standard;
 
-use Honeybee\SystemAccount\User\Projection\Standard\Base\UserType as BaseUserType;
+use Foh\SystemAccount\User\Projection\Standard\Base\UserType as BaseUserType;
 
 /**
  * Defines the (normalized) strucuture of a default user projection.

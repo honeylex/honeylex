@@ -652,17 +652,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeybee/honeybee.git",
-                "reference": "9ce557de354d1124b6304b63d10582d479cb64ac"
+                "reference": "b057105301b060634445146a0a5e084cb4473f7d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/9ce557de354d1124b6304b63d10582d479cb64ac",
-                "reference": "9ce557de354d1124b6304b63d10582d479cb64ac",
+                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/b057105301b060634445146a0a5e084cb4473f7d",
+                "reference": "b057105301b060634445146a0a5e084cb4473f7d",
                 "shasum": ""
             },
             "require": {
                 "beberlei/assert": "~2.5",
                 "elasticsearch/elasticsearch": "~2.0",
+                "guzzlehttp/guzzle": "~6.2",
                 "honeybee/trellis": "master@dev",
                 "league/flysystem": "~1.0",
                 "michelf/php-markdown": "~1.4",
@@ -738,7 +739,7 @@
                 "hexagonal",
                 "messaging"
             ],
-            "time": "2016-06-03 10:14:02"
+            "time": "2016-06-06 15:59:39"
         },
         {
             "name": "honeybee/trellis",
@@ -746,12 +747,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeybee/trellis.git",
-                "reference": "c5f043d23fa65f8383cbd0601828fc2c3764b814"
+                "reference": "0d78cb0cbace704ea66a9b1aaf2a37456bbdfbb0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeybee/trellis/zipball/c5f043d23fa65f8383cbd0601828fc2c3764b814",
-                "reference": "c5f043d23fa65f8383cbd0601828fc2c3764b814",
+                "url": "https://api.github.com/repos/honeybee/trellis/zipball/0d78cb0cbace704ea66a9b1aaf2a37456bbdfbb0",
+                "reference": "0d78cb0cbace704ea66a9b1aaf2a37456bbdfbb0",
                 "shasum": ""
             },
             "require": {
@@ -807,7 +808,7 @@
                 "entity",
                 "validation"
             ],
-            "time": "2016-06-03 16:50:54"
+            "time": "2016-06-06 13:01:50"
         },
         {
             "name": "league/flysystem",
@@ -1782,16 +1783,16 @@
         },
         {
             "name": "symfony/asset",
-            "version": "v3.0.6",
+            "version": "v3.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/asset.git",
-                "reference": "ae5e0397523f6c75d28e500731a4300385f1a11b"
+                "reference": "669665d36ae32613d31a5a3a95967764d5bd5ddd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/asset/zipball/ae5e0397523f6c75d28e500731a4300385f1a11b",
-                "reference": "ae5e0397523f6c75d28e500731a4300385f1a11b",
+                "url": "https://api.github.com/repos/symfony/asset/zipball/669665d36ae32613d31a5a3a95967764d5bd5ddd",
+                "reference": "669665d36ae32613d31a5a3a95967764d5bd5ddd",
                 "shasum": ""
             },
             "require": {
@@ -1833,11 +1834,11 @@
             ],
             "description": "Symfony Asset Component",
             "homepage": "https://symfony.com",
-            "time": "2016-03-10 10:34:12"
+            "time": "2016-05-13 18:03:36"
         },
         {
             "name": "symfony/browser-kit",
-            "version": "v3.0.6",
+            "version": "v3.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/browser-kit.git",
@@ -1894,7 +1895,7 @@
         },
         {
             "name": "symfony/class-loader",
-            "version": "v3.0.6",
+            "version": "v3.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/class-loader.git",
@@ -1950,7 +1951,7 @@
         },
         {
             "name": "symfony/config",
-            "version": "v3.0.6",
+            "version": "v3.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/config.git",
@@ -2003,16 +2004,16 @@
         },
         {
             "name": "symfony/console",
-            "version": "v2.8.6",
+            "version": "v2.8.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "48221d3de4dc22d2cd57c97e8b9361821da86609"
+                "reference": "5ac8bc9aa77bb2edf06af3a1bb6bc1020d23acd3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/48221d3de4dc22d2cd57c97e8b9361821da86609",
-                "reference": "48221d3de4dc22d2cd57c97e8b9361821da86609",
+                "url": "https://api.github.com/repos/symfony/console/zipball/5ac8bc9aa77bb2edf06af3a1bb6bc1020d23acd3",
+                "reference": "5ac8bc9aa77bb2edf06af3a1bb6bc1020d23acd3",
                 "shasum": ""
             },
             "require": {
@@ -2059,20 +2060,20 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2016-04-26 12:00:47"
+            "time": "2016-06-06 15:06:25"
         },
         {
             "name": "symfony/css-selector",
-            "version": "v3.0.6",
+            "version": "v3.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/css-selector.git",
-                "reference": "65e764f404685f2dc20c057e889b3ad04b2e2db0"
+                "reference": "e8a66c51bf65f188c02f8120c0748b2291d3a2d0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/css-selector/zipball/65e764f404685f2dc20c057e889b3ad04b2e2db0",
-                "reference": "65e764f404685f2dc20c057e889b3ad04b2e2db0",
+                "url": "https://api.github.com/repos/symfony/css-selector/zipball/e8a66c51bf65f188c02f8120c0748b2291d3a2d0",
+                "reference": "e8a66c51bf65f188c02f8120c0748b2291d3a2d0",
                 "shasum": ""
             },
             "require": {
@@ -2112,20 +2113,20 @@
             ],
             "description": "Symfony CssSelector Component",
             "homepage": "https://symfony.com",
-            "time": "2016-03-04 07:55:57"
+            "time": "2016-06-06 11:33:26"
         },
         {
             "name": "symfony/debug",
-            "version": "v3.0.6",
+            "version": "v3.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/debug.git",
-                "reference": "a06d10888a45afd97534506afb058ec38d9ba35b"
+                "reference": "e67e1552dd7313df1cf6535cb606751899e0e727"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/debug/zipball/a06d10888a45afd97534506afb058ec38d9ba35b",
-                "reference": "a06d10888a45afd97534506afb058ec38d9ba35b",
+                "url": "https://api.github.com/repos/symfony/debug/zipball/e67e1552dd7313df1cf6535cb606751899e0e727",
+                "reference": "e67e1552dd7313df1cf6535cb606751899e0e727",
                 "shasum": ""
             },
             "require": {
@@ -2169,7 +2170,7 @@
             ],
             "description": "Symfony Debug Component",
             "homepage": "https://symfony.com",
-            "time": "2016-03-30 10:41:14"
+            "time": "2016-06-06 15:08:35"
         },
         {
             "name": "symfony/dom-crawler",
@@ -2289,7 +2290,7 @@
         },
         {
             "name": "symfony/expression-language",
-            "version": "v2.8.6",
+            "version": "v2.8.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/expression-language.git",
@@ -2338,7 +2339,7 @@
         },
         {
             "name": "symfony/filesystem",
-            "version": "v2.8.6",
+            "version": "v2.8.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/filesystem.git",
@@ -2387,16 +2388,16 @@
         },
         {
             "name": "symfony/finder",
-            "version": "v3.0.6",
+            "version": "v3.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/finder.git",
-                "reference": "c54e407b35bc098916704e9fd090da21da4c4f52"
+                "reference": "39e5f3d533d07b5416b9d7aad53a27f939d4f811"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/finder/zipball/c54e407b35bc098916704e9fd090da21da4c4f52",
-                "reference": "c54e407b35bc098916704e9fd090da21da4c4f52",
+                "url": "https://api.github.com/repos/symfony/finder/zipball/39e5f3d533d07b5416b9d7aad53a27f939d4f811",
+                "reference": "39e5f3d533d07b5416b9d7aad53a27f939d4f811",
                 "shasum": ""
             },
             "require": {
@@ -2432,20 +2433,20 @@
             ],
             "description": "Symfony Finder Component",
             "homepage": "https://symfony.com",
-            "time": "2016-03-10 11:13:05"
+            "time": "2016-05-13 18:03:36"
         },
         {
             "name": "symfony/form",
-            "version": "v3.0.6",
+            "version": "v3.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/form.git",
-                "reference": "51cc15ccc55dca008126ae1d22d6f77ba9d78b70"
+                "reference": "54f73abd26f4406c4f3d5ffedcb018dc5bfe671c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/form/zipball/51cc15ccc55dca008126ae1d22d6f77ba9d78b70",
-                "reference": "51cc15ccc55dca008126ae1d22d6f77ba9d78b70",
+                "url": "https://api.github.com/repos/symfony/form/zipball/54f73abd26f4406c4f3d5ffedcb018dc5bfe671c",
+                "reference": "54f73abd26f4406c4f3d5ffedcb018dc5bfe671c",
                 "shasum": ""
             },
             "require": {
@@ -2506,7 +2507,7 @@
             ],
             "description": "Symfony Form Component",
             "homepage": "https://symfony.com",
-            "time": "2016-04-28 14:42:50"
+            "time": "2016-06-06 11:33:26"
         },
         {
             "name": "symfony/http-foundation",
@@ -2720,16 +2721,16 @@
         },
         {
             "name": "symfony/monolog-bridge",
-            "version": "v3.0.5",
+            "version": "v3.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/monolog-bridge.git",
-                "reference": "012f08d364933582488eaaba2e8797a8f859b4d3"
+                "reference": "77b887c25d67da57975ac2f1aaa6e9e288ed44bc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/monolog-bridge/zipball/012f08d364933582488eaaba2e8797a8f859b4d3",
-                "reference": "012f08d364933582488eaaba2e8797a8f859b4d3",
+                "url": "https://api.github.com/repos/symfony/monolog-bridge/zipball/77b887c25d67da57975ac2f1aaa6e9e288ed44bc",
+                "reference": "77b887c25d67da57975ac2f1aaa6e9e288ed44bc",
                 "shasum": ""
             },
             "require": {
@@ -2776,7 +2777,7 @@
             ],
             "description": "Symfony Monolog Bridge",
             "homepage": "https://symfony.com",
-            "time": "2016-04-12 18:09:53"
+            "time": "2016-05-11 08:46:10"
         },
         {
             "name": "symfony/options-resolver",
@@ -3118,16 +3119,16 @@
         },
         {
             "name": "symfony/process",
-            "version": "v3.0.6",
+            "version": "v3.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
-                "reference": "53f9407c0bb1c5a79127db8f7bfe12f0f6f3dcdb"
+                "reference": "bf6e2d1fa8b93fdd7cca6b684c0ea213cf0255dd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/process/zipball/53f9407c0bb1c5a79127db8f7bfe12f0f6f3dcdb",
-                "reference": "53f9407c0bb1c5a79127db8f7bfe12f0f6f3dcdb",
+                "url": "https://api.github.com/repos/symfony/process/zipball/bf6e2d1fa8b93fdd7cca6b684c0ea213cf0255dd",
+                "reference": "bf6e2d1fa8b93fdd7cca6b684c0ea213cf0255dd",
                 "shasum": ""
             },
             "require": {
@@ -3163,20 +3164,20 @@
             ],
             "description": "Symfony Process Component",
             "homepage": "https://symfony.com",
-            "time": "2016-04-14 15:30:28"
+            "time": "2016-06-06 11:33:26"
         },
         {
             "name": "symfony/property-access",
-            "version": "v2.8.6",
+            "version": "v2.8.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/property-access.git",
-                "reference": "1d6f0181fbddda4bb2e2a41f7a5928d590f06b34"
+                "reference": "00525e9aa76036e915ada7c5d4b534ff46d6178a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/property-access/zipball/1d6f0181fbddda4bb2e2a41f7a5928d590f06b34",
-                "reference": "1d6f0181fbddda4bb2e2a41f7a5928d590f06b34",
+                "url": "https://api.github.com/repos/symfony/property-access/zipball/00525e9aa76036e915ada7c5d4b534ff46d6178a",
+                "reference": "00525e9aa76036e915ada7c5d4b534ff46d6178a",
                 "shasum": ""
             },
             "require": {
@@ -3223,7 +3224,7 @@
                 "property path",
                 "reflection"
             ],
-            "time": "2016-04-20 18:52:26"
+            "time": "2016-05-29 09:49:47"
         },
         {
             "name": "symfony/routing",
@@ -3302,7 +3303,7 @@
         },
         {
             "name": "symfony/security",
-            "version": "v3.0.6",
+            "version": "v3.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/security.git",
@@ -3380,16 +3381,16 @@
         },
         {
             "name": "symfony/stopwatch",
-            "version": "v3.0.6",
+            "version": "v3.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/stopwatch.git",
-                "reference": "6015187088421e9499d8f8316bdb396f8b806c06"
+                "reference": "e0310b28e3a1f6100b44e37beb9b7fed14bdb1b0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/stopwatch/zipball/6015187088421e9499d8f8316bdb396f8b806c06",
-                "reference": "6015187088421e9499d8f8316bdb396f8b806c06",
+                "url": "https://api.github.com/repos/symfony/stopwatch/zipball/e0310b28e3a1f6100b44e37beb9b7fed14bdb1b0",
+                "reference": "e0310b28e3a1f6100b44e37beb9b7fed14bdb1b0",
                 "shasum": ""
             },
             "require": {
@@ -3425,20 +3426,20 @@
             ],
             "description": "Symfony Stopwatch Component",
             "homepage": "https://symfony.com",
-            "time": "2016-03-04 07:55:57"
+            "time": "2016-06-06 11:33:26"
         },
         {
             "name": "symfony/translation",
-            "version": "v3.0.6",
+            "version": "v3.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/translation.git",
-                "reference": "f7a07af51ea067745a521dab1e3152044a2fb1f2"
+                "reference": "2b0aacaa613c0ec1ad8046f972d8abdcb19c1db7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/translation/zipball/f7a07af51ea067745a521dab1e3152044a2fb1f2",
-                "reference": "f7a07af51ea067745a521dab1e3152044a2fb1f2",
+                "url": "https://api.github.com/repos/symfony/translation/zipball/2b0aacaa613c0ec1ad8046f972d8abdcb19c1db7",
+                "reference": "2b0aacaa613c0ec1ad8046f972d8abdcb19c1db7",
                 "shasum": ""
             },
             "require": {
@@ -3489,20 +3490,20 @@
             ],
             "description": "Symfony Translation Component",
             "homepage": "https://symfony.com",
-            "time": "2016-03-25 01:41:20"
+            "time": "2016-06-06 11:33:26"
         },
         {
             "name": "symfony/twig-bridge",
-            "version": "v3.0.6",
+            "version": "v3.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/twig-bridge.git",
-                "reference": "856a0b75f634fa907cdc0fbce5bf2eb667a1673d"
+                "reference": "f6efc04414e1b99d574884e733ef5f38d9ec7bf3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/twig-bridge/zipball/856a0b75f634fa907cdc0fbce5bf2eb667a1673d",
-                "reference": "856a0b75f634fa907cdc0fbce5bf2eb667a1673d",
+                "url": "https://api.github.com/repos/symfony/twig-bridge/zipball/f6efc04414e1b99d574884e733ef5f38d9ec7bf3",
+                "reference": "f6efc04414e1b99d574884e733ef5f38d9ec7bf3",
                 "shasum": ""
             },
             "require": {
@@ -3570,20 +3571,20 @@
             ],
             "description": "Symfony Twig Bridge",
             "homepage": "https://symfony.com",
-            "time": "2016-03-28 06:29:34"
+            "time": "2016-06-06 11:33:26"
         },
         {
             "name": "symfony/validator",
-            "version": "v3.0.6",
+            "version": "v3.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/validator.git",
-                "reference": "dbf5925e3a53c2df3f711a8ef9d200b6dfef34c0"
+                "reference": "bce8c3272eee9a70a3b930add41743b02085b26f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/validator/zipball/dbf5925e3a53c2df3f711a8ef9d200b6dfef34c0",
-                "reference": "dbf5925e3a53c2df3f711a8ef9d200b6dfef34c0",
+                "url": "https://api.github.com/repos/symfony/validator/zipball/bce8c3272eee9a70a3b930add41743b02085b26f",
+                "reference": "bce8c3272eee9a70a3b930add41743b02085b26f",
                 "shasum": ""
             },
             "require": {
@@ -3642,20 +3643,20 @@
             ],
             "description": "Symfony Validator Component",
             "homepage": "https://symfony.com",
-            "time": "2016-04-20 11:35:44"
+            "time": "2016-05-19 07:37:29"
         },
         {
             "name": "symfony/web-profiler-bundle",
-            "version": "v3.0.6",
+            "version": "v3.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/web-profiler-bundle.git",
-                "reference": "f2d80066354508ae64bc8fadcbb5ab6aadd18533"
+                "reference": "44ea150dabdaece55bf12a5572f9ad607e6ca95d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/web-profiler-bundle/zipball/f2d80066354508ae64bc8fadcbb5ab6aadd18533",
-                "reference": "f2d80066354508ae64bc8fadcbb5ab6aadd18533",
+                "url": "https://api.github.com/repos/symfony/web-profiler-bundle/zipball/44ea150dabdaece55bf12a5572f9ad607e6ca95d",
+                "reference": "44ea150dabdaece55bf12a5572f9ad607e6ca95d",
                 "shasum": ""
             },
             "require": {
@@ -3700,7 +3701,7 @@
             ],
             "description": "Symfony WebProfilerBundle",
             "homepage": "https://symfony.com",
-            "time": "2016-05-09 19:39:20"
+            "time": "2016-05-26 07:56:45"
         },
         {
             "name": "twig/twig",

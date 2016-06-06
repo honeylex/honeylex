@@ -1,9 +1,9 @@
 <?php
 
-namespace Honeybee\SystemAccount\User\Controller;
+namespace Foh\SystemAccount\User\Controller;
 
 use Honeybee\Infrastructure\Template\TemplateRendererInterface;
-use Honeybee\SystemAccount\User\HelloService;
+use Foh\SystemAccount\User\HelloService;
 
 class HelloController
 {

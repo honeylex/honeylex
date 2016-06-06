@@ -1,8 +1,8 @@
 <?php
 
-namespace Honeybee\SystemAccount\User\Projection\Standard;
+namespace Foh\SystemAccount\User\Projection\Standard;
 
-use Honeybee\SystemAccount\User\Projection\Standard\Base\User as BaseUser;
+use Foh\SystemAccount\User\Projection\Standard\Base\User as BaseUser;
 
 /**
  * This class may be used to customize the behaviour of the

@@ -4,27 +4,27 @@
 storage_writers:
   honeybee::domain_event::view_store::write:
     class: Honeybee\Infrastructure\DataAccess\Storage\Elasticsearch\DomainEvent\DomainEventWriter
-    connection: view_store
+    connection: honeybee.view_store
     settings:
       type: domain_event
   honeybee.core::process_state::process_store::writer:
     class: Honeybee\Infrastructure\DataAccess\Storage\Filesystem\ProcessState\ProcessStateWriter
-    connection: process_state.store
+    connection: honeybee.process_state.store
   honeybee.core::process_state::process_cache::writer:
     class: Honeybee\Infrastructure\DataAccess\Storage\Memory\ProcessState\ProcessStateWriter
-    connection: process_state.cache
+    connection: honeybee.process_state.cache
 
 storage_readers:
   honeybee.core::process_state::process_store::reader:
     class: Honeybee\Infrastructure\DataAccess\Storage\Filesystem\ProcessState\ProcessStateReader
-    connection: process_state.store
+    connection: honeybee.process_state.store
   honeybee.core::process_state::process_cache::reader:
     class: Honeybee\Infrastructure\DataAccess\Storage\Memory\ProcessState\ProcessStateReader
-    connection: process_state.cache
+    connection: honeybee.process_state.cache
 
 finders:
   honeybee::domain_event::view_store::finder:
     class: Honeybee\Infrastructure\DataAccess\Finder\Elasticsearch\DomainEvent\DomainEventFinder
-    connection: view_store
+    connection: honeybee.view_store
     settings:
       type: domain_event

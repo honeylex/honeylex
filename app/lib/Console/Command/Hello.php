@@ -2,7 +2,7 @@
 
 namespace Honeybee\FrameworkBinding\Silex\Console\Command;
 
-use Honeybee\SystemAccount\User\HelloService;
+use Foh\SystemAccount\User\HelloService;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;

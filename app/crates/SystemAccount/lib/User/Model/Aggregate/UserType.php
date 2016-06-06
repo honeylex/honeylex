@@ -1,8 +1,8 @@
 <?php
 
-namespace Honeybee\SystemAccount\User\Model\Aggregate;
+namespace Foh\SystemAccount\User\Model\Aggregate;
 
-use Honeybee\SystemAccount\User\Model\Aggregate\Base\UserType as BaseUserType;
+use Foh\SystemAccount\User\Model\Aggregate\Base\UserType as BaseUserType;
 
 /**
  * Defines a set of attributes that are used to manage a user aggregate-root&#039;s internal state.

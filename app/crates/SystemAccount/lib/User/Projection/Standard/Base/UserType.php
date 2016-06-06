@@ -19,11 +19,11 @@
  * @see https://github.com/honeybee/trellis
  */
 
-namespace Honeybee\SystemAccount\User\Projection\Standard\Base;
+namespace Foh\SystemAccount\User\Projection\Standard\Base;
 
 use Trellis\Common\Options;
 use Workflux\StateMachine\StateMachineInterface;
-use Honeybee\SystemAccount\User\Projection\Standard\Base;
+use Foh\SystemAccount\User\Projection\Standard\Base;
 use Honeybee\Projection\ProjectionType;
 
 /**

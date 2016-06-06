@@ -11,8 +11,8 @@ class CrateLoader implements CrateLoaderInterface
         $crateMap = new CrateMap;
         foreach ($crateManifestMap as $crateManifest) {
             $crate = $this->load($crateManifest);
-            $crateMap->setItem($crateManifest->getPrefix(), $crate);
-            $app->mount($crateManifest->getPrefix(), $crate);
+            $crateMap->setItem($crate->getPrefix(), $crate);
+            $app->mount($crate->getRoutingPrefix(), $crate);
         }
 
         return $crateMap;

@@ -1,8 +1,8 @@
 #
 # service configuration for the SystemAccount crate
 ---
-system_account.user.hello_service:
-  class: Honeybee\SystemAccount\User\HelloService
+foh.system_account.user.hello_service:
+  class: Foh\SystemAccount\User\HelloService
   options:
     greetings:
       - Hello world!

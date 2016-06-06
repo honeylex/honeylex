@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\SystemAccount\Migration\Elasticsearch;
+namespace Foh\SystemAccount\Migration\Elasticsearch;
 
 use Honeybee\Infrastructure\Migration\ElasticsearchMigration;
 use Honeybee\Infrastructure\Migration\MigrationTargetInterface;
@@ -27,9 +27,9 @@ class Migration_20140915235807_InitViewStore extends ElasticsearchMigration
     public function getDescription($direction = MigrationInterface::MIGRATE_UP)
     {
         if ($direction === MigrationInterface::MIGRATE_UP) {
-            return 'Will create the elasticsearch index for the SystemAccount/User context\'s view data.';
+            return 'Will create the elasticsearch index for the Foh\SystemAccount\User context\'s view data.';
         }
-        return 'Will delete the elasticsearch index for the SystemAccount/User context.';
+        return 'Will delete the elasticsearch index for the Foh\SystemAccount\User context.';
     }
 
     public function isReversible()

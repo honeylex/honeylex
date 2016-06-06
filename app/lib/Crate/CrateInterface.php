@@ -9,4 +9,6 @@ interface CrateInterface extends ControllerProviderInterface
     public function getConfigDir();
 
     public function getManifest();
+
+    public function getRoutingPrefix();
 }

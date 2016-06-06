@@ -1,9 +1,9 @@
 <?php
 
-namespace Honeybee\SystemAccount\User;
+namespace Foh\SystemAccount\User;
 
 use Honeybee\Infrastructure\Config\ConfigInterface;
-use Honeybee\SystemAccount\User\Projection\Standard\UserType;
+use Foh\SystemAccount\User\Projection\Standard\UserType;
 
 class HelloService
 {

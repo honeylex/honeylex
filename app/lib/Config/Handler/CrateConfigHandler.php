@@ -37,12 +37,10 @@ class CrateConfigHandler implements ConfigHandlerInterface
             $manifest = $yamlParser->parse(file_get_contents($manifestFile));
 
             $name = $manifest['name'];
-            $prefix = $manifest['prefix'];
-            $namespace = $manifest['namespace'];
+            $vendor = $manifest['vendor'];
             $description = isset($manifest['description']) ? $manifest['description'] : '';
-
-            $metadata = new CrateManifest($crateDir, $name, $prefix, $namespace, $implementor, $description);
-            $manifestMap->setItem($manifest['prefix'], $metadata);
+            $metadata = new CrateManifest($crateDir, $vendor, $name, $implementor, $description);
+            $manifestMap->setItem($metadata->getPrefix(), $metadata);
         }
 
         return $manifestMap;

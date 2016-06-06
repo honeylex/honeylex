@@ -8,6 +8,8 @@ interface CrateManifestInterface
 
     public function getPrefix();
 
+    public function getVendor();
+
     public function getName();
 
     public function getNamespace();

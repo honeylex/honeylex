@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\SystemAccount\Migration\CouchDb;
+namespace Foh\SystemAccount\Migration\CouchDb;
 
 use Honeybee\Infrastructure\Migration\CouchDbMigration;
 use Honeybee\Infrastructure\Migration\MigrationTargetInterface;
@@ -21,9 +21,9 @@ class Migration_20140915235807_InitEventSource extends CouchDbMigration
     public function getDescription($direction = MigrationInterface::MIGRATE_UP)
     {
         if ($direction === MigrationInterface::MIGRATE_UP) {
-            return 'Will initially setup a couchdb database for the SystemAccount/User context.';
+            return 'Will initially setup a couchdb database for the Foh\SystemAccount\User context.';
         }
-        return 'Will deinit the couchdb database for the SystemAccount/User context.';
+        return 'Will deinit the couchdb database for the Foh\SystemAccount\User context.';
     }
 
     public function isReversible()

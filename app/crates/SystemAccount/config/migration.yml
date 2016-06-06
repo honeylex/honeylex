@@ -1,24 +1,24 @@
 #
 # SystemAccount migration targets
 ---
-honeybee.system_account::migration::event_source:
+foh.system_account::migration::event_source:
   active: true
   settings:
-    version_list_reader: honeybee.system_account::version_list::event_source::reader
-    version_list_writer: honeybee.system_account::version_list::event_source::writer
-    target_connection: system_account.event_source
+    version_list_reader: foh.system_account::version_list::event_source::reader
+    version_list_writer: foh.system_account::version_list::event_source::writer
+    target_connection: foh.system_account.event_source
   migration_loader:
     class: Honeybee\Infrastructure\Migration\FileSystemLoader
     settings:
       directory: ${project.dir}/app/crates/SystemAccount/migration/couchdb
 
-honeybee.system_account::migration::view_store:
+foh.system_account::migration::view_store:
   active: true
   settings:
-    version_list_reader: honeybee.system_account::version_list::view_store::reader
-    version_list_writer: honeybee.system_account::version_list::view_store::writer
-    target_connection: view_store
-    index: honeybee-system_account
+    version_list_reader: foh.system_account::version_list::view_store::reader
+    version_list_writer: foh.system_account::version_list::view_store::writer
+    target_connection: honeybee.view_store
+    index: foh-system_account
   migration_loader:
     class: Honeybee\Infrastructure\Migration\FileSystemLoader
     settings:

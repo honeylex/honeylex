@@ -1,8 +1,8 @@
 <?php
 
-namespace Honeybee\SystemAccount\User\Model\Aggregate;
+namespace Foh\SystemAccount\User\Model\Aggregate;
 
-use Honeybee\SystemAccount\User\Model\Aggregate\Base\User as BaseUser;
+use Foh\SystemAccount\User\Model\Aggregate\Base\User as BaseUser;
 
 /**
  * This class may be used to customize the behaviour of the

@@ -35,7 +35,7 @@
     "autoload": {
         "psr-4": {
             "Honeybee\\FrameworkBinding\\Silex\\": "app/lib/",
-            "Honeybee\\SystemAccount\\": "app/crates/SystemAccount/lib/"
+            "Foh\\SystemAccount\\": "app/crates/SystemAccount/lib/"
         }
     },
     "scripts": {

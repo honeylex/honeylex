@@ -1,7 +1,7 @@
 #
 # Project level connection configuration.
 ---
-view_store:
+honeybee.view_store:
   class: Honeybee\Infrastructure\DataAccess\Connector\ElasticsearchConnector
   settings:
     transport: http
@@ -9,7 +9,7 @@ view_store:
     port: 9200
     index: honeylux.domain_events
 
-msg_queue:
+honeybee.msg_queue:
   class: Honeybee\Infrastructure\DataAccess\Connector\RabbitMqConnector
   settings:
     host: localhost
@@ -17,26 +17,26 @@ msg_queue:
     user: ${rabbitmq.user}
     password: ${rabbitmq.password}
 
-mailer:
+honeybee.mailer:
   class: Honeybee\Infrastructure\DataAccess\Connector\SwiftMailer\LocalSendmailConnector
 
-mailer.null:
+honeybee.mailer.null:
   class: Honeybee\Infrastructure\DataAccess\Connector\SwiftMailer\NullConnector
 
-files.local:
+honeybee.files.local:
   class: Honeybee\Infrastructure\DataAccess\Connector\Flysystem\LocalConnector
   settings:
     directory: ${project.dir}/data/files
 
-files.local.tmp:
+honeybee.files.local.tmp:
   class: Honeybee\Infrastructure\DataAccess\Connector\Flysystem\LocalConnector
   settings:
     directory: ${project.dir}/data/tmp_files
 
-process_state.store:
+honeybee.process_state.store:
   class: Honeybee\Infrastructure\DataAccess\Connector\Flysystem\LocalConnector
   settings:
     directory: ${project.dir}/data/process_states
 
-process_state.cache:
+honeybee.process_state.cache:
   class: Honeybee\Infrastructure\DataAccess\Connector\Memory\ArrayConnector
