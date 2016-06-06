@@ -2,23 +2,8 @@
 
 namespace Honeybee\FrameworkBinding\Silex\Config\Handler;
 
-use Honeybee\Infrastructure\Config\ConfigInterface;
-use Honeybee\Infrastructure\DataAccess\Connector\ConnectorMap;
-use Symfony\Component\Yaml\Parser;
-
-class ConnectionConfigHandler implements ConfigHandlerInterface
+class ConnectionConfigHandler extends YamlConfigHandler
 {
-    protected $config;
-
-    protected $yamlParser;
-
-    public function __construct(ConfigInterface $config)
-    {
-        $this->config = $config;
-        $parserClass = $this->config->get('parser');
-        $this->yamlParser = new $parserClass;
-    }
-
     public function handle(array $configFiles)
     {
         return array_reduce(
@@ -29,10 +14,12 @@ class ConnectionConfigHandler implements ConfigHandlerInterface
 
     protected function handlConfigFile($configFile)
     {
-        $connectionConfigs = $this->yamlParser->parse(file_get_contents($configFile));
+        $connectionConfigs = $this->parse($configFile);
         foreach ($connectionConfigs as &$connectionConfig) {
             if (!isset($connectionConfig['settings'])) {
                 $connectionConfig['settings'] = [];
+            } else {
+                $connectionConfig['settings'] = $this->interpolateConfigValues($connectionConfig['settings']);
             }
         }
         return $connectionConfigs;
@@ -41,12 +28,5 @@ class ConnectionConfigHandler implements ConfigHandlerInterface
     protected function mergeConfigs(array $out, array $in)
     {
         return array_merge($out, $in);
-    }
-
-    protected function createParser()
-    {
-        $parserClass = $this->config->get('parser');
-
-        return new $parserClass;
     }
 }

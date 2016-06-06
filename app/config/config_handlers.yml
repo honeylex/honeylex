@@ -1,14 +1,13 @@
 #
-# Specify config file to load using the ConfigLoader.
+# Specify config file to load using the ConfigProvider.
 # The latter will load hierarchically starting at the app level and then traversing any registered crates,
 # in the order they are specified within the crates.yml.
 # Depending on the handler behavior concurring crate configs will be treated either as:
 # firstone-wins, lastone-wins, flat-merge or deep-merge.
 ---
-# the crates config is the only config that may only exist once within your project
-# and that doesn't support hierarchical loading.
-crates.yml:
-  handler: Honeybee\FrameworkBinding\Silex\Config\Handler\CrateConfigHandler
+# merge behaviour: lastone-wins
+settings.yml:
+  handler: Honeybee\FrameworkBinding\Silex\Config\Handler\SettingConfigHandler
   settings:
     parser: Symfony\Component\Yaml\Parser
 

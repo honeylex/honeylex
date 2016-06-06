@@ -4,74 +4,58 @@ namespace Honeybee\FrameworkBinding\Silex;
 
 use Auryn\Injector;
 use Auryn\StandardReflector;
-use Honeybee\FrameworkBinding\Silex\Config\ConfigLoader;
 use Honeybee\FrameworkBinding\Silex\Config\ConfigProvider;
 use Honeybee\FrameworkBinding\Silex\Config\ConfigProviderInterface;
+use Honeybee\FrameworkBinding\Silex\Config\Handler\CrateConfigHandler;
 use Honeybee\FrameworkBinding\Silex\Controller\ControllerResolverServiceProvider;
+use Honeybee\FrameworkBinding\Silex\Crate\CrateLoader;
 use Honeybee\FrameworkBinding\Silex\Crate\CrateLoaderInterface;
 use Honeybee\FrameworkBinding\Silex\Service\ServiceProvider;
 use Honeybee\FrameworkBinding\Silex\Service\ServiceProvisioner;
+use Honeybee\Infrastructure\Config\ArrayConfig;
+use Honeybee\Infrastructure\Config\ConfigInterface;
+use Honeybee\Infrastructure\Config\Settings;
 use Psr\Log\LoggerInterface;
 use Silex\Application;
 use Silex\Provider\AssetServiceProvider;
 use Silex\Provider\HttpFragmentServiceProvider;
 use Silex\Provider\MonologServiceProvider;
 use Silex\Provider\WebProfilerServiceProvider;
+use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Yaml\Parser;
 
 class Bootstrap
 {
-    protected $configLoader;
-
-    protected $crateLoader;
-
-    public function __construct(ConfigLoader $configLoader, CrateLoaderInterface $crateLoader)
+    public function __invoke(Application $app, array $settings)
     {
-        $this->configLoader = $configLoader;
-        $this->crateLoader = $crateLoader;
-    }
-
-    public function __invoke(Application $app)
-    {
-        // load crates and init config-provider
-        $crateManifestMap = $this->configLoader->loadConfig('crates.yml');
-        $crateMap = $this->crateLoader->loadCrates($app, $crateManifestMap);
-        $configProvider = new ConfigProvider($this->configLoader, $crateMap);
-        // register logger as first item within the DI chain
-        $app->register(new MonologServiceProvider(), [
-            'monolog.logfile' => $configProvider->getProjectDir().'/var/logs/silex_dev.log'
-        ]);
-        $logger = $app['logger'];
         $injector = new Injector(new StandardReflector);
-        $injector
-            ->share($logger)
-            ->alias(LoggerInterface::CLASS, get_class($logger));
+        $config = $this->bootstrapConfig($app, $injector, $settings);
+        $app['version'] = $config->getVersion();
+        $this->bootstrapLogger($app, $config, $injector);
         // then kick off service provisioning
-        $injector->share($configProvider)->alias(ConfigProviderInterface::CLASS, get_class($configProvider));
-        $serviceDefinitionMap = $configProvider->provide('services.yml');
-        $serviceProvisioner = new ServiceProvisioner($app, $injector, $configProvider, $serviceDefinitionMap);
+        $serviceProvisioner = new ServiceProvisioner($app, $injector, $config, $config->provide('services.yml'));
         // and register some standard service providers.
-        $app['version'] = $configProvider->getVersion();
         $app->register(new ServiceProvider($serviceProvisioner));
         $app->register(new ControllerResolverServiceProvider);
         $app->register(new AssetServiceProvider);
         $app->register(new HttpFragmentServiceProvider);
         // load context specific configuration (well, only web atm. needs to change too)
-        if ($configProvider->getAppContext() === 'web') {
+        if ($config->getAppContext() === 'web') {
             $this->registerWebErrorHandler($app);
-            $this->loadProjectRoutes($configProvider->getConfigDir().'/routing.php', $app);
+            $this->loadProjectRoutes($config->getConfigDir().'/routing.php', $app);
             // dev specific switches
-            if ($configProvider->getAppEnv() === 'dev') {
+            if ($config->getAppEnv() === 'dev') {
                 $app['debug'] = true;
                 $app->register(
                     new WebProfilerServiceProvider(),
-                    [ 'profiler.cache_dir' => $configProvider->getProjectDir().'/var/cache/profiler' ]
+                    [ 'profiler.cache_dir' => $config->getProjectDir().'/var/cache/profiler' ]
                 );
             }
         }
         // load environment specific configuration (this has to change badly)
-        $envConfig = $configProvider->getEnvConfigPath();
+        $envConfig = $config->getEnvConfigPath();
         if (is_readable($envConfig)) {
             require $envConfig;
         }
@@ -106,5 +90,38 @@ class Bootstrap
                 $code
             );
         });
+    }
+
+    protected function bootstrapConfig(Application $app, Injector $injector, array $settings)
+    {
+        $configDir = $settings['project']['config_dir'];
+        $configHandlers = new ArrayConfig(
+            (new Parser)->parse(
+                file_get_contents($configDir.'/config_handlers.yml')
+            )
+        );
+        $crateMap = (new CrateLoader)->loadCrates(
+            $app,
+            (new CrateConfigHandler)->handle([ $configDir.'/crates.yml' ])
+        );
+        // load crates and init config-provider
+        $config = new ConfigProvider(new Settings($settings), $crateMap, $configHandlers, new Finder);
+        $injector->share($config)->alias(ConfigProviderInterface::CLASS, get_class($config));
+
+        return $config;
+    }
+
+    protected function bootstrapLogger(Application $app, ConfigProviderInterface $config, Injector $injector)
+    {
+        // register logger as first item within the DI chain
+        $app->register(new MonologServiceProvider(), [
+            'monolog.logfile' => $config->getProjectDir().'/var/logs/silex_dev.log'
+        ]);
+        $logger = $app['logger'];
+        $injector
+            ->share($logger)
+            ->alias(LoggerInterface::CLASS, get_class($logger));
+
+        return $logger;
     }
 }

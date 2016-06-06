@@ -39,22 +39,21 @@ class ServiceProvisioner implements ServiceProvisionerInterface
     public function __construct(
         Container $app,
         Injector $injector,
-        ConfigProviderInterface $configProvider,
-        ServiceDefinitionMap $serviceDefinitions
+        ConfigProviderInterface $configProvider
     ) {
         $this->app = $app;
         $this->injector = $injector;
         $this->configProvider = $configProvider;
-        $this->serviceDefinitions = $serviceDefinitions;
     }
 
     public function provision()
     {
-        $this->registerEntityTypeMaps();
-        $this->evaluateServiceDefinitions();
+        $serviceDefinitions = $this->configProvider->provide('services.yml');
+        $this->registerEntityTypeMaps($serviceDefinitions);
+        $this->evaluateServiceDefinitions($serviceDefinitions);
 
         $serviceLocatorState = [
-            ':service_definition_map' => $this->serviceDefinitions,
+            ':service_definition_map' => $serviceDefinitions,
             ':di_container' => $this->injector
         ];
 
@@ -64,7 +63,7 @@ class ServiceProvisioner implements ServiceProvisionerInterface
             ->make(ServiceLocator::CLASS, $serviceLocatorState);
     }
 
-    protected function registerEntityTypeMaps()
+    protected function registerEntityTypeMaps(ServiceDefinitionMap $serviceDefinitions)
     {
         $aggregateRootTypeMap = new AggregateRootTypeMap;
         $projectionTypeMap = new ProjectionTypeMap;
@@ -90,45 +89,25 @@ class ServiceProvisioner implements ServiceProvisionerInterface
         }
     }
 
-    protected function evaluateServiceDefinitions()
+    protected function evaluateServiceDefinitions(ServiceDefinitionMap $serviceDefinitions)
     {
-        $defaultProvisioner = static::$defaultProvisionerClass;
-
-        foreach ($this->serviceDefinitions as $serviceKey => $serviceDefinition) {
-            $this->evaluateServiceDefinition(
-                $serviceKey,
-                function (ServiceDefinitionInterface $serviceDefinition) use ($defaultProvisioner) {
-                    $this->injector
-                        ->make($defaultProvisioner)
-                        ->provision(
-                            $this->app,
-                            $this->injector,
-                            $this->configProvider,
-                            $serviceDefinition,
-                            new Settings([])
-                        );
-                }
-            );
+        $defaultProvisioner = $this->injector->make(static::$defaultProvisionerClass);
+        foreach ($serviceDefinitions as $serviceKey => $serviceDefinition) {
+            if ($serviceDefinition->hasProvisioner()) {
+                $this->runServiceProvisioner($serviceDefinition);
+            } else {
+                $defaultProvisioner->provision(
+                    $this->app,
+                    $this->injector,
+                    $this->configProvider,
+                    $serviceDefinition,
+                    new Settings([])
+                );
+            }
         }
     }
 
-    protected function evaluateServiceDefinition($serviceAlias, Closure $defaultProvisioning, array $settings = [])
-    {
-        if (!$this->serviceDefinitions->hasKey($serviceAlias)) {
-            throw new RuntimeError(
-                sprintf("Couldn't find service for key: %s. Maybe a typo within the services.xml?", $serviceAlias)
-            );
-        }
-
-        $serviceDefinition = $this->serviceDefinitions->getItem($serviceAlias);
-        if ($serviceDefinition->hasProvisioner()) {
-            $this->runServiceProvisioner($serviceDefinition, $settings);
-        } else {
-            $defaultProvisioning($serviceDefinition);
-        }
-    }
-
-    protected function runServiceProvisioner(ServiceDefinitionInterface $serviceDefinition, array $settings)
+    protected function runServiceProvisioner(ServiceDefinitionInterface $serviceDefinition, array $settings = [])
     {
         $provisionerConfig = $serviceDefinition->getProvisioner();
         if (!$provisionerConfig) {

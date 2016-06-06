@@ -2,27 +2,12 @@
 
 namespace Honeybee\FrameworkBinding\Silex\Config\Handler;
 
-use Honeybee\Common\Error\ConfigError;
 use Honeybee\FrameworkBinding\Silex\Service\Provisioner\DefaultProvisioner;
-use Honeybee\Infrastructure\Config\ConfigInterface;
 use Honeybee\ServiceDefinition;
-use Honeybee\ServiceDefinitionInterface;
 use Honeybee\ServiceDefinitionMap;
-use Symfony\Component\Yaml\Parser;
 
-class ServiceConfigHandler implements ConfigHandlerInterface
+class ServiceConfigHandler extends YamlConfigHandler
 {
-    protected $config;
-
-    protected $yamlParser;
-
-    public function __construct(ConfigInterface $config)
-    {
-        $this->config = $config;
-        $parserClass = $this->config->get('parser');
-        $this->yamlParser = new $parserClass;
-    }
-
     public function handle(array $configFiles)
     {
         return array_reduce(
@@ -33,7 +18,7 @@ class ServiceConfigHandler implements ConfigHandlerInterface
 
     protected function handlConfigFile($configFile)
     {
-        $serviceConfigs = $this->yamlParser->parse(file_get_contents($configFile)) ?: [];
+        $serviceConfigs = $this->parse($configFile) ?: [];
         $serviceDefinitionMap = new ServiceDefinitionMap;
 
         foreach ($serviceConfigs as $serviceKey => $serviceDefState) {
@@ -46,6 +31,7 @@ class ServiceConfigHandler implements ConfigHandlerInterface
                     $serviceDefState['provisioner']['class'] = DefaultProvisioner::CLASS;
                 }
             }
+            // @todo interpolate $serviceDefState 'setting' values using $this->interpolateConfigValues(...)
             $serviceDefinitionMap->setItem($serviceKey, new ServiceDefinition($serviceDefState));
         }
 
@@ -55,12 +41,5 @@ class ServiceConfigHandler implements ConfigHandlerInterface
     protected function mergeConfigs(ServiceDefinitionMap $out, ServiceDefinitionMap $in)
     {
         return $out->append($in);
-    }
-
-    protected function createParser()
-    {
-        $parserClass = $this->config->get('parser');
-
-        return new $parserClass;
     }
 }

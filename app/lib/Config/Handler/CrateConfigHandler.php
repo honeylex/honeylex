@@ -15,17 +15,6 @@ use Symfony\Component\Yaml\Parser;
 
 class CrateConfigHandler implements ConfigHandlerInterface
 {
-    protected $config;
-
-    protected $yamlParser;
-
-    public function __construct(ConfigInterface $config)
-    {
-        $this->config = $config;
-        $parserClass = $this->config->get('parser');
-        $this->yamlParser = new $parserClass;
-    }
-
     public function handle(array $configFiles)
     {
         if (count($configFiles) !== 1) {
@@ -37,14 +26,15 @@ class CrateConfigHandler implements ConfigHandlerInterface
 
     protected function handlConfigFile($configFile)
     {
+        $yamlParser = new Parser;
         $manifestMap = new CrateManifestMap;
-        $crates = $this->yamlParser->parse(file_get_contents($configFile));
+        $crates = $yamlParser->parse(file_get_contents($configFile));
 
         foreach ($crates as $implementor) {
             $reflector = new ReflectionClass($implementor);
             $crateDir = dirname(dirname($reflector->getFileName()));
             $manifestFile = $crateDir . '/manifest.yml';
-            $manifest = $this->yamlParser->parse(file_get_contents($manifestFile));
+            $manifest = $yamlParser->parse(file_get_contents($manifestFile));
 
             $name = $manifest['name'];
             $prefix = $manifest['prefix'];

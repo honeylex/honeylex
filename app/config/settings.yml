@@ -1,0 +1,13 @@
+#
+# Project level settings:
+---
+local_configs:
+  rabbitmq:
+    name: rabbitmq.json
+    type: json
+    load: from_file
+
+project:
+  name: Honeylex Cmf Vendor
+  description: App bpoilerplate that integrates honeybee with silex.
+  foo: foo/${core.config_dir}/bar/${project.description}

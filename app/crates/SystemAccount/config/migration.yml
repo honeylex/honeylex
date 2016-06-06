@@ -10,7 +10,7 @@ honeybee.system_account::migration::event_source:
   migration_loader:
     class: Honeybee\Infrastructure\Migration\FileSystemLoader
     settings:
-      directory: /srv/www/honeybee-silex-cmf-vendor/app/crates/SystemAccount/migration/couchdb
+      directory: ${project.dir}/app/crates/SystemAccount/migration/couchdb
 
 honeybee.system_account::migration::view_store:
   active: true
@@ -22,4 +22,4 @@ honeybee.system_account::migration::view_store:
   migration_loader:
     class: Honeybee\Infrastructure\Migration\FileSystemLoader
     settings:
-      directory: /srv/www/honeybee-silex-cmf-vendor/app/crates/SystemAccount/migration/elasticsearch
+      directory: ${project.dir}/app/crates/SystemAccount/migration/elasticsearch

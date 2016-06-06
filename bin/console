@@ -14,6 +14,7 @@ use Honeybee\FrameworkBinding\Silex\Console\Command\Migrate\TargetInfo;
 use Symfony\Component\Console\Input\ArgvInput;
 
 $appContext = 'console';
+$localConfigDir = getenv('LOCAL_CONFIG_DIR') ?: '/usr/local/honeylex.local/';
 $appCommands = [
     CrateInfo::CLASS,
     Hello::CLASS,
