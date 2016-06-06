@@ -10,4 +10,3 @@ local_configs:
 project:
   name: Honeylex Cmf Vendor
   description: App bpoilerplate that integrates honeybee with silex.
-  foo: foo/${core.config_dir}/bar/${project.description}
