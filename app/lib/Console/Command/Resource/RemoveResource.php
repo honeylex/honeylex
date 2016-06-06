@@ -42,13 +42,15 @@ class RemoveResource extends ResourceCommand
 
         $crateDir = $crate->getRootDir();
         $resourceDirectories = [
-            $crate->getRootDir().'config/'.$resourceName,
-            $crate->getRootDir().'lib/'.$resourceName,
-            $crate->getRootDir().'templates/'.StringToolkit::asSnakeCase($resourceName)
+            $crate->getRootDir().'/config/'.$resourceName,
+            $crate->getRootDir().'/lib/'.$resourceName,
+            $crate->getRootDir().'/templates/'.StringToolkit::asSnakeCase($resourceName)
         ];
+        // @todo tricky: find and remove proper migration directories
         foreach ($resourceDirectories as $resourceDirectory) {
             $output->writeln('<info>Removing resource dir '.$resourceDirectory.'</info>');
             (new Filesystem)->remove($resourceDirectory);
         }
+        // @todo also tricky: find and run proper migrations
     }
 }

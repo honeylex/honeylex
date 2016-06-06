@@ -97,5 +97,6 @@ class MakeResource extends ResourceCommand
 
         $skeletonGenerator = new SkeletonGenerator('resource', $skeletonLocations, $crate->getRootDir(), $data);
         $skeletonGenerator->generate();
+        // @todo auto run migrations?
     }
 }
