@@ -33,25 +33,21 @@ class ListController
 
     protected $queryServiceMap;
 
-    protected $app;
-
     public function __construct(
         UserType $userType,
         TemplateRendererInterface $templateRenderer,
         CommandBusInterface $commandBus,
-        QueryServiceMap $queryServiceMap,
-        Application $app
+        QueryServiceMap $queryServiceMap
     ) {
         $this->userType = $userType;
         $this->templateRenderer = $templateRenderer;
         $this->commandBus = $commandBus;
         $this->queryServiceMap = $queryServiceMap;
-        $this->app = $app;
     }
 
-    public function read()
+    public function read(Request $request, Application $app)
     {
-        $form = $this->buildUserForm($this->app['form.factory']);
+        $form = $this->buildUserForm($app['form.factory']);
         $search = $this->fetchUserList();
 
         return $this->templateRenderer->render(
@@ -60,9 +56,9 @@ class ListController
         );
     }
 
-    public function write(Request $request)
+    public function write(Request $request, Application $app)
     {
-        $form = $this->buildUserForm($this->app['form.factory']);
+        $form = $this->buildUserForm($app['form.factory']);
         $form->handleRequest($request);
 
         if (!$form->isValid()) {
@@ -78,7 +74,7 @@ class ListController
 
         if ($result instanceof Success) {
             $this->commandBus->post($result->get());
-            return $this->app->redirect('/index_dev.php/foh/system_account/user/list');
+            return $app->redirect('/index_dev.php/foh/system_account/user/list');
         }
 
         $status = 'Failed to create user: '.var_export($result->get(), true);

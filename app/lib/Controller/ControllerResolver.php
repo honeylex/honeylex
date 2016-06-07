@@ -3,7 +3,6 @@
 namespace Honeybee\FrameworkBinding\Silex\Controller;
 
 use Honeybee\ServiceLocatorInterface;
-use Silex\Application;
 use Silex\CallbackResolver;
 use Silex\ServiceControllerResolver;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,18 +12,14 @@ class ControllerResolver extends ServiceControllerResolver
 {
     protected $serviceLocator;
 
-    protected $app;
-
     public function __construct(
         ControllerResolverInterface $controllerResolver,
         CallbackResolver $callbackResolver,
-        ServiceLocatorInterface $serviceLocator,
-        Application $app
+        ServiceLocatorInterface $serviceLocator
     ) {
         parent::__construct($controllerResolver, $callbackResolver);
 
         $this->serviceLocator = $serviceLocator;
-        $this->app = $app;
     }
 
     public function getController(Request $request)
@@ -61,6 +56,6 @@ class ControllerResolver extends ServiceControllerResolver
             return false;
         }
 
-        return [ $this->serviceLocator->createEntity($controllerClass, [ ':app' => $this->app ]), $controllerMethod ];
+        return [ $this->serviceLocator->createEntity($controllerClass), $controllerMethod ];
     }
 }
