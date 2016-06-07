@@ -74,7 +74,7 @@ class ListController
 
         if ($result instanceof Success) {
             $this->commandBus->post($result->get());
-            return $app->redirect('/index_dev.php/foh/system_account/user/list');
+            return $app->redirect($request->getRequestUri());
         }
 
         $status = 'Failed to create user: '.var_export($result->get(), true);
