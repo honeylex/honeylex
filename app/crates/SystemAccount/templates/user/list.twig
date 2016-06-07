@@ -1,27 +1,62 @@
 {% extends "layout.twig" %}
 
 {% block content %}
-    <h1>Foh.SystemAccount.User::List</h1>
-    <ul>
-    {% for user in user_list.results %}
-        <li>
-            <dl>
-                <dt>username</dt>
-                <dd>{{ user.username }}</dd>
-                <dt>firstname</dt>
-                <dd>{{ user.firstname }}</dd>
-                <dt>lastname</dt>
-                <dd>{{ user.lastname }}</dd>
-                <dt>email</dt>
-                <dd>{{ user.email }}</dd>
-            </dl>
-        </li>
-    {% endfor %}
-    </ul>
-    <form method="post">
-        <h2>Create user</h2>
-        {{ status }}
-        {{ form_widget(form) }}
-        <button type="submit">create user</button>
-    </form>
+<div class="row">
+    <div class="col-xs-12 col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">User list</div>
+            <div class="panel-body">
+                <ul>
+                {% for user in user_list.results %}
+                    <li>
+                        <dl>
+                            <dt>username</dt>
+                            <dd>{{ user.username }}</dd>
+                            <dt>firstname</dt>
+                            <dd>{{ user.firstname }}</dd>
+                            <dt>lastname</dt>
+                            <dd>{{ user.lastname }}</dd>
+                            <dt>email</dt>
+                            <dd>{{ user.email }}</dd>
+                        </dl>
+                    </li>
+                {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">Create user</div>
+            <div class="panel-body">
+                <form method="post">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input class="form-control" id="username" />
+                    </div>
+                    <div class="form-group">
+                        <label for="firstname">Firstname</label>
+                        <input class="form-control" id="firstname" />
+                    </div>
+                    <div class="form-group">
+                        <label for="lastname">Lastname</label>
+                        <input class="form-control" id="lastname" />
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email address</label>
+                        <input type="email" class="form-control" id="email" placeholder="your.email@example.com" />
+                    </div>
+                    <div class="form-group">
+                        <label for="role">Role</label>
+                        <select type="select" class="form-control" id="role">
+                           <option>administrator</option>
+                           <option>user</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-success" type="submit">create!</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
