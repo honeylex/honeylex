@@ -32,23 +32,23 @@
                 <form method="post">
                     <div class="form-group">
                         <label for="username">Username</label>
-                        <input class="form-control" id="username" />
+                        <input class="form-control" id="username" name="form[username]" />
                     </div>
                     <div class="form-group">
                         <label for="firstname">Firstname</label>
-                        <input class="form-control" id="firstname" />
+                        <input class="form-control" id="firstname" name="form[firstname]" />
                     </div>
                     <div class="form-group">
                         <label for="lastname">Lastname</label>
-                        <input class="form-control" id="lastname" />
+                        <input class="form-control" id="lastname" name="form[lastname]" />
                     </div>
                     <div class="form-group">
                         <label for="email">Email address</label>
-                        <input type="email" class="form-control" id="email" placeholder="your.email@example.com" />
+                        <input type="email" name="form[email]" class="form-control" id="email" placeholder="your.email@example.com" />
                     </div>
                     <div class="form-group">
                         <label for="role">Role</label>
-                        <select type="select" class="form-control" id="role">
+                        <select type="select" name="form[role]" class="form-control" id="role">
                            <option>administrator</option>
                            <option>user</option>
                         </select>
