@@ -18,8 +18,11 @@ use Honeybee\Infrastructure\Config\Settings;
 use Psr\Log\LoggerInterface;
 use Silex\Application;
 use Silex\Provider\AssetServiceProvider;
+use Silex\Provider\FormServiceProvider;
 use Silex\Provider\HttpFragmentServiceProvider;
 use Silex\Provider\MonologServiceProvider;
+use Silex\Provider\TranslationServiceProvider;
+use Silex\Provider\ValidatorServiceProvider;
 use Silex\Provider\WebProfilerServiceProvider;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\Request;
@@ -41,6 +44,12 @@ class Bootstrap
         $app->register(new ControllerResolverServiceProvider);
         $app->register(new AssetServiceProvider);
         $app->register(new HttpFragmentServiceProvider);
+        $app->register(
+            new TranslationServiceProvider,
+            [ 'locale' => 'en', 'locale_fallbacks' => [ 'en' ]]
+        );
+        $app->register(new FormServiceProvider);
+        $app->register(new ValidatorServiceProvider);
         // load context specific configuration (well, only web atm. needs to change too)
         if ($config->getAppContext() === 'web') {
             $this->registerWebErrorHandler($app);

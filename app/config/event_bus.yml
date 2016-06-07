@@ -28,6 +28,8 @@ channels:
         - class: Honeybee\Projection\EventHandler\DomainEventProjector
           settings:
             storage_writer: honeybee::domain_event::view_store::writer
+        - class: Honeybee\Projection\EventHandler\ProjectionUpdater
+
 
   honeybee.events.failed:
     - transport: sync

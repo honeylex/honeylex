@@ -1,9 +1,27 @@
 {% extends "layout.twig" %}
 
 {% block content %}
-    Foh.SystemAccount.User::List
-    <p>{{ message }}</p>
+    <h1>Foh.SystemAccount.User::List</h1>
+    <ul>
+    {% for user in user_list.results %}
+        <li>
+            <dl>
+                <dt>username</dt>
+                <dd>{{ user.username }}</dd>
+                <dt>firstname</dt>
+                <dd>{{ user.firstname }}</dd>
+                <dt>lastname</dt>
+                <dd>{{ user.lastname }}</dd>
+                <dt>email</dt>
+                <dd>{{ user.email }}</dd>
+            </dl>
+        </li>
+    {% endfor %}
+    </ul>
     <form method="post">
-        <button type="submit">create a shrink</button>
+        <h2>Create user</h2>
+        {{ status }}
+        {{ form_widget(form) }}
+        <button type="submit">create user</button>
     </form>
 {% endblock %}

@@ -73,8 +73,7 @@ abstract class UserType extends ProjectionType
                         'max_length' => 255,
                         'allowed_values' => array(
                             'administrator' => 'administrator',
-                            'test-role-additiv' => 'test-role-additiv',
-                            'test-two' => 'test-two',
+                            'user' => 'user',
                         ),
                     )
                 ),

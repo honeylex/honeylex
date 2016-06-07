@@ -29,8 +29,7 @@
                 <option name="max_length">255</option>
                 <option name="allowed_values">
                     <option name="administrator">administrator</option>
-                    <option name="test-role-additiv">test-role-additiv</option>
-                    <option name="test-two">test-two</option>
+                    <option name="user">user</option>
                 </option>
             </attribute>
             <attribute name="firstname" type="text">

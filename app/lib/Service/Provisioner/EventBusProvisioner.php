@@ -133,10 +133,11 @@ class EventBusProvisioner implements ProvisionerInterface
         $event_handlers = new EventHandlerList;
 
         foreach ($handlerConfigs as $handlerConfig) {
+            $settings = isset($handlerConfig['settings']) ? $handlerConfig['settings'] : [];
             $event_handlers->addItem(
                 $injector->make(
                     $handlerConfig['class'],
-                    [ ':config' => new ArrayConfig($handlerConfig['settings']) ]
+                    [ ':config' => new ArrayConfig($settings) ]
                 )
             );
         }
