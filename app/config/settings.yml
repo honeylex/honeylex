@@ -8,5 +8,5 @@ local_configs:
     load: from_file
 
 project:
-  name: Honeylex Cmf Vendor
+  name: Honeylex CMF Vendor
   description: App bpoilerplate that integrates honeybee with silex.

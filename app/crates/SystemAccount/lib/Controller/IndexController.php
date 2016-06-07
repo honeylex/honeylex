@@ -2,14 +2,13 @@
 
 namespace Foh\SystemAccount\Controller;
 
-use Honeybee\Infrastructure\Command\Bus\CommandBusInterface;
 use Honeybee\Infrastructure\Template\TemplateRendererInterface;
 
 class IndexController
 {
     protected $templateRenderer;
 
-    public function __construct(TemplateRendererInterface $templateRenderer, CommandBusInterface $cbus)
+    public function __construct(TemplateRendererInterface $templateRenderer)
     {
         $this->templateRenderer = $templateRenderer;
     }

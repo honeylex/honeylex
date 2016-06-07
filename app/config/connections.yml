@@ -7,7 +7,7 @@ honeybee.view_store:
     transport: http
     host: localhost
     port: 9200
-    index: honeylux.domain_events
+    index: honeylex.domain_events
 
 honeybee.msg_queue:
   class: Honeybee\Infrastructure\DataAccess\Connector\RabbitMqConnector

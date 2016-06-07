@@ -1,0 +1,11 @@
+{% extends "layout.twig" %}
+
+{% block content %}
+    <h1>Foh.SystemAccount.User::Modify</h1>
+    <form method="post">
+        <h2>Modify user</h2>
+        {{ status }}
+        {{ form_widget(form) }}
+        <button type="submit">modify user</button>
+    </form>
+{% endblock %}

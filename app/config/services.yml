@@ -1,5 +1,5 @@
 #
-# honeylux core services
+# Honeylex core services
 ---
 honeybee.environment:
   class: Honeybee\FrameworkBinding\Silex\Environment

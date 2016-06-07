@@ -3,3 +3,5 @@ subscriptions:
     commands:
       foh.system_account.user.create_user:
         handler: Foh\SystemAccount\User\Model\Task\CreateUser\CreateUserCommandHandler
+      foh.system_account.user.modify_user:
+        handler: Foh\SystemAccount\User\Model\Task\ModifyUser\ModifyUserCommandHandler

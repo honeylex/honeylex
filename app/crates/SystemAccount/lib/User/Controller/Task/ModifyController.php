@@ -1,13 +1,11 @@
 <?php
 
-namespace Foh\SystemAccount\User\Controller;
+namespace Foh\SystemAccount\User\Controller\Task;
 
 use Foh\SystemAccount\User\Model\Aggregate\UserType;
-use Foh\SystemAccount\User\Model\Task\CreateUser\CreateUserCommand;
+use Foh\SystemAccount\User\Model\Task\ModifyUser\ModifyUserCommand;
 use Honeybee\Infrastructure\Command\Bus\CommandBusInterface;
-use Honeybee\Infrastructure\DataAccess\Query\CriteriaList;
-use Honeybee\Infrastructure\DataAccess\Query\Query;
-use Honeybee\Infrastructure\DataAccess\Query\QueryServiceMap;
+use Honeybee\Infrastructure\DataAccess\Finder\FinderMap;
 use Honeybee\Infrastructure\Template\TemplateRendererInterface;
 use Honeybee\Model\Command\AggregateRootCommandBuilder;
 use Shrink0r\Monatic\Success;
@@ -22,7 +20,7 @@ use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
-class ListController
+class ModifyController
 {
     protected $userType;
 
@@ -36,65 +34,65 @@ class ListController
         UserType $userType,
         TemplateRendererInterface $templateRenderer,
         CommandBusInterface $commandBus,
-        QueryServiceMap $queryServiceMap
+        FinderMap $finderMap
     ) {
         $this->userType = $userType;
         $this->templateRenderer = $templateRenderer;
         $this->commandBus = $commandBus;
-        $this->queryServiceMap = $queryServiceMap;
+        $this->finderMap = $finderMap;
     }
 
     public function read(Request $request, Application $app)
     {
-        $form = $this->buildUserForm($app['form.factory']);
-        $search = $this->fetchUserList();
+        $user = $this->fetchUser($request->get('identifier'));
+        $form = $this->buildUserForm($app['form.factory'], $user->toArray());
 
         return $this->templateRenderer->render(
-            '@SystemAccount/user/list.twig',
-            [ 'form' => $form->createView(), 'user_list' => $search, 'status' => '' ]
+            '@SystemAccount/user/task/modify.twig',
+            [ 'form' => $form->createView(), 'user' => $user, 'status' => '' ]
         );
     }
 
     public function write(Request $request, Application $app)
     {
+        $user = $this->fetchUser($request->get('identifier'));
         $form = $this->buildUserForm($app['form.factory']);
         $form->handleRequest($request);
 
         if (!$form->isValid()) {
             return $this->templateRenderer->render(
-                '@SystemAccount/user/list.twig',
-                [ 'form' => $form->createView(), 'user_list' => $search, 'status' => 'Form validation error' ]
+                '@SystemAccount/user/task/modify.twig',
+                [ 'form' => $form->createView(), 'user' => $user, 'status' => 'Form validation error' ]
             );
         }
 
-        $result = (new AggregateRootCommandBuilder($this->userType, CreateUserCommand::CLASS))
+        $result = (new AggregateRootCommandBuilder($this->userType, ModifyUserCommand::CLASS))
+            ->withProjection($user)
             ->withValues($form->getData())
             ->build();
 
         if ($result instanceof Success) {
             $this->commandBus->post($result->get());
-            return $app->redirect($request->getRequestUri());
+            return $app->redirect('/index_dev.php/foh/system_account/user/list');
         }
 
-        $status = 'Failed to create user: '.var_export($result->get(), true);
+        $status = 'Failed to modify user: '.var_export($result->get(), true);
         return $this->templateRenderer->render(
-            '@SystemAccount/user/list.twig',
-            [ 'form' => $form->createView(), 'user_list' => $this->fetchUserList(), 'status' => $status ]
+            '@SystemAccount/user/task/modify.twig',
+            [ 'form' => $form->createView(), 'user' => $user, 'status' => $status ]
         );
     }
 
-    protected function fetchUserList($offset = 0, $limit = 10)
+    protected function fetchUser($identifier)
     {
-        $query = new Query(new CriteriaList, new CriteriaList, new CriteriaList, 0, $limit);
-
-        return $this->queryServiceMap
-            ->getItem($this->userType->getPrefix().'::query_service')
-                ->find($query);
+        $finder = $this->finderMap->getItem($this->userType->getPrefix().'::projection.standard::view_store::finder');
+        $results = $finder->getByIdentifier($identifier);
+        return $results->getFirstResult();
     }
 
-    protected function buildUserForm(FormFactory $formFactory)
+    protected function buildUserForm(FormFactory $formFactory, array $data = [])
     {
-        $data = [
+        $data = $data ?: [
             'username' => '',
             'firstname' => '',
             'lastname' => '',
