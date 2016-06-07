@@ -1,0 +1,11 @@
+#
+# Holds the project level configuration for the command-bus
+---
+transports:
+  sync:
+    class: Honeybee\Infrastructure\Command\Bus\Transport\SynchronousTransport
+
+#  spinner_default:
+#    class: Honeybee\Infrastructure\Command\Bus\Transport\JobQueueTransport
+#    settings:
+#      exchange: honeybee.domain.commands

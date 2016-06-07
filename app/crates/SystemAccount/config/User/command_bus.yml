@@ -1,0 +1,5 @@
+subscriptions:
+  - transport: sync
+    commands:
+      foh.system_account.user.create_user:
+        handler: Foh\SystemAccount\User\Model\Task\CreateUser\CreateUserCommandHandler

@@ -1,0 +1,50 @@
+#
+# Project level event-bus configuration
+---
+transports:
+#  event_queue:
+#    class: Honeybee\Infrastructure\Event\Bus\Transport\JobQueueTransport
+#    settings:
+#      exchange: honeybee.domain.events
+
+#  event_pub:
+#    class: Honeybee\Infrastructure\Event\Bus\Transport\ZmqTransport
+#    settings:
+#      channel: ${event_pub.default_channel}
+#      host: ${event_pub.pull_socket.host}
+#      port: ${event_pub.pull_socket.port}
+
+  sync:
+    class: Honeybee\Infrastructure\Event\Bus\Transport\SynchronousTransport
+
+channels:
+  honeybee.events.domain:
+    - transport: sync
+      enabled: true
+      filters:
+        - settings:
+            expression: event.getType() matches "/.*/"
+      handlers:
+        - class: Honeybee\Projection\EventHandler\DomainEventProjector
+          settings:
+            storage_writer: honeybee::domain_event::view_store::writer
+
+  honeybee.events.failed:
+    - transport: sync
+      enabled: true
+      filter:
+        settings:
+          expression: event.getType() matches "/.*\.failed$/"
+      handler:
+        class: Honeybee\Infrastructure\Event\FailedJobEventHandler
+
+  honeybee.events.replay:
+    - transport: sync
+      enabled: true
+      filter:
+        settings:
+          expression: event.getType() matches "/.*/"
+      handler:
+        class: Honeybee\Projection\EventHandler\DomainEventProjector
+        settings:
+          storage_writer: honeybee::domain_event::view_store::writer

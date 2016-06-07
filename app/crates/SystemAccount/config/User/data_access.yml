@@ -1,0 +1,83 @@
+#
+# Connections that are used for the SystemAccount crate's UserType.
+---
+storage_writers:
+  foh.system_account.user::domain_event::event_source::writer:
+    class: Honeybee\Infrastructure\DataAccess\Storage\CouchDb\EventStream\EventStreamAppender
+    connection: foh.system_account.event_source
+
+  foh.system_account.user::projection.standard::view_store::writer:
+    class: Honeybee\Infrastructure\DataAccess\Storage\Elasticsearch\Projection\ProjectionWriter
+    connection: honeybee.view_store
+    settings:
+      index: foh-system_account
+      type: foh-system_account-user-standard
+      parameters:
+        index:
+            refresh: true
+        delete:
+            refresh: true
+
+storage_readers:
+  foh.system_account.user::event_stream::event_source::reader:
+    class: Honeybee\Infrastructure\DataAccess\Storage\CouchDb\EventStream\EventStreamReader
+    connection: foh.system_account.event_source
+    settings:
+        design_doc: foh-system_account-user
+
+  foh.system_account.user::domain_event::event_source::reader:
+    class: Honeybee\Infrastructure\DataAccess\Storage\CouchDb\DomainEvent\DomainEventReader
+    connection: honeybee.view_store
+    connection: foh.system_account.event_source
+    settings:
+        design_doc: foh-system_account-user
+
+  foh.system_account.user::projection.standard::view_store::reader:
+    class: Honeybee\Infrastructure\DataAccess\Storage\Elasticsearch\Projection\ProjectionReader
+    connection: honeybee.view_store
+    settings:
+      index: foh-system_account
+      type: foh-system_account-user-standard
+    dependencies:
+      resource_type: Foh\SystemAccount\User\Projection\Standard\UserType
+
+units_of_work:
+  foh.system_account.user::domain_event::event_source::unit_of_work:
+    class: Honeybee\Infrastructure\DataAccess\UnitOfWork\UnitOfWork
+    event_reader: foh.system_account.user::event_stream::event_source::reader
+    event_writer: foh.system_account.user::domain_event::event_source::writer
+    dependencies:
+      aggregate_root_type: Foh\SystemAccount\User\Model\Aggregate\UserType
+
+finders:
+  foh.system_account.user::projection.standard::view_store::finder:
+    class: Honeybee\Infrastructure\DataAccess\Finder\Elasticsearch\Projection\ProjectionFinder
+    connection: honeybee.view_store
+    settings:
+      index: foh-system_account
+      type: foh-system_account-user-standard
+      log_search_query: false
+    dependencies:
+      resource_type: Foh\SystemAccount\User\Projection\Standard\UserType
+
+query_services:
+  foh.system_account.user::query_service:
+    class: Honeybee\Infrastructure\DataAccess\Query\QueryService
+    settings:
+      default_mapping: user.standard
+    finder_mappings:
+      user.standard:
+        finder: foh.system_account.user::projection.standard::view_store::finder
+        query_translation:
+          class: Honeybee\Infrastructure\DataAccess\Finder\Elasticsearch\ElasticsearchQueryTranslation
+          settings:
+            multi_fields:
+              - username
+              - firstname
+              - lastname
+            query_filters:
+              workflow_state: "!deleted"
+      domain.event:
+        finder: honeybee::domain_event::view_store::finder
+        query_translation:
+          class: Honeybee\Infrastructure\DataAccess\Finder\Elasticsearch\ElasticsearchQueryTranslation

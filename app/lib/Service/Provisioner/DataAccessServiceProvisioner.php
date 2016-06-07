@@ -146,7 +146,7 @@ class DataAccessServiceProvisioner implements ProvisionerInterface
                 $queryServiceMap = new QueryServiceMap();
                 foreach ($qsConfigs as $serviceKey => $qsConf) {
                     $finderMappings = [];
-                    foreach ($qsConf['finderMappings'] as $finderMappingName => $finderMapping) {
+                    foreach ($qsConf['finder_mappings'] as $finderMappingName => $finderMapping) {
                         $finderMappings[$finderMappingName] = [
                             'finder' => $finderMap->getItem($finderMapping['finder']),
                             'query_translation' => $this->createQueryTranslation($finderMapping['query_translation'])
@@ -154,14 +154,14 @@ class DataAccessServiceProvisioner implements ProvisionerInterface
                     }
                     $objectState =[
                         ':config' => new ArrayConfig(isset($qsConf['settings']) ? $qsConf['settings'] : []),
-                        ':finderMappings' => $finderMappings
+                        ':finder_mappings' => $finderMappings
                     ];
                     if (isset($qsConf['dependencies'])) {
                         foreach ($qsConf['dependencies'] as $key => $dependency) {
                             $objectState[$key] = $dependency;
                         }
                     }
-                    $queryServiceMap->setItem($serviceKey, $injector->make($serviceCfg['class'], $objectState));
+                    $queryServiceMap->setItem($serviceKey, $injector->make($qsConf['class'], $objectState));
                 }
                 return $queryServiceMap;
             }
@@ -177,7 +177,8 @@ class DataAccessServiceProvisioner implements ProvisionerInterface
         if (!class_exists($class)) {
             throw new RuntimeError(sprintf('Configured query-translation: "%s" does not exist!', $class));
         }
-        $queryTranslation = new $class(new ArrayConfig($config['settings']));
+        $settings = isset($config['settings']) ? $config['settings'] : [];
+        $queryTranslation = new $class(new ArrayConfig($settings));
         if (!$queryTranslation instanceof QueryTranslationInterface) {
             throw new RuntimeError(
                 sprintf(

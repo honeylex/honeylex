@@ -2,7 +2,7 @@
 # Project level data-access is configured here.
 ---
 storage_writers:
-  honeybee::domain_event::view_store::write:
+  honeybee::domain_event::view_store::writer:
     class: Honeybee\Infrastructure\DataAccess\Storage\Elasticsearch\DomainEvent\DomainEventWriter
     connection: honeybee.view_store
     settings:

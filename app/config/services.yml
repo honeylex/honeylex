@@ -28,3 +28,18 @@ honeybee.infrastructure.migration_service:
   class: Honeybee\Infrastructure\Migration\MigrationService
   provisioner:
     class: Honeybee\FrameworkBinding\Silex\Service\Provisioner\MigrationServiceProvisioner
+
+honeybee.infrastructure.expression_service:
+  class: Honeybee\Infrastructure\Expression\ExpressionService
+  provisioner:
+    class: Honeybee\FrameworkBinding\Silex\Service\Provisioner\ExpressionServiceProvisioner
+
+honeybee.infrastructure.event_bus:
+  class: Honeybee\Infrastructure\Event\Bus\EventBus
+  provisioner:
+    class: Honeybee\FrameworkBinding\Silex\Service\Provisioner\EventBusProvisioner
+
+honeybee.infrastructure.command_bus:
+  class: Honeybee\Infrastructure\Command\Bus\CommandBus
+  provisioner:
+    class: Honeybee\FrameworkBinding\Silex\Service\Provisioner\CommandBusProvisioner

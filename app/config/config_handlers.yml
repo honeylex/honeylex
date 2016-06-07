@@ -5,32 +5,37 @@
 # Depending on the handler behavior concurring crate configs will be treated either as:
 # firstone-wins, lastone-wins, flat-merge or deep-merge.
 ---
-# merge behaviour: lastone-wins
-settings.yml:
+settings.yml: # merge behaviour: lastone-wins
   handler: Honeybee\FrameworkBinding\Silex\Config\Handler\SettingConfigHandler
   settings:
     parser: Symfony\Component\Yaml\Parser
 
-# merge behaviour: lastone-wins
-services.yml:
+services.yml: # merge behaviour: lastone-wins
   handler: Honeybee\FrameworkBinding\Silex\Config\Handler\ServiceConfigHandler
   settings:
     parser: Symfony\Component\Yaml\Parser
 
-# merge behaviour: lastone-wins
-connections.yml:
+connections.yml: # merge behaviour: lastone-wins
   handler: Honeybee\FrameworkBinding\Silex\Config\Handler\ConnectionConfigHandler
   settings:
     parser: Symfony\Component\Yaml\Parser
 
-# merge behaviour: lastone-wins (topmost keys are merged)
-data_access.yml:
+data_access.yml: # merge behaviour: lastone-wins (topmost keys are merged)
   handler: Honeybee\FrameworkBinding\Silex\Config\Handler\DataAccessConfigHandler
   settings:
     parser: Symfony\Component\Yaml\Parser
 
-# merge behaviour: lastone-wins
-migration.yml:
+migration.yml: # merge behaviour: lastone-wins
   handler: Honeybee\FrameworkBinding\Silex\Config\Handler\MigrationConfigHandler
+  settings:
+    parser: Symfony\Component\Yaml\Parser
+
+event_bus.yml: # merge behaviour: lastone-wins
+  handler: Honeybee\FrameworkBinding\Silex\Config\Handler\EventBusConfigHandler
+  settings:
+    parser: Symfony\Component\Yaml\Parser
+
+command_bus.yml: # merge behaviour: lastone-wins
+  handler: Honeybee\FrameworkBinding\Silex\Config\Handler\CommandBusConfigHandler
   settings:
     parser: Symfony\Component\Yaml\Parser
