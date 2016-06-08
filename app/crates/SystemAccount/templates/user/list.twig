@@ -1,120 +1,219 @@
 {% extends "layout.twig" %}
 
 {% block content %}
-<div class="row">
-    <div class="col-xs-12 col-md-12">
-        <div class="page-header">
-          <h1>User <small>resource-list</small></h1>
+<div class="resource-list-view">
+    <div class="row">
+        <div class="col-xs-12 col-md-12">
+            <div class="page-header">
+              <h1>User <small>resource-list</small></h1>
+            </div>
         </div>
     </div>
-</div>
-<div class="row">
-    <div class="col-xs-12 col-md-8">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <div class="userlist-header">
-                    <form method="get" class="form-inline">
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-6 col-md-6">
-                                <div class="form-group">
+    <div class="row">
+        <div class="col-xs-12 col-md-8">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="userlist-header">
+                        <form method="get" class="form-inline">
+                            <div class="row">
+                                <!--
+                                search
+                                -->
+                                <div class="col-xs-12 col-sm-6 col-md-6">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <div class="input-group-addon"><span class="glyphicon glyphicon-search"></span></div>
+                                            <input type="text" class="form-control" id="search" name="q" value="{{ q }}" placeholder="search terms">
+                                            <span class="input-group-btn">
+                                                <button type="submit" class="btn btn-primary">search</button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--
+                                pagination
+                                -->
+                                <div class="col-xs-12 col-sm-6 col-md-6" style="text-align: right">
                                     <div class="input-group">
-                                        <div class="input-group-addon"><span class="glyphicon glyphicon-search"></span></div>
-                                        <input type="text" class="form-control" id="search" name="q" value="{{ q }}" placeholder="search terms">
+                                        {% if pager.prev_url == false %}
                                         <span class="input-group-btn">
-                                            <button type="submit" class="btn btn-primary">search</button>
+                                            <a class="btn btn-default disabled" href="#">&laquo; prev</a>
                                         </span>
+                                        {% else %}
+                                        <span class="input-group-btn">
+                                            <a class="btn btn-default" href="{{ pager.prev_url }}" type="submit">&laquo; prev</a>
+                                        </span>
+                                        {% endif %}
+                                        <span class="input-group-addon" id="basic-addon1">page </span>
+                                        <input class="form-control cur-offset" name="page" type="number" min="0" max="{{ pager.total }}" value="{{ pager.current }}">
+                                        <span class="input-group-addon">of {{ pager.total }}</span>
+                                        {% if pager.next_url == false %}
+                                        <span class="input-group-btn">
+                                            <a class="btn btn-default disabled" href="#" type="submit">next &raquo;</a>
+                                        </span>
+                                        {% else %}
+                                        <span class="input-group-btn">
+                                            <a class="btn btn-default" href="{{ pager.next_url }}" type="submit">next &raquo;</a>
+                                        </span>
+                                        {% endif %}
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xs-12 col-sm-6 col-md-6" style="text-align: right">
-                                <div class="input-group">
-                                    {% if pager.prev_url == false %}
-                                    <span class="input-group-btn">
-                                        <a class="btn btn-default disabled" href="#">&laquo; prev</a>
-                                    </span>
-                                    {% else %}
-                                    <span class="input-group-btn">
-                                        <a class="btn btn-default" href="{{ pager.prev_url }}" type="submit">&laquo; prev</a>
-                                    </span>
-                                    {% endif %}
-                                    <span class="input-group-addon" id="basic-addon1">page </span>
-                                    <input class="form-control cur-offset" name="page" type="number" min="0" max="{{ pager.total }}" value="{{ pager.current }}">
-                                    <span class="input-group-addon">of {{ pager.total }}</span>
-                                    {% if pager.next_url == false %}
-                                    <span class="input-group-btn">
-                                        <a class="btn btn-default disabled" href="#" type="submit">next &raquo;</a>
-                                    </span>
-                                    {% else %}
-                                    <span class="input-group-btn">
-                                        <a class="btn btn-default" href="{{ pager.next_url }}" type="submit">next &raquo;</a>
-                                    </span>
-                                    {% endif %}
-                                </div>
-                            </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <!--
+                        user table
+                        -->
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>username</th>
+                                    <th>firstname</th>
+                                    <th>lastname</th>
+                                    <th>email</th>
+                                    <th>role</th>
+                                    <th class="workflow-state">status</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for user in user_list.results %}
+                                <tr>
+                                    <td>
+                                        <!--
+                                        modify link
+                                        -->
+                                        {% if user|accepts_event('edit') %}
+                                        <a href="{{ url(
+                                            'foh.system_account.user.tasks.modify',
+                                            { 'identifier': user.identifier}
+                                        ) }}">{{ user.username }}</a>
+                                        {% else %}
+                                            {{ user.username }}
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ user.firstname }}</td>
+                                    <td>{{ user.lastname }}</td>
+                                    <td>{{ user.email }}</td>
+                                    <td>{{ user.role }}</td>
+                                    <td class="list-item-actions workflow-state">
+                                        <div style="display: flex">
+                                            <!--
+                                            demote action
+                                            -->
+                                            <form method="post" class="form-inline" action="{{ url(
+                                                    'foh.system_account.user.tasks.proceed',
+                                                    { 'identifier': user.identifier}
+                                            ) }}">
+                                                <input type="hidden" name="revision" value="{{ user.revision }}" />
+                                                <input type="hidden" name="via" value="demote" />
+                                                <input type="hidden" name="from" value="{{ user.workflowState }}" />
+                                                <button type="submit" class="btn btn-warning btn-xs"
+                                                    {% if not user|accepts_event('demote') %}disabled="disabled"{% endif %}>
+                                                    <span class="glyphicon glyphicon-arrow-left"></span>
+                                                </button>
+                                            </form>
+                                            <div class="user-state">{{ user.workflowState }}</div>
+                                            <!--
+                                            promote action
+                                            -->
+                                            <form class="form-inline" method="post" action="{{ url(
+                                                    'foh.system_account.user.tasks.proceed',
+                                                    { 'identifier': user.identifier}
+                                            ) }}">
+                                                <input type="hidden" name="revision" value="{{ user.revision }}" />
+                                                <input type="hidden" name="via" value="promote" />
+                                                <input type="hidden" name="from" value="{{ user.workflowState }}" />
+                                                <button type="submit" class="btn btn-success btn-xs"
+                                                    {% if not user|accepts_event('promote') %}disabled="disabled"{% endif %}>
+                                                    <span class="glyphicon glyphicon-arrow-right"></span>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                    <td class="delete-action">
+                                        <div class="btn-group btn-group-justified" role="group">
+                                            <!--
+                                            delete action
+                                            -->
+                                            <form method="post" action="{{ url(
+                                                    'foh.system_account.user.tasks.proceed',
+                                                    { 'identifier': user.identifier}
+                                            ) }}">
+                                                <input type="hidden" name="revision" class="revision-val" value="{{ user.revision }}" />
+                                                <input type="hidden" name="via" value="delete" />
+                                                <input type="hidden" name="from" class="workflow-state-val" value="{{ user.workflowState }}" />
+                                                <button type="button" class="btn btn-danger btn-xs"
+                                                    data-toggle="modal" data-target="#deletePrompt"
+                                                    {% if not user|accepts_event('delete') %}disabled="disabled"{% endif %}>
+                                                    <span class="glyphicon glyphicon-remove"></span>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-            <div class="panel-body">
-                <div class="table-responsive">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>username</th>
-                                <th>firstname</th>
-                                <th>lastname</th>
-                                <th>email</th>
-                                <th>role</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for user in user_list.results %}
-                            <tr>
-                                <td><a href="{{ url(
-                                    'foh.system_account.user.tasks.modify',
-                                    { 'identifier': user.identifier}
-                                ) }}">{{ user.username }}</a></td>
-                                <td>{{ user.firstname }}</td>
-                                <td>{{ user.lastname }}</td>
-                                <td>{{ user.email }}</td>
-                                <td>{{ user.role }}</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
+        </div>
+        <div class="col-xs-12 col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">Create user</div>
+                <div class="panel-body">
+                    <!--
+                    create form
+                    -->
+                    <form method="post">
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <input class="form-control" id="username" name="form[username]" />
+                        </div>
+                        <div class="form-group">
+                            <label for="firstname">Firstname</label>
+                            <input class="form-control" id="firstname" name="form[firstname]" />
+                        </div>
+                        <div class="form-group">
+                            <label for="lastname">Lastname</label>
+                            <input class="form-control" id="lastname" name="form[lastname]" />
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email address</label>
+                            <input type="email" name="form[email]" class="form-control" id="email" placeholder="your.email@example.com" />
+                        </div>
+                        <div class="form-group">
+                            <label for="role">Role</label>
+                            <select type="select" name="form[role]" class="form-control" id="role">
+                               <option>administrator</option>
+                               <option>user</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-success" type="submit">create</button>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-xs-12 col-md-4">
-        <div class="panel panel-default">
-            <div class="panel-heading">Create user</div>
-            <div class="panel-body">
-                <form method="post">
-                    <div class="form-group">
-                        <label for="username">Username</label>
-                        <input class="form-control" id="username" name="form[username]" />
-                    </div>
-                    <div class="form-group">
-                        <label for="firstname">Firstname</label>
-                        <input class="form-control" id="firstname" name="form[firstname]" />
-                    </div>
-                    <div class="form-group">
-                        <label for="lastname">Lastname</label>
-                        <input class="form-control" id="lastname" name="form[lastname]" />
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email address</label>
-                        <input type="email" name="form[email]" class="form-control" id="email" placeholder="your.email@example.com" />
-                    </div>
-                    <div class="form-group">
-                        <label for="role">Role</label>
-                        <select type="select" name="form[role]" class="form-control" id="role">
-                           <option>administrator</option>
-                           <option>user</option>
-                        </select>
-                    </div>
-                    <button class="btn btn-success" type="submit">create!</button>
+</div>
+<div class="modal fade" id="deletePrompt">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Delete user?</h4>
+            </div>
+            <div class="modal-footer">
+                <form method="post" class="form-inline delete-form">
+                    <input type="hidden" class="revision-val" name="revision" />
+                    <input type="hidden" name="via" value="delete" />
+                    <input type="hidden" class="workflow-state-val" name="from" />
+                    <button type="submit" class="btn btn-danger">Yes, delete</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">No, cancel</button>
                 </form>
             </div>
         </div>

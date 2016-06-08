@@ -105,7 +105,7 @@ class ListController
         if (!$form->isValid()) {
             return $this->templateRenderer->render(
                 '@SystemAccount/user/list.twig',
-                [ 'form' => $form->createView(), 'user_list' => $search, 'status' => 'Form validation error' ]
+                [ 'form' => $form->createView(), 'user_list' => $this->fetchUserList('', 1, 10), 'status' => 'Form validation error' ]
             );
         }
 

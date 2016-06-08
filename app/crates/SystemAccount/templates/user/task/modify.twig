@@ -1,43 +1,69 @@
 {% extends "layout.twig" %}
 
 {% block content %}
-<div class="row">
-    <div class="col-xs-12 col-md-12">
-        <div class="page-header">
-          <h1>User <small>edit-resource</small></h1>
+<div class="edit-resource-view">
+    <div class="row">
+        <div class="col-xs-12 col-md-12">
+            <div class="page-header">
+              <h1>User <small>modify-resource</small></h1>
+            </div>
         </div>
     </div>
-</div>
-<div class="row">
-    <div class="col-xs-12 col-md-6">
-        <form method="post">
-            {{ status }}
-            <div class="form-group">
-                <label for="username">Username</label>
-                <input class="form-control" id="username" value="{{ user.username }}" name="form[username]" />
-            </div>
-            <div class="form-group">
-                <label for="firstname">Firstname</label>
-                <input class="form-control" id="firstname" value="{{ user.firstname }}" name="form[firstname]" />
-            </div>
-            <div class="form-group">
-                <label for="lastname">Lastname</label>
-                <input class="form-control" id="lastname" value="{{ user.lastname }}" name="form[lastname]" />
-            </div>
-            <div class="form-group">
-                <label for="email">Email address</label>
-                <input type="email" name="form[email]" value="{{ user.email }}" class="form-control" id="email" placeholder="your.email@example.com" />
-            </div>
-            <div class="form-group">
-                <label for="role">Role</label>
-                <select type="select" name="form[role]" class="form-control" id="role">
-                   <option {% if user.role =='administrator' %}selected{% endif %}>administrator</option>
-                   <option {% if user.role =='user' %}selected{% endif %}>user</option>
-                </select>
-            </div>
-            <button class="btn btn-success" type="submit">modify user!</button>
-            <a href="{{ url('foh.system_account.user.list') }}" class="btn btn-warning">cancel</a>
-        </form>
+    <div class="row">
+        <div class="col-xs-12 col-md-12">
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="active"><a href="#main" data-toggle="tab">Main</a></li>
+                <li><a href="#metadata" data-toggle="tab">Metadata</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-md-6">
+            <form method="post" class="tab-content">
+                {{ status }}
+                <div class="tab-pane active" id="main">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input class="form-control" id="username" value="{{ user.username }}" name="form[username]" />
+                    </div>
+                    <div class="form-group">
+                        <label for="firstname">Firstname</label>
+                        <input class="form-control" id="firstname" value="{{ user.firstname }}" name="form[firstname]" />
+                    </div>
+                    <div class="form-group">
+                        <label for="lastname">Lastname</label>
+                        <input class="form-control" id="lastname" value="{{ user.lastname }}" name="form[lastname]" />
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email address</label>
+                        <input type="email" name="form[email]" value="{{ user.email }}" class="form-control" id="email" placeholder="your.email@example.com" />
+                    </div>
+                    <div class="form-group">
+                        <label for="role">Role</label>
+                        <select type="select" name="form[role]" class="form-control" id="role">
+                           <option {% if user.role =='administrator' %}selected{% endif %}>administrator</option>
+                           <option {% if user.role =='user' %}selected{% endif %}>user</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="tab-pane" id="metadata">
+                    <div class="form-group">
+                        <label for="identifier">Identifier</label>
+                        <input class="form-control" id="identifier" value="{{ user.identifier }}" readonly />
+                    </div>
+                    <div class="form-group">
+                        <label for="language">Language</label>
+                        <input class="form-control" id="language" value="{{ user.language }}" readonly />
+                    </div>
+                    <div class="form-group">
+                        <label for="revision">Revision</label>
+                        <input class="form-control" id="revision" value="{{ user.revision }}" readonly />
+                    </div>
+                </div>
+                <button class="btn btn-success" type="submit">modify</button>
+                <a href="{{ url('foh.system_account.user.list') }}" class="btn btn-default">cancel</a>
+            </form>
+        </div>
     </div>
 </div>
 {% endblock %}
