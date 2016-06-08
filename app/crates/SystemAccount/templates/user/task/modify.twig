@@ -1,7 +1,9 @@
 {% extends "layout.twig" %}
 
+{% block view_classes %}edit-resource-view{% endblock %}
+
 {% block content %}
-<div class="edit-resource-view">
+<div>
     <div class="row">
         <div class="col-xs-12 col-md-12">
             <div class="page-header">
@@ -60,8 +62,10 @@
                         <input class="form-control" id="revision" value="{{ user.revision }}" readonly />
                     </div>
                 </div>
-                <button class="btn btn-success" type="submit">modify</button>
-                <a href="{{ url('foh.system_account.user.list') }}" class="btn btn-default">cancel</a>
+                <div class="form-actions">
+                    <button class="btn btn-success" type="submit">modify</button>
+                    <a href="{{ url('foh.system_account.user.list') }}" class="btn btn-default">cancel</a>
+                </div>
             </form>
         </div>
     </div>
