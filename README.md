@@ -14,6 +14,7 @@ In order to get the honeylex up and running you'll need to make sure you, that y
 * php >= 5.6.1
 * [elasticsearch 2.x](https://www.elastic.co/downloads/elasticsearch)
 * [couchdb 1.6.x](http://couchdb.apache.org)
+* [rabbitmq](https://www.rabbitmq.com) - Only required if you want support for async background processing.
 
 #### Install:
 
