@@ -73,7 +73,7 @@ class ModifyController
 
         if ($result instanceof Success) {
             $this->commandBus->post($result->get());
-            return $app->redirect('/index_dev.php/foh/system_account/user/list');
+            return $app->redirect($app['url_generator']->generate('foh.system_account.user.list'));
         }
 
         $status = 'Failed to modify user: '.var_export($result->get(), true);

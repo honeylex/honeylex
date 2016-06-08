@@ -4,7 +4,7 @@
 <div class="row">
     <div class="col-xs-12 col-md-12">
         <div class="page-header">
-          <h1>Users <small>list</small></h1>
+          <h1>User <small>resource-list</small></h1>
         </div>
     </div>
 </div>
@@ -38,7 +38,10 @@
                     <tbody>
                         {% for user in user_list.results %}
                         <tr>
-                            <td><a href="{{ user.identifier }}/tasks/edit">{{ user.username }}</a></td>
+                            <td><a href="{{ url(
+                                'foh.system_account.user.tasks.modify',
+                                { 'identifier': user.identifier}
+                            ) }}">{{ user.username }}</a></td>
                             <td>{{ user.firstname }}</td>
                             <td>{{ user.lastname }}</td>
                             <td>{{ user.email }}</td>

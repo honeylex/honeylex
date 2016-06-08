@@ -6,7 +6,6 @@ use Honeybee\FrameworkBinding\Silex\Console\Command\Crate\CrateInfo;
 use Honeybee\FrameworkBinding\Silex\Console\Command\Crate\ListCrates;
 use Honeybee\FrameworkBinding\Silex\Console\Command\Crate\MakeCrate;
 use Honeybee\FrameworkBinding\Silex\Console\Command\Crate\RemoveCrate;
-use Honeybee\FrameworkBinding\Silex\Console\Command\Hello;
 use Honeybee\FrameworkBinding\Silex\Console\Command\Migrate\ListTargets;
 use Honeybee\FrameworkBinding\Silex\Console\Command\Migrate\MigrateDown;
 use Honeybee\FrameworkBinding\Silex\Console\Command\Migrate\MigrateUp;
@@ -37,8 +36,6 @@ $appCommands = [
     MakeResource::CLASS,
     RemoveResource::CLASS,
     ResourceInfo::CLASS,
-    // Example
-    Hello::CLASS,
 ];
 
 require_once __DIR__.'/../vendor/autoload.php';
