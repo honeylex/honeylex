@@ -20,6 +20,7 @@ use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Constraints\Choice;
 use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Component\Validator\Constraints\GreaterThan;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
@@ -53,11 +54,46 @@ class ListController
         if (count($errors) > 0) {
             $query = '';
         }
-        $search = $this->fetchUserList($query);
+        $page = $request->query->get('page', 1);
+        $errors = $app['validator']->validate($page, new GreaterThan([ 'value' => 0 ]));
+        if (count($errors) > 0) {
+            $page = 1;
+        }
+        $limit = $request->query->get('limit', 10);
+        $errors = $app['validator']->validate($limit, new GreaterThan([ 'value' => 0 ]));
+        if (count($errors) > 0) {
+            $limit = 10;
+        }
+        $search = $this->fetchUserList($query, $page, $limit);
+
+        $pager = [
+            'total' => ceil($search->getTotalCount() / $limit),
+            'current' => $page,
+            'next_url' => false,
+            'prev_url' => false
+        ];
+        if (($page + 1) * $limit <= $search->getTotalCount()) {
+            $pager['next_url'] = $app['url_generator']->generate(
+                'foh.system_account.user.list',
+                [ 'page' => $page + 1, 'limit' => $limit, 'q' => $query ]
+            );
+        }
+        if (($page - 1) / $limit > 0) {
+            $pager['prev_url'] = $app['url_generator']->generate(
+                'foh.system_account.user.list',
+                [ 'page' => $page - 1, 'limit' => $limit, 'q' => $query ]
+            );
+        }
 
         return $this->templateRenderer->render(
             '@SystemAccount/user/list.twig',
-            [ 'form' => $form->createView(), 'user_list' => $search, 'status' => '', 'q' => $query ]
+            [
+                'form' => $form->createView(),
+                'user_list' => $search,
+                'pager' => $pager,
+                'status' => '',
+                'q' => $query
+            ]
         );
     }
 
@@ -85,17 +121,17 @@ class ListController
         $status = 'Failed to create user: '.var_export($result->get(), true);
         return $this->templateRenderer->render(
             '@SystemAccount/user/list.twig',
-            [ 'form' => $form->createView(), 'user_list' => $this->fetchUserList(), 'status' => $status ]
+            [ 'form' => $form->createView(), 'user_list' => $this->fetchUserList('', 1, 10), 'status' => $status ]
         );
     }
 
-    protected function fetchUserList($searchTerm = '', $offset = 0, $limit = 10)
+    protected function fetchUserList($searchTerm, $page, $limit)
     {
         $searchCriteria = new CriteriaList;
         if (!empty($searchTerm)) {
             $searchCriteria->addItem(new SearchCriteria($searchTerm));
         }
-        $query = new Query($searchCriteria, new CriteriaList, new CriteriaList, 0, $limit);
+        $query = new Query($searchCriteria, new CriteriaList, new CriteriaList, ($page - 1) * $limit, $limit);
 
         return $this->queryServiceMap
             ->getItem($this->userType->getPrefix().'::query_service')
