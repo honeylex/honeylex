@@ -4,23 +4,25 @@ A cqrs plus es (cms) app boilerplate for php based on the integration of the [Ho
 
 ## Development
 
-### Installation
+### Setup
 
-Prerequisites:
+#### Prerequisites
+
+In order to get the honeylex up and running you'll need to make sure you, that your machine meets the following requirements:
 
 * [Composer][Composer]
 * php >= 5.6.1
 * elasticsearch 2.x
 * couchdb 1.6.x
 
-Setup:
+#### Install:
 
 * Run ```git clone git@github.com:shrink0r/honeylex.git```
 * create a directory ```/usr/local/honeylex.local/```
 * in the latter directory create a file named ```rabbitmq.json``` with the following contents: ```{ "user":"username", "password":"secret", "host": "localhost", "port": 5672 }```
 * Run ```composer install```
 * Run ```bin/console hlx:migrate:up```
-* Run ```composer run```
+* Run ```composer run``` this will start a local webserver that hosts the [app][http://localhost:8888/]
 
 ### Registered silex service providers
 
