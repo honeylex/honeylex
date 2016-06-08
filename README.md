@@ -1,6 +1,6 @@
 # Honeylex
 
-A cqrs plus es (cms) app boilerplate for php based on the integration of [Honeybee][Honeybee] lib with [silex][Documentation] framework.
+A cqrs plus es (cms) app boilerplate for php based on the integration of the [Honeybee][Honeybee] lib with the [silex][Documentation] framework.
 
 ## Development
 
