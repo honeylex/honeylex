@@ -20,6 +20,7 @@ Setup:
 * in the latter directory create a file named ```rabbitmq.json``` with the following contents: ```{ "user":"username", "password":"secret", "host": "localhost", "port": 5672 }```
 * Run ```composer install```
 * Run ```bin/console hlx:migrate:up```
+* Run ```composer run```
 
 ### Registered silex service providers
 
