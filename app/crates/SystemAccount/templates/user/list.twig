@@ -25,31 +25,33 @@
                 </div>
             </div>
             <div class="panel-body">
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th>username</th>
-                            <th>firstname</th>
-                            <th>lastname</th>
-                            <th>email</th>
-                            <th>role</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for user in user_list.results %}
-                        <tr>
-                            <td><a href="{{ url(
-                                'foh.system_account.user.tasks.modify',
-                                { 'identifier': user.identifier}
-                            ) }}">{{ user.username }}</a></td>
-                            <td>{{ user.firstname }}</td>
-                            <td>{{ user.lastname }}</td>
-                            <td>{{ user.email }}</td>
-                            <td>{{ user.role }}</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>username</th>
+                                <th>firstname</th>
+                                <th>lastname</th>
+                                <th>email</th>
+                                <th>role</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for user in user_list.results %}
+                            <tr>
+                                <td><a href="{{ url(
+                                    'foh.system_account.user.tasks.modify',
+                                    { 'identifier': user.identifier}
+                                ) }}">{{ user.username }}</a></td>
+                                <td>{{ user.firstname }}</td>
+                                <td>{{ user.lastname }}</td>
+                                <td>{{ user.email }}</td>
+                                <td>{{ user.role }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

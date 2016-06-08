@@ -11,11 +11,11 @@ use Psr\Log\LoggerInterface;
 class ModifyUserCommandHandler extends ModifyAggregateRootCommandHandler
 {
     public function __construct(
-        UserType $user_type,
-        DataAccessServiceInterface $data_access_service,
-        EventBusInterface $event_bus,
+        UserType $userType,
+        DataAccessServiceInterface $dataAccessService,
+        EventBusInterface $eventBus,
         LoggerInterface $logger
     ) {
-        parent::__construct($user_type, $data_access_service, $event_bus, $logger);
+        parent::__construct($userType, $dataAccessService, $eventBus, $logger);
     }
 }
