@@ -1,6 +1,6 @@
-# Honeylex - The php cqrs plus es (cms) app boilerplate
+# Honeylex
 
-Test integration of the honeybee cqrs+es lib with the silex app-framework.
+A cqrs plus es (cms) app boilerplate for php based on the integration of [Honeybee][Honeybee] lib with [silex][Documentation] framework.
 
 ## Development
 
@@ -17,8 +17,7 @@ Setup:
 
 * Run ```git clone git@github.com:shrink0r/honeylex.git```
 * create a directory ```/usr/local/honeylex.local/```
-* in the latter directory create a file named ```rabbitmq.json```
-    File contents:```json {"user":"username","password":"secret","host":"localhost","port":5672}```
+* in the latter directory create a file named ```rabbitmq.json``` with the following contents: ```{ "user":"username", "password":"secret", "host": "localhost", "port": 5672 }```
 * Run ```composer install```
 * Run ```bin/console hlx:migrate:up```
 
@@ -50,3 +49,4 @@ Read the [Providers][Providers] documentation for more details about Silex Servi
 [WebProfilerServiceProvider]: http://github.com/silexphp/Silex-WebProfiler
 [MonologServiceProvider]: http://silex.sensiolabs.org/doc/providers/monolog.html
 [Providers]: http://silex.sensiolabs.org/doc/providers.html
+[Honeybee]: http://github.com/honeybee/honeybee
