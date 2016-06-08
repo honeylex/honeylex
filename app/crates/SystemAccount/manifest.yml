@@ -1,4 +1,0 @@
----
-vendor: Foh
-name: SystemAccount
-description: Standard crate for managing system-accounts, users and roles.

@@ -1,9 +1,0 @@
-subscriptions:
-  - transport: sync
-    commands:
-      foh.system_account.user.create_user:
-        handler: Foh\SystemAccount\User\Model\Task\CreateUser\CreateUserCommandHandler
-      foh.system_account.user.modify_user:
-        handler: Foh\SystemAccount\User\Model\Task\ModifyUser\ModifyUserCommandHandler
-      foh.system_account.user.proceed_user_workflow:
-        handler: Foh\SystemAccount\User\Model\Task\ProceedUserWorkflow\ProceedUserWorkflowCommandHandler
