@@ -22,7 +22,7 @@ In order to get the honeylex up and running you'll need to make sure you, that y
 * in the latter directory create a file named ```rabbitmq.json``` with the following contents: ```{ "user":"username", "password":"secret", "host": "localhost", "port": 5672 }```
 * Run ```composer install```
 * Run ```bin/console hlx:migrate:up```
-* Run ```composer run``` this will start a local webserver that hosts the [app][http://localhost:8888/]
+* Run ```composer run``` this will start a local webserver that hosts the [app](http://localhost:8888/)
 
 ### Registered silex service providers
 
