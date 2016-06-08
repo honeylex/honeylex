@@ -8,6 +8,7 @@ use Honeybee\Infrastructure\Command\Bus\CommandBusInterface;
 use Honeybee\Infrastructure\DataAccess\Query\CriteriaList;
 use Honeybee\Infrastructure\DataAccess\Query\Query;
 use Honeybee\Infrastructure\DataAccess\Query\QueryServiceMap;
+use Honeybee\Infrastructure\DataAccess\Query\SearchCriteria;
 use Honeybee\Infrastructure\Template\TemplateRendererInterface;
 use Honeybee\Model\Command\AggregateRootCommandBuilder;
 use Shrink0r\Monatic\Success;
@@ -47,11 +48,16 @@ class ListController
     public function read(Request $request, Application $app)
     {
         $form = $this->buildUserForm($app['form.factory']);
-        $search = $this->fetchUserList();
+        $query = $request->query->get('q', '');
+        $errors = $app['validator']->validate($query, new Length([ 'max' => 100 ]));
+        if (count($errors) > 0) {
+            $query = '';
+        }
+        $search = $this->fetchUserList($query);
 
         return $this->templateRenderer->render(
             '@SystemAccount/user/list.twig',
-            [ 'form' => $form->createView(), 'user_list' => $search, 'status' => '' ]
+            [ 'form' => $form->createView(), 'user_list' => $search, 'status' => '', 'q' => $query ]
         );
     }
 
@@ -83,9 +89,13 @@ class ListController
         );
     }
 
-    protected function fetchUserList($offset = 0, $limit = 10)
+    protected function fetchUserList($searchTerm = '', $offset = 0, $limit = 10)
     {
-        $query = new Query(new CriteriaList, new CriteriaList, new CriteriaList, 0, $limit);
+        $searchCriteria = new CriteriaList;
+        if (!empty($searchTerm)) {
+            $searchCriteria->addItem(new SearchCriteria($searchTerm));
+        }
+        $query = new Query($searchCriteria, new CriteriaList, new CriteriaList, 0, $limit);
 
         return $this->queryServiceMap
             ->getItem($this->userType->getPrefix().'::query_service')

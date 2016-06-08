@@ -1,11 +1,43 @@
 {% extends "layout.twig" %}
 
 {% block content %}
-    <h1>Foh.SystemAccount.User::Modify</h1>
-    <form method="post">
-        <h2>Modify user</h2>
-        {{ status }}
-        {{ form_widget(form) }}
-        <button type="submit">modify user</button>
-    </form>
+<div class="row">
+    <div class="col-xs-12 col-md-12">
+        <div class="page-header">
+          <h1>Users <small>edit</small></h1>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12 col-md-6">
+        <form method="post">
+            {{ status }}
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input class="form-control" id="username" value="{{ user.username }}" name="form[username]" />
+            </div>
+            <div class="form-group">
+                <label for="firstname">Firstname</label>
+                <input class="form-control" id="firstname" value="{{ user.firstname }}" name="form[firstname]" />
+            </div>
+            <div class="form-group">
+                <label for="lastname">Lastname</label>
+                <input class="form-control" id="lastname" value="{{ user.lastname }}" name="form[lastname]" />
+            </div>
+            <div class="form-group">
+                <label for="email">Email address</label>
+                <input type="email" name="form[email]" value="{{ user.email }}" class="form-control" id="email" placeholder="your.email@example.com" />
+            </div>
+            <div class="form-group">
+                <label for="role">Role</label>
+                <select type="select" name="form[role]" class="form-control" id="role">
+                   <option {% if user.role =='administrator' %}selected{% endif %}>administrator</option>
+                   <option {% if user.role =='user' %}selected{% endif %}>user</option>
+                </select>
+            </div>
+            <button class="btn btn-success" type="submit">modify user!</button>
+            <a href="{{ url('foh.system_account.user.list') }}" class="btn btn-warning">cancel</a>
+        </form>
+    </div>
+</div>
 {% endblock %}

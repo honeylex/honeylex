@@ -2,30 +2,55 @@
 
 {% block content %}
 <div class="row">
-    <div class="col-xs-12 col-md-6">
+    <div class="col-xs-12 col-md-12">
+        <div class="page-header">
+          <h1>Users <small>list</small></h1>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12 col-md-8">
         <div class="panel panel-default">
-            <div class="panel-heading">User list</div>
+            <div class="panel-heading">
+                <div class="userlist-header">
+                    <form method="get" class="form-inline">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-addon"><span class="glyphicon glyphicon-search"></span></div>
+                                <input type="text" class="form-control" id="search" name="q" value="{{ q }}" placeholder="search terms">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">search</button>
+                    </form>
+                </div>
+            </div>
             <div class="panel-body">
-                <ul>
-                {% for user in user_list.results %}
-                    <li>
-                        <dl>
-                            <dt>username</dt>
-                            <dd><a href="{{ user.identifier }}/tasks/edit">{{ user.username }}</a></dd>
-                            <dt>firstname</dt>
-                            <dd>{{ user.firstname }}</dd>
-                            <dt>lastname</dt>
-                            <dd>{{ user.lastname }}</dd>
-                            <dt>email</dt>
-                            <dd>{{ user.email }}</dd>
-                        </dl>
-                    </li>
-                {% endfor %}
-                </ul>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>username</th>
+                            <th>firstname</th>
+                            <th>lastname</th>
+                            <th>email</th>
+                            <th>role</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in user_list.results %}
+                        <tr>
+                            <td><a href="{{ user.identifier }}/tasks/edit">{{ user.username }}</a></td>
+                            <td>{{ user.firstname }}</td>
+                            <td>{{ user.lastname }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>{{ user.role }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
-    <div class="col-xs-12 col-md-6">
+    <div class="col-xs-12 col-md-4">
         <div class="panel panel-default">
             <div class="panel-heading">Create user</div>
             <div class="panel-body">
