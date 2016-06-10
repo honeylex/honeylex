@@ -1547,12 +1547,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:shrink0r/foh-system_account.git",
-                "reference": "d85a35e831012a7dd87b63a3a86ffe7b28e8890e"
+                "reference": "fbfdc1e71ab1a7c0d841f64067c341740ddd23f9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/shrink0r/foh-system_account/zipball/d85a35e831012a7dd87b63a3a86ffe7b28e8890e",
-                "reference": "d85a35e831012a7dd87b63a3a86ffe7b28e8890e",
+                "url": "https://api.github.com/repos/shrink0r/foh-system_account/zipball/fbfdc1e71ab1a7c0d841f64067c341740ddd23f9",
+                "reference": "fbfdc1e71ab1a7c0d841f64067c341740ddd23f9",
                 "shasum": ""
             },
             "require": {
@@ -1575,7 +1575,7 @@
                 "source": "https://github.com/shrink0r/foh-system_account/tree/master",
                 "issues": "https://github.com/shrink0r/foh-system_account/issues"
             },
-            "time": "2016-06-10 00:06:36"
+            "time": "2016-06-10 01:55:45"
         },
         {
             "name": "shrink0r/monatic",

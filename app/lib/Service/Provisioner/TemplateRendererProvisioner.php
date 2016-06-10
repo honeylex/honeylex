@@ -51,6 +51,7 @@ class TemplateRendererProvisioner implements ProvisionerInterface
         $namespacedPaths['Honeylex'] = $configProvider->getCoreDir().'/app/templates';
         $namespacedPaths['Project'] = $projectTemplates;
 
+        $app['twig.form.templates'] = [ 'bootstrap_3_layout.html.twig' ];
         $app['twig.options'] = [ 'cache' => $configProvider->getProjectDir().'/var/cache/twig' ];
         $app['twig.loader.filesystem'] = function () use ($namespacedPaths, $projectTemplates) {
             $filesystem = new \Twig_Loader_Filesystem($projectTemplates);
