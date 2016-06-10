@@ -26,6 +26,7 @@
         "guzzlehttp/guzzle": "~6.2",
         "beberlei/assert": "~2.5",
         "honeybee/honeybee": "master@dev",
+        "nesbot/carbon": "~1.21",
         "shrink0r/foh-system_account": "dev-master"
     },
     "repositories": [
