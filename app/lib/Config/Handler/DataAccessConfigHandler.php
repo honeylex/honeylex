@@ -4,7 +4,7 @@ namespace Honeybee\FrameworkBinding\Silex\Config\Handler;
 
 class DataAccessConfigHandler extends ArrayConfigHandler
 {
-    protected function handlConfigFile($configFile)
+    protected function handleConfigFile($configFile)
     {
         $dataAccessConfig = $this->parse($configFile);
 

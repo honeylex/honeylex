@@ -13,7 +13,6 @@ use Honeybee\ServiceDefinitionInterface;
 use Pimple\Container;
 use Silex\Provider\TwigServiceProvider;
 use Symfony\Component\Filesystem\Filesystem;
-use Twig_SimpleFilter;
 
 class TemplateRendererProvisioner implements ProvisionerInterface
 {

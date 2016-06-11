@@ -21,14 +21,14 @@ class CrateConfigHandler implements ConfigHandlerInterface
             throw new ConfigError('Unsupported number of crate.yml config files given.');
         }
 
-        return $this->handlConfigFile($configFiles[0]);
+        return $this->handleConfigFile($configFiles[0]);
     }
 
-    protected function handlConfigFile($configFile)
+    protected function handleConfigFile($configFile)
     {
         $yamlParser = new Parser;
         $manifestMap = new CrateManifestMap;
-        $crates = $yamlParser->parse(file_get_contents($configFile));
+        $crates = (array)$yamlParser->parse(file_get_contents($configFile));
 
         foreach ($crates as $implementor) {
             $reflector = new ReflectionClass($implementor);

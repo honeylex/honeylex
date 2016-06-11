@@ -4,7 +4,7 @@ namespace Honeybee\FrameworkBinding\Silex\Config\Handler;
 
 class EventBusConfigHandler extends ArrayConfigHandler
 {
-    protected function handlConfigFile($configFile)
+    protected function handleConfigFile($configFile)
     {
         return $this->parse($configFile);
     }

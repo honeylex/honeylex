@@ -11,12 +11,12 @@ class ServiceConfigHandler extends YamlConfigHandler
     public function handle(array $configFiles)
     {
         return array_reduce(
-            array_map([ $this, 'handlConfigFile' ], $configFiles), [ $this, 'mergeConfigs' ],
+            array_map([ $this, 'handleConfigFile' ], $configFiles), [ $this, 'mergeConfigs' ],
             new ServiceDefinitionMap
         );
     }
 
-    protected function handlConfigFile($configFile)
+    protected function handleConfigFile($configFile)
     {
         $serviceConfigs = $this->parse($configFile) ?: [];
         $serviceDefinitionMap = new ServiceDefinitionMap;

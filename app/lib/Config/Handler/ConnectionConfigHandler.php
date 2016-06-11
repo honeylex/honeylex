@@ -4,7 +4,7 @@ namespace Honeybee\FrameworkBinding\Silex\Config\Handler;
 
 class ConnectionConfigHandler extends ArrayConfigHandler
 {
-    protected function handlConfigFile($configFile)
+    protected function handleConfigFile($configFile)
     {
         $connectionConfigs = $this->parse($configFile);
         foreach ($connectionConfigs as &$connectionConfig) {
