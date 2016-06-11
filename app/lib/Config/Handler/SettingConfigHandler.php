@@ -11,7 +11,8 @@ class SettingConfigHandler extends YamlConfigHandler
         return $this->interpolateConfigValues(
             array_merge_recursive(
                 array_reduce(
-                    array_map([ $this, 'handleConfigFile' ], $configFiles), [ $this, 'mergeConfigs' ],
+                    array_map([ $this, 'handleConfigFile' ], $configFiles),
+                    [ $this, 'mergeConfigs' ],
                     []
                 ),
                 (array)$this->configProvider->getSettings()->toArray()
@@ -92,7 +93,7 @@ class SettingConfigHandler extends YamlConfigHandler
         foreach ($config as $key => $value) {
             if (is_array($value)) {
                 $config[$key] = $this->interpolateConfigValues($value, $globalConf);
-            } else if (is_string($value)) {
+            } elseif (is_string($value)) {
                 if (preg_match_all('/(\$\{(.*?)\})/', $value, $matches)) {
                     $replacements = [];
                     foreach ($matches[2] as $configKey) {

@@ -73,12 +73,14 @@ class GenerateCode extends ResourceCommand
             ]
         );
 
-        $output->writeln('Generating code for ' . $crate->getVendor().'/'.$crate->getName().'/'.$resourceName.' resource:');
+        $output->writeln(
+            'Generating code for '.$crate->getVendor().'/'.$crate->getName().'/'.$resourceName.' resource:'
+        );
 
-        $output->writeln('- ' . $arBasePath.'.xml');
+        $output->writeln('- '.$arBasePath.'.xml');
         (new GenerateCodeCommand)->run($arInput, $output);
 
-        $output->writeln('- ' . $projectionBasePath.'.xml');
+        $output->writeln('- '.$projectionBasePath.'.xml');
         (new GenerateCodeCommand)->run($projectionInput, $output);
     }
 }

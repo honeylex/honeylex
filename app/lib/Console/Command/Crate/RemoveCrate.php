@@ -18,7 +18,8 @@ class RemoveCrate extends CrateCommand
     {
         $this
             ->setName('hlx:crate:rm')
-            ->setDescription('Removes a crate from the project. ' . PHP_EOL .
+            ->setDescription(
+                'Removes a crate from the project. ' . PHP_EOL .
                 'Cant be used to remove crates that are loaded from the vendor directory via composer.'
             )
             ->addArgument(
@@ -40,7 +41,9 @@ class RemoveCrate extends CrateCommand
                     $output->writeln('<info>Removed crate: '.$crate->getVendor().'/'.$crate->getName().'</info>');
                 }
             } catch (\Exception $e) {
-                $output->writeln('<error>Failed to remove crate: '.$crate->getVendor().'/'.$crate->getName().'</error>');
+                $output->writeln(
+                    '<error>Failed to remove crate: '.$crate->getVendor().'/'.$crate->getName().'</error>'
+                );
             }
             $this->configProvider->getCrateMap()->removeItem($crate);
             $this->removeAutoloadConfig($crate->getNamespace().'\\');

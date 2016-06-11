@@ -42,7 +42,7 @@ abstract class MigrateCommand extends Command
                     '<error>The version to migrate to must not be smaller than the current head version.</error>'
                 );
                 return;
-            } else if ($direction === self::DOWN && (int)$latestVersion <= (int)$toVersion) {
+            } elseif ($direction === self::DOWN && (int)$latestVersion <= (int)$toVersion) {
                 $output->writeln(
                     '<error>The version to migrate to must not be greater than the current head version.</error>'
                 );

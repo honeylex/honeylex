@@ -1,8 +1,10 @@
 <?php
 
+namespace Honeylex\Tests;
+
 use Silex\WebTestCase;
 
-class controllersTest extends WebTestCase
+class ControllersTest extends WebTestCase
 {
     public function testGetHomepage()
     {

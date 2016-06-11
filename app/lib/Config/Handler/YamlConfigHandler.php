@@ -31,7 +31,7 @@ abstract class YamlConfigHandler implements ConfigHandlerInterface
         foreach ($config as $key => $value) {
             if (is_array($value)) {
                 $config[$key] = $this->interpolateConfigValues($value);
-            } else if (is_string($value)) {
+            } elseif (is_string($value)) {
                 if (preg_match_all('/(\$\{(.*?)\})/', $value, $matches)) {
                     $replacements = [];
                     foreach ($matches[2] as $configKey) {

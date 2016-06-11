@@ -116,9 +116,13 @@ class DataAccessServiceProvisioner implements ProvisionerInterface
     {
         $injector->share(UnitOfWorkMap::CLASS)->delegate(
             UnitOfWorkMap::CLASS,
-            function (StorageWriterMap $storageWriterMap, StorageReaderMap $storageReaderMap)
-                use ($injector, $uowConfigs)
-            {
+            function (
+                StorageWriterMap $storageWriterMap,
+                StorageReaderMap $storageReaderMap
+            ) use (
+                $injector,
+                $uowConfigs
+            ) {
                 $map = new UnitOfWorkMap();
                 foreach ($uowConfigs as $uowKey => $uowConf) {
                     $objectState = [
