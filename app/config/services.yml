@@ -45,3 +45,30 @@ honeybee.infrastructure.command_bus:
   class: Honeybee\Infrastructure\Command\Bus\CommandBus
   provisioner:
     class: Honeybee\FrameworkBinding\Silex\Service\Provisioner\CommandBusProvisioner
+
+honeylex.url_generator:
+  class: Symfony\Component\Routing\Generator\UrlGenerator
+  provisioner:
+    class: Honeybee\FrameworkBinding\Silex\Service\Provisioner\SilexServiceProvisioner
+    settings:
+      app_key: url_generator
+      share: true
+      alias: Symfony\Component\Routing\Generator\UrlGeneratorInterface
+
+honeylex.form_factory:
+  class: Symfony\Component\Form\FormFactory
+  provisioner:
+    class: Honeybee\FrameworkBinding\Silex\Service\Provisioner\SilexServiceProvisioner
+    settings:
+      app_key: form.factory
+      share: true
+      alias: Symfony\Component\Form\FormFactoryInterface
+
+honeylex.validator:
+  class: Symfony\Component\Validator\Validator\Validator
+  provisioner:
+    class: Honeybee\FrameworkBinding\Silex\Service\Provisioner\SilexServiceProvisioner
+    settings:
+      app_key: validator
+      share: true
+      alias: Symfony\Component\Validator\Validator\ValidatorInterface
