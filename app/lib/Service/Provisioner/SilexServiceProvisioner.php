@@ -28,7 +28,7 @@ class SilexServiceProvisioner implements ProvisionerInterface
         if ($provisionerSettings->has('alias')) {
             $alias = $provisionerSettings->get('alias');
             if (!is_string($alias) && !class_exists($alias)) {
-                throw new ConfigError('Alias given must be an existing class or interface name (fully qualified).');
+                throw new ConfigError('Alias must be an existing fully qualified class or interface name.');
             }
             $injector->alias($alias, $service);
         }

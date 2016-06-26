@@ -4,7 +4,6 @@ namespace Honeybee\FrameworkBinding\Silex\Crate;
 
 use Honeybee\Common\Error\RuntimeError;
 use Honeybee\Common\Util\StringToolkit;
-use ReflectionClass;
 use Silex\Application;
 
 abstract class Crate implements CrateInterface
