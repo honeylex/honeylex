@@ -19,8 +19,7 @@ class RemoveCrate extends CrateCommand
         $this
             ->setName('hlx:crate:rm')
             ->setDescription(
-                'Removes a crate from the project. ' . PHP_EOL .
-                'Cant be used to remove crates that are loaded from the vendor directory via composer.'
+                'Removes a crate from the project.'
             )
             ->addArgument(
                 'crate',

@@ -30,23 +30,23 @@ channels:
             storage_writer: honeybee::domain_event::view_store::writer
         - class: Honeybee\Projection\EventHandler\ProjectionUpdater
 
-
   honeybee.events.failed:
     - transport: sync
       enabled: true
-      filter:
-        settings:
-          expression: event.getType() matches "/.*\.failed$/"
-      handler:
-        class: Honeybee\Infrastructure\Event\FailedJobEventHandler
+      filters:
+        - settings:
+            expression: event.getType() matches "/.*\.failed$/"
+      handlers:
+        - class: Honeybee\Infrastructure\Event\FailedJobEventHandler
 
   honeybee.events.replay:
     - transport: sync
       enabled: true
-      filter:
-        settings:
-          expression: event.getType() matches "/.*/"
-      handler:
-        class: Honeybee\Projection\EventHandler\DomainEventProjector
-        settings:
-          storage_writer: honeybee::domain_event::view_store::writer
+      filters:
+        - settings:
+            expression: event.getType() matches "/.*/"
+      handlers:
+        - class: Honeybee\Projection\EventHandler\DomainEventProjector
+          settings:
+            storage_writer: honeybee::domain_event::view_store::writer
+        - class: Honeybee\Projection\EventHandler\ProjectionUpdater

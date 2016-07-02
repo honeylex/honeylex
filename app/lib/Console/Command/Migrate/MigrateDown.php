@@ -24,7 +24,7 @@ class MigrateDown extends MigrateCommand
                 'to',
                 null,
                 InputOption::VALUE_REQUIRED,
-                "The version to migrate towards."
+                'The version to migrate to.'
             );
     }
 

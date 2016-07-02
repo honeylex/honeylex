@@ -55,13 +55,13 @@ abstract class MigrateCommand extends Command
                 if ($migrationTarget->isActivated()) {
                     $output->writeln('Running migrations for "'.$targetName.'"');
                     foreach ($this->migrationService->migrate($targetName) as $runMigration) {
-                        $output->writeln('Executed migration "'.$runMigration->getName().'"');
+                        $output->writeln('  Executed migration "'.$runMigration->getName().'"');
                     }
                 }
             }
         } else {
             foreach ($this->migrationService->migrate($migrationTarget->getName(), $toVersion) as $runMigration) {
-                $output->writeln('Executed migration "'.$runMigration->getName().'"');
+                $output->writeln('  Executed migration "'.$runMigration->getName().'"');
             }
         }
     }
