@@ -2,18 +2,13 @@
 
 namespace Honeybee\FrameworkBinding\Silex\Console\Command\Resource;
 
-use Honeybee\Common\Util\StringToolkit;
 use Honeybee\FrameworkBinding\Silex\Config\ConfigProviderInterface;
-use Honeybee\FrameworkBinding\Silex\Console\Scafold\SkeletonGenerator;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 use Trellis\CodeGen\Console\GenerateCodeCommand;
-use Trellis\CodeGen\Parser\Schema\EntityTypeSchemaXmlParser;
 
 class GenerateCode extends ResourceCommand
 {
@@ -34,14 +29,13 @@ class GenerateCode extends ResourceCommand
             ->setDescription('Scafold entities off a specific schema-definition within a given crate.')
             ->addArgument(
                 'crate',
-                InputArgument::OPTIONAL,
-                "The prefix of the crate to generate the resource for."
+                InputArgument::REQUIRED,
+                'The prefix of the crate to generate the resource for.'
             )
             ->addArgument(
                 'resource',
-                null,
                 InputArgument::REQUIRED,
-                "The name of the resource to generate the code for."
+                'The name of the resource to generate the code for.'
             );
     }
 
@@ -49,11 +43,13 @@ class GenerateCode extends ResourceCommand
     {
         $cratePrefix = $input->getArgument('crate');
         $resourceName = $input->getArgument('resource');
-        $crate = $this->configProvider->getCrateMap()->getItem($cratePrefix);
-        if (!$resourceName || !$cratePrefix || !$crate) {
+
+        if (!$resourceName || !$cratePrefix) {
             $output->writeln('<error>You must specify at least a crate-prefix and resource-name.</error>');
             return false;
         }
+
+        $crate = $this->configProvider->getCrateMap()->getItem($cratePrefix);
 
         $configDir = $crate->getRootDir().'/config/'.$resourceName;
         $arBasePath = $configDir.'/entity_schema/aggregate_root';
