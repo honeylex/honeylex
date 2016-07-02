@@ -3,10 +3,8 @@
 namespace Honeybee\FrameworkBinding\Silex\Console\Command\Resource;
 
 use Honeybee\Common\Util\StringToolkit;
-use Honeybee\FrameworkBinding\Silex\Console\Scafold\SkeletonGenerator;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
 
@@ -24,7 +22,6 @@ class RemoveResource extends ResourceCommand
             )
             ->addArgument(
                 'resource',
-                null,
                 InputArgument::REQUIRED,
                 "The name of the resource to remove."
             );
@@ -34,11 +31,13 @@ class RemoveResource extends ResourceCommand
     {
         $cratePrefix = $input->getArgument('crate');
         $resourceName = $input->getArgument('resource');
-        $crate = $this->configProvider->getCrateMap()->getItem($cratePrefix);
-        if (!$resourceName || !$cratePrefix || !$crate) {
+
+        if (!$resourceName || !$cratePrefix) {
             $output->writeln('<error>You must specify at least a crate-prefix and resource-name.</error>');
             return false;
         }
+
+        $crate = $this->configProvider->getCrateMap()->getItem($cratePrefix);
 
         $crateDir = $crate->getRootDir();
         $resourceDirectories = [

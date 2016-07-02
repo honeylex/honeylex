@@ -3,7 +3,7 @@
 namespace Honeybee\FrameworkBinding\Silex\Console\Command\Resource;
 
 use Honeybee\Common\Util\StringToolkit;
-use Honeybee\FrameworkBinding\Silex\Console\Scafold\SkeletonGenerator;
+use Honeybee\FrameworkBinding\Silex\Console\Scaffold\SkeletonGenerator;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -35,7 +35,6 @@ class MakeResource extends ResourceCommand
             )
             ->addArgument(
                 'resource',
-                null,
                 InputArgument::REQUIRED,
                 "The name of the resource to make."
             );
@@ -45,11 +44,13 @@ class MakeResource extends ResourceCommand
     {
         $cratePrefix = $input->getArgument('crate');
         $resourceName = $input->getArgument('resource');
-        $crate = $this->configProvider->getCrateMap()->getItem($cratePrefix);
-        if (!$resourceName || !$cratePrefix || !$crate) {
+
+        if (!$resourceName || !$cratePrefix) {
             $output->writeln('<error>You must specify at least a crate-prefix and resource-name.</error>');
             return false;
         }
+
+        $crate = $this->configProvider->getCrateMap()->getItem($cratePrefix);
 
         $resourcePrefix = $cratePrefix.'.'.StringToolkit::asSnakeCase($resourceName);
         $crateDir = $crate->getRootDir();

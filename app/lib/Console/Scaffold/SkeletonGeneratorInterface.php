@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Silex\Console\Scafold;
+namespace Honeybee\FrameworkBinding\Silex\Console\Scaffold;
 
 interface SkeletonGeneratorInterface
 {

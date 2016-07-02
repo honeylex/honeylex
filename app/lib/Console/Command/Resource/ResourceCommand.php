@@ -6,5 +6,4 @@ use Honeybee\FrameworkBinding\Silex\Console\Command\Command;
 
 abstract class ResourceCommand extends Command
 {
-
 }
