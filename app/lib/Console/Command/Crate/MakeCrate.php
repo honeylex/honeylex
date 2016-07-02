@@ -17,18 +17,6 @@ class MakeCrate extends CrateCommand
         $this
             ->setName('hlx:crate:mk')
             ->setDescription('Makes a vanilla crate from a crate-template.')
-            ->addOption(
-                'description',
-                null,
-                InputOption::VALUE_REQUIRED,
-                "A short text describing the crate's purpose."
-            )
-            ->addOption(
-                'location',
-                null,
-                InputOption::VALUE_IS_ARRAY | InputOption::VALUE_REQUIRED,
-                "Optional override of the locations that will be searched for (crate)skeletons."
-            )
             ->addArgument(
                 'vendor',
                 InputArgument::REQUIRED,
@@ -37,12 +25,24 @@ class MakeCrate extends CrateCommand
             ->addArgument(
                 'name',
                 InputArgument::REQUIRED,
-                "The name of the crate to make"
+                'The name of the crate to make.'
             )
             ->addArgument(
                 'path',
                 InputArgument::REQUIRED,
-                "The directory path where the crate shall be created."
+                'The directory path where the crate shall be created.'
+            )
+            ->addOption(
+                'description',
+                null,
+                InputOption::VALUE_REQUIRED,
+                'A short text describing the crate\'s purpose.'
+            )
+            ->addOption(
+                'location',
+                null,
+                InputOption::VALUE_IS_ARRAY | InputOption::VALUE_REQUIRED,
+                'Optional override of the locations that will be searched for (crate)skeletons.'
             );
     }
 
