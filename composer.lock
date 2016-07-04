@@ -652,12 +652,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeybee/honeybee.git",
-                "reference": "bf5e49ed3b5cfc27821e1b7884b87af9f776955b"
+                "reference": "4f9c71fc7bcb8e41bc62c6cf79e7daa199d61095"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/bf5e49ed3b5cfc27821e1b7884b87af9f776955b",
-                "reference": "bf5e49ed3b5cfc27821e1b7884b87af9f776955b",
+                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/4f9c71fc7bcb8e41bc62c6cf79e7daa199d61095",
+                "reference": "4f9c71fc7bcb8e41bc62c6cf79e7daa199d61095",
                 "shasum": ""
             },
             "require": {
@@ -739,7 +739,7 @@
                 "hexagonal",
                 "messaging"
             ],
-            "time": "2016-07-01 10:30:10"
+            "time": "2016-07-04 16:33:13"
         },
         {
             "name": "honeybee/trellis",
@@ -946,16 +946,16 @@
         },
         {
             "name": "monolog/monolog",
-            "version": "1.19.0",
+            "version": "1.20.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "5f56ed5212dc509c8dc8caeba2715732abb32dbf"
+                "reference": "55841909e2bcde01b5318c35f2b74f8ecc86e037"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/5f56ed5212dc509c8dc8caeba2715732abb32dbf",
-                "reference": "5f56ed5212dc509c8dc8caeba2715732abb32dbf",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/55841909e2bcde01b5318c35f2b74f8ecc86e037",
+                "reference": "55841909e2bcde01b5318c35f2b74f8ecc86e037",
                 "shasum": ""
             },
             "require": {
@@ -974,8 +974,8 @@
                 "php-console/php-console": "^3.1.3",
                 "phpunit/phpunit": "~4.5",
                 "phpunit/phpunit-mock-objects": "2.3.0",
-                "raven/raven": "^0.13",
                 "ruflin/elastica": ">=0.90 <3.0",
+                "sentry/sentry": "^0.13",
                 "swiftmailer/swiftmailer": "~5.3"
             },
             "suggest": {
@@ -987,9 +987,9 @@
                 "mongodb/mongodb": "Allow sending log messages to a MongoDB server via PHP Driver",
                 "php-amqplib/php-amqplib": "Allow sending log messages to an AMQP server using php-amqplib",
                 "php-console/php-console": "Allow sending log messages to Google Chrome",
-                "raven/raven": "Allow sending log messages to a Sentry server",
                 "rollbar/rollbar": "Allow sending log messages to Rollbar",
-                "ruflin/elastica": "Allow sending log messages to an Elastic Search server"
+                "ruflin/elastica": "Allow sending log messages to an Elastic Search server",
+                "sentry/sentry": "Allow sending log messages to a Sentry server"
             },
             "type": "library",
             "extra": {
@@ -1020,7 +1020,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2016-04-12 18:29:35"
+            "time": "2016-07-02 14:02:10"
         },
         {
             "name": "mtdowling/jmespath.php",
@@ -1547,12 +1547,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:shrink0r/foh-system_account.git",
-                "reference": "52f56c2ea429306bad70c55fb116944b33cac088"
+                "reference": "d2e5ad94aec10ea003b16c853afef8ca76cdee9c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/shrink0r/foh-system_account/zipball/52f56c2ea429306bad70c55fb116944b33cac088",
-                "reference": "52f56c2ea429306bad70c55fb116944b33cac088",
+                "url": "https://api.github.com/repos/shrink0r/foh-system_account/zipball/d2e5ad94aec10ea003b16c853afef8ca76cdee9c",
+                "reference": "d2e5ad94aec10ea003b16c853afef8ca76cdee9c",
                 "shasum": ""
             },
             "require": {
@@ -1581,7 +1581,7 @@
                 "source": "https://github.com/shrink0r/foh-system_account/tree/master",
                 "issues": "https://github.com/shrink0r/foh-system_account/issues"
             },
-            "time": "2016-07-02 12:04:10"
+            "time": "2016-07-04 21:38:49"
         },
         {
             "name": "shrink0r/monatic",
