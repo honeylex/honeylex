@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ec94c69667c67b682c4264b37df5b688",
-    "content-hash": "40454a349711f3aaa9868bb81e8a298e",
+    "hash": "33239e5dc488fd38833c9dbd8ceda763",
+    "content-hash": "d17ea50880acc963a5f0ec4e2968ccdc",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -116,16 +116,16 @@
         },
         {
             "name": "egulias/email-validator",
-            "version": "1.2.12",
+            "version": "1.2.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/egulias/EmailValidator.git",
-                "reference": "cbfe3ee6f758225559b1111048e05a3e4c2e26cf"
+                "reference": "b8bb147f46cc9790326ce2440a13be06cc5a63bb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/egulias/EmailValidator/zipball/cbfe3ee6f758225559b1111048e05a3e4c2e26cf",
-                "reference": "cbfe3ee6f758225559b1111048e05a3e4c2e26cf",
+                "url": "https://api.github.com/repos/egulias/EmailValidator/zipball/b8bb147f46cc9790326ce2440a13be06cc5a63bb",
+                "reference": "b8bb147f46cc9790326ce2440a13be06cc5a63bb",
                 "shasum": ""
             },
             "require": {
@@ -164,7 +164,7 @@
                 "validation",
                 "validator"
             ],
-            "time": "2016-05-15 10:06:34"
+            "time": "2016-07-03 21:52:18"
         },
         {
             "name": "elasticsearch/elasticsearch",
@@ -652,12 +652,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeybee/honeybee.git",
-                "reference": "4f9c71fc7bcb8e41bc62c6cf79e7daa199d61095"
+                "reference": "87ffd29a71b5bc7127c4b81e9cdc13e62fc30c14"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/4f9c71fc7bcb8e41bc62c6cf79e7daa199d61095",
-                "reference": "4f9c71fc7bcb8e41bc62c6cf79e7daa199d61095",
+                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/87ffd29a71b5bc7127c4b81e9cdc13e62fc30c14",
+                "reference": "87ffd29a71b5bc7127c4b81e9cdc13e62fc30c14",
                 "shasum": ""
             },
             "require": {
@@ -739,7 +739,7 @@
                 "hexagonal",
                 "messaging"
             ],
-            "time": "2016-07-04 16:33:13"
+            "time": "2016-07-08 10:12:36"
         },
         {
             "name": "honeybee/trellis",
@@ -809,6 +809,48 @@
                 "validation"
             ],
             "time": "2016-06-23 13:37:30"
+        },
+        {
+            "name": "honeylex/foh-system_account",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/honeylex/foh-system_account.git",
+                "reference": "3b5e06a375be37386f6e9fbb6976a1afdf76f6b8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/honeylex/foh-system_account/zipball/3b5e06a375be37386f6e9fbb6976a1afdf76f6b8",
+                "reference": "3b5e06a375be37386f6e9fbb6976a1afdf76f6b8",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~5.3",
+                "squizlabs/php_codesniffer": "~2.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Foh\\SystemAccount\\": "lib/"
+                }
+            },
+            "scripts": {
+                "code-sniffer": [
+                    "vendor/bin/phpcs --extensions=php --standard=psr2 lib"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "System account crate for Honeylex.",
+            "support": {
+                "source": "https://github.com/honeylex/foh-system_account/tree/master",
+                "issues": "https://github.com/honeylex/foh-system_account/issues"
+            },
+            "time": "2016-07-09 11:09:23"
         },
         {
             "name": "league/flysystem",
@@ -1542,48 +1584,6 @@
             "time": "2016-05-03 17:50:52"
         },
         {
-            "name": "shrink0r/foh-system_account",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "git@github.com:shrink0r/foh-system_account.git",
-                "reference": "d2e5ad94aec10ea003b16c853afef8ca76cdee9c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/shrink0r/foh-system_account/zipball/d2e5ad94aec10ea003b16c853afef8ca76cdee9c",
-                "reference": "d2e5ad94aec10ea003b16c853afef8ca76cdee9c",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.6.1"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~5.3",
-                "squizlabs/php_codesniffer": "~2.3"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Foh\\SystemAccount\\": "lib/"
-                }
-            },
-            "scripts": {
-                "code-sniffer": [
-                    "vendor/bin/phpcs --extensions=php --standard=psr2 lib"
-                ]
-            },
-            "license": [
-                "MIT"
-            ],
-            "description": "System account crate for Honeylex.",
-            "support": {
-                "source": "https://github.com/shrink0r/foh-system_account/tree/master",
-                "issues": "https://github.com/shrink0r/foh-system_account/issues"
-            },
-            "time": "2016-07-04 21:38:49"
-        },
-        {
             "name": "shrink0r/monatic",
             "version": "dev-master",
             "source": {
@@ -1823,23 +1823,23 @@
         },
         {
             "name": "swiftmailer/swiftmailer",
-            "version": "v5.4.2",
+            "version": "v5.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swiftmailer/swiftmailer.git",
-                "reference": "d8db871a54619458a805229a057ea2af33c753e8"
+                "reference": "4cc92842069c2bbc1f28daaaf1d2576ec4dfe153"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/d8db871a54619458a805229a057ea2af33c753e8",
-                "reference": "d8db871a54619458a805229a057ea2af33c753e8",
+                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/4cc92842069c2bbc1f28daaaf1d2576ec4dfe153",
+                "reference": "4cc92842069c2bbc1f28daaaf1d2576ec4dfe153",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
             },
             "require-dev": {
-                "mockery/mockery": "~0.9.1,<0.9.4"
+                "mockery/mockery": "~0.9.1"
             },
             "type": "library",
             "extra": {
@@ -1872,7 +1872,7 @@
                 "mail",
                 "mailer"
             ],
-            "time": "2016-05-01 08:45:47"
+            "time": "2016-07-08 11:51:25"
         },
         {
             "name": "symfony/asset",
@@ -5287,7 +5287,7 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "honeybee/honeybee": 20,
-        "shrink0r/foh-system_account": 20
+        "honeylex/foh-system_account": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

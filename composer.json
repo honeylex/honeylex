@@ -1,5 +1,5 @@
 {
-    "name": "honeybee/honeylex",
+    "name": "honeylex/honeylex",
     "description": "Vendor library that is used in the honeybee-silex-cmf-project.",
     "license": "MIT",
     "type": "library",
@@ -27,12 +27,12 @@
         "beberlei/assert": "~2.5",
         "honeybee/honeybee": "master@dev",
         "nesbot/carbon": "~1.21",
-        "shrink0r/foh-system_account": "dev-master"
+        "honeylex/foh-system_account": "dev-master"
     },
     "repositories": [
         {
             "type": "vcs",
-            "url": "git@github.com:shrink0r/foh-system_account.git"
+            "url": "git@github.com:honeylex/foh-system_account.git"
         }
     ],
     "require-dev": {
