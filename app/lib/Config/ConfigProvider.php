@@ -120,6 +120,7 @@ class ConfigProvider implements ConfigProviderInterface
             $this->getCoreConfigDir() . '/' . $name,
             $this->getConfigDir() . '/' . $name
         ];
+
         foreach ($this->crateMap as $prefix => $crate) {
             $finder = clone $this->fileFinder;
             $foundConfigs = $finder->in($crate->getConfigDir())->name($name);

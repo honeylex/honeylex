@@ -9,11 +9,9 @@ use Honeybee\FrameworkBinding\Silex\Config\ConfigProviderInterface;
 use Honeybee\FrameworkBinding\Silex\Config\Handler\CrateConfigHandler;
 use Honeybee\FrameworkBinding\Silex\Controller\ControllerResolverServiceProvider;
 use Honeybee\FrameworkBinding\Silex\Crate\CrateLoader;
-use Honeybee\FrameworkBinding\Silex\Crate\CrateLoaderInterface;
 use Honeybee\FrameworkBinding\Silex\Service\ServiceProvider;
 use Honeybee\FrameworkBinding\Silex\Service\ServiceProvisioner;
 use Honeybee\Infrastructure\Config\ArrayConfig;
-use Honeybee\Infrastructure\Config\ConfigInterface;
 use Honeybee\Infrastructure\Config\Settings;
 use Psr\Log\LoggerInterface;
 use Silex\Application;
@@ -103,18 +101,28 @@ class Bootstrap
 
     protected function bootstrapConfig(Application $app, Injector $injector, array $settings)
     {
-        $configDir = $settings['project']['config_dir'];
-        $configHandlers = new ArrayConfig(
-            (new Parser)->parse(
-                file_get_contents($configDir.'/config_handlers.yml')
-            )
+        $configDir = $settings['core']['config_dir'];
+        $projectConfigDir = $settings['project']['config_dir'];
+        // default configs
+        $configHandlers = (new Parser)->parse(
+            file_get_contents($configDir.'/config_handlers.yml')
         );
+        // project configs
+        if (is_readable($projectConfigDir.'/config_handlers.yml')) {
+            $configHandlers = array_merge(
+                $configHandlers,
+                (new Parser)->parse(
+                    file_get_contents($projectConfigDir.'/config_handlers.yml')
+                )
+            );
+        }
+        // crate configs
         $crateMap = (new CrateLoader)->loadCrates(
             $app,
-            (new CrateConfigHandler)->handle([ $configDir.'/crates.yml' ])
+            (new CrateConfigHandler)->handle([ $projectConfigDir.'/crates.yml' ])
         );
         // load crates and init config-provider
-        $config = new ConfigProvider(new Settings($settings), $crateMap, $configHandlers, new Finder);
+        $config = new ConfigProvider(new Settings($settings), $crateMap, new ArrayConfig($configHandlers), new Finder);
         $injector->share($config)->alias(ConfigProviderInterface::CLASS, get_class($config));
 
         return $config;

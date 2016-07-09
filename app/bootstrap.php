@@ -10,7 +10,7 @@ return $bootstrap(new Application, [
     'appEnv' => $appEnv,
     'appContext' => $appContext,
     'core' => [
-        'config_dir' => __DIR__.'/config',
+        'config_dir' => __DIR__.'/config/default',
         'dir' => dirname(__DIR__)
     ],
     'project' => [

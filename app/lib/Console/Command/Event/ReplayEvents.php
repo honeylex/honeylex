@@ -48,7 +48,7 @@ class ReplayEvents extends EventCommand
 
         foreach ($distributedEvents as $event_type => $count) {
             $output->writeln('event: '.$event_type);
-            $output->writeln(sprintf('status: replayed %d event%s', $count,  $count > 1 ? 's' : ''));
+            $output->writeln(sprintf('status: replayed %d event%s', $count, $count > 1 ? 's' : ''));
         }
     }
 

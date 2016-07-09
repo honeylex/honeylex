@@ -3,7 +3,6 @@
 namespace Honeybee\FrameworkBinding\Silex\Service;
 
 use Auryn\Injector;
-use Closure;
 use Honeybee\Common\Error\ConfigError;
 use Honeybee\Common\Util\StringToolkit;
 use Honeybee\FrameworkBinding\Silex\Config\ConfigProviderInterface;
