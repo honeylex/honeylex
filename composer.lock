@@ -816,12 +816,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeylex/foh-system_account.git",
-                "reference": "51cb53806e5cb3598f0427f1ced8e6b86ddbbe0b"
+                "reference": "d87dc0e5a68060c4b07f8d96dfda96c951011fd8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeylex/foh-system_account/zipball/51cb53806e5cb3598f0427f1ced8e6b86ddbbe0b",
-                "reference": "51cb53806e5cb3598f0427f1ced8e6b86ddbbe0b",
+                "url": "https://api.github.com/repos/honeylex/foh-system_account/zipball/d87dc0e5a68060c4b07f8d96dfda96c951011fd8",
+                "reference": "d87dc0e5a68060c4b07f8d96dfda96c951011fd8",
                 "shasum": ""
             },
             "require": {
@@ -850,7 +850,7 @@
                 "source": "https://github.com/honeylex/foh-system_account/tree/master",
                 "issues": "https://github.com/honeylex/foh-system_account/issues"
             },
-            "time": "2016-07-09 13:27:11"
+            "time": "2016-07-09 13:32:17"
         },
         {
             "name": "league/flysystem",
