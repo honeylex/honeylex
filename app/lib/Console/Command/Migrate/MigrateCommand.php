@@ -2,7 +2,6 @@
 
 namespace Honeybee\FrameworkBinding\Silex\Console\Command\Migrate;
 
-use Honeybee\Common\Error\RuntimeError;
 use Honeybee\Infrastructure\Migration\MigrationServiceInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Output\OutputInterface;

@@ -3,10 +3,8 @@
 namespace Honeybee\FrameworkBinding\Silex\Service\Provisioner;
 
 use Auryn\Injector;
-use Honeybee\Common\Util\StringToolkit;
 use Honeybee\FrameworkBinding\Silex\Config\ConfigProviderInterface;
 use Honeybee\FrameworkBinding\Silex\Crate\CrateMap;
-use Honeybee\FrameworkBinding\Silex\Twig\TwigExtension;
 use Honeybee\Infrastructure\Config\SettingsInterface;
 use Honeybee\Infrastructure\Template\TemplateRendererInterface;
 use Honeybee\ServiceDefinitionInterface;

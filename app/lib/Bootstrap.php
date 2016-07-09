@@ -26,6 +26,7 @@ use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Yaml\Parser;
+use Honeybee\FrameworkBinding\Silex\Crate\CrateMap;
 
 class Bootstrap
 {
@@ -108,19 +109,18 @@ class Bootstrap
             file_get_contents($configDir.'/config_handlers.yml')
         );
         // project configs
-        if (is_readable($projectConfigDir.'/config_handlers.yml')) {
+        $projectConfigHandlersFile = $projectConfigDir.'/config_handlers.yml';
+        if (is_readable($projectConfigHandlersFile)) {
             $configHandlers = array_merge(
                 $configHandlers,
-                (new Parser)->parse(
-                    file_get_contents($projectConfigDir.'/config_handlers.yml')
-                )
+                (new Parser)->parse(file_get_contents($projectConfigHandlersFile))
             );
         }
         // crate configs
-        $crateMap = (new CrateLoader)->loadCrates(
-            $app,
-            (new CrateConfigHandler)->handle([ $projectConfigDir.'/crates.yml' ])
-        );
+        $cratesConfigFile = $projectConfigDir.'/crates.yml';
+        $crateMap  = is_readable($cratesConfigFile)
+            ? (new CrateLoader)->loadCrates($app, (new CrateConfigHandler)->handle([ $cratesConfigFile ]))
+            : new CrateMap;
         // load crates and init config-provider
         $config = new ConfigProvider(new Settings($settings), $crateMap, new ArrayConfig($configHandlers), new Finder);
         $injector->share($config)->alias(ConfigProviderInterface::CLASS, get_class($config));

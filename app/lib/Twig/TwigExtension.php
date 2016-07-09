@@ -7,7 +7,6 @@ use Honeybee\Projection\ProjectionInterface;
 use Honeybee\Projection\WorkflowSubject;
 use Twig_Extension;
 use Twig_SimpleFilter;
-use Workflux\StateMachine\StateMachineInterface;
 
 class TwigExtension extends Twig_Extension
 {

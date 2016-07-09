@@ -2,9 +2,6 @@
 
 namespace Honeybee\FrameworkBinding\Silex\Config\Handler;
 
-use Honeybee\FrameworkBinding\Silex\Config\ConfigProviderInterface;
-use Honeybee\Infrastructure\Config\ConfigInterface;
-
 abstract class ArrayConfigHandler extends YamlConfigHandler
 {
     abstract protected function handleConfigFile($configFile);
