@@ -4,13 +4,9 @@ namespace Honeybee\FrameworkBinding\Silex\Config\Handler;
 
 use ReflectionClass;
 use Honeybee\Common\Error\ConfigError;
+use Honeybee\Infrastructure\Config\Settings;
 use Honeybee\FrameworkBinding\Silex\Crate\CrateManifest;
 use Honeybee\FrameworkBinding\Silex\Crate\CrateManifestMap;
-use Honeybee\Infrastructure\Config\ConfigInterface;
-use Honeybee\Infrastructure\Config\Settings;
-use Honeybee\ServiceDefinition;
-use Honeybee\ServiceDefinitionInterface;
-use Honeybee\ServiceDefinitionMap;
 use Symfony\Component\Yaml\Parser;
 
 class CrateConfigHandler implements ConfigHandlerInterface
@@ -27,10 +23,10 @@ class CrateConfigHandler implements ConfigHandlerInterface
     protected function handleConfigFile($configFile)
     {
         $yamlParser = new Parser;
-        $manifestMap = new CrateManifestMap;
+        $manifests = [];
         $crates = (array)$yamlParser->parse(file_get_contents($configFile));
 
-        foreach ($crates as $implementor) {
+        foreach ($crates as $implementor => $config) {
             $reflector = new ReflectionClass($implementor);
             $crateDir = dirname(dirname($reflector->getFileName()));
             $manifestFile = $crateDir . '/manifest.yml';
@@ -39,10 +35,18 @@ class CrateConfigHandler implements ConfigHandlerInterface
             $name = $manifest['name'];
             $vendor = $manifest['vendor'];
             $description = isset($manifest['description']) ? $manifest['description'] : '';
-            $metadata = new CrateManifest($crateDir, $vendor, $name, $implementor, $description);
-            $manifestMap->setItem($metadata->getPrefix(), $metadata);
+            $settings = isset($config['settings']) ? (array)$config['settings'] : [];
+            $metadata = new CrateManifest(
+                $crateDir,
+                $vendor,
+                $name,
+                $implementor,
+                $description,
+                new Settings($settings)
+            );
+            $manifests[$metadata->getPrefix()] = $metadata;
         }
 
-        return $manifestMap;
+        return new CrateManifestMap($manifests);
     }
 }

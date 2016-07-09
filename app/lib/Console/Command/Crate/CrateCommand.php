@@ -48,7 +48,10 @@ abstract class CrateCommand extends Command
     protected function updateCratesConfig(array $crates)
     {
         $cratesFile = $this->configProvider->getConfigDir().'/crates.yml';
-        (new Filesystem)->dumpFile($cratesFile, sprintf($this->getCratesConfigTemplate(), Yaml::dump($crates)));
+        (new Filesystem)->dumpFile(
+            $cratesFile,
+            sprintf($this->getCratesConfigTemplate(), Yaml::dump($crates, 8, 2))
+        );
     }
 
     protected function getCratesConfigTemplate()

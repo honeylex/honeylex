@@ -33,8 +33,6 @@ class ServiceProvisioner implements ServiceProvisionerInterface
 
     protected $configProvider;
 
-    protected $serviceDefinitions;
-
     public function __construct(
         Container $app,
         Injector $injector,

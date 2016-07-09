@@ -3,9 +3,12 @@
 namespace Honeybee\FrameworkBinding\Silex\Crate;
 
 use Honeybee\Common\Util\StringToolkit;
+use Honeybee\Infrastructure\Config\Settings;
 
 class CrateManifest implements CrateManifestInterface
 {
+    private $rootDir;
+
     private $vendor;
 
     private $name;
@@ -14,13 +17,16 @@ class CrateManifest implements CrateManifestInterface
 
     private $description;
 
-    public function __construct($rootDir, $vendor, $name, $class, $description = '')
+    private $settings;
+
+    public function __construct($rootDir, $vendor, $name, $class, $description = '', Settings $settings = null)
     {
         $this->rootDir = $rootDir;
         $this->vendor = $vendor;
         $this->name = $name;
-        $this->description = $description;
         $this->class = $class;
+        $this->description = $description;
+        $this->settings = $settings ? $settings : new Settings;
     }
 
     public function getRootDir()
@@ -56,5 +62,10 @@ class CrateManifest implements CrateManifestInterface
     public function getDescription()
     {
         return $this->description;
+    }
+
+    public function getSettings()
+    {
+        return $this->settings;
     }
 }

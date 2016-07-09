@@ -36,7 +36,7 @@ class Bootstrap
         $app['version'] = $config->getVersion();
         $this->bootstrapLogger($app, $config, $injector);
         // then kick off service provisioning
-        $serviceProvisioner = new ServiceProvisioner($app, $injector, $config, $config->provide('services.yml'));
+        $serviceProvisioner = new ServiceProvisioner($app, $injector, $config);
         // and register some standard service providers.
         $app->register(new ServiceProvider($serviceProvisioner));
         $app->register(new ControllerResolverServiceProvider);

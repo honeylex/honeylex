@@ -17,4 +17,6 @@ interface CrateManifestInterface
     public function getRootDir();
 
     public function getDescription();
+
+    public function getSettings();
 }

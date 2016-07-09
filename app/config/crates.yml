@@ -1,4 +1,6 @@
 #
 # list of crates that will be loaded into the app.
 ---
-- Foh\SystemAccount\SystemAccountCrate
+Foh\SystemAccount\SystemAccountCrate:
+  settings:
+    routing_prefix: /
