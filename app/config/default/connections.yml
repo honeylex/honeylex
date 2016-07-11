@@ -1,5 +1,5 @@
 #
-# Project level connection configuration.
+# Honeylex default connections configuration
 ---
 honeybee.view_store:
   class: Honeybee\Infrastructure\DataAccess\Connector\ElasticsearchConnector

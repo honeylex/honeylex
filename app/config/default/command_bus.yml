@@ -1,5 +1,5 @@
 #
-# Holds the project level configuration for the command-bus
+# Honeylex default command bus configuration
 ---
 transports:
   sync:

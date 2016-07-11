@@ -1,5 +1,5 @@
 #
-# Project level data-access is configured here.
+# Honeylex default data access configuration
 ---
 storage_writers:
   honeybee::domain_event::view_store::writer:

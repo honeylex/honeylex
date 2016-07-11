@@ -652,12 +652,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeybee/honeybee.git",
-                "reference": "87ffd29a71b5bc7127c4b81e9cdc13e62fc30c14"
+                "reference": "4dbc234a13a0f02628da9efaacbde9f4202e3d5e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/87ffd29a71b5bc7127c4b81e9cdc13e62fc30c14",
-                "reference": "87ffd29a71b5bc7127c4b81e9cdc13e62fc30c14",
+                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/4dbc234a13a0f02628da9efaacbde9f4202e3d5e",
+                "reference": "4dbc234a13a0f02628da9efaacbde9f4202e3d5e",
                 "shasum": ""
             },
             "require": {
@@ -739,7 +739,7 @@
                 "hexagonal",
                 "messaging"
             ],
-            "time": "2016-07-08 10:12:36"
+            "time": "2016-07-11 14:19:48"
         },
         {
             "name": "honeybee/trellis",
@@ -816,12 +816,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeylex/foh-system_account.git",
-                "reference": "d87dc0e5a68060c4b07f8d96dfda96c951011fd8"
+                "reference": "cb536075f9c3c0c0a85bb67b8c8b20348c31f020"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeylex/foh-system_account/zipball/d87dc0e5a68060c4b07f8d96dfda96c951011fd8",
-                "reference": "d87dc0e5a68060c4b07f8d96dfda96c951011fd8",
+                "url": "https://api.github.com/repos/honeylex/foh-system_account/zipball/cb536075f9c3c0c0a85bb67b8c8b20348c31f020",
+                "reference": "cb536075f9c3c0c0a85bb67b8c8b20348c31f020",
                 "shasum": ""
             },
             "require": {
@@ -850,7 +850,7 @@
                 "source": "https://github.com/honeylex/foh-system_account/tree/master",
                 "issues": "https://github.com/honeylex/foh-system_account/issues"
             },
-            "time": "2016-07-09 13:32:17"
+            "time": "2016-07-11 20:38:24"
         },
         {
             "name": "league/flysystem",

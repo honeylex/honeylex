@@ -1,0 +1,8 @@
+#
+# Project settings:
+---
+project:
+  name: Honeylex
+  description: Honeybee CQRS & ES integration with the Silex framework
+  database:
+    prefix: honeylex

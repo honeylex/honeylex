@@ -1,5 +1,5 @@
 #
-# Honeylex core services
+# Honeylex default services configuration
 ---
 honeybee.environment:
   class: Honeybee\FrameworkBinding\Silex\Environment

@@ -1,4 +1,6 @@
 #
+# Honeylex default configuration handlers
+#
 # Specify config file to load using the ConfigProvider.
 # The latter will load hierarchically starting at the app level and then traversing any registered crates,
 # in the order they are specified within the crates.yml.

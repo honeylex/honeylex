@@ -1,5 +1,5 @@
 #
-# list of crates that will be loaded into the app.
+# Project crates configuration
 ---
 Foh\SystemAccount\SystemAccountCrate:
   settings:
