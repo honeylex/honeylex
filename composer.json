@@ -27,12 +27,12 @@
         "beberlei/assert": "~2.5",
         "honeybee/honeybee": "master@dev",
         "nesbot/carbon": "~1.21",
-        "honeylex/foh-system_account": "dev-master"
+        "honeylex/hlx-security": "dev-master"
     },
     "repositories": [
         {
             "type": "vcs",
-            "url": "git@github.com:honeylex/foh-system_account.git"
+            "url": "git@github.com:honeylex/hlx-security.git"
         }
     ],
     "require-dev": {

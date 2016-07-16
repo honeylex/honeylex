@@ -31,3 +31,12 @@ finders:
     connection: honeybee.view_store
     settings:
       type: domain_event
+
+query_services:
+  honeybee::domain_event::query_service:
+    class: Honeybee\Infrastructure\DataAccess\Query\DomainEventQueryService
+    finder_mappings:
+      default:
+        finder: honeybee::domain_event::view_store::finder
+        query_translation:
+          class: Honeybee\Infrastructure\DataAccess\Finder\Elasticsearch\ElasticsearchQueryTranslation

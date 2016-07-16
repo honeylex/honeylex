@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "33239e5dc488fd38833c9dbd8ceda763",
-    "content-hash": "d17ea50880acc963a5f0ec4e2968ccdc",
+    "hash": "718765bb66ae0814c175c8e6674e0376",
+    "content-hash": "027e18e9fcec89cbb3e2378d4e184cfe",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -168,16 +168,16 @@
         },
         {
             "name": "elasticsearch/elasticsearch",
-            "version": "v2.2.0",
+            "version": "v2.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/elastic/elasticsearch-php.git",
-                "reference": "11ebdf2c847d0e2c4a47ac993485beb5a19d5dc4"
+                "reference": "7b34186a58730d0a8963741bd62fa5ab45658ada"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/elastic/elasticsearch-php/zipball/11ebdf2c847d0e2c4a47ac993485beb5a19d5dc4",
-                "reference": "11ebdf2c847d0e2c4a47ac993485beb5a19d5dc4",
+                "url": "https://api.github.com/repos/elastic/elasticsearch-php/zipball/7b34186a58730d0a8963741bd62fa5ab45658ada",
+                "reference": "7b34186a58730d0a8963741bd62fa5ab45658ada",
                 "shasum": ""
             },
             "require": {
@@ -218,7 +218,7 @@
                 "elasticsearch",
                 "search"
             ],
-            "time": "2016-06-03 21:09:29"
+            "time": "2016-07-14 14:13:40"
         },
         {
             "name": "evenement/evenement",
@@ -652,12 +652,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeybee/honeybee.git",
-                "reference": "4dbc234a13a0f02628da9efaacbde9f4202e3d5e"
+                "reference": "b023f6bbf7fc3c11ff463d5cb8cc8934bc9c13d3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/4dbc234a13a0f02628da9efaacbde9f4202e3d5e",
-                "reference": "4dbc234a13a0f02628da9efaacbde9f4202e3d5e",
+                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/b023f6bbf7fc3c11ff463d5cb8cc8934bc9c13d3",
+                "reference": "b023f6bbf7fc3c11ff463d5cb8cc8934bc9c13d3",
                 "shasum": ""
             },
             "require": {
@@ -739,7 +739,7 @@
                 "hexagonal",
                 "messaging"
             ],
-            "time": "2016-07-11 14:19:48"
+            "time": "2016-07-15 11:09:38"
         },
         {
             "name": "honeybee/trellis",
@@ -811,17 +811,17 @@
             "time": "2016-06-23 13:37:30"
         },
         {
-            "name": "honeylex/foh-system_account",
+            "name": "honeylex/hlx-security",
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/honeylex/foh-system_account.git",
-                "reference": "cb536075f9c3c0c0a85bb67b8c8b20348c31f020"
+                "url": "https://github.com/honeylex/hlx-security.git",
+                "reference": "d0f7f2c80f78fa1b9f67f9a56d2fc85ebd867b5f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeylex/foh-system_account/zipball/cb536075f9c3c0c0a85bb67b8c8b20348c31f020",
-                "reference": "cb536075f9c3c0c0a85bb67b8c8b20348c31f020",
+                "url": "https://api.github.com/repos/honeylex/hlx-security/zipball/d0f7f2c80f78fa1b9f67f9a56d2fc85ebd867b5f",
+                "reference": "d0f7f2c80f78fa1b9f67f9a56d2fc85ebd867b5f",
                 "shasum": ""
             },
             "require": {
@@ -834,7 +834,7 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Foh\\SystemAccount\\": "lib/"
+                    "Hlx\\Security\\": "lib/"
                 }
             },
             "scripts": {
@@ -845,12 +845,12 @@
             "license": [
                 "MIT"
             ],
-            "description": "System account crate for Honeylex.",
+            "description": "Honeylex crate for managing security, users and roles.",
             "support": {
-                "source": "https://github.com/honeylex/foh-system_account/tree/master",
-                "issues": "https://github.com/honeylex/foh-system_account/issues"
+                "source": "https://github.com/honeylex/hlx-security/tree/master",
+                "issues": "https://github.com/honeylex/hlx-security/issues"
             },
-            "time": "2016-07-11 20:38:24"
+            "time": "2016-07-16 09:47:27"
         },
         {
             "name": "league/flysystem",
@@ -5108,16 +5108,16 @@
         },
         {
             "name": "squizlabs/php_codesniffer",
-            "version": "2.6.1",
+            "version": "2.6.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-                "reference": "fb72ed32f8418db5e7770be1653e62e0d6f5dd3d"
+                "reference": "4edb770cb853def6e60c93abb088ad5ac2010c83"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/fb72ed32f8418db5e7770be1653e62e0d6f5dd3d",
-                "reference": "fb72ed32f8418db5e7770be1653e62e0d6f5dd3d",
+                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/4edb770cb853def6e60c93abb088ad5ac2010c83",
+                "reference": "4edb770cb853def6e60c93abb088ad5ac2010c83",
                 "shasum": ""
             },
             "require": {
@@ -5182,7 +5182,7 @@
                 "phpcs",
                 "standards"
             ],
-            "time": "2016-05-30 22:24:32"
+            "time": "2016-07-13 23:29:13"
         },
         {
             "name": "symfony/yaml",
@@ -5287,7 +5287,7 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "honeybee/honeybee": 20,
-        "honeylex/foh-system_account": 20
+        "honeylex/hlx-security": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

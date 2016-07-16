@@ -72,7 +72,7 @@ class ServiceProvisioner implements ServiceProvisionerInterface
             }
             foreach (glob($crate->getConfigDir() . '/*/entity_schema/projection/*.xml') as $schemaFile) {
                 $projectionType = $this->loadEntityType($crate->getConfigDir(), $schemaFile);
-                $projectionTypeMap->setItem($projectionType->getPrefix(), $projectionType);
+                $projectionTypeMap->setItem($projectionType->getVariantPrefix(), $projectionType);
             }
         }
         $this->injector->share($aggregateRootTypeMap);

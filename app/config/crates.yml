@@ -1,6 +1,6 @@
 #
 # Project crates configuration
 ---
-Foh\SystemAccount\SystemAccountCrate:
+Hlx\Security\SecurityCrate:
   settings:
     routing_prefix: /
