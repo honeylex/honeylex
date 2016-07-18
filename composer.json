@@ -23,11 +23,12 @@
         "symfony/translation": "~2.8|3.0.*",
         "symfony/twig-bridge": "~2.8|3.0.*",
         "symfony/validator": "~2.8|3.0.*",
-        "guzzlehttp/guzzle": "~6.2",
+        "guzzlehttp/guzzle": "^6.2.1",
         "beberlei/assert": "~2.5",
         "honeybee/honeybee": "master@dev",
         "nesbot/carbon": "~1.21",
-        "honeylex/hlx-security": "dev-master"
+        "honeylex/hlx-security": "dev-master",
+        "roave/security-advisories": "dev-master"
     },
     "repositories": [
         {
