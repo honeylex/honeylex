@@ -73,7 +73,7 @@ class SettingConfigHandler extends YamlConfigHandler
         } elseif ($type === 'json') {
             $jsonString = file_get_contents($configFile);
             if (!$jsonString) {
-                throw new Exception('Failed to read local configuration at: '.$configFile);
+                throw new ConfigError('Failed to read local configuration at: '.$configFile);
             }
             $settings = json_decode($jsonString, true);
 
