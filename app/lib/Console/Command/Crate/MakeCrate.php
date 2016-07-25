@@ -51,14 +51,16 @@ class MakeCrate extends CrateCommand
         $name = $input->getArgument('name');
         $vendor = $input->getArgument('vendor');
         $targetPath = $input->getArgument('path');
+        $name_prefix = StringToolkit::asSnakecase($name);
+        $vendor_prefix = StringToolkit::asSnakecase($vendor);
         if (!$vendor || !$name || !$targetPath) {
             $output->writeln('<error>You must specify at least a vendor-name, crate-name and target-path.</error>');
             return false;
         }
 
-        $targetPath .= '/'.$name;
+        $targetPath .= '/'.$vendor_prefix.'-'.$name_prefix;
         $fqns = sprintf('%s\%s', trim($vendor), trim($name));
-        $prefix = StringToolkit::asSnakecase($vendor).'.'.StringToolkit::asSnakecase($name);
+        $prefix = $vendor_prefix.'.'.$name_prefix;
         $description = $input->getOption('description');
         $locations = $input->getOption('location') ?: null;
 

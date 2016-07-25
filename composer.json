@@ -1,6 +1,6 @@
 {
     "name": "honeylex/honeylex",
-    "description": "Vendor library that is used in the honeybee-silex-cmf-project.",
+    "description": "Honeybee CQRS & ES integration with the Silex framework.",
     "license": "MIT",
     "type": "library",
     "require": {
@@ -27,8 +27,8 @@
         "beberlei/assert": "~2.5",
         "honeybee/honeybee": "master@dev",
         "nesbot/carbon": "~1.21",
-        "honeylex/hlx-security": "dev-master",
-        "roave/security-advisories": "dev-master"
+        "honeylex/hlx-security": "master@dev",
+        "roave/security-advisories": "master@dev"
     },
     "repositories": [
         {

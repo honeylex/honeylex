@@ -91,6 +91,7 @@ class MakeResource extends ResourceCommand
             ],
             'resource' => [
                 'name' => $resourceName,
+                'variant' => 'Standard',
                 'prefix' => $resourcePrefix,
                 'description' => $description
             ]

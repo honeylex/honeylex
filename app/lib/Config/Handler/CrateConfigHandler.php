@@ -2,11 +2,11 @@
 
 namespace Honeybee\FrameworkBinding\Silex\Config\Handler;
 
-use ReflectionClass;
 use Honeybee\Common\Error\ConfigError;
 use Honeybee\Infrastructure\Config\Settings;
 use Honeybee\FrameworkBinding\Silex\Crate\CrateManifest;
 use Honeybee\FrameworkBinding\Silex\Crate\CrateManifestMap;
+use ReflectionClass;
 use Symfony\Component\Yaml\Parser;
 
 class CrateConfigHandler implements ConfigHandlerInterface

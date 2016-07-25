@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<type_schema namespace="{{ crate.vendor }}\{{ crate.name }}\{{ resource.name }}\Projection\Standard"
+<type_schema namespace="{{ crate.vendor }}\{{ crate.name }}\{{ resource.name }}\Projection\{{ resource.variant }}"
     xmlns:xi="http://www.w3.org/2001/XInclude"
     xmlns="http://berlinonline.net/trellis/1.0/schema">
     <type_definition name="{{ resource.name }}">
         <implementor>\Honeybee\Projection\ProjectionType</implementor>
         <entity_implementor>\Honeybee\Projection\Projection</entity_implementor>
         <description>
-            Defines the (normalized) strucuture of a default {{ resource.name|snake }} projection.
+            Defines the (normalized) structure of a {{ resource.name|snake }} projection.
         </description>
         <options>
             <option name="vendor">{{ crate.vendor }}</option>
             <option name="package">{{ crate.name }}</option>
+            <option name="variant">{{ resource.variant }}</option>
             <option name="is_hierarchical">false</option>
         </options>
         <!-- attribute definitions -->

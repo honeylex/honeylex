@@ -4,3 +4,6 @@
 Hlx\Security\SecurityCrate:
   settings:
     routing_prefix: /
+    cookie:
+      key: mob7jaC2Be5v
+      lifetime: 1209000

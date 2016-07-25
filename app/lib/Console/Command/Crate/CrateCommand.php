@@ -58,7 +58,7 @@ abstract class CrateCommand extends Command
     {
         return <<<CRATES
 #
-# list of crates that will be loaded into the app.
+# Project crates configuration
 ---
 %s
 CRATES;

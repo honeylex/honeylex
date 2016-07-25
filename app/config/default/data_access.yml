@@ -39,4 +39,4 @@ query_services:
       default:
         finder: honeybee::domain_event::view_store::finder
         query_translation:
-          class: Honeybee\Infrastructure\DataAccess\Finder\Elasticsearch\ElasticsearchQueryTranslation
+          class: Honeybee\Infrastructure\DataAccess\Finder\Elasticsearch\CriteriaQueryTranslation
