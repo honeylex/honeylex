@@ -41,3 +41,8 @@ command_bus.yml: # merge behaviour: lastone-wins
   handler: Honeybee\FrameworkBinding\Silex\Config\Handler\CommandBusConfigHandler
   settings:
     parser: Symfony\Component\Yaml\Parser
+
+mail.yml: # merge behaviour: lastone-wins
+  handler: Honeybee\FrameworkBinding\Silex\Config\Handler\MailConfigHandler
+  settings:
+    parser: Symfony\Component\Yaml\Parser

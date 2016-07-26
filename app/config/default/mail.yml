@@ -1,0 +1,8 @@
+#
+# Honeylex default mail service settings
+---
+swiftmailer:
+  options:
+    host: localhost
+    port: 25
+  use_spool: false

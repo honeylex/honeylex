@@ -16,6 +16,11 @@ honeybee.infrastructure.template_renderer:
       extensions:
         - Honeybee\FrameworkBinding\Silex\Twig\TwigExtension
 
+honeybee.infrastructure.mail_service:
+  class: Honeybee\Infrastructure\Mail\LoggingSwiftMailer
+  provisioner:
+    class: Honeybee\FrameworkBinding\Silex\Service\Provisioner\MailServiceProvisioner
+
 honeybee.infrastructure.connector_service:
   class: Honeybee\Infrastructure\DataAccess\Connector\ConnectorService
   provisioner:
