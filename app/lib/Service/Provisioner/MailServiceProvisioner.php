@@ -41,8 +41,8 @@ class MailServiceProvisioner implements ProvisionerInterface
             ->alias(MailServiceInterface::CLASS, $service)
             ->delegate(
                 $service,
-                function (LoggerInterface $logger) use ($service, $app) {
-                    return new $service($app['mailer'], new ArrayConfig([]), $logger);
+                function (LoggerInterface $logger) use ($service, $app, $config) {
+                    return new $service($app['mailer'], new ArrayConfig($config), $logger);
                 }
             );
     }
