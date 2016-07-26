@@ -17,13 +17,13 @@ class MigrateUp extends MigrateCommand
                 'target',
                 null,
                 InputOption::VALUE_REQUIRED,
-                "Name of the migration-target to migrate (if omitted all targets will be run)."
+                'Name of the migration-target to migrate (if omitted all targets will be run).'
             )
             ->addOption(
                 'to',
                 null,
                 InputOption::VALUE_REQUIRED,
-                "The version to migrate towards (if omitted all pendings versions will run)."
+                'The version to migrate towards (if omitted all pendings versions will run).'
             );
     }
 
