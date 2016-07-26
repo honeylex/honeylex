@@ -38,6 +38,7 @@ The bootstrapped Silex app is configured with the following service providers:
 * [UrlGeneratorServiceProvider][UrlGeneratorServiceProvider]
 * [ValidatorServiceProvider][ValidatorServiceProvider]
 * [WebProfilerServiceProvider][WebProfilerServiceProvider]
+* [SwiftmailerServiceProvider][SwiftmailerServiceProvider]
 
 Read the [Providers][Providers] documentation for more details about Silex Service Providers.
 
@@ -52,5 +53,6 @@ Read the [Providers][Providers] documentation for more details about Silex Servi
 [ValidatorServiceProvider]: http://silex.sensiolabs.org/doc/providers/validator.html
 [WebProfilerServiceProvider]: http://github.com/silexphp/Silex-WebProfiler
 [MonologServiceProvider]: http://silex.sensiolabs.org/doc/providers/monolog.html
+[SwiftmailerServiceProvider]: http://silex.sensiolabs.org/doc/providers/swiftmailer.html
 [Providers]: http://silex.sensiolabs.org/doc/providers.html
 [Honeybee]: http://github.com/honeybee/honeybee
