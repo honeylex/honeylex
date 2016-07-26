@@ -12,7 +12,7 @@ class Environment implements EnvironmentInterface
 
     protected $config;
 
-    public function __construct(ConfigInterface $config, User $user)
+    public function __construct(ConfigInterface $config, User $user = null)
     {
         $this->user = $user;
         $this->config = $config;

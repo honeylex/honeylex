@@ -9,6 +9,7 @@ use Honeybee\FrameworkBinding\Silex\Config\ConfigProviderInterface;
 use Honeybee\FrameworkBinding\Silex\Config\Handler\CrateConfigHandler;
 use Honeybee\FrameworkBinding\Silex\Controller\ControllerResolverServiceProvider;
 use Honeybee\FrameworkBinding\Silex\Crate\CrateLoader;
+use Honeybee\FrameworkBinding\Silex\Crate\CrateMap;
 use Honeybee\FrameworkBinding\Silex\Service\ServiceProvider;
 use Honeybee\FrameworkBinding\Silex\Service\ServiceProvisioner;
 use Honeybee\Infrastructure\Config\ArrayConfig;
@@ -26,7 +27,6 @@ use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Yaml\Parser;
-use Honeybee\FrameworkBinding\Silex\Crate\CrateMap;
 
 class Bootstrap
 {
@@ -36,8 +36,10 @@ class Bootstrap
         $config = $this->bootstrapConfig($app, $injector, $settings);
         $app['version'] = $config->getVersion();
         $this->bootstrapLogger($app, $config, $injector);
+
         // then kick off service provisioning
         $serviceProvisioner = new ServiceProvisioner($app, $injector, $config);
+
         // and register some standard service providers.
         $app->register(new ServiceProvider($serviceProvisioner));
         $app->register(new ControllerResolverServiceProvider);
@@ -49,6 +51,7 @@ class Bootstrap
         );
         $app->register(new FormServiceProvider);
         $app->register(new ValidatorServiceProvider);
+
         // load context specific configuration (well, only web atm. needs to change too)
         if ($config->getAppContext() === 'web') {
             $this->registerWebErrorHandler($app);
@@ -62,6 +65,7 @@ class Bootstrap
                 );
             }
         }
+
         // load environment specific configuration (this has to change badly)
         $envConfig = $config->getEnvConfigPath();
         if (is_readable($envConfig)) {

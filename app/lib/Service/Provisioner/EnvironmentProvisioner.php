@@ -8,7 +8,6 @@ use Honeybee\FrameworkBinding\Silex\Config\ConfigProviderInterface;
 use Honeybee\Infrastructure\Config\SettingsInterface;
 use Honeybee\ServiceDefinitionInterface;
 use Pimple\Container;
-use Symfony\Component\Security\Core\User\User;
 
 class EnvironmentProvisioner implements ProvisionerInterface
 {
@@ -21,8 +20,7 @@ class EnvironmentProvisioner implements ProvisionerInterface
     ) {
         $service = $serviceDefinition->getClass();
         $state = [
-            ':config' => $serviceDefinition->getConfig(),
-            ':user' => new User('hodor', 'srsly?', [ 'default' ], true, true, true, true)
+            ':config' => $serviceDefinition->getConfig()
         ];
         $injector->define($service, $state);
         // there will only be one instance of the service when the "share" setting is true
