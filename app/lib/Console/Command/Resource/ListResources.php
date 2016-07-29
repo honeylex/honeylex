@@ -29,18 +29,20 @@ class ListResources extends ResourceCommand
             ->addArgument(
                 'crate',
                 InputArgument::OPTIONAL,
-                "The prefix of the crate to remove the resource from."
+                'The prefix of the crate to remove the resource from.'
             );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $cratePrefix = $input->getArgument('crate');
+
         if ($cratePrefix) {
             $crates = [ $cratePrefix ];
         } else {
             $crates = $this->configProvider->getCrateMap()->getKeys();
         }
+
         foreach ($crates as $cratePrefix) {
             $crate = $this->configProvider->getCrateMap()->getItem($cratePrefix);
             $finder = clone $this->fileFinder;

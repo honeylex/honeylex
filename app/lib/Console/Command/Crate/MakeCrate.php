@@ -8,6 +8,7 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Process\Process;
 
 class MakeCrate extends CrateCommand
@@ -19,17 +20,17 @@ class MakeCrate extends CrateCommand
             ->setDescription('Makes a vanilla crate from a crate-template.')
             ->addArgument(
                 'vendor',
-                InputArgument::REQUIRED,
+                InputArgument::OPTIONAL,
                 'The vendor that ships this crate.'
             )
             ->addArgument(
                 'name',
-                InputArgument::REQUIRED,
+                InputArgument::OPTIONAL,
                 'The name of the crate to make.'
             )
             ->addArgument(
                 'path',
-                InputArgument::REQUIRED,
+                InputArgument::OPTIONAL,
                 'The directory path where the crate shall be created.'
             )
             ->addOption(
@@ -46,19 +47,43 @@ class MakeCrate extends CrateCommand
             );
     }
 
+    protected function writeHeader(OutputInterface $output)
+    {
+        $output->writeln('');
+        $output->writeln('Honeylex crate scaffolding');
+        $output->writeln('--------------------------');
+        $output->writeln('');
+    }
+
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $name = $input->getArgument('name');
-        $vendor = $input->getArgument('vendor');
-        $targetPath = $input->getArgument('path');
-        $name_prefix = StringToolkit::asSnakecase($name);
+        $helper = $this->getHelper('question');
+
+        if (!$vendor = $input->getArgument('vendor')) {
+            $this->writeHeader($output);
+            $question = new Question('Please provide a vendor name: ');
+            $vendor = $helper->ask($input, $output, $question);
+        }
+
+        if (!$name = $input->getArgument('name')) {
+            $question = new Question('Please provide a crate name: ');
+            $name = $helper->ask($input, $output, $question);
+        }
+
+        if (!$path = $input->getArgument('path')) {
+            $question = new Question('Please provide a target path [./app/crates]: ', './app/crates');
+            $path = $helper->ask($input, $output, $question);
+        }
+
         $vendor_prefix = StringToolkit::asSnakecase($vendor);
-        if (!$vendor || !$name || !$targetPath) {
-            $output->writeln('<error>You must specify at least a vendor-name, crate-name and target-path.</error>');
+        $name_prefix = StringToolkit::asSnakecase($name);
+
+        if (!$vendor || !$name || !$path) {
+            $output->writeln('<error>You must specify a vendor, crate and path.</error>');
             return false;
         }
 
-        $targetPath .= '/'.$vendor_prefix.'-'.$name_prefix;
+        $path .= '/'.$vendor_prefix.'-'.$name_prefix;
         $fqns = sprintf('%s\%s', trim($vendor), trim($name));
         $prefix = $vendor_prefix.'.'.$name_prefix;
         $description = $input->getOption('description');
@@ -78,7 +103,7 @@ class MakeCrate extends CrateCommand
         $output->writeln('Crate prefix: ' . $prefix);
         $output->writeln('Crate namespace: ' . $fqns);
         $output->writeln('Crate description: ' . $description);
-        $output->writeln('Crate dir: ' . $targetPath);
+        $output->writeln('Crate dir: ' . $path);
         $output->writeln('Skeleton locations: ' . implode(', ', $skeletonLocations));
         // variables that will be available within skeleton file- and directory-names and within file-contents.
         $data = [
@@ -91,11 +116,11 @@ class MakeCrate extends CrateCommand
                 'description' => $description
             ]
         ];
-        // generate crate from skeleton and deploy the resulting code to the target-path
-        $skeletonGenerator = new SkeletonGenerator('crate', $skeletonLocations, $targetPath, $data);
+        // generate crate from skeleton and deploy the resulting code to the target path
+        $skeletonGenerator = new SkeletonGenerator('crate', $skeletonLocations, $path, $data);
         $skeletonGenerator->generate();
         // update the composer.json's autoload
-        $this->addAutoloadConfig($fqns, $targetPath.'/lib/');
+        $this->addAutoloadConfig($fqns, $path.'/lib/');
         // update the crates.yml
         $crates = [];
         foreach ($this->configProvider->getCrateMap() as $crateToLoad) {

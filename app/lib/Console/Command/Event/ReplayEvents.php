@@ -6,6 +6,7 @@ use Honeybee\Model\Aggregate\AggregateRootTypeInterface;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Question\ChoiceQuestion;
 
 class ReplayEvents extends EventCommand
 {
@@ -16,19 +17,41 @@ class ReplayEvents extends EventCommand
             ->setDescription('Replay aggregate root type domain events on the specified channel.')
             ->addArgument(
                 'type',
-                InputArgument::REQUIRED,
+                InputArgument::OPTIONAL,
                 'The name of the aggregate root type to migrate.'
             )
             ->addArgument(
                 'channel',
-                InputArgument::REQUIRED,
+                InputArgument::OPTIONAL,
                 'The channel on which to replay domain events.'
             );
     }
 
+    protected function writeHeader(OutputInterface $output)
+    {
+        $output->writeln('');
+        $output->writeln('Honeylex event replay');
+        $output->writeln('---------------------');
+        $output->writeln('');
+    }
+
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->replay($output, $input->getArgument('type'), $input->getArgument('channel'));
+        if (!$type =  $input->getArgument('type')) {
+            $this->writeHeader($output);
+            $type = $this->listTypes($input, $output);
+        }
+
+        if (!$channel =  $input->getArgument('channel')) {
+            $channel = $this->listChannels($input, $output);
+        }
+
+        if (!$type || !$channel) {
+            $output->writeln('<error>You must specify at least a type and channel.</error>');
+            return false;
+        }
+
+        $this->replay($output, $type, $channel);
     }
 
     protected function replay(OutputInterface $output, $type, $channel)
@@ -56,5 +79,21 @@ class ReplayEvents extends EventCommand
     {
         $reader_key = sprintf('%s::domain_event::event_source::reader', $aggregateRootType->getPrefix());
         return $this->dataAccessService->getStorageReader($reader_key);
+    }
+
+    protected function listTypes(InputInterface $input, OutputInterface $output)
+    {
+        $helper = $this->getHelper('question');
+        $types = $this->aggregateRootTypeMap->getKeys();
+        $question = new ChoiceQuestion('Please select a type: ', $types);
+        return $helper->ask($input, $output, $question);
+    }
+
+    protected function listChannels(InputInterface $input, OutputInterface $output)
+    {
+        $helper = $this->getHelper('question');
+        $channels = $this->eventBus->getChannels()->getKeys();
+        $question = new ChoiceQuestion('Please select a channel: ', $channels);
+        return $helper->ask($input, $output, $question);
     }
 }

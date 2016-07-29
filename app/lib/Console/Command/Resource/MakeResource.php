@@ -8,6 +8,8 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Question\ChoiceQuestion;
+use Symfony\Component\Console\Question\Question;
 
 class MakeResource extends ResourceCommand
 {
@@ -16,37 +18,54 @@ class MakeResource extends ResourceCommand
         $this
             ->setName('hlx:res:mk')
             ->setDescription('Makes a vanilla resource from a resource-template.')
+            ->addArgument(
+                'crate',
+                InputArgument::OPTIONAL,
+                'The prefix of the crate to make the resource in.'
+            )
+            ->addArgument(
+                'resource',
+                InputArgument::OPTIONAL,
+                'The name of the resource to make.'
+            )
             ->addOption(
                 'description',
                 null,
                 InputOption::VALUE_REQUIRED,
-                "A short text describing the resource's purpose."
+                'A short text describing the resource\'s purpose.'
             )
             ->addOption(
                 'location',
                 null,
                 InputOption::VALUE_IS_ARRAY | InputOption::VALUE_REQUIRED,
-                "Optional override of the locations that will be searched for (resource)skeletons."
-            )
-            ->addArgument(
-                'crate',
-                InputArgument::REQUIRED,
-                "The prefix of the crate to make the resource in."
-            )
-            ->addArgument(
-                'resource',
-                InputArgument::REQUIRED,
-                "The name of the resource to make."
+                'Optional override of the locations that will be searched for (resource)skeletons.'
             );
+    }
+
+    protected function writeHeader(OutputInterface $output)
+    {
+        $output->writeln('');
+        $output->writeln('Honeylex resource generation');
+        $output->writeln('----------------------------');
+        $output->writeln('');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $cratePrefix = $input->getArgument('crate');
-        $resourceName = $input->getArgument('resource');
+        $helper = $this->getHelper('question');
+
+        if (!$cratePrefix = $input->getArgument('crate')) {
+            $this->writeHeader($output);
+            $cratePrefix = $this->listCrates($input, $output);
+        }
+
+        if (!$resourceName = $input->getArgument('resource')) {
+            $question = new Question('Please provide a resource name: ');
+            $resourceName = $helper->ask($input, $output, $question);
+        }
 
         if (!$resourceName || !$cratePrefix) {
-            $output->writeln('<error>You must specify at least a crate-prefix and resource-name.</error>');
+            $output->writeln('<error>You must specify at least a crate and resource.</error>');
             return false;
         }
 
@@ -68,7 +87,7 @@ class MakeResource extends ResourceCommand
         $skeletonLocations = array_unique($skeletonLocations);
 
         $output->writeln('Target crate: ' . $crate->getVendor().'/'.$crate->getName());
-        $output->writeln('Name/Prefix: ' . $resourceName.'/'.$resourcePrefix);
+        $output->writeln('Prefix: ' . $resourcePrefix);
         $output->writeln('Namespace: ' . $crate->getNamespace().'\\'.$resourceName);
         $output->writeln('Description: ' . $description);
         $output->writeln('Directories: ');
@@ -100,5 +119,12 @@ class MakeResource extends ResourceCommand
         $skeletonGenerator = new SkeletonGenerator('resource', $skeletonLocations, $crate->getRootDir(), $data);
         $skeletonGenerator->generate();
         // @todo auto run migrations?
+    }
+
+    protected function listCrates(InputInterface $input, OutputInterface $output)
+    {
+        $helper = $this->getHelper('question');
+        $question = new ChoiceQuestion('Please select a crate: ', $this->configProvider->getCrateMap()->getKeys());
+        return $helper->ask($input, $output, $question);
     }
 }

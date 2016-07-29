@@ -2,6 +2,7 @@
 
 namespace Honeybee\FrameworkBinding\Silex\Console\Command\Crate;
 
+use Honeybee\Common\Util\StringToolkit;
 use Honeybee\FrameworkBinding\Silex\Crate\CrateInterface;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -24,6 +25,18 @@ class ListCrates extends CrateCommand
 
     protected function printCrateInfo(CrateInterface $crate, OutputInterface $output)
     {
-        $output->writeln('- '.$crate->getName().': '.$crate->getRootDir());
+        $vendor = $crate->getVendor();
+        $name = $crate->getName();
+
+        $output->writeln(
+            sprintf(
+                "%s/%s:\n  Prefix: %s.%s\n  Path: %s",
+                $vendor,
+                $name,
+                StringToolkit::asSnakecase($vendor),
+                StringToolkit::asSnakecase($name),
+                $crate->getRootDir()
+            )
+        );
     }
 }

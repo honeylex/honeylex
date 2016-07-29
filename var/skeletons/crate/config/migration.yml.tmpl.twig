@@ -10,7 +10,7 @@
   migration_loader:
     class: Honeybee\Infrastructure\Migration\FileSystemLoader
     settings:
-      directory: ${project.dir}/app/crates/{{ crate.name }}/migration/couchdb
+      directory: ${project.dir}/app/crates/{{ crate.vendor|snake }}-{{ crate.name|snake }}/migration/couchdb
 
 {{ crate.prefix }}::migration::view_store:
   active: true
@@ -22,4 +22,4 @@
   migration_loader:
     class: Honeybee\Infrastructure\Migration\FileSystemLoader
     settings:
-      directory: ${project.dir}/app/crates/{{ crate.name }}/migration/elasticsearch
+      directory: ${project.dir}/app/crates/{{ crate.vendor|snake }}-{{ crate.name|snake }}/migration/elasticsearch

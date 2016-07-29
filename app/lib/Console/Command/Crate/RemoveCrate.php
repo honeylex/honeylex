@@ -5,6 +5,7 @@ namespace Honeybee\FrameworkBinding\Silex\Console\Command\Crate;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Question\ChoiceQuestion;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Process\Process;
 
@@ -19,25 +20,43 @@ class RemoveCrate extends CrateCommand
             )
             ->addArgument(
                 'crate',
-                InputArgument::REQUIRED,
+                InputArgument::OPTIONAL,
                 'The prefix of the crate to remove.'
             );
+    }
+
+    protected function writeHeader(OutputInterface $output)
+    {
+        $output->writeln('');
+        $output->writeln('Honeylex crate removal');
+        $output->writeln('----------------------');
+        $output->writeln('');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $prefix = $input->getArgument('crate');
+
+        if (!$prefix) {
+            $this->writeHeader($output);
+            $prefix = $this->listCrates($input, $output);
+        }
+
+        if (!$this->confirm($input, $output)) {
+            $output->writeln('Crate removal aborted.');
+            return false;
+        }
+
         $crate = $this->configProvider->getCrateMap()->getItem($prefix);
         $crateDir = $crate->getRootDir();
         $appDir = $this->configProvider->getProjectDir().'/app/';
         if (strpos($crateDir, $appDir) === 0) {
             try {
-                if ((new Filesystem)->remove($crateDir)) {
-                    $output->writeln('<info>Removed crate: '.$crate->getVendor().'/'.$crate->getName().'</info>');
-                }
+                (new Filesystem)->remove($crateDir);
+                $output->writeln('<info>Removed crate '.$crate->getVendor().'/'.$crate->getName().'</info>');
             } catch (\Exception $e) {
                 $output->writeln(
-                    '<error>Failed to remove crate: '.$crate->getVendor().'/'.$crate->getName().'</error>'
+                    '<error>Failed to remove crate '.$crate->getVendor().'/'.$crate->getName().'</error>'
                 );
             }
             $this->configProvider->getCrateMap()->removeItem($crate);
@@ -45,7 +64,7 @@ class RemoveCrate extends CrateCommand
             $output->writeln('<info>Removed crate from composer autoload.</info>');
             $crates = [];
             foreach ($this->configProvider->getCrateMap() as $crateToLoad) {
-                $crates[] = get_class($crateToLoad);
+                $crates[get_class($crateToLoad)]['settings'] = $crateToLoad->getManifest()->getSettings()->toArray();
             }
             $this->updateCratesConfig($crates);
             $output->writeln('<info>Removed crate from crates.yml config.</info>');
@@ -60,5 +79,12 @@ class RemoveCrate extends CrateCommand
         } else {
             $output->writeln('<error>not allowed to remove crate</error>');
         }
+    }
+
+    protected function listCrates(InputInterface $input, OutputInterface $output)
+    {
+        $helper = $this->getHelper('question');
+        $question = new ChoiceQuestion('Please select a crate: ', $this->configProvider->getCrateMap()->getKeys());
+        return $helper->ask($input, $output, $question);
     }
 }

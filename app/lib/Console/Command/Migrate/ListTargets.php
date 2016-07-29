@@ -28,12 +28,12 @@ class ListTargets extends MigrateCommand
         $pendingCount = $this->migrationService->getPendingMigrations($target->getName())->getSize();
         $latestVersion = Maybe::unit($target->getLatestStructureVersion())->getVersion()->get() ?: 0;
         $output->writeln($target->getName());
-        $output->writeln('  version: '.$latestVersion);
-        $output->writeln('  active: '.($target->isActivated() ? 'true' : 'false'));
+        $output->writeln('  Version: '.$latestVersion);
+        $output->writeln('  Active: '.($target->isActivated() ? 'true' : 'false'));
         if ($pendingCount === 0) {
-            $output->writeln('  migrations: '.$target->getMigrationList()->getSize());
+            $output->writeln('  Migrations: '.$target->getMigrationList()->getSize());
         } else {
-            $output->writeln('  migrations: '.$target->getMigrationList()->getSize().'/'.$pendingCount.' (pending)');
+            $output->writeln('  Migrations: '.$target->getMigrationList()->getSize().'/'.$pendingCount.' (pending)');
         }
     }
 }

@@ -17,13 +17,14 @@ abstract class ProjectCommand extends Command
             sprintf($this->getSettingsTemplate(), Yaml::dump($settings, 8, 2))
         );
 
+        $output->writeln('');
         $output->writeln('Project settings updated in ' . $settingsFile);
         $output->writeln('');
-        $output->writeln('    If this project is new you can scaffold a crate using:');
+        $output->writeln('    If this project is new, you can scaffold a crate using:');
         $output->writeln('');
         $output->writeln('    bin/console hlx:crate:mk <Vendor> <Package> ./crates');
         $output->writeln('');
-        $output->writeln('    Then you can scaffold a resource using:');
+        $output->writeln('    Then you can generate a resource using:');
         $output->writeln('');
         $output->writeln('    bin/console hlx:res:mk vendor.package <Resource>');
         $output->writeln('');
