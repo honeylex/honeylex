@@ -21,12 +21,19 @@ In order to get the honeylex up and running you'll need to make sure you, that y
 
 #### Install:
 
-* Run: ```git clone git@github.com:shrink0r/honeylex.git```
+* Run: ```composer create-project -sdev honeylex/honeylex your-project```
+* Install: ```cd your-project; bin/console hlx:project:install```
 * Create a directory: ```/usr/local/honeylex.local/```
-* In the latter directory create a file named ```rabbitmq.json``` with the following contents: ```{ "user":"username", "password":"secret", "host": "localhost", "port": 5672 }```
-* Run: ```composer install```
+* In this directory create a file named ```rabbitmq.json``` with the following contents: ```{ "user":"name", "password":"secret", "host": "localhost", "port": 5672 }```
 * Run: ```bin/console hlx:migrate:up```
 * Run: ```composer run```, this will start a local webserver that hosts the app [here](http://localhost:8888/)
+
+### Console
+
+A full list of supported console commands for scaffolding crates and resources, managing migrations and more can be found by running:
+```
+bin/console
+```
 
 ### Registered silex service providers
 
