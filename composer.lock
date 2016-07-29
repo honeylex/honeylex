@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c1130b16e1f7be418ce528d22b741ee6",
-    "content-hash": "c9d6378f29a077a8327d373b6c5307a3",
+    "hash": "944e0c74bc3e34b01fba411c62a8153b",
+    "content-hash": "c2f89918f8e3ac67e108a9abb33d925d",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -658,12 +658,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeybee/honeybee.git",
-                "reference": "cc1cfe62b72db1669c9f5e7d52756107a89f4724"
+                "reference": "2c342399a38468925cce371d697e3443db284c0d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/cc1cfe62b72db1669c9f5e7d52756107a89f4724",
-                "reference": "cc1cfe62b72db1669c9f5e7d52756107a89f4724",
+                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/2c342399a38468925cce371d697e3443db284c0d",
+                "reference": "2c342399a38468925cce371d697e3443db284c0d",
                 "shasum": ""
             },
             "require": {
@@ -678,6 +678,7 @@
                 "psr/log": "~1.0",
                 "ql/uri-template": "~1.0",
                 "rdlowrey/auryn": "~1.4",
+                "roave/security-advisories": "master@dev",
                 "shrink0r/monatic": "master@dev",
                 "shrink0r/workflux": "master@dev",
                 "swiftmailer/swiftmailer": "~5.4",
@@ -688,12 +689,12 @@
             },
             "require-dev": {
                 "mockery/mockery": "master@dev",
-                "phpmd/phpmd": "^2.3",
-                "phpunit/phpunit": "^5.0.5",
-                "sami/sami": "^3.2",
+                "phpmd/phpmd": "~2.3",
+                "phpunit/phpunit": "~5.0",
+                "sami/sami": "~3.2",
                 "satooshi/php-coveralls": "master@dev",
-                "sebastian/phpcpd": "^2.0",
-                "squizlabs/php_codesniffer": "^2.3"
+                "sebastian/phpcpd": "~2.0",
+                "squizlabs/php_codesniffer": "~2.3"
             },
             "suggest": {
                 "cboden/Ratchet": "0.3.* to handle messages over websocket",
@@ -745,7 +746,7 @@
                 "hexagonal",
                 "messaging"
             ],
-            "time": "2016-07-29 17:12:27"
+            "time": "2016-07-29 18:26:12"
         },
         {
             "name": "honeybee/trellis",
@@ -753,12 +754,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeybee/trellis.git",
-                "reference": "1587324740abc9ad0f14fded01f469b2c20df96d"
+                "reference": "9fbe21ada707a484091122fd67e2886cbd3b7265"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeybee/trellis/zipball/1587324740abc9ad0f14fded01f469b2c20df96d",
-                "reference": "1587324740abc9ad0f14fded01f469b2c20df96d",
+                "url": "https://api.github.com/repos/honeybee/trellis/zipball/9fbe21ada707a484091122fd67e2886cbd3b7265",
+                "reference": "9fbe21ada707a484091122fd67e2886cbd3b7265",
                 "shasum": ""
             },
             "require": {
@@ -767,18 +768,19 @@
                 "fzaninotto/faker": "~1.5",
                 "mtdowling/jmespath.php": "~2.2",
                 "php": ">=5.6.0",
-                "ramsey/uuid": "~3.1",
-                "symfony/console": "~2.7",
-                "symfony/filesystem": "~2.7",
+                "ramsey/uuid": "^3.1",
+                "roave/security-advisories": "master@dev",
+                "symfony/console": "~2.8|~3.1",
+                "symfony/filesystem": "~2.8|~3.1",
                 "twig/twig": "~1.23"
             },
             "require-dev": {
                 "mockery/mockery": "master@dev",
-                "phpmd/phpmd": "^2.3",
-                "phpunit/phpunit": "^5.0.5",
-                "sami/sami": "^3.2",
+                "phpmd/phpmd": "~2.3",
+                "phpunit/phpunit": "~5.0",
+                "sami/sami": "~3.2",
                 "satooshi/php-coveralls": "master@dev",
-                "squizlabs/php_codesniffer": "^2.3"
+                "squizlabs/php_codesniffer": "~2.3"
             },
             "bin": [
                 "bin/trellis"
@@ -814,7 +816,7 @@
                 "entity",
                 "validation"
             ],
-            "time": "2016-06-23 13:37:30"
+            "time": "2016-07-29 18:17:57"
         },
         {
             "name": "honeylex/hlx-security",
@@ -2229,26 +2231,26 @@
         },
         {
             "name": "symfony/console",
-            "version": "v2.8.8",
+            "version": "v3.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "c392a6ec72f2122748032c2ad6870420561ffcfa"
+                "reference": "747154aa69b0f83cd02fc9aa554836dee417631a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/c392a6ec72f2122748032c2ad6870420561ffcfa",
-                "reference": "c392a6ec72f2122748032c2ad6870420561ffcfa",
+                "url": "https://api.github.com/repos/symfony/console/zipball/747154aa69b0f83cd02fc9aa554836dee417631a",
+                "reference": "747154aa69b0f83cd02fc9aa554836dee417631a",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.9",
+                "php": ">=5.5.9",
                 "symfony/polyfill-mbstring": "~1.0"
             },
             "require-dev": {
                 "psr/log": "~1.0",
-                "symfony/event-dispatcher": "~2.1|~3.0.0",
-                "symfony/process": "~2.1|~3.0.0"
+                "symfony/event-dispatcher": "~2.8|~3.0",
+                "symfony/process": "~2.8|~3.0"
             },
             "suggest": {
                 "psr/log": "For using the console logger",
@@ -2258,7 +2260,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.8-dev"
+                    "dev-master": "3.1-dev"
                 }
             },
             "autoload": {
@@ -2285,7 +2287,7 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2016-06-29 07:02:14"
+            "time": "2016-06-29 07:02:31"
         },
         {
             "name": "symfony/css-selector",
