@@ -3,7 +3,7 @@
 A cqrs plus es (cms) app boilerplate for php based on the integration of the [Honeybee][Honeybee] lib with the [silex][Documentation] framework.
 
 [![Code Climate](https://codeclimate.com/github/honeylex/honeylex/badges/gpa.svg)](https://codeclimate.com/github/honeylex/honeylex)
-[![Dependency Status](https://www.versioneye.com/user/projects/579b9160aa78d5003c17360f/badge.svg?style=flat)](https://www.versioneye.com/user/projects/579b9160aa78d5003c17360f)
+[![Dependency Status](https://www.versioneye.com/user/projects/579b94f7aa78d500469f9701/badge.svg?style=flat)](https://www.versioneye.com/user/projects/579b94f7aa78d500469f9701)
 
 ## Development
 
