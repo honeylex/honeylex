@@ -6,3 +6,11 @@ local_configs:
     name: rabbitmq.json
     type: json
     load: from_file
+  couchdb:
+    name: couchdb.json
+    type: json
+    load: from_file
+  elasticsearch:
+    name: elasticsearch.json
+    type: json
+    load: from_file

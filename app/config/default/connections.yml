@@ -4,9 +4,9 @@
 honeybee.view_store:
   class: Honeybee\Infrastructure\DataAccess\Connector\ElasticsearchConnector
   settings:
-    transport: http
-    host: localhost
-    port: 9200
+    transport: ${elasticsearch.transport}
+    host: ${elasticsearch.host}
+    port: ${elasticsearch.port}
     index: honeylex.domain_events
 
 honeybee.msg_queue:
