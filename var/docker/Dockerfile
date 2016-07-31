@@ -43,7 +43,14 @@ RUN sed -i '/.*xdebug.so$/s/^/;/' /etc/php5/mods-available/xdebug.ini
 # Add configuration files
 COPY conf/nginx/nginx.conf /etc/nginx/
 COPY conf/supervisord.conf /etc/supervisor/conf.d/
-COPY conf/php/php.ini /etc/php5/fpm/conf.d/40-custom.ini
+COPY conf/php/php-cli.ini /etc/php5/cli/conf.d/40-custom.ini
+COPY conf/php/php-fpm.ini /etc/php5/fpm/conf.d/40-custom.ini
+
+# Add composer
+COPY scripts/composer-install.sh /tmp/
+RUN chmod +x /tmp/composer-install.sh
+RUN /tmp/composer-install.sh
+RUN mkdir -m 777 /.composer
 
 ################################################################################
 # Ports

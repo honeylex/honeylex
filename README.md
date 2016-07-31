@@ -11,18 +11,26 @@ A cqrs plus es (cms) app boilerplate for php based on the integration of the [Ho
 
 You can have Honeylex running very quickly with [Docker][Docker]:
 
-Install and run as follows:
+Setup on your host machine as follows:
 ```shell
 git clone git@github.com:honeylex/honeylex.git your-project
-cd your-project/var/docker
-docker-compose up -d
-docker exec -ti docker_elasticsearch_1 bin/plugin install analysis-icu
-docker exec -ti docker_elasticsearch_1 bin/plugin install mobz/elasticsearch-head
-docker-compose restart
-# project installation
-docker exec -ti docker_front_1 /var/www/bin/console hlx:project:install
-docker exec -ti docker_front_1 /var/www/bin/console hlx:migrate:up
+cd your-project
+composer docker:build
 ```
+
+Now you can connect to the front container and run commands:
+```shell
+# project installation
+# NOTE! docker will sanitize your container prefix removing punctuation etc.
+docker exec -it -u 1000 yourproject_web_1 bash
+cd /var/www
+composer install
+bin/console hlx:project:install
+bin/console hlx:migrate:up
+```
+Your site will then be available at the IP address of your base machine. 
+You can configure various files in ```/var/docker/conf```
+
 
 ### Local
 
