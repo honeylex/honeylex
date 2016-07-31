@@ -22,6 +22,8 @@ services:
     image: couchdb:latest
     ports:
       - "5984:5984"
+    volumes:
+      - ../../data/couchdb:/usr/local/var/lib/couchdb
     environment:
       COUCHDB_USER: honeylex
       COUCHDB_PASSWORD: honeylex
@@ -31,7 +33,7 @@ services:
     ports:
       - "9200:9200"
       - "9300:9300"
-  
+
   rabbitmq:
     image: rabbitmq:3.6-management
     ports:
