@@ -29,7 +29,16 @@ bin/console hlx:project:install
 bin/console hlx:migrate:up
 ```
 Your site will then be available at the IP address of your base machine. 
-You can configure various files in ```/var/docker/conf```
+You can configure various files in the ```your-project/var/docker/conf``` folder of your host machine.
+
+The following docker commands are available via `composer` from your host machine:
+```shell
+composer docker:build # provision a container set for a Honeylex project
+composer docker:up    # bring up the containers without building
+composer docker:down  # stops and removes the project containers
+composer docker:start # start previously stopped containers
+composer docker:stop  # stop/suspend the docker containers
+```
 
 ### Local
 
