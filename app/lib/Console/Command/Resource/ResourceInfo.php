@@ -9,6 +9,7 @@ use Honeybee\Projection\ProjectionTypeMap;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Finder\Finder;
 
 class ResourceInfo extends ResourceCommand
 {
@@ -18,11 +19,11 @@ class ResourceInfo extends ResourceCommand
 
     public function __construct(
         ConfigProviderInterface $configProvider,
+        Finder $fileFinder,
         ProjectionTypeMap $projectionTypeMap,
         AggregateRootTypeMap $aggregateRootTypeMap
     ) {
-        parent::__construct($configProvider);
-
+        parent::__construct($configProvider, $fileFinder);
         $this->projectionTypeMap = $projectionTypeMap;
         $this->aggregateRootTypeMap = $aggregateRootTypeMap;
     }
@@ -34,23 +35,28 @@ class ResourceInfo extends ResourceCommand
             ->setDescription('Displays detail information about a specific resource from the given crate.')
             ->addArgument(
                 'crate',
-                InputArgument::REQUIRED,
-                "The prefix of the crate that contains the target resource."
+                InputArgument::OPTIONAL,
+                'The prefix of the crate that contains the target resource.'
             )
             ->addArgument(
                 'resource',
-                InputArgument::REQUIRED,
-                "The name of the resource to display the details for."
+                InputArgument::OPTIONAL,
+                'The name of the resource to display the details for.'
             );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $cratePrefix = $input->getArgument('crate');
-        $resourceName = $input->getArgument('resource');
+        if (!$cratePrefix = $input->getArgument('crate')) {
+            $cratePrefix = $this->listCrates($input, $output);
+        }
+
+        if (!$resourceName = $input->getArgument('resource')) {
+            $resourceName = $this->listResources($input, $output, $cratePrefix);
+        }
 
         if (!$resourceName || !$cratePrefix) {
-            $output->writeln('<error>You must specify at least a crate-prefix and resource-name.</error>');
+            $output->writeln('<error>You must specify at least a crate and resource.</error>');
             return false;
         }
 
@@ -58,7 +64,7 @@ class ResourceInfo extends ResourceCommand
 
         $crateDir = $crate->getRootDir();
         $resourcePrefix = $crate->getPrefix().'.'.StringToolkit::asSnakeCase($resourceName);
-        $projectionType = $this->projectionTypeMap->getItem($resourcePrefix);
+        $projectionTypes = $this->projectionTypeMap->filterByPrefix($resourcePrefix);
         $aggregateRootType = $this->aggregateRootTypeMap->getItem($resourcePrefix);
 
         $resourceDirectories = [
@@ -70,8 +76,15 @@ class ResourceInfo extends ResourceCommand
         $output->writeln('Crate:       ' . $crate->getVendor().'/'.$crate->getName());
         $output->writeln('Name:        ' . $resourceName);
         $output->writeln('Namespace:   ' . $crate->getNamespace().'\\'.$resourceName);
-        $output->writeln('Projection:  ' . $projectionType->getEntityImplementor());
         $output->writeln('Model:       ' . $aggregateRootType->getEntityImplementor());
+        $output->writeln('Projections: ');
+        foreach ($projectionTypes as $projectionType) {
+            $output->writeln(sprintf(
+                '  %s: %s',
+                $projectionType->getVariant(),
+                $projectionType->getEntityImplementor()
+            ));
+        }
         $output->writeln('Directories: ');
         $output->writeln('- '.$crateDir.'/config/'.$resourceName);
         $output->writeln('- '.$crateDir.'/lib/'.$resourceName);

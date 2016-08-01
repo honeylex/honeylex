@@ -8,7 +8,6 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Question\ChoiceQuestion;
 use Symfony\Component\Console\Question\Question;
 
 class MakeResource extends ResourceCommand
@@ -45,8 +44,8 @@ class MakeResource extends ResourceCommand
     protected function writeHeader(OutputInterface $output)
     {
         $output->writeln('');
-        $output->writeln('Honeylex resource generation');
-        $output->writeln('----------------------------');
+        $output->writeln('Honeylex resource scaffolding');
+        $output->writeln('-----------------------------');
         $output->writeln('');
     }
 
@@ -119,12 +118,5 @@ class MakeResource extends ResourceCommand
         $skeletonGenerator = new SkeletonGenerator('resource', $skeletonLocations, $crate->getRootDir(), $data);
         $skeletonGenerator->generate();
         // @todo auto run migrations?
-    }
-
-    protected function listCrates(InputInterface $input, OutputInterface $output)
-    {
-        $helper = $this->getHelper('question');
-        $question = new ChoiceQuestion('Please select a crate: ', $this->configProvider->getCrateMap()->getKeys());
-        return $helper->ask($input, $output, $question);
     }
 }

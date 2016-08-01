@@ -12,16 +12,6 @@ use Trellis\CodeGen\Console\GenerateCodeCommand;
 
 class GenerateCode extends ResourceCommand
 {
-    protected $fileFinder;
-
-    public function __construct(
-        ConfigProviderInterface $configProvider,
-        Finder $fileFinder
-    ) {
-        parent::__construct($configProvider);
-        $this->fileFinder = $fileFinder;
-    }
-
     protected function configure()
     {
         $this
@@ -29,23 +19,37 @@ class GenerateCode extends ResourceCommand
             ->setDescription('Scaffold entities off a specific schema-definition within a given crate.')
             ->addArgument(
                 'crate',
-                InputArgument::REQUIRED,
+                InputArgument::OPTIONAL,
                 'The prefix of the crate to generate the resource for.'
             )
             ->addArgument(
                 'resource',
-                InputArgument::REQUIRED,
+                InputArgument::OPTIONAL,
                 'The name of the resource to generate the code for.'
             );
     }
 
+    protected function writeHeader(OutputInterface $output)
+    {
+        $output->writeln('');
+        $output->writeln('Honeylex resource code generation');
+        $output->writeln('---------------------------------');
+        $output->writeln('');
+    }
+
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $cratePrefix = $input->getArgument('crate');
-        $resourceName = $input->getArgument('resource');
+        if (!$cratePrefix = $input->getArgument('crate')) {
+            $this->writeHeader($output);
+            $cratePrefix = $this->listCrates($input, $output);
+        }
+
+        if (!$resourceName = $input->getArgument('resource')) {
+            $resourceName = $this->listResources($input, $output, $cratePrefix);
+        }
 
         if (!$resourceName || !$cratePrefix) {
-            $output->writeln('<error>You must specify at least a crate-prefix and resource-name.</error>');
+            $output->writeln('<error>You must specify at least a crate and resource.</error>');
             return false;
         }
 

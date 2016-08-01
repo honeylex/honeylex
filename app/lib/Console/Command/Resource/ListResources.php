@@ -2,25 +2,13 @@
 
 namespace Honeybee\FrameworkBinding\Silex\Console\Command\Resource;
 
-use Honeybee\FrameworkBinding\Silex\Config\ConfigProviderInterface;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Finder\Finder;
 use Trellis\CodeGen\Parser\Schema\EntityTypeSchemaXmlParser;
 
 class ListResources extends ResourceCommand
 {
-    protected $fileFinder;
-
-    public function __construct(
-        ConfigProviderInterface $configProvider,
-        Finder $fileFinder
-    ) {
-        parent::__construct($configProvider);
-        $this->fileFinder = $fileFinder;
-    }
-
     protected function configure()
     {
         $this

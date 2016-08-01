@@ -3,26 +3,13 @@
 namespace Honeybee\FrameworkBinding\Silex\Console\Command\Resource;
 
 use Honeybee\Common\Util\StringToolkit;
-use Honeybee\FrameworkBinding\Silex\Config\ConfigProviderInterface;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Question\Question;
-use Symfony\Component\Console\Question\ChoiceQuestion;
 use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\Finder\Finder;
-use Trellis\CodeGen\Parser\Schema\EntityTypeSchemaXmlParser;
 
 class RemoveResource extends ResourceCommand
 {
-    public function __construct(
-        ConfigProviderInterface $configProvider,
-        Finder $fileFinder
-    ) {
-        parent::__construct($configProvider);
-        $this->fileFinder = $fileFinder;
-    }
-
     protected function configure()
     {
         $this
@@ -83,28 +70,5 @@ class RemoveResource extends ResourceCommand
             (new Filesystem)->remove($resourceDirectory);
         }
         // @todo also tricky: find and run proper migrations
-    }
-
-    protected function listCrates(InputInterface $input, OutputInterface $output)
-    {
-        $helper = $this->getHelper('question');
-        $question = new ChoiceQuestion('Please select a crate: ', $this->configProvider->getCrateMap()->getKeys());
-        return $helper->ask($input, $output, $question);
-    }
-
-    protected function listResources(InputInterface $input, OutputInterface $output, $cratePrefix)
-    {
-        $helper = $this->getHelper('question');
-        $crate = $this->configProvider->getCrateMap()->getItem($cratePrefix);
-        $finder = clone $this->fileFinder;
-        $foundSchemas = $finder->in($crate->getRootDir())->name('aggregate_root.xml');
-        $resource_names = [];
-        foreach (iterator_to_array($foundSchemas, true) as $fileInfo) {
-           $entitySchema = (new EntityTypeSchemaXmlParser)->parse($fileInfo->getPathname());
-           $typeDefinition = $entitySchema->getEntityTypeDefinition();
-           $resource_names[] = $typeDefinition->getName();
-        }
-        $question = new ChoiceQuestion('Please select a resource: ', $resource_names);
-        return $helper->ask($input, $output, $question);
     }
 }
