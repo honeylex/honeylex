@@ -6,18 +6,17 @@ use Trellis\CodeGen\PluginInterface;
 use Trellis\CodeGen\Schema\EntityTypeDefinition;
 use Trellis\CodeGen\Schema\EntityTypeSchema;
 use Trellis\Common\Options;
-use Trellis\Runtime\Attribute\Image\Image;
 use Symfony\Component\Filesystem\Filesystem;
 
 /**
- * A plugin for the trellis code-generator.
- * Generates and deploys an elasticsearch type mapping for a given entity-type-definition.
+ * A plugin for the Trellis code-generator.
+ * Generates an Elasticsearch type mapping for a given entity type definition.
  */
 class ElasticsearchMappingPlugin implements PluginInterface
 {
     const FILE_MODE = 0644;
 
-    protected static $es_type_map = [
+    protected static $esTypeMap = [
         'asset' => 'object',
         'boolean' => 'boolean',
         'boolean-list' => 'boolean',
@@ -46,55 +45,49 @@ class ElasticsearchMappingPlugin implements PluginInterface
 
     protected $options;
 
-    protected $file_system;
+    protected $fileSystem;
 
     public function __construct(Options $options)
     {
         $this->options = $options;
-        $this->file_system = new Filesystem();
+        $this->fileSystem = new Filesystem;
     }
 
-    public function execute(EntityTypeSchema $type_schema)
+    public function execute(EntityTypeSchema $typeSchema)
     {
-        $type_definition = $type_schema->getEntityTypeDefinition();
-        $type_properties = $this->buildTypePropertiesMapping($type_definition);
-        $index_name = $this->options->get('index_name');
-        $type_name = $this->options->get('type_name');
+        $typeDefinition = $typeSchema->getEntityTypeDefinition();
+        $typeProperties = $this->buildTypePropertiesMapping($typeDefinition);
 
-        $this->file_system->dumpFile(
+        $this->fileSystem->dumpFile(
             $this->options['deploy_path'],
             json_encode(
-                [
-                    'properties' => (object)$type_properties
-                ],
+                [ 'properties' => (object)$typeProperties ],
                 JSON_PRETTY_PRINT
             ),
             self::FILE_MODE
         );
     }
 
-    protected function buildTypePropertiesMapping(EntityTypeDefinition $type_definition)
+    protected function buildTypePropertiesMapping(EntityTypeDefinition $typeDefinition)
     {
-        $type_properties = [];
-        foreach ($type_definition->getAttributes() as $attribute) {
-            $handler_function = sprintf(
+        $typeProperties = [];
+        foreach ($typeDefinition->getAttributes() as $attribute) {
+            $handlerFunction = sprintf(
                 'map%s',
                 implode('', array_map('ucfirst', explode('-', $attribute->getShortName())))
             );
-            if (is_callable(array($this, $handler_function))) {
-                $mapping = $this->$handler_function(
-                        $attribute->getName(), $attribute, $type_definition
-                );
+            if (is_callable(array($this, $handlerFunction))) {
+                $mapping = $this->$handlerFunction($attribute);
                 if (!empty($mapping)) {
-                    $type_properties[$attribute->getName()] = $mapping;
+                    $typeProperties[$attribute->getName()] = $mapping;
                 }
             }
         }
 
-        return $type_properties;
+        return $typeProperties;
     }
 
-    protected function mapText($attribute_name, $attribute, $type_definition)
+    protected function mapText($attribute)
     {
         return [
             'type' => 'string',
@@ -117,113 +110,113 @@ class ElasticsearchMappingPlugin implements PluginInterface
         ];
     }
 
-    protected function mapEmail($attribute_name, $attribute, $type_definition)
+    protected function mapEmail($attribute)
     {
-        return [ 'type' => self::$es_type_map[$attribute->getShortName()], 'index' => 'not_analyzed' ];
+        return [ 'type' => self::$esTypeMap[$attribute->getShortName()], 'index' => 'not_analyzed' ];
     }
 
-    protected function mapEmailList($attribute_name, $attribute, $type_definition)
+    protected function mapEmailList($attribute)
     {
-        return [ 'type' => self::$es_type_map[$attribute->getShortName()], 'index' => 'not_analyzed' ];
+        return [ 'type' => self::$esTypeMap[$attribute->getShortName()], 'index' => 'not_analyzed' ];
     }
 
-    protected function mapUrl($attribute_name, $attribute, $type_definition)
+    protected function mapUrl($attribute)
     {
-        return [ 'type' => self::$es_type_map[$attribute->getShortName()], 'index' => 'no' ];
+        return [ 'type' => self::$esTypeMap[$attribute->getShortName()], 'index' => 'no' ];
     }
 
-    protected function mapTimestamp($attribute_name, $attribute, $type_definition)
+    protected function mapTimestamp($attribute)
     {
-        return [ 'type' => self::$es_type_map[$attribute->getShortName()] ];
+        return [ 'type' => self::$esTypeMap[$attribute->getShortName()] ];
     }
 
-    protected function mapDate($attribute_name, $attribute, $type_definition)
+    protected function mapDate($attribute)
     {
-        return [ 'type' => self::$es_type_map[$attribute->getShortName()] ];
+        return [ 'type' => self::$esTypeMap[$attribute->getShortName()] ];
     }
 
-    protected function mapChoice($attribute_name, $attribute, $type_definition)
+    protected function mapChoice($attribute)
     {
-        return [ 'type' => self::$es_type_map[$attribute->getShortName()], 'index' => 'not_analyzed' ];
+        return [ 'type' => self::$esTypeMap[$attribute->getShortName()], 'index' => 'not_analyzed' ];
     }
 
-    protected function mapTextList($attribute_name, $attribute, $type_definition)
+    protected function mapTextList($attribute)
     {
-        return [ 'type' => self::$es_type_map[$attribute->getShortName()] ];
+        return [ 'type' => self::$esTypeMap[$attribute->getShortName()] ];
     }
 
-    protected function mapTextarea($attribute_name, $attribute, $type_definition)
+    protected function mapTextarea($attribute)
     {
-        return [ 'type' => self::$es_type_map[$attribute->getShortName()] ];
+        return [ 'type' => self::$esTypeMap[$attribute->getShortName()] ];
     }
 
-    protected function mapInteger($attribute_name, $attribute, $type_definition)
+    protected function mapInteger($attribute)
     {
-        return [ 'type' => self::$es_type_map[$attribute->getShortName()] ];
+        return [ 'type' => self::$esTypeMap[$attribute->getShortName()] ];
     }
 
-    protected function mapIntegerList($attribute_name, $attribute, $type_definition)
+    protected function mapIntegerList($attribute)
     {
-        return [ 'type' => self::$es_type_map[$attribute->getShortName()] ];
+        return [ 'type' => self::$esTypeMap[$attribute->getShortName()] ];
     }
 
-    protected function mapFloat($attribute_name, $attribute, $type_definition)
+    protected function mapFloat($attribute)
     {
-        return [ 'type' => self::$es_type_map[$attribute->getShortName()] ];
+        return [ 'type' => self::$esTypeMap[$attribute->getShortName()] ];
     }
 
-    protected function mapFloatList($attribute_name, $attribute, $type_definition)
+    protected function mapFloatList($attribute)
     {
-        return [ 'type' => self::$es_type_map[$attribute->getShortName()] ];
+        return [ 'type' => self::$esTypeMap[$attribute->getShortName()] ];
     }
 
-    protected function mapBoolean($attribute_name, $attribute, $type_definition)
+    protected function mapBoolean($attribute)
     {
-        return [ 'type' => self::$es_type_map[$attribute->getShortName()] ];
+        return [ 'type' => self::$esTypeMap[$attribute->getShortName()] ];
     }
 
-    protected function mapBooleanList($attribute_name, $attribute, $type_definition)
+    protected function mapBooleanList($attribute)
     {
-        return [ 'type' => self::$es_type_map[$attribute->getShortName()] ];
+        return [ 'type' => self::$esTypeMap[$attribute->getShortName()] ];
     }
 
-    protected function mapKeyValueList($attribute_name, $attribute, $type_definition)
+    protected function mapKeyValueList($attribute)
     {
-        return [ 'type' => self::$es_type_map[$attribute->getShortName()], 'enabled' => false ];
+        return [ 'type' => self::$esTypeMap[$attribute->getShortName()], 'enabled' => false ];
     }
 
-    protected function mapImage($attribute_name, $attribute, $type_definition)
+    protected function mapImage($attribute)
     {
-        return [ 'type' => self::$es_type_map[$attribute->getShortName()], 'enabled' => false ];
+        return [ 'type' => self::$esTypeMap[$attribute->getShortName()], 'enabled' => false ];
     }
 
-    protected function mapImageList($attribute_name, $attribute, $type_definition)
+    protected function mapImageList($attribute)
     {
-        return [ 'type' => self::$es_type_map[$attribute->getShortName()], 'enabled' => false ];
+        return [ 'type' => self::$esTypeMap[$attribute->getShortName()], 'enabled' => false ];
     }
 
-    protected function mapEmbeddedEntityList($attribute_name, $attribute, $type_definition)
+    protected function mapEmbeddedEntityList($attribute)
     {
-        return [ 'type' => self::$es_type_map[$attribute->getShortName()] ];
+        return [ 'type' => self::$esTypeMap[$attribute->getShortName()] ];
     }
 
-    protected function mapEntityReferenceList($attribute_name, $attribute, $type_definition)
+    protected function mapEntityReferenceList($attribute)
     {
-        return [ 'type' => self::$es_type_map[$attribute->getShortName()] ];
+        return [ 'type' => self::$esTypeMap[$attribute->getShortName()] ];
     }
 
-    protected function mapAsset($attribute_name, $attribute, $type_definition)
+    protected function mapAsset($attribute)
     {
-        return [ 'type' => self::$es_type_map[$attribute->getShortName()], 'enabled' => false ];
+        return [ 'type' => self::$esTypeMap[$attribute->getShortName()], 'enabled' => false ];
     }
 
-    protected function mapGeoPoint($attribute_name, $attribute, $type_definition)
+    protected function mapGeoPoint($attribute)
     {
-        return [ 'type' => self::$es_type_map[$attribute->getShortName()] ];
+        return [ 'type' => self::$esTypeMap[$attribute->getShortName()] ];
     }
 
-    protected function mapToken($attribute_name, $attribute, $type_definition)
+    protected function mapToken($attribute)
     {
-        return [ 'type' => self::$es_type_map[$attribute->getShortName()], 'index' => 'not_analyzed' ];
+        return [ 'type' => self::$esTypeMap[$attribute->getShortName()], 'index' => 'not_analyzed' ];
     }
 }
