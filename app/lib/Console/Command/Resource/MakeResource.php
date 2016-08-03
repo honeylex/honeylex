@@ -85,17 +85,17 @@ class MakeResource extends ResourceCommand
         }
         $skeletonLocations = array_unique($skeletonLocations);
 
-        $output->writeln('Target crate: ' . $crate->getVendor().'/'.$crate->getName());
-        $output->writeln('Prefix: ' . $resourcePrefix);
-        $output->writeln('Namespace: ' . $crate->getNamespace().'\\'.$resourceName);
-        $output->writeln('Description: ' . $description);
+        $output->writeln('Target crate: '.$crate->getVendor().'/'.$crate->getName());
+        $output->writeln('Resource prefix: '.$resourcePrefix);
+        $output->writeln('Resource namespace: '.$crate->getNamespace().'\\'.$resourceName);
+        $output->writeln('Resource description: '.$description);
         $output->writeln('Directories: ');
         $output->writeln('- '.$crate->getRootDir().'/config/'.$resourceName);
         $output->writeln('- '.$crate->getRootDir().'/lib/'.$resourceName);
         $output->writeln('- '.$crate->getRootDir().'/templates/'.StringToolkit::asSnakeCase($resourceName));
-        $output->writeln('Skeleton-locations:');
+        $output->writeln('Skeleton locations:');
         foreach ($skeletonLocations as $skeletonLocation) {
-            $output->writeln('- '. $skeletonLocation);
+            $output->writeln('- '.$skeletonLocation);
         }
 
         $data = [

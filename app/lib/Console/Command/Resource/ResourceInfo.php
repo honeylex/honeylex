@@ -73,10 +73,10 @@ class ResourceInfo extends ResourceCommand
             $crateDir.'templates/'.StringToolkit::asSnakeCase($resourceName)
         ];
 
-        $output->writeln('Crate:       ' . $crate->getVendor().'/'.$crate->getName());
-        $output->writeln('Name:        ' . $resourceName);
-        $output->writeln('Namespace:   ' . $crate->getNamespace().'\\'.$resourceName);
-        $output->writeln('Model:       ' . $aggregateRootType->getEntityImplementor());
+        $output->writeln('Crate:       '.$crate->getVendor().'/'.$crate->getName());
+        $output->writeln('Name:        '.$resourceName);
+        $output->writeln('Namespace:   '.$crate->getNamespace().'\\'.$resourceName);
+        $output->writeln('Model:       '.$aggregateRootType->getEntityImplementor());
         $output->writeln('Projections: ');
         foreach ($projectionTypes as $projectionType) {
             $output->writeln(sprintf(

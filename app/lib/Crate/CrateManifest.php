@@ -39,9 +39,9 @@ class CrateManifest implements CrateManifestInterface
         return $this->class;
     }
 
-    public function getPrefix()
+    public function getPrefix($sep = '.')
     {
-        return StringToolkit::asSnakecase($this->getVendor()).'.'.StringToolkit::asSnakecase($this->getName());
+        return StringToolkit::asSnakecase($this->getVendor()).$sep.StringToolkit::asSnakecase($this->getName());
     }
 
     public function getVendor()

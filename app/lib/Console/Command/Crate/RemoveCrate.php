@@ -64,7 +64,7 @@ class RemoveCrate extends CrateCommand
             $output->writeln('<info>Removed crate from composer autoload.</info>');
             $crates = [];
             foreach ($this->configProvider->getCrateMap() as $crateToLoad) {
-                $crates[get_class($crateToLoad)]['settings'] = $crateToLoad->getManifest()->getSettings()->toArray();
+                $crates[get_class($crateToLoad)]['settings'] = $crateToLoad->getSettings()->toArray();
             }
             $this->updateCratesConfig($crates);
             $output->writeln('<info>Removed crate from crates.yml config.</info>');

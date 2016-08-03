@@ -3,7 +3,6 @@
 namespace Honeybee\FrameworkBinding\Silex\Crate;
 
 use Honeybee\Common\Error\RuntimeError;
-use Honeybee\Common\Util\StringToolkit;
 
 abstract class Crate implements CrateInterface
 {
@@ -29,7 +28,7 @@ abstract class Crate implements CrateInterface
         $settings = $this->manifest->getSettings();
         return $settings->has('routing_prefix')
             ? $settings->get('routing_prefix')
-            : '/'.StringToolkit::asSnakeCase($this->getVendor()).'/'.StringToolkit::asSnakeCase($this->getName());
+            : '/'.$this->manifest->getPrefix('/');
     }
 
     public function __call($method, $arguments)

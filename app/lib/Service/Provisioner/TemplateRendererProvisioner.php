@@ -3,6 +3,7 @@
 namespace Honeybee\FrameworkBinding\Silex\Service\Provisioner;
 
 use Auryn\Injector;
+use Honeybee\Common\Util\StringToolkit;
 use Honeybee\FrameworkBinding\Silex\Config\ConfigProviderInterface;
 use Honeybee\FrameworkBinding\Silex\Crate\CrateMap;
 use Honeybee\Infrastructure\Config\SettingsInterface;
@@ -43,17 +44,17 @@ class TemplateRendererProvisioner implements ProvisionerInterface
     ) {
         $app->register(new TwigServiceProvider);
 
-        $namespacedPaths = $this->getCrateTemplatesPaths($configProvider->getCrateMap());
+        $namespacedPaths = $this->getCrateTemplatesPaths($configProvider);
         $projectTemplates = $configProvider->getProjectDir().'/app/templates';
-        $namespacedPaths['Honeylex'] = $configProvider->getCoreDir().'/app/templates';
-        $namespacedPaths['Project'] = $projectTemplates;
+        $namespacedPaths['honeylex'] = $configProvider->getCoreDir().'/app/templates';
+        $namespacedPaths['project'] = $projectTemplates;
 
         $app['twig.form.templates'] = [ 'bootstrap_3_layout.html.twig' ];
         $app['twig.options'] = [ 'cache' => $configProvider->getProjectDir().'/var/cache/twig' ];
         $app['twig.loader.filesystem'] = function () use ($namespacedPaths, $projectTemplates) {
             $filesystem = new \Twig_Loader_Filesystem($projectTemplates);
             foreach ($namespacedPaths as $namespace => $path) {
-                $filesystem->addPath($path, $namespace);
+                $filesystem->setPaths($path, $namespace);
             }
             return $filesystem;
         };
@@ -62,18 +63,24 @@ class TemplateRendererProvisioner implements ProvisionerInterface
             foreach ($provisionerSettings->get('extensions', []) as $extension) {
                 $twig->addExtension(new $extension);
             }
-
             return $twig;
         });
     }
 
-    protected function getCrateTemplatesPaths(CrateMap $crateMap)
+    protected function getCrateTemplatesPaths(ConfigProviderInterface $configProvider)
     {
+        $projectDir = $configProvider->getProjectDir().'/app/templates';
+
         $paths = [];
-        foreach ($crateMap as $crate) {
+        foreach ($configProvider->getCrateMap() as $crate) {
+            $cratePrefix = $crate->getPrefix('-');
+            $projectCratePath = $projectDir.'/'.$cratePrefix;
+            if (is_readable($projectCratePath)) {
+                $paths[$cratePrefix][] = $projectDir.'/'.$cratePrefix;
+            }
             $templatesPath = $crate->getRootDir().'/templates';
             if (is_readable($templatesPath)) {
-                $paths[$crate->getName()] = $templatesPath;
+                $paths[$cratePrefix][] = $templatesPath;
             }
         }
 

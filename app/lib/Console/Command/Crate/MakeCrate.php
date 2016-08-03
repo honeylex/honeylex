@@ -124,7 +124,7 @@ class MakeCrate extends CrateCommand
         // update the crates.yml
         $crates = [];
         foreach ($this->configProvider->getCrateMap() as $crateToLoad) {
-            $crates[get_class($crateToLoad)]['settings'] = $crateToLoad->getManifest()->getSettings()->toArray();
+            $crates[get_class($crateToLoad)]['settings'] = $crateToLoad->getSettings()->toArray();
         }
         $crates[$fqns.'\\'.$name.'Crate']['settings'] = [];
         $this->updateCratesConfig($crates);

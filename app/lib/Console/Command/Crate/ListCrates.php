@@ -30,11 +30,10 @@ class ListCrates extends CrateCommand
 
         $output->writeln(
             sprintf(
-                "%s/%s:\n  Prefix: %s.%s\n  Path: %s",
+                "%s/%s:\n  Prefix: %s\n  Path: %s",
                 $vendor,
                 $name,
-                StringToolkit::asSnakecase($vendor),
-                StringToolkit::asSnakecase($name),
+                $crate->getPrefix(),
                 $crate->getRootDir()
             )
         );
