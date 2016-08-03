@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "944e0c74bc3e34b01fba411c62a8153b",
+    "hash": "58d8057293c9177ddf471d892328506e",
     "content-hash": "c2f89918f8e3ac67e108a9abb33d925d",
     "packages": [
         {
@@ -658,12 +658,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeybee/honeybee.git",
-                "reference": "dbb66f80fcdce26dbe74712d596bf329d3399605"
+                "reference": "b497a5da710be52ee431c4a2794dc8bd4cb41bbf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/dbb66f80fcdce26dbe74712d596bf329d3399605",
-                "reference": "dbb66f80fcdce26dbe74712d596bf329d3399605",
+                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/b497a5da710be52ee431c4a2794dc8bd4cb41bbf",
+                "reference": "b497a5da710be52ee431c4a2794dc8bd4cb41bbf",
                 "shasum": ""
             },
             "require": {
@@ -689,6 +689,7 @@
             },
             "require-dev": {
                 "mockery/mockery": "master@dev",
+                "php-amqplib/php-amqplib": "master@dev",
                 "phpmd/phpmd": "~2.3",
                 "phpunit/phpunit": "~5.0",
                 "sami/sami": "~3.2",
@@ -746,7 +747,7 @@
                 "hexagonal",
                 "messaging"
             ],
-            "time": "2016-07-31 12:05:28"
+            "time": "2016-08-03 16:29:04"
         },
         {
             "name": "honeybee/trellis",
@@ -824,12 +825,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeylex/hlx-security.git",
-                "reference": "5cad0c2819406845b40661330a53d5893c8e4579"
+                "reference": "d6f09eee676666268083f7f32b72a248c2a8c11c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeylex/hlx-security/zipball/5cad0c2819406845b40661330a53d5893c8e4579",
-                "reference": "5cad0c2819406845b40661330a53d5893c8e4579",
+                "url": "https://api.github.com/repos/honeylex/hlx-security/zipball/d6f09eee676666268083f7f32b72a248c2a8c11c",
+                "reference": "d6f09eee676666268083f7f32b72a248c2a8c11c",
                 "shasum": ""
             },
             "require": {
@@ -858,20 +859,20 @@
                 "source": "https://github.com/honeylex/hlx-security/tree/master",
                 "issues": "https://github.com/honeylex/hlx-security/issues"
             },
-            "time": "2016-07-29 20:25:22"
+            "time": "2016-08-03 19:28:53"
         },
         {
             "name": "league/flysystem",
-            "version": "1.0.25",
+            "version": "1.0.26",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "a76afa4035931be0c78ca8efc6abf3902362f437"
+                "reference": "fb3b30dca320b36931ea878fea17ebe136fba1b0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/a76afa4035931be0c78ca8efc6abf3902362f437",
-                "reference": "a76afa4035931be0c78ca8efc6abf3902362f437",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/fb3b30dca320b36931ea878fea17ebe136fba1b0",
+                "reference": "fb3b30dca320b36931ea878fea17ebe136fba1b0",
                 "shasum": ""
             },
             "require": {
@@ -941,7 +942,7 @@
                 "sftp",
                 "storage"
             ],
-            "time": "2016-07-18 12:22:57"
+            "time": "2016-08-03 09:49:11"
         },
         {
             "name": "michelf/php-markdown",
@@ -996,16 +997,16 @@
         },
         {
             "name": "monolog/monolog",
-            "version": "1.20.0",
+            "version": "1.21.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "55841909e2bcde01b5318c35f2b74f8ecc86e037"
+                "reference": "f42fbdfd53e306bda545845e4dbfd3e72edb4952"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/55841909e2bcde01b5318c35f2b74f8ecc86e037",
-                "reference": "55841909e2bcde01b5318c35f2b74f8ecc86e037",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/f42fbdfd53e306bda545845e4dbfd3e72edb4952",
+                "reference": "f42fbdfd53e306bda545845e4dbfd3e72edb4952",
                 "shasum": ""
             },
             "require": {
@@ -1070,7 +1071,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2016-07-02 14:02:10"
+            "time": "2016-07-29 03:23:52"
         },
         {
             "name": "mtdowling/jmespath.php",
@@ -1408,16 +1409,16 @@
         },
         {
             "name": "ramsey/uuid",
-            "version": "3.4.1",
+            "version": "3.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ramsey/uuid.git",
-                "reference": "b4fe3b7387cb323fd15ad5837cae992422c9fa5c"
+                "reference": "a6d15c8618ea3951fd54d34e326b68d3d0bc0786"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ramsey/uuid/zipball/b4fe3b7387cb323fd15ad5837cae992422c9fa5c",
-                "reference": "b4fe3b7387cb323fd15ad5837cae992422c9fa5c",
+                "url": "https://api.github.com/repos/ramsey/uuid/zipball/a6d15c8618ea3951fd54d34e326b68d3d0bc0786",
+                "reference": "a6d15c8618ea3951fd54d34e326b68d3d0bc0786",
                 "shasum": ""
             },
             "require": {
@@ -1435,7 +1436,7 @@
                 "jakub-onderka/php-parallel-lint": "^0.9.0",
                 "mockery/mockery": "^0.9.4",
                 "moontoast/math": "^1.1",
-                "phpunit/phpunit": "^4.7|^5.0",
+                "phpunit/phpunit": "^4.7|>=5.0 <5.4",
                 "satooshi/php-coveralls": "^0.6.1",
                 "squizlabs/php_codesniffer": "^2.3"
             },
@@ -1484,7 +1485,7 @@
                 "identifier",
                 "uuid"
             ],
-            "time": "2016-04-24 00:30:41"
+            "time": "2016-08-02 18:39:32"
         },
         {
             "name": "rdlowrey/auryn",
