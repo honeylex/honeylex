@@ -1,4 +1,5 @@
 .project
+.DS_Store
 .settings/
 /vendor/
 /var/cache

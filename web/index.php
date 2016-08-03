@@ -2,7 +2,7 @@
 
 $appEnv = 'prod';
 $appContext = 'web';
-$localConfigDir = getenv('LOCAL_CONFIG_DIR') ?: '/usr/local/honeylex.local/';
+$localConfigDir = getenv('LOCAL_CONFIG_DIR') ?: '/usr/local/honeylex.local';
 
 ini_set('display_errors', 0);
 
