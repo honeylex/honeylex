@@ -4,7 +4,6 @@ namespace Honeybee\FrameworkBinding\Silex;
 
 use Honeybee\EnvironmentInterface;
 use Honeybee\Infrastructure\Config\ConfigInterface;
-use Symfony\Component\Security\Core\User\User;
 
 class Environment implements EnvironmentInterface
 {
@@ -12,7 +11,7 @@ class Environment implements EnvironmentInterface
 
     protected $config;
 
-    public function __construct(ConfigInterface $config, User $user = null)
+    public function __construct(ConfigInterface $config, $user = null)
     {
         $this->user = $user;
         $this->config = $config;

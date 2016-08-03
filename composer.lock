@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "58d8057293c9177ddf471d892328506e",
-    "content-hash": "c2f89918f8e3ac67e108a9abb33d925d",
+    "hash": "68d284619f6e64a6b2e12c3770c9d77c",
+    "content-hash": "aa8b47ee987fd17c1a7091c97d95eb08",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -825,16 +825,17 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeylex/hlx-security.git",
-                "reference": "d6f09eee676666268083f7f32b72a248c2a8c11c"
+                "reference": "f32a8d244f8f907fd01a80d9e4439ae8e85aeddc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeylex/hlx-security/zipball/d6f09eee676666268083f7f32b72a248c2a8c11c",
-                "reference": "d6f09eee676666268083f7f32b72a248c2a8c11c",
+                "url": "https://api.github.com/repos/honeylex/hlx-security/zipball/f32a8d244f8f907fd01a80d9e4439ae8e85aeddc",
+                "reference": "f32a8d244f8f907fd01a80d9e4439ae8e85aeddc",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.6.1"
+                "php": ">=5.6.1",
+                "symfony/security": "~2.8|~3.1"
             },
             "require-dev": {
                 "phpunit/phpunit": "~5.3",
@@ -859,7 +860,7 @@
                 "source": "https://github.com/honeylex/hlx-security/tree/master",
                 "issues": "https://github.com/honeylex/hlx-security/issues"
             },
-            "time": "2016-08-03 19:28:53"
+            "time": "2016-08-03 20:12:13"
         },
         {
             "name": "league/flysystem",
