@@ -32,8 +32,6 @@ finders:
       index: ${project.database.prefix}.{{ crate.vendor|snake }}-{{ crate.name|snake }}
       type: {{ crate.vendor|snake }}-{{ crate.name|snake }}-{{ resource.name|snake }}-{{ resource.variant|snake }}
       log_search_query: false
-    dependencies:
-      projection_type: {{ crate.vendor }}\{{ crate.name }}\{{ resource.name }}\Projection\{{ resource.variant }}\{{ resource.name }}Type
 
 query_services:
   {{ crate.vendor|snake }}.{{ crate.name|snake }}.{{ resource.name|snake }}::projection.{{ resource.variant|snake }}::query_service:

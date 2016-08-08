@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "68d284619f6e64a6b2e12c3770c9d77c",
-    "content-hash": "aa8b47ee987fd17c1a7091c97d95eb08",
+    "hash": "ddfd945764f3ea135d2c95163709f2af",
+    "content-hash": "52db9886e3db2f31d9000fa1c1b46332",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -319,6 +319,54 @@
                 "fixtures"
             ],
             "time": "2016-04-29 12:21:54"
+        },
+        {
+            "name": "gigablah/silex-oauth",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/gigablah/silex-oauth.git",
+                "reference": "29beb1ed60110cd6838b606277037d53980ba25e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/gigablah/silex-oauth/zipball/29beb1ed60110cd6838b606277037d53980ba25e",
+                "reference": "29beb1ed60110cd6838b606277037d53980ba25e",
+                "shasum": ""
+            },
+            "require": {
+                "lusitanian/oauth": ">=0.3.5"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Gigablah\\Silex\\OAuth\\": [
+                        "src/"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Chris Heng",
+                    "email": "bigblah@gmail.com"
+                }
+            ],
+            "description": "Silex OAuth Authentication Provider",
+            "homepage": "https://github.com/gigablah/silex-oauth",
+            "keywords": [
+                "oauth",
+                "silex"
+            ],
+            "time": "2016-02-24 16:23:07"
         },
         {
             "name": "graste/params",
@@ -658,12 +706,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeybee/honeybee.git",
-                "reference": "b497a5da710be52ee431c4a2794dc8bd4cb41bbf"
+                "reference": "605908b2639be1c6a5092f6b50ec41b8ec280637"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/b497a5da710be52ee431c4a2794dc8bd4cb41bbf",
-                "reference": "b497a5da710be52ee431c4a2794dc8bd4cb41bbf",
+                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/605908b2639be1c6a5092f6b50ec41b8ec280637",
+                "reference": "605908b2639be1c6a5092f6b50ec41b8ec280637",
                 "shasum": ""
             },
             "require": {
@@ -747,7 +795,7 @@
                 "hexagonal",
                 "messaging"
             ],
-            "time": "2016-08-03 16:29:04"
+            "time": "2016-08-05 14:51:26"
         },
         {
             "name": "honeybee/trellis",
@@ -825,15 +873,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeylex/hlx-security.git",
-                "reference": "f32a8d244f8f907fd01a80d9e4439ae8e85aeddc"
+                "reference": "784147c241da99e345c3b83cdb0ad1e491dcb2f2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeylex/hlx-security/zipball/f32a8d244f8f907fd01a80d9e4439ae8e85aeddc",
-                "reference": "f32a8d244f8f907fd01a80d9e4439ae8e85aeddc",
+                "url": "https://api.github.com/repos/honeylex/hlx-security/zipball/784147c241da99e345c3b83cdb0ad1e491dcb2f2",
+                "reference": "784147c241da99e345c3b83cdb0ad1e491dcb2f2",
                 "shasum": ""
             },
             "require": {
+                "gigablah/silex-oauth": "~2.0@dev",
                 "php": ">=5.6.1",
                 "symfony/security": "~2.8|~3.1"
             },
@@ -860,7 +909,7 @@
                 "source": "https://github.com/honeylex/hlx-security/tree/master",
                 "issues": "https://github.com/honeylex/hlx-security/issues"
             },
-            "time": "2016-08-03 20:12:13"
+            "time": "2016-08-08 21:03:36"
         },
         {
             "name": "league/flysystem",
@@ -944,6 +993,73 @@
                 "storage"
             ],
             "time": "2016-08-03 09:49:11"
+        },
+        {
+            "name": "lusitanian/oauth",
+            "version": "v0.8.9",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Lusitanian/PHPoAuthLib.git",
+                "reference": "29bda6e176df6c292a9b1c43ae8a44d56a87c30b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Lusitanian/PHPoAuthLib/zipball/29bda6e176df6c292a9b1c43ae8a44d56a87c30b",
+                "reference": "29bda6e176df6c292a9b1c43ae8a44d56a87c30b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "3.7.*",
+                "predis/predis": "0.8.*@dev",
+                "squizlabs/php_codesniffer": "2.*",
+                "symfony/http-foundation": "~2.1"
+            },
+            "suggest": {
+                "ext-openssl": "Allows for usage of secure connections with the stream-based HTTP client.",
+                "predis/predis": "Allows using the Redis storage backend.",
+                "symfony/http-foundation": "Allows using the Symfony Session storage backend."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "OAuth": "src",
+                    "OAuth\\Unit": "tests"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "David Desberg",
+                    "email": "david@daviddesberg.com"
+                },
+                {
+                    "name": "Elliot Chance",
+                    "email": "elliotchance@gmail.com"
+                },
+                {
+                    "name": "Pieter Hordijk",
+                    "email": "info@pieterhordijk.com"
+                }
+            ],
+            "description": "PHP 5.3+ oAuth 1/2 Library",
+            "keywords": [
+                "Authentication",
+                "authorization",
+                "oauth",
+                "security"
+            ],
+            "time": "2016-02-24 00:20:18"
         },
         {
             "name": "michelf/php-markdown",
@@ -1272,16 +1388,16 @@
         },
         {
             "name": "psr/http-message",
-            "version": "1.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/http-message.git",
-                "reference": "85d63699f0dbedb190bbd4b0d2b9dc707ea4c298"
+                "reference": "f6561bf28d520154e4b0ec72be95418abe6d9363"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/http-message/zipball/85d63699f0dbedb190bbd4b0d2b9dc707ea4c298",
-                "reference": "85d63699f0dbedb190bbd4b0d2b9dc707ea4c298",
+                "url": "https://api.github.com/repos/php-fig/http-message/zipball/f6561bf28d520154e4b0ec72be95418abe6d9363",
+                "reference": "f6561bf28d520154e4b0ec72be95418abe6d9363",
                 "shasum": ""
             },
             "require": {
@@ -1309,6 +1425,7 @@
                 }
             ],
             "description": "Common interface for HTTP messages",
+            "homepage": "https://github.com/php-fig/http-message",
             "keywords": [
                 "http",
                 "http-message",
@@ -1317,7 +1434,7 @@
                 "request",
                 "response"
             ],
-            "time": "2015-05-04 20:22:00"
+            "time": "2016-08-06 14:39:51"
         },
         {
             "name": "psr/log",
@@ -1900,62 +2017,6 @@
                 "microframework"
             ],
             "time": "2016-06-14 09:27:51"
-        },
-        {
-            "name": "silex/web-profiler",
-            "version": "v2.0.1",
-            "target-dir": "Silex/Provider",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/silexphp/Silex-WebProfiler.git",
-                "reference": "605ebe9d16eb9597ab42603d1b4bec595ebf677d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/silexphp/Silex-WebProfiler/zipball/605ebe9d16eb9597ab42603d1b4bec595ebf677d",
-                "reference": "605ebe9d16eb9597ab42603d1b4bec595ebf677d",
-                "shasum": ""
-            },
-            "require": {
-                "silex/silex": "^2.0",
-                "symfony/stopwatch": "^2.8|^3.0",
-                "symfony/twig-bridge": "^2.8|^3.0",
-                "symfony/web-profiler-bundle": "^2.8|^3.0"
-            },
-            "conflict": {
-                "symfony/web-profiler-bundle": "3.1.0"
-            },
-            "require-dev": {
-                "symfony/browser-kit": "^2.8|^3.0",
-                "symfony/css-selector": "^2.8|^3.0",
-                "symfony/debug-bundle": "^2.8|^3.0",
-                "symfony/security": "^2.8|^3.0",
-                "symfony/security-bundle": "^2.8|^3.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Silex\\Provider\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                }
-            ],
-            "description": "A WebProfiler for Silex",
-            "homepage": "http://silex.sensiolabs.org/",
-            "time": "2016-06-15 07:44:40"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -3609,55 +3670,6 @@
             "time": "2016-07-17 14:02:08"
         },
         {
-            "name": "symfony/stopwatch",
-            "version": "v3.1.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/stopwatch.git",
-                "reference": "bb42806b12c5f89db4ebf64af6741afe6d8457e1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/stopwatch/zipball/bb42806b12c5f89db4ebf64af6741afe6d8457e1",
-                "reference": "bb42806b12c5f89db4ebf64af6741afe6d8457e1",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.5.9"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.1-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Component\\Stopwatch\\": ""
-                },
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Symfony Stopwatch Component",
-            "homepage": "https://symfony.com",
-            "time": "2016-06-29 05:41:56"
-        },
-        {
             "name": "symfony/translation",
             "version": "v3.1.3",
             "source": {
@@ -3873,64 +3885,6 @@
                 }
             ],
             "description": "Symfony Validator Component",
-            "homepage": "https://symfony.com",
-            "time": "2016-07-26 08:04:17"
-        },
-        {
-            "name": "symfony/web-profiler-bundle",
-            "version": "v3.1.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/web-profiler-bundle.git",
-                "reference": "c9483641cfcdf014972c3dc9795768729e8b7539"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/web-profiler-bundle/zipball/c9483641cfcdf014972c3dc9795768729e8b7539",
-                "reference": "c9483641cfcdf014972c3dc9795768729e8b7539",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.5.9",
-                "symfony/http-kernel": "~3.1",
-                "symfony/routing": "~2.8|~3.0",
-                "symfony/twig-bridge": "~2.8|~3.0"
-            },
-            "require-dev": {
-                "symfony/config": "~2.8|~3.0",
-                "symfony/console": "~2.8|~3.0",
-                "symfony/dependency-injection": "~2.8|~3.0",
-                "symfony/stopwatch": "~2.8|~3.0"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.1-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Bundle\\WebProfilerBundle\\": ""
-                },
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Symfony WebProfilerBundle",
             "homepage": "https://symfony.com",
             "time": "2016-07-26 08:04:17"
         },
@@ -4596,16 +4550,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "5.4.8",
+            "version": "5.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "3132365e1430c091f208e120b8845d39c25f20e6"
+                "reference": "c7b3e1dcc1d183f26d5ba282881fe65c2cbb5b2b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/3132365e1430c091f208e120b8845d39c25f20e6",
-                "reference": "3132365e1430c091f208e120b8845d39c25f20e6",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/c7b3e1dcc1d183f26d5ba282881fe65c2cbb5b2b",
+                "reference": "c7b3e1dcc1d183f26d5ba282881fe65c2cbb5b2b",
                 "shasum": ""
             },
             "require": {
@@ -4644,7 +4598,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "5.4.x-dev"
+                    "dev-master": "5.5.x-dev"
                 }
             },
             "autoload": {
@@ -4670,7 +4624,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2016-07-26 14:48:00"
+            "time": "2016-08-05 04:49:02"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -5245,6 +5199,62 @@
             "time": "2016-02-04 12:56:52"
         },
         {
+            "name": "silex/web-profiler",
+            "version": "v2.0.1",
+            "target-dir": "Silex/Provider",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/silexphp/Silex-WebProfiler.git",
+                "reference": "605ebe9d16eb9597ab42603d1b4bec595ebf677d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/silexphp/Silex-WebProfiler/zipball/605ebe9d16eb9597ab42603d1b4bec595ebf677d",
+                "reference": "605ebe9d16eb9597ab42603d1b4bec595ebf677d",
+                "shasum": ""
+            },
+            "require": {
+                "silex/silex": "^2.0",
+                "symfony/stopwatch": "^2.8|^3.0",
+                "symfony/twig-bridge": "^2.8|^3.0",
+                "symfony/web-profiler-bundle": "^2.8|^3.0"
+            },
+            "conflict": {
+                "symfony/web-profiler-bundle": "3.1.0"
+            },
+            "require-dev": {
+                "symfony/browser-kit": "^2.8|^3.0",
+                "symfony/css-selector": "^2.8|^3.0",
+                "symfony/debug-bundle": "^2.8|^3.0",
+                "symfony/security": "^2.8|^3.0",
+                "symfony/security-bundle": "^2.8|^3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Silex\\Provider\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                }
+            ],
+            "description": "A WebProfiler for Silex",
+            "homepage": "http://silex.sensiolabs.org/",
+            "time": "2016-06-15 07:44:40"
+        },
+        {
             "name": "squizlabs/php_codesniffer",
             "version": "2.6.2",
             "source": {
@@ -5321,6 +5331,113 @@
                 "standards"
             ],
             "time": "2016-07-13 23:29:13"
+        },
+        {
+            "name": "symfony/stopwatch",
+            "version": "v3.1.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/stopwatch.git",
+                "reference": "bb42806b12c5f89db4ebf64af6741afe6d8457e1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/stopwatch/zipball/bb42806b12c5f89db4ebf64af6741afe6d8457e1",
+                "reference": "bb42806b12c5f89db4ebf64af6741afe6d8457e1",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.9"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Stopwatch\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Stopwatch Component",
+            "homepage": "https://symfony.com",
+            "time": "2016-06-29 05:41:56"
+        },
+        {
+            "name": "symfony/web-profiler-bundle",
+            "version": "v3.1.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/web-profiler-bundle.git",
+                "reference": "c9483641cfcdf014972c3dc9795768729e8b7539"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/web-profiler-bundle/zipball/c9483641cfcdf014972c3dc9795768729e8b7539",
+                "reference": "c9483641cfcdf014972c3dc9795768729e8b7539",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.9",
+                "symfony/http-kernel": "~3.1",
+                "symfony/routing": "~2.8|~3.0",
+                "symfony/twig-bridge": "~2.8|~3.0"
+            },
+            "require-dev": {
+                "symfony/config": "~2.8|~3.0",
+                "symfony/console": "~2.8|~3.0",
+                "symfony/dependency-injection": "~2.8|~3.0",
+                "symfony/stopwatch": "~2.8|~3.0"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Bundle\\WebProfilerBundle\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony WebProfilerBundle",
+            "homepage": "https://symfony.com",
+            "time": "2016-07-26 08:04:17"
         },
         {
             "name": "symfony/yaml",

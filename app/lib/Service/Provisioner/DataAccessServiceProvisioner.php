@@ -49,7 +49,7 @@ class DataAccessServiceProvisioner implements ProvisionerInterface
         $injector->share(StorageWriterMap::CLASS)->delegate(
             StorageWriterMap::CLASS,
             function (ConnectorServiceInterface $connectorService) use ($injector, $writerConfigs) {
-                $map = new StorageWriterMap();
+                $map = [];
                 foreach ($writerConfigs as $writerKey => $writerConf) {
                     $objectState = [
                         ':config' => new ArrayConfig(isset($writerConf['settings']) ? $writerConf['settings'] : []),
@@ -60,9 +60,9 @@ class DataAccessServiceProvisioner implements ProvisionerInterface
                             $objectState[$key] = $dependency;
                         }
                     }
-                    $map->setItem($writerKey, $injector->make($writerConf['class'], $objectState));
+                    $map[$writerKey] = $injector->make($writerConf['class'], $objectState);
                 }
-                return $map;
+                return new StorageWriterMap($map);
             }
         );
     }
@@ -72,7 +72,7 @@ class DataAccessServiceProvisioner implements ProvisionerInterface
         $injector->share(StorageReaderMap::CLASS)->delegate(
             StorageReaderMap::CLASS,
             function (ConnectorServiceInterface $connectorService) use ($injector, $readerConfigs) {
-                $map = new StorageReaderMap();
+                $map = [];
                 foreach ($readerConfigs as $readerKey => $readerConf) {
                     $objectState = [
                         ':config' => new ArrayConfig(isset($readerConf['settings']) ? $readerConf['settings'] : []),
@@ -83,9 +83,9 @@ class DataAccessServiceProvisioner implements ProvisionerInterface
                             $objectState[$key] = $dependency;
                         }
                     }
-                    $map->setItem($readerKey, $injector->make($readerConf['class'], $objectState));
+                    $map[$readerKey] = $injector->make($readerConf['class'], $objectState);
                 }
-                return $map;
+                return new StorageReaderMap($map);
             }
         );
     }
@@ -95,7 +95,7 @@ class DataAccessServiceProvisioner implements ProvisionerInterface
         $injector->share(FinderMap::CLASS)->delegate(
             FinderMap::CLASS,
             function (ConnectorServiceInterface $connectorService) use ($injector, $finderConfigs) {
-                $map = new FinderMap();
+                $map = [];
                 foreach ($finderConfigs as $finderKey => $finderConf) {
                     $objectState = [
                         ':config' => new ArrayConfig(isset($finderConf['settings']) ? $finderConf['settings'] : []),
@@ -106,9 +106,9 @@ class DataAccessServiceProvisioner implements ProvisionerInterface
                             $objectState[$key] = $dependency;
                         }
                     }
-                    $map->setItem($finderKey, $injector->make($finderConf['class'], $objectState));
+                    $map[$finderKey] = $injector->make($finderConf['class'], $objectState);
                 }
-                return $map;
+                return new FinderMap($map);
             }
         );
     }
@@ -124,7 +124,7 @@ class DataAccessServiceProvisioner implements ProvisionerInterface
                 $injector,
                 $uowConfigs
             ) {
-                $map = new UnitOfWorkMap();
+                $map = [];
                 foreach ($uowConfigs as $uowKey => $uowConf) {
                     $objectState = [
                         ':config' => new ArrayConfig(isset($uowConf['settings']) ? $uowConf['settings'] : []),
@@ -136,9 +136,9 @@ class DataAccessServiceProvisioner implements ProvisionerInterface
                             $objectState[$key] = $dependency;
                         }
                     }
-                    $map->setItem($uowKey, $injector->make($uowConf['class'], $objectState));
+                    $map[$uowKey] = $injector->make($uowConf['class'], $objectState);
                 }
-                return $map;
+                return new UnitOfWorkMap($map);
             }
         );
     }
@@ -148,7 +148,7 @@ class DataAccessServiceProvisioner implements ProvisionerInterface
         $injector->share(QueryServiceMap::CLASS)->delegate(
             QueryServiceMap::CLASS,
             function (FinderMap $finderMap) use ($injector, $qsConfigs) {
-                $queryServiceMap = new QueryServiceMap();
+                $map = [];
                 foreach ($qsConfigs as $serviceKey => $qsConf) {
                     $finderMappings = [];
                     foreach ($qsConf['finder_mappings'] as $finderMappingName => $finderMapping) {
@@ -166,9 +166,9 @@ class DataAccessServiceProvisioner implements ProvisionerInterface
                             $objectState[$key] = $dependency;
                         }
                     }
-                    $queryServiceMap->setItem($serviceKey, $injector->make($qsConf['class'], $objectState));
+                    $map[$serviceKey] = $injector->make($qsConf['class'], $objectState);
                 }
-                return $queryServiceMap;
+                return new QueryServiceMap($map);
             }
         );
     }

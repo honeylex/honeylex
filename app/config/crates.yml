@@ -7,3 +7,10 @@ Hlx\Security\SecurityCrate:
     cookie:
       key: mob7jaC2Be5v
       lifetime: 1209000
+    oauth:
+      facebook:
+        app_key: app_key
+        app_secret: app_secret
+        scope: [ email ] # user_location, user_hometown, user_tagged_places
+        fields: [ id, name, email, first_name, last_name ]
+        field_mapping: [ firstname: first_name, lastname: last_name ]

@@ -47,7 +47,7 @@ class Bootstrap
         $app->register(new HttpFragmentServiceProvider);
         $app->register(
             new TranslationServiceProvider,
-            [ 'locale' => 'en', 'locale_fallbacks' => [ 'en' ]]
+            [ 'locale' => 'en', 'locale_fallbacks' => [ 'en' ] ]
         );
         $app->register(new FormServiceProvider);
         $app->register(new ValidatorServiceProvider);
@@ -60,7 +60,7 @@ class Bootstrap
             if ($config->getAppEnv() === 'dev') {
                 $app['debug'] = true;
                 $app->register(
-                    new WebProfilerServiceProvider(),
+                    new WebProfilerServiceProvider,
                     [ 'profiler.cache_dir' => $config->getProjectDir().'/var/cache/profiler' ]
                 );
             }
@@ -135,7 +135,7 @@ class Bootstrap
     protected function bootstrapLogger(Application $app, ConfigProviderInterface $config, Injector $injector)
     {
         // register logger as first item within the DI chain
-        $app->register(new MonologServiceProvider(), [
+        $app->register(new MonologServiceProvider, [
             'monolog.logfile' => $config->getProjectDir().'/var/logs/silex_dev.log'
         ]);
         $logger = $app['logger'];
