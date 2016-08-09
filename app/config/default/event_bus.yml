@@ -5,7 +5,7 @@ transports:
 #  event_queue:
 #    class: Honeybee\Infrastructure\Event\Bus\Transport\JobQueueTransport
 #    settings:
-#      exchange: honeybee.domain.events
+#      exchange: ${core.app.prefix}.domain.events
 
 #  event_pub:
 #    class: Honeybee\Infrastructure\Event\Bus\Transport\ZmqTransport
@@ -28,7 +28,6 @@ channels:
         - class: Honeybee\Projection\EventHandler\DomainEventProjector
           settings:
             storage_writer: honeybee::domain_event::view_store::writer
-        - class: Honeybee\Projection\EventHandler\ProjectionUpdater
 
   honeybee.events.failed:
     - transport: sync
@@ -49,4 +48,3 @@ channels:
         - class: Honeybee\Projection\EventHandler\DomainEventProjector
           settings:
             storage_writer: honeybee::domain_event::view_store::writer
-        - class: Honeybee\Projection\EventHandler\ProjectionUpdater

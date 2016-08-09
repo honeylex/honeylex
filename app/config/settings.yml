@@ -4,5 +4,7 @@
 project:
   name: Honeylex
   description: 'Honeybee CQRS & ES integration with the Silex framework'
+  app:
+    prefix: honeylex
   database:
     prefix: honeylex

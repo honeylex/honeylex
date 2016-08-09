@@ -58,6 +58,9 @@ class InstallProject extends ProjectCommand
                 'project' => [
                     'name' => $name,
                     'description' => $input->getOption('description'),
+                    'app' => [
+                        'prefix' => strtolower($name)
+                    ],
                     'database' => [
                         'prefix' => strtolower($name)
                     ]
