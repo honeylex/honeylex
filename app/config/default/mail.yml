@@ -2,7 +2,14 @@
 # Honeylex default mail service settings
 ---
 swiftmailer:
+  transport: \Swift_NullTransport
   options:
     host: localhost
     port: 25
   use_spool: false
+  delivery_addresses: honeylex@honeylex.dev
+
+default_mailer:
+  send_messages: true # uses null transport by default
+  logging_enabled: true
+  log_messages: true

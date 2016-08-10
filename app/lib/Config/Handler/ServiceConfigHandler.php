@@ -32,7 +32,8 @@ class ServiceConfigHandler extends YamlConfigHandler
                     $serviceDefState['provisioner']['class'] = DefaultProvisioner::CLASS;
                 }
             }
-            // @todo interpolate $serviceDefState 'setting' values using $this->interpolateConfigValues(...)
+
+            $serviceDefState = $this->interpolateConfigValues($serviceDefState);
             $serviceDefinitionMap->setItem($serviceKey, new ServiceDefinition($serviceDefState));
         }
 

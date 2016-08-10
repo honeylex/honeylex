@@ -68,7 +68,7 @@ class ConfigProvider implements ConfigProviderInterface
         $value = $this->settings;
         do {
             $key = array_shift($pathParts);
-            $value = $value->get($key);
+            $value = $value instanceof SettingsInterface ? $value->get($key) : null;
         } while (!empty($pathParts));
 
         return $value;

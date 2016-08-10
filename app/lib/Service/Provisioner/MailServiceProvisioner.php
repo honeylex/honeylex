@@ -36,6 +36,14 @@ class MailServiceProvisioner implements ProvisionerInterface
             $app['swiftmailer.use_spool'] = $config['swiftmailer']['use_spool'];
         }
 
+        if (isset($config['swiftmailer']['delivery_addresses'])) {
+            $app['swiftmailer.delivery_addresses'] = $config['swiftmailer']['delivery_addresses'];
+        }
+
+        if (isset($config['swiftmailer']['transport']) && class_exists($config['swiftmailer']['transport'])) {
+            $app['swiftmailer.transport'] = new $config['swiftmailer']['transport'];
+        }
+
         return $injector
             ->share($service)
             ->alias(MailServiceInterface::CLASS, $service)

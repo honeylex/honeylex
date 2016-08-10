@@ -52,6 +52,7 @@ class InstallProject extends ProjectCommand
             return false;
         }
 
+        $lcName = strtolower($name);
         $this->install(
             $output,
             [
@@ -59,10 +60,14 @@ class InstallProject extends ProjectCommand
                     'name' => $name,
                     'description' => $input->getOption('description'),
                     'app' => [
-                        'prefix' => strtolower($name)
+                        'prefix' => $lcName
                     ],
                     'database' => [
-                        'prefix' => strtolower($name)
+                        'prefix' => $lcName
+                    ],
+                    'email' => [
+                        'from_email' => sprintf('%1$s@%1$s.dev', $lcName),
+                        'from_name' => $name
                     ]
                 ]
             ]
