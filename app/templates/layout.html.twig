@@ -10,7 +10,19 @@
         <link href="{{ asset('css/main.css') }}" rel="stylesheet" type="text/css" />
     </head>
     <body>
+        <header class="container-fluid">
+            {% block header %}{% endblock %}
+        </header>
         <div class="container-fluid">
+        {% if errors is defined and errors|length > 0 %}
+            <div class="alert alert-danger">
+                <ul>
+                    {% for error in errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                <ul>
+            </div>
+        {% endif %}
         {% block content %}{% endblock %}
         </div>
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
