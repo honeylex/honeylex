@@ -369,6 +369,51 @@
             "time": "2016-02-24 16:23:07"
         },
         {
+            "name": "google/recaptcha",
+            "version": "1.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/google/recaptcha.git",
+                "reference": "2b7e00566afca82a38a1d3adb8e42c118006296e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/google/recaptcha/zipball/2b7e00566afca82a38a1d3adb8e42c118006296e",
+                "reference": "2b7e00566afca82a38a1d3adb8e42c118006296e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.5.*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "ReCaptcha\\": "src/ReCaptcha"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "Client library for reCAPTCHA, a free service that protect websites from spam and abuse.",
+            "homepage": "http://www.google.com/recaptcha/",
+            "keywords": [
+                "Abuse",
+                "captcha",
+                "recaptcha",
+                "spam"
+            ],
+            "time": "2015-09-02 17:23:59"
+        },
+        {
             "name": "graste/params",
             "version": "v3.0.0",
             "source": {
@@ -873,16 +918,17 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeylex/hlx-security.git",
-                "reference": "199171b6d53345253c47e8ee9e27b845b0bb8156"
+                "reference": "45e7bc549b6e28bda5e5e7bb8eb5399ee810cef5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeylex/hlx-security/zipball/199171b6d53345253c47e8ee9e27b845b0bb8156",
-                "reference": "199171b6d53345253c47e8ee9e27b845b0bb8156",
+                "url": "https://api.github.com/repos/honeylex/hlx-security/zipball/45e7bc549b6e28bda5e5e7bb8eb5399ee810cef5",
+                "reference": "45e7bc549b6e28bda5e5e7bb8eb5399ee810cef5",
                 "shasum": ""
             },
             "require": {
                 "gigablah/silex-oauth": "~2.0@dev",
+                "google/recaptcha": "~1.1",
                 "php": ">=5.6.1",
                 "symfony/security": "~2.8|~3.1"
             },
@@ -909,7 +955,7 @@
                 "source": "https://github.com/honeylex/hlx-security/tree/master",
                 "issues": "https://github.com/honeylex/hlx-security/issues"
             },
-            "time": "2016-08-11 11:30:13"
+            "time": "2016-08-12 11:54:14"
         },
         {
             "name": "league/flysystem",
