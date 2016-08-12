@@ -20,7 +20,6 @@ use Silex\Provider\AssetServiceProvider;
 use Silex\Provider\FormServiceProvider;
 use Silex\Provider\HttpFragmentServiceProvider;
 use Silex\Provider\MonologServiceProvider;
-use Silex\Provider\TranslationServiceProvider;
 use Silex\Provider\ValidatorServiceProvider;
 use Silex\Provider\WebProfilerServiceProvider;
 use Symfony\Component\Finder\Finder;
@@ -45,10 +44,6 @@ class Bootstrap
         $app->register(new ControllerResolverServiceProvider);
         $app->register(new AssetServiceProvider);
         $app->register(new HttpFragmentServiceProvider);
-        $app->register(
-            new TranslationServiceProvider,
-            [ 'locale' => 'en', 'locale_fallbacks' => [ 'en' ] ]
-        );
         $app->register(new FormServiceProvider);
         $app->register(new ValidatorServiceProvider);
 

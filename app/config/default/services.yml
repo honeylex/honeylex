@@ -77,3 +77,10 @@ honeylex.validator:
       app_key: validator
       share: true
       alias: Symfony\Component\Validator\Validator\ValidatorInterface
+
+honeylex.translator:
+  class: Symfony\Component\Translation\Translator
+  provisioner:
+    class: Honeybee\FrameworkBinding\Silex\Service\Provisioner\TranslationServiceProvisioner
+    settings:
+      alias: Symfony\Component\Translation\TranslatorInterface

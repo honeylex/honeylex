@@ -848,12 +848,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeybee/trellis.git",
-                "reference": "9fbe21ada707a484091122fd67e2886cbd3b7265"
+                "reference": "3a8b5fa4af5f1b7ce03fe360077bc25125cc1a9b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeybee/trellis/zipball/9fbe21ada707a484091122fd67e2886cbd3b7265",
-                "reference": "9fbe21ada707a484091122fd67e2886cbd3b7265",
+                "url": "https://api.github.com/repos/honeybee/trellis/zipball/3a8b5fa4af5f1b7ce03fe360077bc25125cc1a9b",
+                "reference": "3a8b5fa4af5f1b7ce03fe360077bc25125cc1a9b",
                 "shasum": ""
             },
             "require": {
@@ -910,7 +910,7 @@
                 "entity",
                 "validation"
             ],
-            "time": "2016-07-29 18:17:57"
+            "time": "2016-08-12 12:24:25"
         },
         {
             "name": "honeylex/hlx-security",

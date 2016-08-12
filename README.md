@@ -77,6 +77,7 @@ The bootstrapped Silex app is configured with the following service providers:
 
 * [AssetServiceProvider][AssetServiceProvider]
 * [FormServiceProvider][FormServiceProvider]
+* [LocaleServiceProvider][LocaleServiceProvider]
 * [MonologServiceProvider][MonologServiceProvider]
 * [ServiceControllerServiceProvider][ServiceControllerServiceProvider]
 * [TranslationServiceProvider][TranslationServiceProvider]
@@ -97,6 +98,7 @@ Feel free to join us and ask questions in the [#honeybee](http://webchat.freenod
 [Docker]: https://docs.docker.com/engine/installation/
 [FormServiceProvider]: http://silex.sensiolabs.org/doc/providers/form.html
 [Honeybee]: http://github.com/honeybee/honeybee
+[LocaleServiceProvider]: http://silex.sensiolabs.org/doc/master/providers/locale.html
 [MonologServiceProvider]: http://silex.sensiolabs.org/doc/providers/monolog.html
 [Providers]: http://silex.sensiolabs.org/doc/providers.html
 [ServiceControllerServiceProvider]: http://silex.sensiolabs.org/doc/providers/service_controller.html

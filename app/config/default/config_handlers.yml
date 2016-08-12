@@ -46,3 +46,8 @@ mail.yml: # merge behaviour: lastone-wins
   handler: Honeybee\FrameworkBinding\Silex\Config\Handler\MailConfigHandler
   settings:
     parser: Symfony\Component\Yaml\Parser
+
+translation.yml: # merge behaviour: lastone-wins
+  handler: Honeybee\FrameworkBinding\Silex\Config\Handler\TranslationConfigHandler
+  settings:
+    parser: Symfony\Component\Yaml\Parser
