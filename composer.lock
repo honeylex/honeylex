@@ -848,12 +848,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeybee/trellis.git",
-                "reference": "3a8b5fa4af5f1b7ce03fe360077bc25125cc1a9b"
+                "reference": "654ef7bfe81895684b9388db296a90c43f9e5260"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeybee/trellis/zipball/3a8b5fa4af5f1b7ce03fe360077bc25125cc1a9b",
-                "reference": "3a8b5fa4af5f1b7ce03fe360077bc25125cc1a9b",
+                "url": "https://api.github.com/repos/honeybee/trellis/zipball/654ef7bfe81895684b9388db296a90c43f9e5260",
+                "reference": "654ef7bfe81895684b9388db296a90c43f9e5260",
                 "shasum": ""
             },
             "require": {
@@ -910,7 +910,7 @@
                 "entity",
                 "validation"
             ],
-            "time": "2016-08-12 12:24:25"
+            "time": "2016-08-12 19:32:58"
         },
         {
             "name": "honeylex/hlx-security",
@@ -918,12 +918,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeylex/hlx-security.git",
-                "reference": "45e7bc549b6e28bda5e5e7bb8eb5399ee810cef5"
+                "reference": "c988e3fd5b495319f4a946419fb663d859d5746f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeylex/hlx-security/zipball/45e7bc549b6e28bda5e5e7bb8eb5399ee810cef5",
-                "reference": "45e7bc549b6e28bda5e5e7bb8eb5399ee810cef5",
+                "url": "https://api.github.com/repos/honeylex/hlx-security/zipball/c988e3fd5b495319f4a946419fb663d859d5746f",
+                "reference": "c988e3fd5b495319f4a946419fb663d859d5746f",
                 "shasum": ""
             },
             "require": {
@@ -955,7 +955,7 @@
                 "source": "https://github.com/honeylex/hlx-security/tree/master",
                 "issues": "https://github.com/honeylex/hlx-security/issues"
             },
-            "time": "2016-08-12 11:54:14"
+            "time": "2016-08-13 15:44:56"
         },
         {
             "name": "league/flysystem",
