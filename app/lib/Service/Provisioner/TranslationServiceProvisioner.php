@@ -11,7 +11,7 @@ use Pimple\Container;
 use Silex\Provider\LocaleServiceProvider;
 use Silex\Provider\TranslationServiceProvider;
 
-class TranslationServiceProvisioner extends SilexServiceProvisioner
+class TranslationServiceProvisioner implements ProvisionerInterface
 {
     const CONFIG_NAME = 'translation.yml';
 

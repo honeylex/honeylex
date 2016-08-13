@@ -17,6 +17,7 @@ use Honeybee\ServiceLocator;
 use Honeybee\ServiceLocatorInterface;
 use Honeybee\ServiceProvisionerInterface;
 use Pimple\Container;
+use Silex\Api\EventListenerProviderInterface;
 use SplFileInfo;
 use Trellis\CodeGen\Parser\Config\ConfigIniParser;
 use Trellis\CodeGen\Parser\Schema\EntityTypeSchemaXmlParser;
@@ -33,6 +34,8 @@ class ServiceProvisioner implements ServiceProvisionerInterface
 
     protected $configProvider;
 
+    private $serviceDefinitions;
+
     public function __construct(
         Container $app,
         Injector $injector,
@@ -45,7 +48,7 @@ class ServiceProvisioner implements ServiceProvisionerInterface
 
     public function provision()
     {
-        $serviceDefinitions = $this->configProvider->provide('services.yml');
+        $serviceDefinitions = $this->getServiceDefinitions();
         $this->registerEntityTypeMaps($serviceDefinitions);
         $this->evaluateServiceDefinitions($serviceDefinitions);
 
@@ -58,6 +61,28 @@ class ServiceProvisioner implements ServiceProvisionerInterface
             ->share(ServiceLocator::CLASS)
             ->alias(ServiceLocatorInterface::CLASS, ServiceLocator::CLASS)
             ->make(ServiceLocator::CLASS, $serviceLocatorState);
+    }
+
+    public function subscribe()
+    {
+        $serviceDefinitions = $this->getServiceDefinitions();
+        foreach ($serviceDefinitions as $key => $serviceDefinition) {
+            if ($serviceDefinition->hasProvisioner()) {
+                $provisionerConfig = $serviceDefinition->getProvisioner();
+                $provisioner = $this->injector->make($provisionerConfig['class']);
+                if ($provisioner instanceof EventListenerProviderInterface) {
+                    $provisioner->subscribe($this->app, $this->app['dispatcher']);
+                }
+            }
+        }
+    }
+
+    protected function getServiceDefinitions()
+    {
+        if (!$this->serviceDefinitions) {
+            $this->serviceDefinitions = $this->configProvider->provide('services.yml');
+        }
+        return $this->serviceDefinitions;
     }
 
     protected function registerEntityTypeMaps(ServiceDefinitionMap $serviceDefinitions)
