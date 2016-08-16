@@ -4,13 +4,28 @@
 Hlx\Security\SecurityCrate:
   settings:
     routing_prefix: /
-    cookie:
-      key: mob7jaC2Be5v
-      lifetime: 1209000
+    auto_login:
+      enabled: true
+      firewall: default
+      target_path: home
+    recaptcha:
+      enabled: true
+      site_key: site_key
+      secret_key: site_secret
     oauth:
       facebook:
+        enabled: true
         app_key: app_key
         app_secret: app_secret
-        scope: [ email ] # user_location, user_hometown, user_tagged_places
+        scope: [ public_profile, email ] # user_location, user_hometown, user_tagged_places
         fields: [ id, name, email, first_name, last_name ]
         field_mapping: [ firstname: first_name, lastname: last_name ]
+    firewalls:
+      default:
+        form:
+          default_target_path: /
+        logout:
+          target_url: /
+        remember_me:
+          key: mob7jaC2Be5v
+          lifetime: 1209000

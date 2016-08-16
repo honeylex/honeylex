@@ -22,6 +22,7 @@ class EnvironmentProvisioner implements ProvisionerInterface
         $state = [
             ':config' => $serviceDefinition->getConfig()
         ];
+
         $injector->define($service, $state);
         // there will only be one instance of the service when the "share" setting is true
         if ($provisionerSettings->get('share', true) === true) {

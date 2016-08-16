@@ -5,13 +5,17 @@ namespace Honeybee\FrameworkBinding\Silex\Service\Provisioner;
 use Auryn\Injector;
 use Honeybee\Common\Error\ConfigError;
 use Honeybee\FrameworkBinding\Silex\Config\ConfigProviderInterface;
+use Honeybee\FrameworkBinding\Silex\EventListener\HttpLocaleListener;
+use Honeybee\Infrastructure\Config\Settings;
 use Honeybee\Infrastructure\Config\SettingsInterface;
 use Honeybee\ServiceDefinitionInterface;
 use Pimple\Container;
+use Silex\Api\EventListenerProviderInterface;
 use Silex\Provider\LocaleServiceProvider;
 use Silex\Provider\TranslationServiceProvider;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-class TranslationServiceProvisioner implements ProvisionerInterface
+class TranslationServiceProvisioner implements ProvisionerInterface, EventListenerProviderInterface
 {
     const CONFIG_NAME = 'translation.yml';
 
@@ -23,11 +27,15 @@ class TranslationServiceProvisioner implements ProvisionerInterface
         SettingsInterface $provisionerSettings
     ) {
         $service = $serviceDefinition->getClass();
+        $translationSettings = $configProvider->getSetting('project', new Settings)->get('translation', new Settings);
 
         $app->register(new LocaleServiceProvider);
         $app->register(
             new TranslationServiceProvider,
-            [ 'locale_fallbacks' => [ 'en' ] ]
+            [
+                'locale' => $translationSettings->get('default_locale', 'en'),
+                'locale_fallbacks' => (array) $translationSettings->get('locale_fallbacks', [ 'en' ])
+            ]
         );
 
         $this->registerResources($app, $configProvider);
@@ -59,5 +67,12 @@ class TranslationServiceProvisioner implements ProvisionerInterface
             }
             return $resources;
         });
+    }
+
+    public function subscribe(Container $app, EventDispatcherInterface $dispatcher)
+    {
+        $dispatcher->addSubscriber(
+            new HttpLocaleListener($app['translator']->getLocale(), $app['translator']->getFallbackLocales())
+        );
     }
 }
