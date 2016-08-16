@@ -6,6 +6,7 @@ use Auryn\Injector;
 use Honeybee\Common\Error\ConfigError;
 use Honeybee\FrameworkBinding\Silex\Config\ConfigProviderInterface;
 use Honeybee\FrameworkBinding\Silex\EventListener\HttpLocaleListener;
+use Honeybee\FrameworkBinding\Silex\EventListener\SessionLocaleListener;
 use Honeybee\Infrastructure\Config\Settings;
 use Honeybee\Infrastructure\Config\SettingsInterface;
 use Honeybee\ServiceDefinitionInterface;
@@ -74,5 +75,6 @@ class TranslationServiceProvisioner implements ProvisionerInterface, EventListen
         $dispatcher->addSubscriber(
             new HttpLocaleListener($app['translator']->getLocale(), $app['translator']->getFallbackLocales())
         );
+        $dispatcher->addSubscriber(new SessionLocaleListener($app['locale']));
     }
 }

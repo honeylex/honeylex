@@ -24,7 +24,7 @@ class TemplateRendererProvisioner implements ProvisionerInterface
     ) {
         $service = $serviceDefinition->getClass();
 
-        $this->registerTwig($app, $provisionerSettings, $configProvider);
+        $this->registerTwig($app, $injector, $provisionerSettings, $configProvider);
 
         return $injector
             ->share($service)
@@ -39,6 +39,7 @@ class TemplateRendererProvisioner implements ProvisionerInterface
 
     protected function registerTwig(
         Container $app,
+        Injector $injector,
         SettingsInterface $provisionerSettings,
         ConfigProviderInterface $configProvider
     ) {
@@ -59,9 +60,9 @@ class TemplateRendererProvisioner implements ProvisionerInterface
             return $filesystem;
         };
 
-        $app['twig'] = $app->extend('twig', function ($twig, $app) use ($provisionerSettings) {
+        $app['twig'] = $app->extend('twig', function ($twig, $app) use ($injector, $provisionerSettings) {
             foreach ($provisionerSettings->get('extensions', []) as $extension) {
-                $twig->addExtension(new $extension);
+                $twig->addExtension($injector->make($extension));
             }
             return $twig;
         });

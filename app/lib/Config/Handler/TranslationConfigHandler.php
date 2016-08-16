@@ -8,20 +8,17 @@ class TranslationConfigHandler extends ArrayConfigHandler
 {
     protected function handleConfigFile($configFile)
     {
-        preg_match('#^.+-(?<locale>\w+).yml$#', $configFile, $matches);
+        $translations = $this->parse($configFile);
 
-        if (!isset($matches['locale'])) {
-            throw new ConfigError(
-                'Translation filename does not have a valid locale. Filename format '.
-                'should be "translation-{locale}.yml".'
-            );
+        if(preg_match('#^.+-(?<locale>\w+).yml$#', $configFile, $matches)) {
+            return [ $matches['locale'] => $translations ];
+        } else {
+            return $translations;
         }
-
-        return [ $matches['locale'] => $this->parse($configFile) ];
     }
 
     protected function mergeConfigs(array $out, array $in)
     {
-        return array_merge($out, $in);
+        return array_merge_recursive($out, $in);
     }
 }

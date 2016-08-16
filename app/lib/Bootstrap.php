@@ -20,6 +20,7 @@ use Silex\Provider\AssetServiceProvider;
 use Silex\Provider\FormServiceProvider;
 use Silex\Provider\HttpFragmentServiceProvider;
 use Silex\Provider\MonologServiceProvider;
+use Silex\Provider\SessionServiceProvider;
 use Silex\Provider\ValidatorServiceProvider;
 use Silex\Provider\WebProfilerServiceProvider;
 use Symfony\Component\Finder\Finder;
@@ -46,6 +47,7 @@ class Bootstrap
         $app->register(new HttpFragmentServiceProvider);
         $app->register(new FormServiceProvider);
         $app->register(new ValidatorServiceProvider);
+        $app->register(new SessionServiceProvider);
 
         // load context specific configuration (well, only web atm. needs to change too)
         if ($config->getAppContext() === 'web') {

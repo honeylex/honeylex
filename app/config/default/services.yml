@@ -15,6 +15,7 @@ honeybee.infrastructure.template_renderer:
     settings:
       extensions:
         - Honeybee\FrameworkBinding\Silex\Twig\TwigExtension
+        - Honeybee\FrameworkBinding\Silex\Twig\LocaliseRouteExtension
 
 honeybee.infrastructure.mail_service:
   class: Honeybee\Infrastructure\Mail\LoggingSwiftMailer
@@ -77,6 +78,14 @@ honeylex.validator:
       app_key: validator
       share: true
       alias: Symfony\Component\Validator\Validator\ValidatorInterface
+
+honeylex.request_stack:
+  class: Symfony\Component\HttpFoundation\RequestStack
+  provisioner:
+    class: Honeybee\FrameworkBinding\Silex\Service\Provisioner\SilexServiceProvisioner
+    settings:
+      app_key: request_stack
+      share: true
 
 honeylex.translator:
   class: Symfony\Component\Translation\Translator
