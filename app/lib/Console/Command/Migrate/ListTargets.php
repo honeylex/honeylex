@@ -18,7 +18,15 @@ class ListTargets extends MigrateCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        foreach ($this->migrationService->getMigrationTargetMap() as $migrationTarget) {
+        $migrationTargetMap = $this->migrationService->getMigrationTargetMap();
+
+        if (!count($migrationTargetMap)) {
+            $output->writeln('<error>There are no migration targets available.</error>');
+            $output->writeln('');
+            exit;
+        }
+
+        foreach ($migrationTargetMap as $migrationTarget) {
             $this->printMigrationTarget($migrationTarget, $output);
         }
     }

@@ -13,7 +13,7 @@ class CrateInfo extends CrateCommand
     {
         $this
             ->setName('hlx:crate:info')
-            ->setDescription('Displays details for the specified crate.')
+            ->setDescription('Displays details for a crate.')
             ->addArgument(
                 'crate',
                 InputArgument::REQUIRED,

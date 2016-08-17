@@ -7,6 +7,7 @@ use Honeybee\FrameworkBinding\Silex\Console\Command\Crate\ListCrates;
 use Honeybee\FrameworkBinding\Silex\Console\Command\Crate\MakeCrate;
 use Honeybee\FrameworkBinding\Silex\Console\Command\Crate\RemoveCrate;
 use Honeybee\FrameworkBinding\Silex\Console\Command\Event\ReplayEvents;
+use Honeybee\FrameworkBinding\Silex\Console\Command\Fixture\ImportFixture;
 use Honeybee\FrameworkBinding\Silex\Console\Command\Migrate\ListTargets;
 use Honeybee\FrameworkBinding\Silex\Console\Command\Migrate\MigrateDown;
 use Honeybee\FrameworkBinding\Silex\Console\Command\Migrate\MigrateUp;
@@ -34,6 +35,8 @@ $appCommands = [
     TargetInfo::CLASS,
     // Replay
     ReplayEvents::CLASS,
+    // Fixture
+    ImportFixture::CLASS,
     // Resource
     GenerateCode::CLASS,
     ListResources::CLASS,

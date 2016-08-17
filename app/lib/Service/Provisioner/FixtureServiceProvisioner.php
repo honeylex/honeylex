@@ -3,19 +3,20 @@
 namespace Honeybee\FrameworkBinding\Silex\Service\Provisioner;
 
 use Auryn\Injector;
+use Pimple\Container;
 use Honeybee\Common\Error\RuntimeError;
 use Honeybee\FrameworkBinding\Silex\Config\ConfigProviderInterface;
 use Honeybee\Infrastructure\Config\ArrayConfig;
 use Honeybee\Infrastructure\Config\SettingsInterface;
-use Honeybee\Infrastructure\Migration\MigrationServiceInterface;
-use Honeybee\Infrastructure\Migration\MigrationTarget;
-use Honeybee\Infrastructure\Migration\MigrationTargetMap;
+use Honeybee\Infrastructure\Fixture\FixtureServiceInterface;
+use Honeybee\Infrastructure\Fixture\FixtureTarget;
+use Honeybee\Infrastructure\Fixture\FixtureTargetMap;
 use Honeybee\ServiceDefinitionInterface;
-use Pimple\Container;
+use Honeybee\Model\Aggregate\AggregateRootTypeMap;
 
-class MigrationServiceProvisioner implements ProvisionerInterface
+class FixtureServiceProvisioner implements ProvisionerInterface
 {
-    const CONFIG_NAME = 'migration.yml';
+    const CONFIG_NAME = 'fixture.yml';
 
     public function provision(
         Container $app,
@@ -24,14 +25,20 @@ class MigrationServiceProvisioner implements ProvisionerInterface
         ServiceDefinitionInterface $serviceDefinition,
         SettingsInterface $provisionerSettings
     ) {
-        $factoryDelegate = function () use ($injector, $configProvider, $serviceDefinition) {
-            $migrationTargets = $configProvider->provide(self::CONFIG_NAME);
-            $migrationTargetMap = $this->buildMigrationTargetMap($injector, $migrationTargets);
+        $factoryDelegate = function (
+            AggregateRootTypeMap $aggregateRootTypeMap
+        ) use (
+            $injector,
+            $configProvider,
+            $serviceDefinition
+        ) {
+            $fixtureTargets = $configProvider->provide(self::CONFIG_NAME);
+            $fixtureTargetMap = $this->buildFixtureTargetMap($injector, $fixtureTargets);
 
             $serviceConfig = $serviceDefinition->getConfig();
             $serviceClass = $serviceDefinition->getClass();
 
-            return new $serviceClass($serviceConfig, $migrationTargetMap);
+            return new $serviceClass($serviceConfig, $fixtureTargetMap, $aggregateRootTypeMap);
         };
 
         $service = $serviceDefinition->getClass();
@@ -39,29 +46,28 @@ class MigrationServiceProvisioner implements ProvisionerInterface
         $injector
             ->delegate($service, $factoryDelegate)
             ->share($service)
-            ->alias(MigrationServiceInterface::CLASS, $service);
+            ->alias(FixtureServiceInterface::CLASS, $service);
     }
 
-    protected function buildMigrationTargetMap(Injector $injector, array $config)
+    protected function buildFixtureTargetMap(Injector $injector, array $config)
     {
-        $migrationTargets = [];
+        $fixtureTargets = [];
 
         foreach ($config as $targetName => $targetConfig) {
             $state = [
                 ':name' => $targetName,
                 ':is_activated' => $targetConfig['active'],
-                ':migration_loader' => $this->buildMigrationLoader($injector, $targetConfig['migration_loader']),
-                ':config' => new ArrayConfig($targetConfig['settings'])
+                ':fixture_loader' => $this->buildFixtureLoader($injector, $targetConfig['fixture_loader'])
             ];
 
-            $migrationTarget = $injector->make(MigrationTarget::CLASS, $state);
-            $migrationTargets[$targetName] = $migrationTarget;
+            $fixtureTarget = $injector->make(FixtureTarget::CLASS, $state);
+            $fixtureTargets[$targetName] = $fixtureTarget;
         }
 
-        return new MigrationTargetMap($migrationTargets);
+        return new FixtureTargetMap($fixtureTargets);
     }
 
-    protected function buildMigrationLoader(Injector $injector, array $config)
+    protected function buildFixtureLoader(Injector $injector, array $config)
     {
         $class = $config['class'];
 

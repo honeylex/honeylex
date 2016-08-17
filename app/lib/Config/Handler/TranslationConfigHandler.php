@@ -10,7 +10,7 @@ class TranslationConfigHandler extends ArrayConfigHandler
     {
         $translations = $this->parse($configFile);
 
-        if(preg_match('#^.+-(?<locale>\w+).yml$#', $configFile, $matches)) {
+        if (preg_match('#^.+-(?<locale>\w+).yml$#', $configFile, $matches)) {
             return [ $matches['locale'] => $translations ];
         } else {
             return $translations;

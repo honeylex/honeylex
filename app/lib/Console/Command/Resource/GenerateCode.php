@@ -16,7 +16,7 @@ class GenerateCode extends ResourceCommand
     {
         $this
             ->setName('hlx:res:code')
-            ->setDescription('Scaffold entities off a specific schema-definition within a given crate.')
+            ->setDescription('Scaffold entities from a resource schema within a crate.')
             ->addArgument(
                 'crate',
                 InputArgument::OPTIONAL,

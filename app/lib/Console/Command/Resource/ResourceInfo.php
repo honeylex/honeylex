@@ -32,7 +32,7 @@ class ResourceInfo extends ResourceCommand
     {
         $this
             ->setName('hlx:res:info')
-            ->setDescription('Displays detail information about a specific resource from the given crate.')
+            ->setDescription('Displays details about a resource within a crate.')
             ->addArgument(
                 'crate',
                 InputArgument::OPTIONAL,

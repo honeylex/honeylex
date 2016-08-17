@@ -35,9 +35,11 @@ ASCII;
         $this->getDefinition()->addOption(
             new InputOption('--env', '-e', InputOption::VALUE_REQUIRED, 'The Environment name.', 'dev')
         );
+
         foreach (array_map([ $app['honeybee.service_locator'], 'createEntity'], $appCommands) as $command) {
             $this->add($command);
         }
+
         $this->setDispatcher($app['dispatcher']);
     }
 

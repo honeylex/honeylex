@@ -47,10 +47,10 @@ class Bootstrap
         $app->register(new HttpFragmentServiceProvider);
         $app->register(new FormServiceProvider);
         $app->register(new ValidatorServiceProvider);
-        $app->register(new SessionServiceProvider);
 
         // load context specific configuration (well, only web atm. needs to change too)
         if ($config->getAppContext() === 'web') {
+            $app->register(new SessionServiceProvider);
             $this->registerWebErrorHandler($app);
             $this->loadProjectRoutes($config->getConfigDir().'/routing.php', $app);
             // dev specific switches
@@ -133,7 +133,7 @@ class Bootstrap
     {
         // register logger as first item within the DI chain
         $app->register(new MonologServiceProvider, [
-            'monolog.logfile' => $config->getProjectDir().'/var/logs/silex_dev.log'
+            'monolog.logfile' => $config->getProjectDir().'/var/logs/honeylex.log'
         ]);
         $logger = $app['logger'];
         $injector

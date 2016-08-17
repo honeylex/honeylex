@@ -1,0 +1,10 @@
+#
+# Honeylex default filesystem configuration
+---
+honeybee.files.local:
+  scheme: files
+  connection: honeybee.files.local
+
+honeybee.files.local.tmp:
+  scheme: tempfiles
+  connection: honeybee.files.local.tmp

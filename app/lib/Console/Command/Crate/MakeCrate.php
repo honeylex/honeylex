@@ -17,7 +17,7 @@ class MakeCrate extends CrateCommand
     {
         $this
             ->setName('hlx:crate:mk')
-            ->setDescription('Makes a vanilla crate from a crate-template.')
+            ->setDescription('Makes a crate from a template.')
             ->addArgument(
                 'vendor',
                 InputArgument::OPTIONAL,

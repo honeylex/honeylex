@@ -12,12 +12,12 @@ class MigrateUp extends MigrateCommand
     {
         $this
             ->setName('hlx:migrate:up')
-            ->setDescription('Migrate up to a specified migration-target version.')
+            ->setDescription('Migrate up to a specified migration version.')
             ->addOption(
                 'target',
                 null,
                 InputOption::VALUE_REQUIRED,
-                'Name of the migration-target to migrate (if omitted all targets will be run).'
+                'Name of the target to migrate (if omitted all targets will be run).'
             )
             ->addOption(
                 'to',

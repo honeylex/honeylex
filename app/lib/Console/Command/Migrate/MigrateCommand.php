@@ -25,8 +25,21 @@ abstract class MigrateCommand extends Command
 
     protected function migrate(OutputInterface $output, $direction, $target = null, $toVersion = null)
     {
+        $migrationTargetMap = $this->migrationService->getMigrationTargetMap();
+
+        if (!count($migrationTargetMap)) {
+            $output->writeln('<error>There are no migration targets available.</error>');
+            $output->writeln('');
+            return;
+        }
+
         if ($target && $target !== self::ALL) {
-            $migrationTarget = $this->migrationService->getMigrationTargetMap()->getItem($target);
+            if (!$migrationTargetMap->hasKey($target)) {
+                $output->writeln('<error>The given migration target does not exist.</error>');
+                $output->writeln('');
+                return;
+            }
+            $migrationTarget = $migrationTargetMap->getItem($target);
         } else {
             $migrationTarget = null;
             if ($toVersion !== null) {
@@ -50,7 +63,7 @@ abstract class MigrateCommand extends Command
         }
 
         if (!$migrationTarget) {
-            foreach ($this->migrationService->getMigrationTargetMap() as $targetName => $migrationTarget) {
+            foreach ($migrationTargetMap as $targetName => $migrationTarget) {
                 if ($migrationTarget->isActivated()) {
                     $output->writeln('Running migrations for "'.$targetName.'"');
                     foreach ($this->migrationService->migrate($targetName) as $runMigration) {

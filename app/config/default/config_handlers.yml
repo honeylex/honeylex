@@ -32,6 +32,16 @@ migration.yml: # merge behaviour: lastone-wins
   settings:
     parser: Symfony\Component\Yaml\Parser
 
+fixture.yml: # merge behaviour: lastone-wins
+  handler: Honeybee\FrameworkBinding\Silex\Config\Handler\FixtureConfigHandler
+  settings:
+    parser: Symfony\Component\Yaml\Parser
+
+filesystem.yml: # merge behaviour: lastone-wins
+  handler: Honeybee\FrameworkBinding\Silex\Config\Handler\FilesystemConfigHandler
+  settings:
+    parser: Symfony\Component\Yaml\Parser
+
 event_bus.yml: # merge behaviour: lastone-wins
   handler: Honeybee\FrameworkBinding\Silex\Config\Handler\EventBusConfigHandler
   settings:

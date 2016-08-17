@@ -14,7 +14,7 @@ class RemoveResource extends ResourceCommand
     {
         $this
             ->setName('hlx:res:rm')
-            ->setDescription('Removes a specific resource from the given crate.')
+            ->setDescription('Removes a specific resource from a crate.')
             ->addArgument(
                 'crate',
                 InputArgument::OPTIONAL,

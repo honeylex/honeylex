@@ -15,7 +15,7 @@ class TargetInfo extends MigrateCommand
     {
         $this
             ->setName('hlx:migrate:info')
-            ->setDescription('Displays migration-target details.')
+            ->setDescription('Displays migration target details.')
             ->addArgument(
                 'target',
                 InputArgument::REQUIRED,

@@ -13,11 +13,11 @@ class MigrateDown extends MigrateCommand
     {
         $this
             ->setName('hlx:migrate:down')
-            ->setDescription('Migrate down to a specified migration-target version.')
+            ->setDescription('Migrate down to a specified migration version.')
             ->addArgument(
                 'target',
                 InputArgument::REQUIRED,
-                'The name of the migration-target to migrate.'
+                'The name of the target to migrate.'
             )
             ->addOption(
                 'to',

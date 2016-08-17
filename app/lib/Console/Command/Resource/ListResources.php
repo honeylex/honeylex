@@ -13,7 +13,7 @@ class ListResources extends ResourceCommand
     {
         $this
             ->setName('hlx:res:ls')
-            ->setDescription('Lists all resources within a given crate.')
+            ->setDescription('Lists all resources within a crate.')
             ->addArgument(
                 'crate',
                 InputArgument::OPTIONAL,

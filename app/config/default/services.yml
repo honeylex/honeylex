@@ -37,6 +37,11 @@ honeybee.infrastructure.migration_service:
   provisioner:
     class: Honeybee\FrameworkBinding\Silex\Service\Provisioner\MigrationServiceProvisioner
 
+honeybee.infrastructure.fixture_service:
+  class: Honeybee\Infrastructure\Fixture\FixtureService
+  provisioner:
+    class: Honeybee\FrameworkBinding\Silex\Service\Provisioner\FixtureServiceProvisioner
+
 honeybee.infrastructure.expression_service:
   class: Honeybee\Infrastructure\Expression\ExpressionService
   provisioner:
@@ -51,6 +56,11 @@ honeybee.infrastructure.command_bus:
   class: Honeybee\Infrastructure\Command\Bus\CommandBus
   provisioner:
     class: Honeybee\FrameworkBinding\Silex\Service\Provisioner\CommandBusProvisioner
+
+honeybee.infrastructure.filesystem_service:
+  class: Honeybee\Infrastructure\Filesystem\FilesystemService
+  provisioner:
+    class: Honeybee\FrameworkBinding\Silex\Service\Provisioner\FilesystemServiceProvisioner
 
 honeylex.url_generator:
   class: Symfony\Component\Routing\Generator\UrlGenerator

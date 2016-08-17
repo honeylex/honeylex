@@ -16,7 +16,7 @@ class MakeResource extends ResourceCommand
     {
         $this
             ->setName('hlx:res:mk')
-            ->setDescription('Makes a vanilla resource from a resource-template.')
+            ->setDescription('Makes a resource from a template.')
             ->addArgument(
                 'crate',
                 InputArgument::OPTIONAL,
