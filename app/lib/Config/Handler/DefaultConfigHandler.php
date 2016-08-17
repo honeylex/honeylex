@@ -2,7 +2,7 @@
 
 namespace Honeybee\FrameworkBinding\Silex\Config\Handler;
 
-class MigrationConfigHandler extends ArrayConfigHandler
+class DefaultConfigHandler extends ArrayConfigHandler
 {
     protected function handleConfigFile($configFile)
     {

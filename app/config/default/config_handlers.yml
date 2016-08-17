@@ -28,17 +28,17 @@ data_access.yml: # merge behaviour: lastone-wins (topmost keys are merged)
     parser: Symfony\Component\Yaml\Parser
 
 migration.yml: # merge behaviour: lastone-wins
-  handler: Honeybee\FrameworkBinding\Silex\Config\Handler\MigrationConfigHandler
+  handler: Honeybee\FrameworkBinding\Silex\Config\Handler\DefaultConfigHandler
   settings:
     parser: Symfony\Component\Yaml\Parser
 
 fixture.yml: # merge behaviour: lastone-wins
-  handler: Honeybee\FrameworkBinding\Silex\Config\Handler\FixtureConfigHandler
+  handler: Honeybee\FrameworkBinding\Silex\Config\Handler\DefaultConfigHandler
   settings:
     parser: Symfony\Component\Yaml\Parser
 
 filesystem.yml: # merge behaviour: lastone-wins
-  handler: Honeybee\FrameworkBinding\Silex\Config\Handler\FilesystemConfigHandler
+  handler: Honeybee\FrameworkBinding\Silex\Config\Handler\DefaultConfigHandler
   settings:
     parser: Symfony\Component\Yaml\Parser
 
@@ -48,12 +48,12 @@ event_bus.yml: # merge behaviour: lastone-wins
     parser: Symfony\Component\Yaml\Parser
 
 command_bus.yml: # merge behaviour: lastone-wins
-  handler: Honeybee\FrameworkBinding\Silex\Config\Handler\CommandBusConfigHandler
+  handler: Honeybee\FrameworkBinding\Silex\Config\Handler\DefaultConfigHandler
   settings:
     parser: Symfony\Component\Yaml\Parser
 
 mail.yml: # merge behaviour: lastone-wins
-  handler: Honeybee\FrameworkBinding\Silex\Config\Handler\MailConfigHandler
+  handler: Honeybee\FrameworkBinding\Silex\Config\Handler\DefaultConfigHandler
   settings:
     parser: Symfony\Component\Yaml\Parser
 
