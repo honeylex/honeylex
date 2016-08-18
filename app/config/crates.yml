@@ -6,7 +6,7 @@ Hlx\Security\SecurityCrate:
     routing_prefix: /
     roles:
       default_role: user
-      available_roles: { User: user, Administrator: administrator }
+      available_roles: [ user, administrator ]
     auto_login:
       enabled: true
       firewall: default
