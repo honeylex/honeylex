@@ -9,6 +9,8 @@ use Symfony\Component\Console\Input\InputOption;
 
 class App extends Application
 {
+    protected $app;
+
     protected $configProvider;
 
     public static function getLogo()
@@ -28,6 +30,7 @@ ASCII;
 
     public function __construct(SilexApp $app, array $appCommands, ConfigProviderInterface $configProvider)
     {
+        $this->app = $app;
         $this->configProvider = $configProvider;
 
         parent::__construct('honeylex', $configProvider->getVersion());
@@ -46,5 +49,10 @@ ASCII;
     public function getHelp()
     {
         return self::getLogo() . parent::getHelp();
+    }
+
+    public function getContainer()
+    {
+        return $this->app;
     }
 }

@@ -18,6 +18,7 @@ use Honeybee\FrameworkBinding\Silex\Console\Command\Resource\ListResources;
 use Honeybee\FrameworkBinding\Silex\Console\Command\Resource\MakeResource;
 use Honeybee\FrameworkBinding\Silex\Console\Command\Resource\RemoveResource;
 use Honeybee\FrameworkBinding\Silex\Console\Command\Resource\ResourceInfo;
+use Honeybee\FrameworkBinding\Silex\Console\Command\Route\ListRoutes;
 use Symfony\Component\Console\Input\ArgvInput;
 
 $appContext = 'console';
@@ -45,6 +46,8 @@ $appCommands = [
     ResourceInfo::CLASS,
     // Project
     InstallProject::CLASS,
+    // Route
+    ListRoutes::CLASS,
 ];
 
 require_once __DIR__.'/../vendor/autoload.php';
