@@ -55,6 +55,7 @@ $appEnv = (new ArgvInput)->getParameterOption([ '--env', '-e' ], getenv('APP_ENV
 
 $app = require __DIR__.'/../app/bootstrap.php';
 $app->boot();
+$app->flush();
 
 $appState = [ ':app' => $app, ':appCommands' => $appCommands ];
 $app['honeybee.service_locator']->createEntity(App::CLASS, $appState)->run();
