@@ -4,22 +4,27 @@
 Hlx\Security\SecurityCrate:
   settings:
     routing_prefix: /
+    roles:
+      default_role: user
+      available_roles: { User: user, Administrator: administrator }
     auto_login:
       enabled: true
       firewall: default
       target_path: home
     recaptcha:
-      enabled: true
+      enabled: false
       site_key: site_key
-      secret_key: site_secret
+      secret_key: secret_key
+    api:
+      enabled: false
     oauth:
       facebook:
-        enabled: true
+        enabled: false
         app_key: app_key
         app_secret: app_secret
         scope: [ public_profile, email ] # user_location, user_hometown, user_tagged_places
         fields: [ id, name, email, first_name, last_name ]
-        field_mapping: [ firstname: first_name, lastname: last_name ]
+        field_mapping: { firstname: first_name, lastname: last_name }
     firewalls:
       default:
         form:
