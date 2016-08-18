@@ -4,8 +4,11 @@
 {{ crate.prefix }}.event_source:
   class: Honeybee\Infrastructure\DataAccess\Connector\GuzzleConnector
   settings:
-    host: 127.0.0.1
-    port: 5984
-    transport: http
-    database: {{ crate.vendor|snake }}-{{ crate.name|snake }}
+#    auth:
+#      username: ${couchdb.user}
+#      password: ${couchdb.password}
+    host: ${couchdb.host}
+    port: ${couchdb.port}
+    transport: ${couchdb.transport}
+    database: ${project.database.prefix}%2B{{ crate.vendor|snake }}-{{ crate.name|snake }}
     status_test: /

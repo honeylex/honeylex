@@ -24,9 +24,6 @@ services:
       - "5984:5984"
     volumes:
       - ../../data/couchdb:/usr/local/var/lib/couchdb
-    environment:
-      COUCHDB_USER: honeylex
-      COUCHDB_PASSWORD: honeylex
   
   elasticsearch:
     image: elasticsearch:latest
