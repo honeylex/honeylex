@@ -103,3 +103,12 @@ honeylex.translator:
     class: Honeybee\FrameworkBinding\Silex\Service\Provisioner\TranslationServiceProvisioner
     settings:
       alias: Symfony\Component\Translation\TranslatorInterface
+
+honeylex.dispatcher:
+  class: Symfony\Component\EventDispatcher\EventDispatcher
+  provisioner:
+    class: Honeybee\FrameworkBinding\Silex\Service\Provisioner\SilexServiceProvisioner
+    settings:
+      app_key: dispatcher
+      share: true
+      alias: Symfony\Component\EventDispatcher\EventDispatcherInterface
