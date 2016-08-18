@@ -31,9 +31,11 @@ cd /var/www
 composer install
 bin/console hlx:project:install
 bin/console hlx:migrate:up
+bin/console hlx:fixture:import # creates a default adminstrator
 ```
-Your site will then be available at the IP address of your base machine. 
-You can configure various files in the ```your-project/var/docker/conf``` folder of your host machine.
+Your site will then be available at the IP address of your base machine (typically http://192.168.99.100) and you can login as a default administrator with username and password `admin`.
+
+You can also configure various environment files in the ```your-project/var/docker/conf``` folder of your host machine.
 
 The following docker commands are available via `composer` from your host machine:
 ```shell
