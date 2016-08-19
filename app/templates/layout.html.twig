@@ -15,7 +15,7 @@
             <nav class="navbar navbar-default">
                 <div class="container-fluid">
                     <div class="navbar-header">
-                        <a class="navbar-brand" href="{{ url('home') }}">Honeylex</a>
+                        <a class="navbar-brand" href="{{ url('home') }}">{{ config('project.name') }}</a>
                     </div>
                     <ul class="nav navbar-nav navbar-right">
                     {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}

@@ -3,8 +3,8 @@
 {% block header %}
 <div class="jumbotron">
     <div class="container">
-        <h1>Honeylex</h1>
-        <p>{{ 'Honeybee CQRS & ES integration with the Silex framework'|trans }}</p>
+        <h1>{{ config('project.name') }}</h1>
+        <p>{{ config('project.description')|trans }}</p>
     </div>
 </div>
 {% endblock %}
