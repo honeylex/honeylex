@@ -1,7 +1,6 @@
 en:
   messages:
     'Honeybee CQRS & ES integration with the Silex framework': 'Honeybee CQRS & ES integration with the Silex framework'
-    'Welcome to your new application.': 'Welcome to your new application.'
   locale:
     'en': English
     'de': Deutsch
@@ -9,4 +8,3 @@ en:
 de:
   messages:
     'Honeybee CQRS & ES integration with the Silex framework': 'Honeybee CQRS & ES Integration mit dem Silex framework'
-    'Welcome to your new application.': 'Willkommen in Ihrem neuen Anwendung.'
