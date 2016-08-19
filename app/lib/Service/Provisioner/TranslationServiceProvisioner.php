@@ -28,7 +28,7 @@ class TranslationServiceProvisioner implements ProvisionerInterface, EventListen
         SettingsInterface $provisionerSettings
     ) {
         $service = $serviceDefinition->getClass();
-        $translationSettings = $configProvider->getSetting('project', new Settings)->get('translation', new Settings);
+        $translationSettings = $configProvider->getSetting('project.translation', new Settings);
 
         $app->register(new LocaleServiceProvider);
         $app->register(

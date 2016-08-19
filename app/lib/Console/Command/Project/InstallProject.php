@@ -68,6 +68,10 @@ class InstallProject extends ProjectCommand
                     'email' => [
                         'from_email' => sprintf('%1$s@%1$s.dev', $lcName),
                         'from_name' => $name
+                    ],
+                    'translation' => [
+                        'default_locale' => 'en',
+                        'locale_fallbacks' => [ 'en', 'de' ]
                     ]
                 ]
             ]
