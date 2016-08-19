@@ -35,6 +35,7 @@ class Bootstrap
         $injector = new Injector(new StandardReflector);
         $config = $this->bootstrapConfig($app, $injector, $settings);
         $app['version'] = $config->getVersion();
+        $app['debug'] = $config->getAppEnv() === 'dev';
         $this->bootstrapLogger($app, $config, $injector);
 
         // then kick off service provisioning
@@ -54,9 +55,7 @@ class Bootstrap
         // load context specific configuration (well, only web atm. needs to change too)
         if ($config->getAppContext() === 'web') {
             $this->registerWebErrorHandler($app);
-            // dev specific switches
             if ($config->getAppEnv() === 'dev') {
-                $app['debug'] = true;
                 $app->register(
                     new WebProfilerServiceProvider,
                     [ 'profiler.cache_dir' => $config->getProjectDir().'/var/cache/profiler' ]
