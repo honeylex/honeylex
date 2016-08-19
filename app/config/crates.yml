@@ -13,16 +13,16 @@ Hlx\Security\SecurityCrate:
       target_path: home
     recaptcha:
       enabled: false
-      site_key: site_key
-      secret_key: secret_key
+      site_key: ${recaptcha.site_key}
+      secret_key: ${recaptcha.secret_key}
     api:
       enabled: false
     oauth:
       facebook:
         enabled: false
-        app_key: app_key
-        app_secret: app_secret
-        scope: [ public_profile, email ] # user_location, user_hometown, user_tagged_places
+        app_key: ${oauth.facebook.app_key}
+        app_secret: ${oauth.facebook.app_secret}
+        scope: [ public_profile, email ]
         fields: [ id, name, email, first_name, last_name ]
         field_mapping: { firstname: first_name, lastname: last_name }
     firewalls:

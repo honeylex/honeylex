@@ -72,7 +72,8 @@ class ConfigProvider implements ConfigProviderInterface
             $cratePrefix = $pathParts[0].'.'.$pathParts[1];
             if ($this->crateMap->hasKey($cratePrefix)) {
                 $pathParts = array_slice($pathParts, 2);
-                $value = $this->crateMap->getItem($cratePrefix)->getSettings();
+                $crateSettings = $this->crateMap->getItem($cratePrefix)->getSettings();
+                $value = new Settings($this->interpolateConfigValues($crateSettings->toArray()));
             }
         }
 
@@ -127,8 +128,8 @@ class ConfigProvider implements ConfigProviderInterface
         $configHandler = new $handlerClass(new ArrayConfig($handlerConfig), $this);
 
         $handlerConfigsFiles = [
-            $this->getCoreConfigDir() . '/' . $name,
-            $this->getConfigDir() . '/' . $name
+            $this->getCoreConfigDir().'/'.$name,
+            $this->getConfigDir().'/'.$name
         ];
 
         foreach ($this->crateMap as $prefix => $crate) {
@@ -148,5 +149,23 @@ class ConfigProvider implements ConfigProviderInterface
                 )
             )
         );
+    }
+
+    protected function interpolateConfigValues(array $config)
+    {
+        foreach ($config as $key => $value) {
+            if (is_array($value)) {
+                $config[$key] = $this->interpolateConfigValues($value);
+            } elseif (is_string($value)) {
+                if (preg_match_all('/(\$\{(.*?)\})/', $value, $matches)) {
+                    $replacements = [];
+                    foreach ($matches[2] as $configKey) {
+                        $replacements[] = $this->getSetting($configKey);
+                    }
+                    $config[$key] = str_replace($matches[0], $replacements, $value);
+                }
+            }
+        }
+        return $config;
     }
 }

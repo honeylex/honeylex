@@ -14,7 +14,7 @@ class CrateConfigHandler implements ConfigHandlerInterface
     public function handle(array $configFiles)
     {
         if (count($configFiles) !== 1) {
-            throw new ConfigError('Unsupported number of crate.yml config files given.');
+            throw new ConfigError('Unsupported number of crates.yml config files given.');
         }
 
         return $this->handleConfigFile($configFiles[0]);

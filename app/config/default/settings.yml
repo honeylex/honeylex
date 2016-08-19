@@ -14,3 +14,15 @@ local_configs:
     name: elasticsearch.json
     type: json
     load: from_file
+  recaptcha:
+    name: recaptcha.json
+    type: json
+    load: from_file
+  oauth:
+    name: oauth.json
+    type: json
+    load: from_file
+  mail:
+    name: mail.json
+    type: json
+    load: from_file

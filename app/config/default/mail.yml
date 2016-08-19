@@ -4,8 +4,11 @@
 swiftmailer:
   transport: \Swift_NullTransport
   options:
-    host: localhost
-    port: 25
+    host: ${mail.host}
+    port: ${mail.port}
+    username: ${mail.username}
+    password: ${mail.password}
+    encryption: ${mail.encryption}
   use_spool: false
   delivery_addresses: honeylex@honeylex.dev
 
