@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ddfd945764f3ea135d2c95163709f2af",
-    "content-hash": "52db9886e3db2f31d9000fa1c1b46332",
+    "hash": "d84f6bb06dbb483eb5f5bd6a61fdc402",
+    "content-hash": "a1d253d0d65a4b422fbab45e02bf0028",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -918,12 +918,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeylex/hlx-security.git",
-                "reference": "59fc3bd63bd49da60afa432ac9e09a69dec85609"
+                "reference": "6e6f45d2e4a543a3080efa33cd72089ea51d7fb0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeylex/hlx-security/zipball/59fc3bd63bd49da60afa432ac9e09a69dec85609",
-                "reference": "59fc3bd63bd49da60afa432ac9e09a69dec85609",
+                "url": "https://api.github.com/repos/honeylex/hlx-security/zipball/6e6f45d2e4a543a3080efa33cd72089ea51d7fb0",
+                "reference": "6e6f45d2e4a543a3080efa33cd72089ea51d7fb0",
                 "shasum": ""
             },
             "require": {
@@ -942,20 +942,12 @@
                     "Hlx\\Security\\": "lib/"
                 }
             },
-            "scripts": {
-                "code-sniffer": [
-                    "vendor/bin/phpcs --extensions=php --standard=psr2 lib"
-                ]
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
-            "description": "Honeylex crate for managing security, users and roles.",
-            "support": {
-                "source": "https://github.com/honeylex/hlx-security/tree/master",
-                "issues": "https://github.com/honeylex/hlx-security/issues"
-            },
-            "time": "2016-08-19 13:53:15"
+            "description": "Security & user administration crate for Honeylex.",
+            "time": "2016-08-19 19:25:16"
         },
         {
             "name": "league/flysystem",

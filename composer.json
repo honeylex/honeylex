@@ -27,12 +27,6 @@
         "honeylex/hlx-security": "master@dev",
         "roave/security-advisories": "master@dev"
     },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "git@github.com:honeylex/hlx-security.git"
-        }
-    ],
     "require-dev": {
         "phpunit/phpunit": "~5.3",
         "squizlabs/php_codesniffer": "~2.3",
