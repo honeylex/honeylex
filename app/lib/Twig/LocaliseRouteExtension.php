@@ -33,12 +33,12 @@ class LocaliseRouteExtension extends Twig_Extension
         // Merge query parameters and route attributes
         $attributes = array_merge(
             $request->query->all(),
-            $request->attributes->get('_route_params')
+            $request->attributes->get('_route_params', [])
         );
 
         $attributes['_locale'] = $locale;
 
-        return $this->urlGenerator->generate($request->attributes->get('_route'), $attributes);
+        return $this->urlGenerator->generate($request->attributes->get('_route', 'home'), $attributes);
     }
 
     public function getName()
