@@ -5,8 +5,6 @@ honeybee.environment:
   class: Honeybee\FrameworkBinding\Silex\Environment
   provisioner:
     class: Honeybee\FrameworkBinding\Silex\Service\Provisioner\EnvironmentProvisioner
-    settings:
-      alias: Honeybee\EnvironmentInterface
 
 honeybee.infrastructure.template_renderer:
   class: Honeybee\Infrastructure\Template\Twig\TwigRenderer
@@ -61,6 +59,14 @@ honeybee.infrastructure.filesystem_service:
   class: Honeybee\Infrastructure\Filesystem\FilesystemService
   provisioner:
     class: Honeybee\FrameworkBinding\Silex\Service\Provisioner\FilesystemServiceProvisioner
+
+honeybee.infrastructure.command_enricher:
+  class: Honeybee\Infrastructure\Command\CommandEnricher
+  provisioner:
+    class: Honeybee\FrameworkBinding\Silex\Service\Provisioner\CommandEnricherProvisioner
+    settings:
+      enrichers:
+        - Hlx\Security\User\AuditMetadataEnricher
 
 honeylex.url_generator:
   class: Symfony\Component\Routing\Generator\UrlGenerator

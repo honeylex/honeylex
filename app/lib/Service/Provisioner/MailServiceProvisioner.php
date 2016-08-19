@@ -44,7 +44,7 @@ class MailServiceProvisioner implements ProvisionerInterface
             $app['swiftmailer.transport'] = new $config['swiftmailer']['transport'];
         }
 
-        return $injector
+        $injector
             ->share($service)
             ->alias(MailServiceInterface::CLASS, $service)
             ->delegate(

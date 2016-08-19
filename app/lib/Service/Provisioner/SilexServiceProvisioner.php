@@ -32,7 +32,5 @@ class SilexServiceProvisioner implements ProvisionerInterface
             }
             $injector->alias($alias, $service);
         }
-
-        return $injector;
     }
 }

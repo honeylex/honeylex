@@ -52,8 +52,6 @@ class TranslationServiceProvisioner implements ProvisionerInterface, EventListen
             }
             $injector->alias($alias, $service);
         }
-
-        return $injector;
     }
 
     protected function registerResources(Container $app, ConfigProviderInterface $configProvider)

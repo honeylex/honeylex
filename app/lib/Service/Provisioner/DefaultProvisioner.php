@@ -20,8 +20,9 @@ class DefaultProvisioner implements ProvisionerInterface
     ) {
         $service = $serviceDefinition->getClass();
         $state = [ ':config' => $serviceDefinition->getConfig() ];
+
         $injector->define($service, $state);
-        // there will only be one instance of the service when the "share" setting is true
+        // there will only be one instance of the service when the "share" setting is true (default)
         if ($provisionerSettings->get('share', true) === true) {
             $injector->share($service);
         }
@@ -33,7 +34,5 @@ class DefaultProvisioner implements ProvisionerInterface
             }
             $injector->alias($alias, $service);
         }
-
-        return $injector;
     }
 }
