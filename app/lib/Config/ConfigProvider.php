@@ -66,12 +66,22 @@ class ConfigProvider implements ConfigProviderInterface
 
         $pathParts = explode('.', $setting);
         $value = $this->settings;
+
+        // crate config support
+        if (count($pathParts) > 1) {
+            $cratePrefix = $pathParts[0].'.'.$pathParts[1];
+            if ($this->crateMap->hasKey($cratePrefix)) {
+                $pathParts = array_slice($pathParts, 2);
+                $value = $this->crateMap->getItem($cratePrefix)->getSettings();
+            }
+        }
+
         do {
             $key = array_shift($pathParts);
-            $value = $value instanceof SettingsInterface ? $value->get($key) : null;
+            $value = $key && $value instanceof SettingsInterface ? $value->get($key) : null;
         } while (!empty($pathParts));
 
-        return $value;
+        return is_null($value) ? $default : $value;
     }
 
     public function getSettings()

@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>{% block title '' %} - Honeylex</title>
+        <title>{% block page_title %}{{ page_title|default(config('project.name')) }}{% endblock %}</title>
         <meta name="description" content="Honeylex: Your cqrs plus es app-boilerplate">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
         <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />

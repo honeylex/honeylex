@@ -918,12 +918,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeylex/hlx-security.git",
-                "reference": "c2c32eb64aa191108048ec98366fc229ec9688e5"
+                "reference": "d7f0ea5bdfc5dfed246d7a853a9d9071d3ff9e54"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeylex/hlx-security/zipball/c2c32eb64aa191108048ec98366fc229ec9688e5",
-                "reference": "c2c32eb64aa191108048ec98366fc229ec9688e5",
+                "url": "https://api.github.com/repos/honeylex/hlx-security/zipball/d7f0ea5bdfc5dfed246d7a853a9d9071d3ff9e54",
+                "reference": "d7f0ea5bdfc5dfed246d7a853a9d9071d3ff9e54",
                 "shasum": ""
             },
             "require": {
@@ -955,7 +955,7 @@
                 "source": "https://github.com/honeylex/hlx-security/tree/master",
                 "issues": "https://github.com/honeylex/hlx-security/issues"
             },
-            "time": "2016-08-18 23:09:02"
+            "time": "2016-08-19 10:58:40"
         },
         {
             "name": "league/flysystem",

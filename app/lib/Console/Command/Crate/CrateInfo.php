@@ -34,7 +34,7 @@ class CrateInfo extends CrateCommand
 
     protected function printCrateInfo(CrateInterface $crate, OutputInterface $output)
     {
-        $output->writeln($crate->getName().": ".$crate->getDescription());
+        $output->writeln($crate->getName().': '.$crate->getDescription());
         $output->writeln('  prefix: '.$crate->getPrefix());
         $output->writeln('  namespace: '.$crate->getNamespace());
         $output->writeln('  directory: '.$crate->getRootDir());
