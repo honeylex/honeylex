@@ -34,7 +34,7 @@ class SkeletonFinder
             $locations = $this->lookupPaths;
         }
 
-        $finder = new Finder();
+        $finder = new Finder;
         $finder->directories()->depth(0)->name($name)->in($locations);
 
         $skeletons = iterator_to_array($finder, true);
@@ -54,7 +54,7 @@ class SkeletonFinder
             $locations = $this->lookupPaths;
         }
 
-        $finder = new Finder();
+        $finder = new Finder;
         $finder->directories()->depth(0)->sortByName()->in($locations);
 
         return iterator_to_array($finder, true);

@@ -90,21 +90,29 @@ class MakeCrate extends CrateCommand
         $locations = $input->getOption('location') ?: null;
 
         if (!is_array($locations)) {
-            $skeletonLocations = [
-                $this->configProvider->getCoreDir() . '/var/skeletons',
-                $this->configProvider->getProjectDir() . '/var/skeletons'
-            ];
+            $skeletonLocations = [];
+            $projectSkeletonDir = $this->configProvider->getProjectDir().'/var/skeletons';
+            if (is_readable($projectSkeletonDir)) {
+                $skeletonLocations[] = $projectSkeletonDir;
+            }
+            $coreSkeletonDir = $this->configProvider->getCoreDir().'/var/skeletons';
+            if (is_readable($coreSkeletonDir)) {
+                $skeletonLocations[] = $coreSkeletonDir;
+            }
         } else {
             $skeletonLocations = $locations;
         }
         $skeletonLocations = array_unique($skeletonLocations);
 
-        $output->writeln('Crate vendor/name: ' . $vendor.'/'.$name);
-        $output->writeln('Crate prefix: ' . $prefix);
-        $output->writeln('Crate namespace: ' . $fqns);
-        $output->writeln('Crate description: ' . $description);
-        $output->writeln('Crate dir: ' . $path);
-        $output->writeln('Skeleton locations: ' . implode(', ', $skeletonLocations));
+        $output->writeln('Crate vendor/name: '.$vendor.'/'.$name);
+        $output->writeln('Crate prefix: '.$prefix);
+        $output->writeln('Crate namespace: '.$fqns);
+        $output->writeln('Crate description: '.$description);
+        $output->writeln('Crate dir: '.$path);
+        $output->writeln('Skeleton locations:');
+        foreach ($skeletonLocations as $skeletonLocation) {
+            $output->writeln('  - '.$skeletonLocation);
+        }
         // variables that will be available within skeleton file- and directory-names and within file-contents.
         $data = [
             'timestamp' => date('YmdHis'),

@@ -76,10 +76,15 @@ class MakeResource extends ResourceCommand
         $locations = $input->getOption('location') ?: null;
 
         if (!is_array($locations)) {
-            $skeletonLocations = [
-                $this->configProvider->getCoreDir() . '/var/skeletons',
-                $this->configProvider->getProjectDir() . '/var/skeletons'
-            ];
+            $skeletonLocations = [];
+            $projectSkeletonDir = $this->configProvider->getProjectDir().'/var/skeletons';
+            if (is_readable($projectSkeletonDir)) {
+                $skeletonLocations[] = $projectSkeletonDir;
+            }
+            $coreSkeletonDir = $this->configProvider->getCoreDir().'/var/skeletons';
+            if (is_readable($coreSkeletonDir)) {
+                $skeletonLocations[] = $coreSkeletonDir;
+            }
         } else {
             $skeletonLocations = $locations;
         }
@@ -90,12 +95,12 @@ class MakeResource extends ResourceCommand
         $output->writeln('Resource namespace: '.$crate->getNamespace().'\\'.$resourceName);
         $output->writeln('Resource description: '.$description);
         $output->writeln('Directories: ');
-        $output->writeln('- '.$crate->getRootDir().'/config/'.$resourceName);
-        $output->writeln('- '.$crate->getRootDir().'/lib/'.$resourceName);
-        $output->writeln('- '.$crate->getRootDir().'/templates/'.StringToolkit::asSnakeCase($resourceName));
+        $output->writeln('  - '.$crate->getRootDir().'/config/'.$resourceName);
+        $output->writeln('  - '.$crate->getRootDir().'/lib/'.$resourceName);
+        $output->writeln('  - '.$crate->getRootDir().'/templates/'.StringToolkit::asSnakeCase($resourceName));
         $output->writeln('Skeleton locations:');
         foreach ($skeletonLocations as $skeletonLocation) {
-            $output->writeln('- '.$skeletonLocation);
+            $output->writeln('  - '.$skeletonLocation);
         }
 
         $data = [

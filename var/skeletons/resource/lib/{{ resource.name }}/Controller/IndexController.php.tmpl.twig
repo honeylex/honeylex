@@ -15,6 +15,6 @@ class IndexController
 
     public function read()
     {
-        return $this->templateRenderer->render('@{{ crate.name }}/{{ resource.name|snake }}/index.twig', [ 'title' => __METHOD__ ]);
+        return $this->templateRenderer->render('@{{ crate.vendor|snake }}-{{ crate.name|snake }}/{{ resource.name|snake }}/index.html.twig', [ 'title' => __METHOD__ ]);
     }
 }
