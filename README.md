@@ -31,9 +31,8 @@ cd /var/www
 composer install
 bin/console hlx:project:install
 bin/console hlx:migrate:up
-bin/console hlx:fixture:import # creates a default adminstrator
 ```
-Your site will then be available at the IP address of your base machine (typically http://192.168.99.100) and you can login as a default administrator with username and password `admin`.
+Your site will then be available at the IP address of your base machine (typically http://192.168.99.100).
 
 You can also configure various environment files in the ```your-project/var/docker/conf``` folder of your host machine.
 
@@ -73,7 +72,7 @@ A full list of supported console commands for scaffolding crates and resources, 
 bin/console
 ```
 
-### Registered silex service providers
+### Registered Silex service providers
 
 The bootstrapped Silex app is configured with the following service providers:
 
