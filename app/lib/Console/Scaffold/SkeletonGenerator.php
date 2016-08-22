@@ -2,6 +2,7 @@
 
 namespace Honeybee\FrameworkBinding\Silex\Console\Scaffold;
 
+use Honeybee\FrameworkBinding\Silex\Config\ConfigProviderInterface;
 use Honeybee\FrameworkBinding\Silex\Twig\TwigExtension;
 use Honeybee\Infrastructure\Template\Twig\TwigRenderer;
 use Symfony\Component\Filesystem\Filesystem;
@@ -26,6 +27,8 @@ class SkeletonGenerator implements SkeletonGeneratorInterface
 
     protected $reportingEnabled = true;
 
+    protected $configProvider;
+
     protected $skeletonName;
 
     protected $lookupPaths;
@@ -42,8 +45,14 @@ class SkeletonGenerator implements SkeletonGeneratorInterface
      * @param string $targetPath full path to the target location
      * @param array $data variables to use as context for rendering via twig
      */
-    public function __construct($skeletonName, array $lookupPaths, $targetPath, array $data = [])
-    {
+    public function __construct(
+        ConfigProviderInterface $configProvider,
+        $skeletonName,
+        array $lookupPaths,
+        $targetPath,
+        array $data = []
+    ) {
+        $this->configProvider = $configProvider;
         $this->skeletonName = $skeletonName;
         $this->lookupPaths = $lookupPaths;
         $this->targetPath = $targetPath;
@@ -52,7 +61,7 @@ class SkeletonGenerator implements SkeletonGeneratorInterface
 
         $this->twigStringRenderer = TwigRenderer::create(
             [
-                'twig_extensions' => [ TwigExtension::CLASS ],
+                'twig_extensions' => [ new TwigExtension($this->configProvider) ],
                 'twig_options' => [
                     'autoescape' => false,
                     'cache' => false,
@@ -172,7 +181,7 @@ class SkeletonGenerator implements SkeletonGeneratorInterface
 
         $twigRenderer = TwigRenderer::create(
             [
-                'twig_extensions' => [ TwigExtension::CLASS ],
+                'twig_extensions' => [ new TwigExtension($this->configProvider) ],
                 'twig_options' => [
                     'autoescape' => false,
                     'cache' => false,

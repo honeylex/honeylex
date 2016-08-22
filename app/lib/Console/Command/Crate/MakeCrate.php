@@ -117,7 +117,7 @@ class MakeCrate extends CrateCommand
             ]
         ];
         // generate crate from skeleton and deploy the resulting code to the target path
-        $skeletonGenerator = new SkeletonGenerator('crate', $skeletonLocations, $path, $data);
+        $skeletonGenerator = new SkeletonGenerator($this->configProvider, 'crate', $skeletonLocations, $path, $data);
         $skeletonGenerator->generate();
         // update the composer.json's autoload
         $this->addAutoloadConfig($fqns, $path.'/lib/');
