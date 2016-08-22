@@ -1,7 +1,13 @@
 <?php
 
-// everything in here will be mounted below the prefix '/{{ crate.name|snake }}'
+// everything in here will be mounted by default below the prefix '/{{ crate.vendor|snake }}/{{ crate.name|snake }}'
+// you can override the mount point by setting a `routing_prefix` in your crates.yml
 
 use {{ crate.namespace }}\Controller\IndexController;
 
-$routing->get('/', [ IndexController::CLASS, 'read' ])->bind('{{ crate.prefix }}.index');
+// routing inclusion for convenience - replace with specific routing includes
+foreach (glob(__DIR__.'/*/routing.php') as $filename) {
+    require_once $filename ;
+}
+
+$routing->get('/', [ IndexController::CLASS, 'read' ])->bind($this->getPrefix().'.index');
