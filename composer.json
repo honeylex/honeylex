@@ -24,7 +24,6 @@
         "beberlei/assert": "~2.5",
         "nesbot/carbon": "~1.21",
         "honeybee/honeybee": "master@dev",
-        "honeylex/hlx-security": "master@dev",
         "roave/security-advisories": "master@dev"
     },
     "require-dev": {

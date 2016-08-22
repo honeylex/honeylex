@@ -17,29 +17,6 @@
                     <div class="navbar-header">
                         <a class="navbar-brand" href="{{ url('home') }}">{{ config('project.name') }}</a>
                     </div>
-                    <ul class="nav navbar-nav navbar-right">
-                    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                    <div class="navbar-text dropdown">
-                        <span class="glyphicon glyphicon-user"></span>
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                            {{ app.user.username }}
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            {% if is_granted('ROLE_ADMIN') %}
-                            <li><a href="{{ path('hlx.security.user.list') }}">{{ 'Admin'|trans }}</a></li>
-                            {% endif %}
-                            <li><a href="{{ path('hlx.security.user.tasks.modify', { identifier:app.user.identifier }) }}">{{ 'My Account'|trans }}</a></li>
-                            <li><a href="{{ path('hlx.security.logout') }}">{{ 'Logout'|trans }}</a></li>
-                        </ul>
-                    </div>
-                    {% else %}
-                    <p class="navbar-text">
-                        <span class="glyphicon glyphicon-user"></span>
-                        <a href="{{ path('hlx.security.login') }}">{{ 'Login'|trans }}</a> | <a href="{{ path('hlx.security.registration') }}">{{ 'Register'|trans }}</a>
-                    </p>
-                    </ul>
-                    {% endif %}
                 </div>
             </nav>
             {% block header %}{% endblock %}

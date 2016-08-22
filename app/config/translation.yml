@@ -1,3 +1,6 @@
+#
+# Project translations
+---
 en:
   messages:
     'Honeybee CQRS & ES integration with the Silex framework': 'Honeybee CQRS & ES integration with the Silex framework'
