@@ -9,7 +9,7 @@ storage_writers:
     class: Honeybee\Infrastructure\DataAccess\Storage\Elasticsearch\StructureVersionList\StructureVersionListWriter
     connection: honeybee.view_store
     settings:
-      index: {{ crate.vendor|snake }}-{{ crate.name|snake }}
+      index: ${project.database.prefix}.{{ crate.vendor|snake }}-{{ crate.name|snake }}
       type: version_list
 
 storage_readers:
@@ -20,5 +20,5 @@ storage_readers:
     class: Honeybee\Infrastructure\DataAccess\Storage\Elasticsearch\StructureVersionList\StructureVersionListReader
     connection: honeybee.view_store
     settings:
-      index: {{ crate.vendor|snake }}-{{ crate.name|snake }}
+      index: ${project.database.prefix}.{{ crate.vendor|snake }}-{{ crate.name|snake }}
       type: version_list
