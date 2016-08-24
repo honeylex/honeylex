@@ -61,3 +61,8 @@ translation.yml: # merge behaviour: lastone-wins
   handler: Honeybee\FrameworkBinding\Silex\Config\Handler\TranslationConfigHandler
   settings:
     parser: Symfony\Component\Yaml\Parser
+
+jobs.yml: # merge behaviour: lastone-wins
+  handler: Honeybee\FrameworkBinding\Silex\Config\Handler\DefaultConfigHandler
+  settings:
+    parser: Symfony\Component\Yaml\Parser

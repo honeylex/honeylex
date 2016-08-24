@@ -12,8 +12,8 @@ honeybee.view_store:
 honeybee.msg_queue:
   class: Honeybee\Infrastructure\DataAccess\Connector\RabbitMqConnector
   settings:
-    host: localhost
-    port: 5762
+    host: ${rabbitmq.host}
+    port: ${rabbitmq.port}
     user: ${rabbitmq.user}
     password: ${rabbitmq.password}
 

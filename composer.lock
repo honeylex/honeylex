@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "fa40b72cb1a36ef3af04d8e286ddc51b",
-    "content-hash": "065c1649f52d71fbd8210ce94431bf20",
+    "hash": "38bf1c2b1d5dfe112c4f6b25467ae786",
+    "content-hash": "6e503ea38a55105d280149ac34af869f",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -658,12 +658,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeybee/honeybee.git",
-                "reference": "3bc51a27b04e5ee3debb54cafc6360a3f2a7bd88"
+                "reference": "36098408c48ef8ced7619b677b25eec500cb6e31"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/3bc51a27b04e5ee3debb54cafc6360a3f2a7bd88",
-                "reference": "3bc51a27b04e5ee3debb54cafc6360a3f2a7bd88",
+                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/36098408c48ef8ced7619b677b25eec500cb6e31",
+                "reference": "36098408c48ef8ced7619b677b25eec500cb6e31",
                 "shasum": ""
             },
             "require": {
@@ -747,7 +747,7 @@
                 "hexagonal",
                 "messaging"
             ],
-            "time": "2016-08-19 12:24:51"
+            "time": "2016-08-24 15:16:05"
         },
         {
             "name": "honeybee/trellis",
@@ -1180,6 +1180,76 @@
                 "random"
             ],
             "time": "2016-04-03 06:00:07"
+        },
+        {
+            "name": "php-amqplib/php-amqplib",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-amqplib/php-amqplib.git",
+                "reference": "b7b677d046a9735e0ad940d649feaf38d58c866c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-amqplib/php-amqplib/zipball/b7b677d046a9735e0ad940d649feaf38d58c866c",
+                "reference": "b7b677d046a9735e0ad940d649feaf38d58c866c",
+                "shasum": ""
+            },
+            "require": {
+                "ext-bcmath": "*",
+                "ext-mbstring": "*",
+                "php": ">=5.3.0"
+            },
+            "replace": {
+                "videlalvaro/php-amqplib": "self.version"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.8",
+                "scrutinizer/ocular": "^1.1",
+                "squizlabs/php_codesniffer": "^2.5"
+            },
+            "suggest": {
+                "ext-sockets": "Use AMQPSocketConnection"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.7-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "PhpAmqpLib\\": "PhpAmqpLib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-2.1"
+            ],
+            "authors": [
+                {
+                    "name": "Alvaro Videla",
+                    "role": "Original Maintainer"
+                },
+                {
+                    "name": "John Kelly",
+                    "email": "johnmkelly86@gmail.com",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "Raúl Araya",
+                    "email": "nubeiro@gmail.com",
+                    "role": "Maintainer"
+                }
+            ],
+            "description": "Formerly videlalvaro/php-amqplib.  This library is a pure PHP implementation of the AMQP protocol. It's been tested against RabbitMQ.",
+            "homepage": "https://github.com/php-amqplib/php-amqplib/",
+            "keywords": [
+                "message",
+                "queue",
+                "rabbitmq"
+            ],
+            "time": "2016-07-01 23:37:24"
         },
         {
             "name": "pimple/pimple",
@@ -1776,16 +1846,16 @@
         },
         {
             "name": "silex/silex",
-            "version": "v2.0.2",
+            "version": "v2.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/silexphp/Silex.git",
-                "reference": "7420ac96195ea7eb6f1e11dc273be49359dd50ad"
+                "reference": "fd0852ebfa0a4cf1e17d746bb81962ec69bbb6d1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silexphp/Silex/zipball/7420ac96195ea7eb6f1e11dc273be49359dd50ad",
-                "reference": "7420ac96195ea7eb6f1e11dc273be49359dd50ad",
+                "url": "https://api.github.com/repos/silexphp/Silex/zipball/fd0852ebfa0a4cf1e17d746bb81962ec69bbb6d1",
+                "reference": "fd0852ebfa0a4cf1e17d746bb81962ec69bbb6d1",
                 "shasum": ""
             },
             "require": {
@@ -1857,7 +1927,7 @@
             "keywords": [
                 "microframework"
             ],
-            "time": "2016-06-14 09:27:51"
+            "time": "2016-08-22 17:50:21"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -4796,17 +4866,17 @@
         },
         {
             "name": "silex/web-profiler",
-            "version": "v2.0.1",
+            "version": "v2.0.2",
             "target-dir": "Silex/Provider",
             "source": {
                 "type": "git",
                 "url": "https://github.com/silexphp/Silex-WebProfiler.git",
-                "reference": "605ebe9d16eb9597ab42603d1b4bec595ebf677d"
+                "reference": "e0fff6fb6282eaa73126e5a6a4dd9a258f9d771b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silexphp/Silex-WebProfiler/zipball/605ebe9d16eb9597ab42603d1b4bec595ebf677d",
-                "reference": "605ebe9d16eb9597ab42603d1b4bec595ebf677d",
+                "url": "https://api.github.com/repos/silexphp/Silex-WebProfiler/zipball/e0fff6fb6282eaa73126e5a6a4dd9a258f9d771b",
+                "reference": "e0fff6fb6282eaa73126e5a6a4dd9a258f9d771b",
                 "shasum": ""
             },
             "require": {
@@ -4848,7 +4918,7 @@
             ],
             "description": "A WebProfiler for Silex",
             "homepage": "http://silex.sensiolabs.org/",
-            "time": "2016-06-15 07:44:40"
+            "time": "2016-08-23 17:38:28"
         },
         {
             "name": "squizlabs/php_codesniffer",
@@ -5139,6 +5209,7 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "honeybee/honeybee": 20,
+        "php-amqplib/php-amqplib": 20,
         "roave/security-advisories": 20
     },
     "prefer-stable": true,

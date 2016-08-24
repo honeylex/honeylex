@@ -60,6 +60,13 @@ honeybee.infrastructure.filesystem_service:
   provisioner:
     class: Honeybee\FrameworkBinding\Silex\Service\Provisioner\FilesystemServiceProvisioner
 
+honeybee.infrastructure.job_service:
+  class: Honeybee\Infrastructure\Job\JobService
+  provisioner:
+    class: Honeybee\FrameworkBinding\Silex\Service\Provisioner\JobServiceProvisioner
+    settings:
+      connection: honeybee.msg_queue
+
 honeybee.infrastructure.command_enricher:
   class: Honeybee\Infrastructure\Command\CommandEnricher
   provisioner:
