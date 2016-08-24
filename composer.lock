@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "38bf1c2b1d5dfe112c4f6b25467ae786",
-    "content-hash": "6e503ea38a55105d280149ac34af869f",
+    "hash": "95c405e0a48088690a8777a21f7d7cc8",
+    "content-hash": "0058312eb7129ffc3704f2257c5b47f0",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -1186,13 +1186,13 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/php-amqplib/php-amqplib.git",
-                "reference": "b7b677d046a9735e0ad940d649feaf38d58c866c"
+                "url": "https://github.com/FriendsOfHoneybee/php-amqplib.git",
+                "reference": "e6dab50364ce5755f6554bf43fe8c956c2e88047"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-amqplib/php-amqplib/zipball/b7b677d046a9735e0ad940d649feaf38d58c866c",
-                "reference": "b7b677d046a9735e0ad940d649feaf38d58c866c",
+                "url": "https://api.github.com/repos/FriendsOfHoneybee/php-amqplib/zipball/e6dab50364ce5755f6554bf43fe8c956c2e88047",
+                "reference": "e6dab50364ce5755f6554bf43fe8c956c2e88047",
                 "shasum": ""
             },
             "require": {
@@ -1222,7 +1222,12 @@
                     "PhpAmqpLib\\": "PhpAmqpLib/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "PhpAmqpLib\\Tests\\Functional\\": "tests/Functional",
+                    "PhpAmqpLib\\Tests\\Unit\\": "tests/Unit"
+                }
+            },
             "license": [
                 "LGPL-2.1"
             ],
@@ -1249,7 +1254,10 @@
                 "queue",
                 "rabbitmq"
             ],
-            "time": "2016-07-01 23:37:24"
+            "support": {
+                "source": "https://github.com/FriendsOfHoneybee/php-amqplib/tree/master"
+            },
+            "time": "2016-07-27 14:55:50"
         },
         {
             "name": "pimple/pimple",
