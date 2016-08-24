@@ -11,6 +11,6 @@ class DefaultConfigHandler extends ArrayConfigHandler
 
     protected function mergeConfigs(array $out, array $in)
     {
-        return array_merge($out, $in);
+        return array_replace_recursive($out, $in);
     }
 }
