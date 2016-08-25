@@ -2,10 +2,10 @@
 # Honeylex default event bus configuration
 ---
 transports:
-#  event_queue:
-#    class: Honeybee\Infrastructure\Event\Bus\Transport\JobQueueTransport
-#    settings:
-#      exchange: ${core.app.prefix}.domain.events
+  event_queue:
+    class: Honeybee\Infrastructure\Event\Bus\Transport\JobQueueTransport
+    settings:
+      exchange: ${project.app.prefix}.domain.events
 
 #  event_pub:
 #    class: Honeybee\Infrastructure\Event\Bus\Transport\ZmqTransport
