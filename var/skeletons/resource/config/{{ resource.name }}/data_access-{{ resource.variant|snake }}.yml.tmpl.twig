@@ -41,3 +41,7 @@ query_services:
         finder: {{ crate.vendor|snake }}.{{ crate.name|snake }}.{{ resource.name|snake }}::projection.{{ resource.variant|snake }}::view_store::finder
         query_translation:
           class: Honeybee\Infrastructure\DataAccess\Finder\Elasticsearch\CriteriaQueryTranslation
+      custom:
+        finder: {{ crate.vendor|snake }}.{{ crate.name|snake }}.{{ resource.name|snake }}::projection.{{ resource.variant|snake }}::view_store::finder
+        query_translation:
+          class: Honeybee\Infrastructure\DataAccess\Finder\Elasticsearch\CustomQueryTranslation
