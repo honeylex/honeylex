@@ -5,5 +5,5 @@
 use {{ crate.vendor }}\{{ crate.name }}\{{ resource.name }}\Controller\IndexController;
 
 $routing->mount('/{{ resource.name|snake }}', function ($routing) {
-    $routing->get('/', [ IndexController::CLASS, 'read' ])->bind($this->getPrefix().'{{ resource.name|snake }}.index');
+    $routing->get('/', [ IndexController::CLASS, 'read' ])->bind($this->getPrefix().'.{{ resource.name|snake }}.index');
 });
