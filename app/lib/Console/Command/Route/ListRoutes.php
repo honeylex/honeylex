@@ -18,9 +18,9 @@ class ListRoutes extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $app = $this->getApplication()->getContainer();
-        foreach ($app['routes']->all() as $route) {
+        foreach ($app['routes']->all() as $binding => $route) {
             $methods = implode(',', $route->getMethods());
-            $output->writeln(($methods ?: 'ANY').' '.$route->getPath());
+            $output->writeln($binding.' => '.($methods ?: 'ANY').' '.$route->getPath());
         }
     }
 }
