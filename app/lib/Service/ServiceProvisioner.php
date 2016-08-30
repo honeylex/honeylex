@@ -19,6 +19,7 @@ use Honeybee\ServiceProvisionerInterface;
 use Pimple\Container;
 use Silex\Api\EventListenerProviderInterface;
 use SplFileInfo;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Trellis\CodeGen\Parser\Config\ConfigIniParser;
 use Trellis\CodeGen\Parser\Schema\EntityTypeSchemaXmlParser;
 use Trellis\CodeGen\Schema\EntityTypeDefinition;
@@ -63,7 +64,7 @@ class ServiceProvisioner implements ServiceProvisionerInterface
             ->make(ServiceLocator::CLASS, $serviceLocatorState);
     }
 
-    public function subscribe()
+    public function subscribe(Container $app, EventDispatcherInterface $dispatcher)
     {
         $serviceDefinitions = $this->getServiceDefinitions();
         foreach ($serviceDefinitions as $key => $serviceDefinition) {
@@ -71,7 +72,7 @@ class ServiceProvisioner implements ServiceProvisionerInterface
                 $provisionerConfig = $serviceDefinition->getProvisioner();
                 $provisioner = $this->injector->make($provisionerConfig['class']);
                 if ($provisioner instanceof EventListenerProviderInterface) {
-                    $provisioner->subscribe($this->app, $this->app['dispatcher']);
+                    $provisioner->subscribe($app, $dispatcher);
                 }
             }
         }

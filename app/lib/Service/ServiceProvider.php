@@ -5,6 +5,7 @@ namespace Honeybee\FrameworkBinding\Silex\Service;
 use Honeybee\ServiceProvisionerInterface;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
+use Silex\Api\BootableProviderInterface;
 use Silex\Api\EventListenerProviderInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
@@ -24,6 +25,6 @@ class ServiceProvider implements ServiceProviderInterface, EventListenerProvider
 
     public function subscribe(Container $app, EventDispatcherInterface $dispatcher)
     {
-        $this->serviceProvisioner->subscribe();
+        $this->serviceProvisioner->subscribe($app, $dispatcher);
     }
 }
