@@ -1,0 +1,21 @@
+<?php
+
+namespace {{ crate.vendor }}\{{ crate.name }}\{{ resource.name }}\Model\Task\Proceed{{ resource.name }}Workflow;
+
+use {{ crate.vendor }}\{{ crate.name }}\{{ resource.name }}\Model\Aggregate\{{ resource.name }}Type;
+use Honeybee\Infrastructure\DataAccess\DataAccessServiceInterface;
+use Honeybee\Infrastructure\Event\Bus\EventBusInterface;
+use Honeybee\Model\Task\ProceedWorkflow\ProceedWorkflowCommandHandler;
+use Psr\Log\LoggerInterface;
+
+class Proceed{{ resource.name }}WorkflowCommandHandler extends ProceedWorkflowCommandHandler
+{
+    public function __construct(
+        {{ resource.name }}Type ${{ resource.name|camel }}Type,
+        DataAccessServiceInterface $dataAccessService,
+        EventBusInterface $eventBus,
+        LoggerInterface $logger
+    ) {
+        parent::__construct(${{ resource.name|camel }}Type, $dataAccessService, $eventBus, $logger);
+    }
+}
