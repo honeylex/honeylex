@@ -1,5 +1,5 @@
 #
-# Connections that are used for the Security crate's UserType.
+# Connections that are used for the {{ crate.vendor }}\{{ crate.name }} crate's {{ resource.name }}.
 ---
 storage_writers:
   {{ crate.vendor|snake }}.{{ crate.name|snake }}.{{ resource.name|snake }}::domain_event::event_source::writer:
@@ -11,13 +11,13 @@ storage_readers:
     class: Honeybee\Infrastructure\DataAccess\Storage\CouchDb\EventStream\EventStreamReader
     connection: {{ crate.vendor|snake }}.{{ crate.name|snake }}.event_source
     settings:
-      design_doc: {{ crate.vendor|snake }}-{{ crate.name|snake }}-user
+      design_doc: {{ crate.vendor|snake }}-{{ crate.name|snake }}-{{ resource.name|snake }}
 
   {{ crate.vendor|snake }}.{{ crate.name|snake }}.{{ resource.name|snake }}::domain_event::event_source::reader:
     class: Honeybee\Infrastructure\DataAccess\Storage\CouchDb\DomainEvent\DomainEventReader
     connection: {{ crate.vendor|snake }}.{{ crate.name|snake }}.event_source
     settings:
-      design_doc: {{ crate.vendor|snake }}-{{ crate.name|snake }}-user
+      design_doc: {{ crate.vendor|snake }}-{{ crate.name|snake }}-{{ resource.name|snake }}
 
 units_of_work:
   {{ crate.vendor|snake }}.{{ crate.name|snake }}.{{ resource.name|snake }}::domain_event::event_source::unit_of_work:

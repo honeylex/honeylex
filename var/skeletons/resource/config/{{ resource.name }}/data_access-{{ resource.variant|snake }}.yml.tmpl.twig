@@ -1,5 +1,5 @@
 #
-# Connections that are used for the Security crate's UserType {{ resource.variant }} projection
+# Connections that are used for the {{ crate.vendor }}\{{ crate.name }} crate's {{ resource.name }} {{ resource.variant }} projection
 ---
 storage_writers:
   {{ crate.vendor|snake }}.{{ crate.name|snake }}.{{ resource.name|snake }}::projection.{{ resource.variant|snake }}::view_store::writer:
