@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "41655ebdf0cb05e66febeca51d1208c5",
+    "hash": "d5591eabf34c096d4d70fbfcde24825c",
     "content-hash": "0058312eb7129ffc3704f2257c5b47f0",
     "packages": [
         {
@@ -658,12 +658,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeybee/honeybee.git",
-                "reference": "b84b4258f8e983a1ac7d5cf743a5e9c5e626b714"
+                "reference": "5fbfd17eaa36687fca31420d679283203e8a59a1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/b84b4258f8e983a1ac7d5cf743a5e9c5e626b714",
-                "reference": "b84b4258f8e983a1ac7d5cf743a5e9c5e626b714",
+                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/5fbfd17eaa36687fca31420d679283203e8a59a1",
+                "reference": "5fbfd17eaa36687fca31420d679283203e8a59a1",
                 "shasum": ""
             },
             "require": {
@@ -747,7 +747,7 @@
                 "hexagonal",
                 "messaging"
             ],
-            "time": "2016-08-30 09:21:34"
+            "time": "2016-09-01 10:50:55"
         },
         {
             "name": "honeybee/trellis",
