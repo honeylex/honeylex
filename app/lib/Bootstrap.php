@@ -58,6 +58,7 @@ class Bootstrap
         // load context specific configuration (well, only web atm. needs to change too)
         if ($config->getAppContext() === 'web') {
             $this->registerWebErrorHandler($app);
+            $this->registerWebViewHandler($app, $injector);
             if ($config->getAppEnv() === 'dev') {
                 $app->register(
                     new WebProfilerServiceProvider,
@@ -86,11 +87,9 @@ class Bootstrap
     protected function registerWebErrorHandler(Application $app)
     {
         $app->error(function (\Exception $e, Request $request, $code) use ($app) {
-            $content = [ 'errors' => [ 'status' => $code, 'detail' => $e->getMessage() ] ];
+            $content = [ 'errors' => [ 'code' => $code, 'message' => $e->getMessage() ] ];
 
-            $acceptHeader = $request->headers->get('Accept');
-            $bestFormat = (new Negotiator)->getBest($acceptHeader, [ 'application/json' ]);
-
+            $bestFormat = $this->getAcceptableFormat($request);
             if ($bestFormat instanceof AcceptHeader && $bestFormat->getType() === 'application/json') {
                 return new JsonResponse($content, $code);
             }
@@ -111,6 +110,28 @@ class Bootstrap
                 $code
             );
         });
+    }
+
+    protected function registerWebViewHandler(Application $app, Injector $injector)
+    {
+        $app->view(function (array $controllerResult, Request $request) use ($app, $injector) {
+            $bestFormat = $this->getAcceptableFormat($request);
+            $view = $injector->make($controllerResult[0]);
+
+            $method = 'renderHtml';
+            if ($bestFormat instanceof AcceptHeader && $bestFormat->getType() === 'application/json') {
+                $method = 'renderJson';
+            }
+
+            return $view->{$method}($request, $app);
+        });
+    }
+
+    protected function getAcceptableFormat(Request $request)
+    {
+        $acceptHeader = $request->headers->get('Accept');
+        $bestFormat = (new Negotiator)->getBest($acceptHeader, [ 'text/html', 'application/json' ]);
+        return $bestFormat;
     }
 
     protected function bootstrapConfig(Application $app, Injector $injector, array $settings)
