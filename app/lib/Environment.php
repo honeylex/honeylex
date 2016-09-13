@@ -28,4 +28,9 @@ class Environment implements EnvironmentInterface
         }
         return null;
     }
+
+    public function getSettings()
+    {
+        return $this->config;
+    }
 }
