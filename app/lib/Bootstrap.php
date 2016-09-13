@@ -14,6 +14,8 @@ use Honeybee\FrameworkBinding\Silex\Service\ServiceProvider;
 use Honeybee\FrameworkBinding\Silex\Service\ServiceProvisioner;
 use Honeybee\Infrastructure\Config\ArrayConfig;
 use Honeybee\Infrastructure\Config\Settings;
+use Negotiation\AcceptHeader;
+use Negotiation\Negotiator;
 use Psr\Log\LoggerInterface;
 use Silex\Application;
 use Silex\Provider\AssetServiceProvider;
@@ -24,6 +26,7 @@ use Silex\Provider\SessionServiceProvider;
 use Silex\Provider\ValidatorServiceProvider;
 use Silex\Provider\WebProfilerServiceProvider;
 use Symfony\Component\Finder\Finder;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Yaml\Parser;
@@ -83,10 +86,19 @@ class Bootstrap
     protected function registerWebErrorHandler(Application $app)
     {
         $app->error(function (\Exception $e, Request $request, $code) use ($app) {
+            $content = [ 'errors' => [ 'status' => $code, 'detail' => $e->getMessage() ] ];
+
+            $acceptHeader = $request->headers->get('Accept');
+            $bestFormat = (new Negotiator)->getBest($acceptHeader, [ 'application/json' ]);
+
+            if ($bestFormat instanceof AcceptHeader && $bestFormat->getType() === 'application/json') {
+                return new JsonResponse($content, $code);
+            }
+
             if ($app['debug']) {
                 return;
             }
-            // 404.html, or 40x.html, or 4xx.html, or error.html
+
             $templates = [
                 'errors/' . $code . '.html.twig',
                 'errors/' . substr($code, 0, 2) . 'x.html.twig',
@@ -95,7 +107,7 @@ class Bootstrap
             ];
 
             return new Response(
-                $app['twig']->resolveTemplate($templates)->render([ 'code' => $code ]),
+                $app['twig']->resolveTemplate($templates)->render($content),
                 $code
             );
         });
