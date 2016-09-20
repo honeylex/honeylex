@@ -72,8 +72,7 @@ class ConfigProvider implements ConfigProviderInterface
             $cratePrefix = $pathParts[0].'.'.$pathParts[1];
             if ($this->crateMap->hasKey($cratePrefix)) {
                 $pathParts = array_slice($pathParts, 2);
-                $crateSettings = $this->crateMap->getItem($cratePrefix)->getSettings();
-                $value = new Settings($this->interpolateConfigValues($crateSettings->toArray()));
+                $value = $this->getCrateSettings($cratePrefix);
             }
         }
 
@@ -88,6 +87,12 @@ class ConfigProvider implements ConfigProviderInterface
     public function getSettings()
     {
         return $this->settings;
+    }
+
+    public function getCrateSettings($cratePrefix)
+    {
+        $crateSettings = $this->crateMap->getItem($cratePrefix)->getSettings();
+        return new Settings($this->interpolateConfigValues($crateSettings->toArray()));
     }
 
     public function hasSetting($setting)

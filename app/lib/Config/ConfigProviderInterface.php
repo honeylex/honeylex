@@ -16,6 +16,8 @@ interface ConfigProviderInterface
 
     public function getSetting($setting, $default = null);
 
+    public function getCrateSettings($cratePrefix);
+
     public function hasSetting($setting);
 
     public function getProjectDir();

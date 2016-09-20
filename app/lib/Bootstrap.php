@@ -99,9 +99,9 @@ class Bootstrap
             }
 
             $templates = [
-                'errors/' . $code . '.html.twig',
-                'errors/' . substr($code, 0, 2) . 'x.html.twig',
-                'errors/' . substr($code, 0, 1) . 'xx.html.twig',
+                'errors/'.$code.'.html.twig',
+                'errors/'.substr($code, 0, 2).'x.html.twig',
+                'errors/'.substr($code, 0, 1).'xx.html.twig',
                 'errors/default.html.twig',
             ];
 
