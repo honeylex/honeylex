@@ -125,3 +125,11 @@ honeylex.dispatcher:
       app_key: dispatcher
       share: true
       alias: Symfony\Component\EventDispatcher\EventDispatcherInterface
+
+honeylex.serializer:
+  class: Symfony\Component\Serializer\Serializer
+  provisioner:
+    class: Honeybee\FrameworkBinding\Silex\Service\Provisioner\SerializerServiceProvisioner
+    settings:
+      normalizers:
+        - Honeybee\FrameworkBinding\Silex\Serializer\ProjectionNormalizer

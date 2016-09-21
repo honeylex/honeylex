@@ -80,13 +80,14 @@ The bootstrapped Silex app is configured with the following service providers:
 * [FormServiceProvider][FormServiceProvider]
 * [LocaleServiceProvider][LocaleServiceProvider]
 * [MonologServiceProvider][MonologServiceProvider]
+* [SerializerServiceProvider][SerializerServiceProvider]
 * [ServiceControllerServiceProvider][ServiceControllerServiceProvider]
+* [SwiftmailerServiceProvider][SwiftmailerServiceProvider]
 * [TranslationServiceProvider][TranslationServiceProvider]
 * [TwigServiceProvider][TwigServiceProvider]
 * [UrlGeneratorServiceProvider][UrlGeneratorServiceProvider]
 * [ValidatorServiceProvider][ValidatorServiceProvider]
 * [WebProfilerServiceProvider][WebProfilerServiceProvider]
-* [SwiftmailerServiceProvider][SwiftmailerServiceProvider]
 
 Read the [Providers][Providers] documentation for more details about Silex Service Providers.
 
@@ -94,19 +95,20 @@ Read the [Providers][Providers] documentation for more details about Silex Servi
 
 Feel free to join us and ask questions in the [#honeybee](http://webchat.freenode.net?randomnick=1&channels=%23honeybee&uio=d4) channel on [freenode](https://freenode.net/).
 
-[AssetServiceProvider]: http://silex.sensiolabs.org/doc/providers/asset.html
+[AssetServiceProvider]: http://silex.sensiolabs.org/doc/master/providers/asset.html
 [Composer]: http://getcomposer.org/
 [Docker]: https://docs.docker.com/engine/installation/
-[FormServiceProvider]: http://silex.sensiolabs.org/doc/providers/form.html
+[FormServiceProvider]: http://silex.sensiolabs.org/doc/master/providers/form.html
 [Honeybee]: http://github.com/honeybee/honeybee
 [LocaleServiceProvider]: http://silex.sensiolabs.org/doc/master/providers/locale.html
-[MonologServiceProvider]: http://silex.sensiolabs.org/doc/providers/monolog.html
-[Providers]: http://silex.sensiolabs.org/doc/providers.html
-[ServiceControllerServiceProvider]: http://silex.sensiolabs.org/doc/providers/service_controller.html
-[Silex]: http://silex.sensiolabs.org/documentation
-[SwiftmailerServiceProvider]: http://silex.sensiolabs.org/doc/providers/swiftmailer.html
-[TranslationServiceProvider]: http://silex.sensiolabs.org/doc/providers/translation.html
-[TwigServiceProvider]: http://silex.sensiolabs.org/doc/providers/twig.html
+[MonologServiceProvider]: http://silex.sensiolabs.org/doc/master/providers/monolog.html
+[Providers]: http://silex.sensiolabs.org/doc/master/providers.html
+[ServiceControllerServiceProvider]: http://silex.sensiolabs.org/doc/master/providers/service_controller.html
+[Silex]: http://silex.sensiolabs.org/doc/master/
+[SerializerServiceProvider]: http://silex.sensiolabs.org/doc/master/providers/serializer.html
+[SwiftmailerServiceProvider]: http://silex.sensiolabs.org/doc/master/providers/swiftmailer.html
+[TranslationServiceProvider]: http://silex.sensiolabs.org/doc/master/providers/translation.html
+[TwigServiceProvider]: http://silex.sensiolabs.org/doc/master/providers/twig.html
 [UrlGeneratorServiceProvider]: http://silex.sensiolabs.org/doc/providers/url_generator.html
-[ValidatorServiceProvider]: http://silex.sensiolabs.org/doc/providers/validator.html
+[ValidatorServiceProvider]: http://silex.sensiolabs.org/doc/master/providers/validator.html
 [WebProfilerServiceProvider]: http://github.com/silexphp/Silex-WebProfiler
