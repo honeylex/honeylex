@@ -2,7 +2,7 @@
 
 namespace Honeybee\FrameworkBinding\Silex\Serializer;
 
-use Honeybee\Projection\Projection;
+use Honeybee\Projection\ProjectionInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 class ProjectionNormalizer implements NormalizerInterface
@@ -14,6 +14,6 @@ class ProjectionNormalizer implements NormalizerInterface
 
     public function supportsNormalization($data, $format = null)
     {
-        return $data instanceof Projection;
+        return $data instanceof ProjectionInterface;
     }
 }
