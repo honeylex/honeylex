@@ -1,5 +1,5 @@
 #
-# Honeylex default mail service settings
+# Honeylex mailer settings
 ---
 swiftmailer:
   transport: \Swift_NullTransport
@@ -10,7 +10,6 @@ swiftmailer:
     password: ${mail.password}
     encryption: ${mail.encryption}
   use_spool: false
-  delivery_addresses: honeylex@honeylex.dev
 
 default_mailer:
   send_messages: true # uses null transport by default

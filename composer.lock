@@ -658,12 +658,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeybee/honeybee.git",
-                "reference": "16d2217e36dff6f81ff8842d96d0d8f16a4d8114"
+                "reference": "5317b21b68be4beaa690fee5ef8935e6d66a4189"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/16d2217e36dff6f81ff8842d96d0d8f16a4d8114",
-                "reference": "16d2217e36dff6f81ff8842d96d0d8f16a4d8114",
+                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/5317b21b68be4beaa690fee5ef8935e6d66a4189",
+                "reference": "5317b21b68be4beaa690fee5ef8935e6d66a4189",
                 "shasum": ""
             },
             "require": {
@@ -747,7 +747,7 @@
                 "hexagonal",
                 "messaging"
             ],
-            "time": "2016-09-20 09:54:56"
+            "time": "2016-09-21 11:40:55"
         },
         {
             "name": "honeybee/trellis",
@@ -3635,16 +3635,16 @@
         },
         {
             "name": "willdurand/negotiation",
-            "version": "v2.0.3",
+            "version": "v2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/willdurand/Negotiation.git",
-                "reference": "1ebc51dd6d47f4037b0d2493335304e5aea50ab6"
+                "reference": "bc814293b153f543c99c89d94c8cc07b3259eef9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/willdurand/Negotiation/zipball/1ebc51dd6d47f4037b0d2493335304e5aea50ab6",
-                "reference": "1ebc51dd6d47f4037b0d2493335304e5aea50ab6",
+                "url": "https://api.github.com/repos/willdurand/Negotiation/zipball/bc814293b153f543c99c89d94c8cc07b3259eef9",
+                "reference": "bc814293b153f543c99c89d94c8cc07b3259eef9",
                 "shasum": ""
             },
             "require": {
@@ -3656,7 +3656,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.0-dev"
+                    "dev-master": "2.1-dev"
                 }
             },
             "autoload": {
@@ -3683,7 +3683,7 @@
                 "header",
                 "negotiation"
             ],
-            "time": "2016-08-30 11:08:41"
+            "time": "2016-09-21 11:26:55"
         },
         {
             "name": "zendframework/zend-permissions-acl",
