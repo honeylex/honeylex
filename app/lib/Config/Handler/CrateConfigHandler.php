@@ -2,7 +2,6 @@
 
 namespace Honeybee\FrameworkBinding\Silex\Config\Handler;
 
-use Honeybee\Common\Error\ConfigError;
 use Honeybee\Infrastructure\Config\Settings;
 use Honeybee\FrameworkBinding\Silex\Crate\CrateManifest;
 use Honeybee\FrameworkBinding\Silex\Crate\CrateManifestMap;
@@ -13,18 +12,23 @@ class CrateConfigHandler implements ConfigHandlerInterface
 {
     public function handle(array $configFiles)
     {
-        if (count($configFiles) !== 1) {
-            throw new ConfigError('Unsupported number of crates.yml config files given.');
-        }
-
-        return $this->handleConfigFile($configFiles[0]);
+        return $this->handleConfigFiles($configFiles);
     }
 
-    protected function handleConfigFile($configFile)
+    protected function handleConfigFiles(array $configFiles)
     {
         $yamlParser = new Parser;
         $manifests = [];
-        $crates = (array)$yamlParser->parse(file_get_contents($configFile));
+
+        $crates = [];
+        foreach ($configFiles as $configFile) {
+            if (is_readable($configFile)) {
+                $crates = array_replace_recursive(
+                    $crates,
+                    (array)$yamlParser->parse(file_get_contents($configFile))
+                );
+            }
+        }
 
         foreach ($crates as $implementor => $config) {
             $reflector = new ReflectionClass($implementor);

@@ -75,6 +75,7 @@ class Bootstrap
     protected function bootstrapConfig(Application $app, Injector $injector, array $settings)
     {
         $app['settings'] = $settings;
+        $appContext = $settings['appContext'];
         $configDir = $settings['core']['config_dir'];
         $projectConfigDir = $settings['project']['config_dir'];
 
@@ -93,9 +94,13 @@ class Bootstrap
         }
 
         // crate configs
-        $cratesConfigFile = $projectConfigDir.'/crates.yml';
-        $crateMap = is_readable($cratesConfigFile)
-            ? (new CrateLoader)->loadCrates($app, (new CrateConfigHandler)->handle([ $cratesConfigFile ]))
+        $cratesConfigFiles = [
+            $projectConfigDir.'/crates.yml',
+            $projectConfigDir."/crates/$appContext.yml"
+        ];
+        $crateManifestMap =  (new CrateConfigHandler)->handle($cratesConfigFiles);
+        $crateMap = $crateManifestMap->count() > 0
+            ? (new CrateLoader)->loadCrates($app, $crateManifestMap)
             : new CrateMap;
 
         // load crates and init config-provider
