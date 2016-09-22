@@ -1,11 +1,10 @@
 <?php
 
-use Honeybee\FrameworkBinding\Silex\Bootstrap;
 use Silex\Application;
 
-$bootstrap = new Bootstrap;
-
-return $bootstrap(new Application, [
+$projectConfigDir = __DIR__.'/config';
+$application = new Application;
+$configuration = [
     'version' => trim(file_get_contents(dirname(__DIR__).'/VERSION.txt')),
     'appEnv' => $appEnv,
     'appContext' => $appContext,
@@ -14,8 +13,21 @@ return $bootstrap(new Application, [
         'dir' => dirname(__DIR__)
     ],
     'project' => [
-        'config_dir' => __DIR__.'/config',
+        'config_dir' => $projectConfigDir,
         'dir' => dirname(__DIR__),
         'local_config_dir' => $localConfigDir
     ]
-]);
+];
+
+// execute context specific bootstrap
+$contextConfigPath = $projectConfigDir."/bootstrap/$appContext.php";
+if (is_readable($contextConfigPath)) {
+    return require $contextConfigPath;
+}
+
+// default bootstrap attempt
+$bootstrapClass = 'Honeybee\\FrameworkBinding\\Silex\\Bootstrap\\'.ucfirst($appContext).'Bootstrap';
+$bootstrap = new $bootstrapClass;
+$app = $bootstrap($application, $configuration);
+
+return $app;

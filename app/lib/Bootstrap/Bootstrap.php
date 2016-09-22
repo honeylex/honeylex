@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Silex;
+namespace Honeybee\FrameworkBinding\Silex\Bootstrap;
 
 use Auryn\Injector;
 use Auryn\StandardReflector;
@@ -14,8 +14,6 @@ use Honeybee\FrameworkBinding\Silex\Service\ServiceProvider;
 use Honeybee\FrameworkBinding\Silex\Service\ServiceProvisioner;
 use Honeybee\Infrastructure\Config\ArrayConfig;
 use Honeybee\Infrastructure\Config\Settings;
-use Negotiation\AcceptHeader;
-use Negotiation\Negotiator;
 use Psr\Log\LoggerInterface;
 use Silex\Application;
 use Silex\Provider\AssetServiceProvider;
@@ -24,25 +22,30 @@ use Silex\Provider\HttpFragmentServiceProvider;
 use Silex\Provider\MonologServiceProvider;
 use Silex\Provider\SessionServiceProvider;
 use Silex\Provider\ValidatorServiceProvider;
-use Silex\Provider\WebProfilerServiceProvider;
 use Symfony\Component\Finder\Finder;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Yaml\Parser;
 
 class Bootstrap
 {
+    protected $injector;
+
+    protected $config;
+
+    public function __construct()
+    {
+        $this->injector = new Injector(new StandardReflector);
+    }
+
     public function __invoke(Application $app, array $settings)
     {
-        $injector = new Injector(new StandardReflector);
-        $config = $this->bootstrapConfig($app, $injector, $settings);
-        $app['version'] = $config->getVersion();
-        $app['debug'] = $config->getAppEnv() === 'dev';
-        $this->bootstrapLogger($app, $config, $injector);
+        $this->config = $this->bootstrapConfig($app, $this->injector, $settings);
+
+        $app['version'] = $this->config->getVersion();
+        $app['debug'] = $this->config->getAppEnv() === 'development';
+        $this->bootstrapLogger($app, $this->config, $this->injector);
 
         // then kick off service provisioning
-        $serviceProvisioner = new ServiceProvisioner($app, $injector, $config);
+        $serviceProvisioner = new ServiceProvisioner($app, $this->injector, $this->config);
 
         // and register some standard service providers.
         $app->register(new ServiceProvider($serviceProvisioner));
@@ -53,25 +56,10 @@ class Bootstrap
         $app->register(new ValidatorServiceProvider);
         $app->register(new SessionServiceProvider);
 
-        $this->loadProjectRoutes($config->getConfigDir().'/routing.php', $app);
-
-        // load context specific configuration (well, only web atm. needs to change too)
-        if ($config->getAppContext() === 'web') {
-            $this->registerWebErrorHandler($app);
-            $this->registerWebViewHandler($app, $injector);
-            if ($config->getAppEnv() === 'dev') {
-                $app->register(
-                    new WebProfilerServiceProvider,
-                    [ 'profiler.cache_dir' => $config->getProjectDir().'/var/cache/profiler' ]
-                );
-            }
-        }
-
-        // load environment specific configuration (this has to change badly)
-        $envConfig = $config->getEnvConfigPath();
-        if (is_readable($envConfig)) {
-            require $envConfig;
-        }
+        $localConfigDir = $this->config->getConfigDir();
+        $appContext = $this->config->getAppContext();
+        $this->loadProjectRoutes($localConfigDir.'/routing.php', $app);
+        $this->loadProjectRoutes($localConfigDir."/routing/$appContext.php", $app);
 
         return $app;
     }
@@ -84,64 +72,17 @@ class Bootstrap
         }
     }
 
-    protected function registerWebErrorHandler(Application $app)
-    {
-        $app->error(function (\Exception $e, Request $request, $code) use ($app) {
-            $content = [ 'errors' => [ 'code' => $code, 'message' => $e->getMessage() ] ];
-
-            $bestFormat = $this->getAcceptableFormat($request);
-            if ($bestFormat instanceof AcceptHeader && $bestFormat->getType() === 'application/json') {
-                return new JsonResponse($content, $code);
-            }
-
-            if ($app['debug']) {
-                return;
-            }
-
-            $templates = [
-                'errors/'.$code.'.html.twig',
-                'errors/'.substr($code, 0, 2).'x.html.twig',
-                'errors/'.substr($code, 0, 1).'xx.html.twig',
-                'errors/default.html.twig',
-            ];
-
-            return new Response(
-                $app['twig']->resolveTemplate($templates)->render($content),
-                $code
-            );
-        });
-    }
-
-    protected function registerWebViewHandler(Application $app, Injector $injector)
-    {
-        $app->view(function (array $controllerResult, Request $request) use ($app, $injector) {
-            $bestFormat = $this->getAcceptableFormat($request);
-            $view = $injector->make($controllerResult[0]);
-
-            $method = 'renderHtml';
-            if ($bestFormat instanceof AcceptHeader && $bestFormat->getType() === 'application/json') {
-                $method = 'renderJson';
-            }
-
-            return $view->{$method}($request, $app);
-        });
-    }
-
-    protected function getAcceptableFormat(Request $request)
-    {
-        $acceptHeader = $request->headers->get('Accept');
-        $bestFormat = (new Negotiator)->getBest($acceptHeader, [ 'text/html', 'application/json' ]);
-        return $bestFormat;
-    }
-
     protected function bootstrapConfig(Application $app, Injector $injector, array $settings)
     {
+        $app['settings'] = $settings;
         $configDir = $settings['core']['config_dir'];
         $projectConfigDir = $settings['project']['config_dir'];
+
         // default configs
         $configHandlers = (new Parser)->parse(
             file_get_contents($configDir.'/config_handlers.yml')
         );
+
         // project configs
         $projectConfigHandlersFile = $projectConfigDir.'/config_handlers.yml';
         if (is_readable($projectConfigHandlersFile)) {
@@ -150,11 +91,13 @@ class Bootstrap
                 (new Parser)->parse(file_get_contents($projectConfigHandlersFile))
             );
         }
+
         // crate configs
         $cratesConfigFile = $projectConfigDir.'/crates.yml';
-        $crateMap  = is_readable($cratesConfigFile)
+        $crateMap = is_readable($cratesConfigFile)
             ? (new CrateLoader)->loadCrates($app, (new CrateConfigHandler)->handle([ $cratesConfigFile ]))
             : new CrateMap;
+
         // load crates and init config-provider
         $config = new ConfigProvider(new Settings($settings), $crateMap, new ArrayConfig($configHandlers), new Finder);
         $injector->share($config)->alias(ConfigProviderInterface::CLASS, get_class($config));
@@ -168,7 +111,9 @@ class Bootstrap
         $app->register(new MonologServiceProvider, [
             'monolog.logfile' => $config->getProjectDir().'/var/logs/honeylex.log'
         ]);
+
         $logger = $app['logger'];
+
         $injector
             ->share($logger)
             ->alias(LoggerInterface::CLASS, get_class($logger));
