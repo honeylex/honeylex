@@ -6,6 +6,7 @@ use Auryn\Injector;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class ApiBootstrap extends Bootstrap
 {
@@ -13,20 +14,25 @@ class ApiBootstrap extends Bootstrap
     {
         parent::__invoke($app, $settings);
 
-        $this->registerErrorHandler($app);
+        $this->registerErrorHandler($app, $this->injector);
         $this->registerViewHandler($app, $this->injector);
 
         return $app;
     }
 
-    protected function registerErrorHandler(Application $app)
+    protected function registerErrorHandler(Application $app, Injector $injector)
     {
-        $app->error(function (\Exception $e, Request $request, $code) use ($app) {
+        $app->error(function (\Exception $e, Request $request, $code) use ($app, $injector) {
+            $translator = $injector->make(TranslatorInterface::CLASS);
             $message = $e->getMessage();
             $message = $message ?: $e->getMessageKey();
-            $errors = [ 'errors' => [ 'code' => $code, 'message' => $message ] ];
+            $errors = [
+                'errors' => [
+                    'code' => $code,
+                    'message' => $translator->trans($message, [], 'errors')
+                ]
+            ];
 
-            // @todo translate response
             return new JsonResponse($errors, $code);
         });
     }

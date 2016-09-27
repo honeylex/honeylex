@@ -14,7 +14,7 @@ class WebBootstrap extends Bootstrap
     {
         parent::__invoke($app, $settings);
 
-        $this->registerErrorHandler($app);
+        $this->registerErrorHandler($app, $this->injector);
         $this->registerViewHandler($app, $this->injector);
 
         if ($this->config->getAppEnv() === 'development') {
@@ -27,7 +27,7 @@ class WebBootstrap extends Bootstrap
         return $app;
     }
 
-    protected function registerErrorHandler(Application $app)
+    protected function registerErrorHandler(Application $app, Injector $injector)
     {
         $app->error(function (\Exception $e, Request $request, $code) use ($app) {
             $message = $e->getMessage();
