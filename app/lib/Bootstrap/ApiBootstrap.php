@@ -22,7 +22,11 @@ class ApiBootstrap extends Bootstrap
     protected function registerErrorHandler(Application $app)
     {
         $app->error(function (\Exception $e, Request $request, $code) use ($app) {
-            $errors = [ 'errors' => [ 'code' => $code, 'message' => $e->getMessage() ] ];
+            $message = $e->getMessage();
+            $message = $message ?: $e->getMessageKey();
+            $errors = [ 'errors' => [ 'code' => $code, 'message' => $message ] ];
+
+            // @todo translate response
             return new JsonResponse($errors, $code);
         });
     }

@@ -30,7 +30,9 @@ class WebBootstrap extends Bootstrap
     protected function registerErrorHandler(Application $app)
     {
         $app->error(function (\Exception $e, Request $request, $code) use ($app) {
-            $errors = [ 'errors' => [ 'code' => $code, 'message' => $e->getMessage() ] ];
+            $message = $e->getMessage();
+            $message = $message ?: $e->getMessageKey();
+            $errors = [ 'errors' => [ 'code' => $code, 'message' => $message ] ];
 
             if ($app['debug']) {
                 return;
