@@ -132,18 +132,38 @@ class ConfigProvider implements ConfigProviderInterface
         $handlerConfig = (array)$handlerDef->get('settings', []);
         $configHandler = new $handlerClass(new ArrayConfig($handlerConfig), $this);
 
-        $handlerConfigsFiles = [
-            $this->getCoreConfigDir().'/'.$name,
-            $this->getConfigDir().'/'.$name
-        ];
+        $appContext = $this->getAppContext();
+        $configType = pathinfo($name, PATHINFO_FILENAME);
+        $configExtension = pathinfo($name, PATHINFO_EXTENSION);
+
+        // register core config
+        $handlerConfigsFiles = [ $this->getCoreConfigDir().'/'.$name ];
 
         foreach ($this->crateMap as $prefix => $crate) {
+            // find crate configs
             $finder = clone $this->fileFinder;
             $wildcard_name = str_replace('.', '*.', $name);
             $foundConfigs = $finder->in($crate->getConfigDir())->name($wildcard_name);
             foreach (iterator_to_array($foundConfigs, true) as $fileInfo) {
                 $handlerConfigsFiles[] = $fileInfo->getPathname();
             }
+
+            // find context specific configs
+            $crateContextConfigPath = $crate->getConfigDir().'/'.$configType;
+            if (is_readable($crateContextConfigPath)) {
+                $finder = clone $this->fileFinder;
+                $contextConfigs = $finder->in($crateContextConfigPath)->name($appContext.'.'.$configExtension);
+                foreach (iterator_to_array($contextConfigs, true) as $fileInfo) {
+                    $handlerConfigsFiles[] = $fileInfo->getPathname();
+                }
+            }
+        }
+
+        // register application configs
+        $handlerConfigsFiles[] = $this->getConfigDir().'/'.$name;
+        $projectContextPath = $this->getConfigDir().'/'.$configType;
+        if (is_readable($projectContextPath)) {
+            $handlerConfigsFiles[] = $projectContextPath.'/'.$appContext.'.'.$configExtension;
         }
 
         return $configHandler->handle(
