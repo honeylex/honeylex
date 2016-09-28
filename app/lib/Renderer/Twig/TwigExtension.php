@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Silex\Twig;
+namespace Honeybee\FrameworkBinding\Silex\Renderer\Twig;
 
 use Honeybee\Common\Util\StringToolkit;
 use Honeybee\FrameworkBinding\Silex\Config\ConfigProviderInterface;

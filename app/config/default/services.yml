@@ -9,11 +9,11 @@ honeybee.environment:
 honeybee.infrastructure.template_renderer:
   class: Honeybee\Infrastructure\Template\Twig\TwigRenderer
   provisioner:
-    class: Honeybee\FrameworkBinding\Silex\Service\Provisioner\TemplateRendererProvisioner
+    class: Honeybee\FrameworkBinding\Silex\Service\Provisioner\TwigRendererProvisioner
     settings:
       extensions:
-        - Honeybee\FrameworkBinding\Silex\Twig\TwigExtension
-        - Honeybee\FrameworkBinding\Silex\Twig\LocaliseRouteExtension
+        - Honeybee\FrameworkBinding\Silex\Renderer\Twig\TwigExtension
+        - Honeybee\FrameworkBinding\Silex\Renderer\Twig\LocaliseRouteExtension
 
 honeybee.infrastructure.mail_service:
   class: Honeybee\Infrastructure\Mail\LoggingSwiftMailer

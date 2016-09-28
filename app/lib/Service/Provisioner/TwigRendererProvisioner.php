@@ -13,7 +13,7 @@ use Pimple\Container;
 use Silex\Provider\TwigServiceProvider;
 use Symfony\Component\Filesystem\Filesystem;
 
-class TemplateRendererProvisioner implements ProvisionerInterface
+class TwigRendererProvisioner implements ProvisionerInterface
 {
     public function provision(
         Container $app,

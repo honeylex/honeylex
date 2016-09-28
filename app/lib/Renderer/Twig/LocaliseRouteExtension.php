@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Silex\Twig;
+namespace Honeybee\FrameworkBinding\Silex\Renderer\Twig;
 
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
