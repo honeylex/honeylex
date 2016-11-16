@@ -14,15 +14,15 @@ class WebBootstrap extends Bootstrap
     {
         parent::__invoke($app, $settings);
 
-        $this->registerErrorHandler($app, $this->injector);
-        $this->registerViewHandler($app, $this->injector);
-
         if ($this->config->getAppEnv() === 'development') {
             $app->register(
                 new WebProfilerServiceProvider,
                 [ 'profiler.cache_dir' => $this->config->getProjectDir().'/var/cache/profiler' ]
             );
         }
+
+        $this->registerErrorHandler($app, $this->injector);
+        $this->registerViewHandler($app, $this->injector);
 
         return $app;
     }
