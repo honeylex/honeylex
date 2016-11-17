@@ -5,8 +5,8 @@ namespace Honeybee\FrameworkBinding\Silex\Renderer\Twig;
 use Honeybee\Common\Util\StringToolkit;
 use Honeybee\FrameworkBinding\Silex\Config\ConfigProviderInterface;
 use Honeybee\Infrastructure\Config\SettingsInterface;
+use Honeybee\Infrastructure\Workflow\WorkflowServiceInterface;
 use Honeybee\Projection\ProjectionInterface;
-use Honeybee\Projection\WorkflowSubject;
 use Twig_Extension;
 use Twig_SimpleFilter;
 use Twig_SimpleFunction;
@@ -16,9 +16,12 @@ class TwigExtension extends Twig_Extension
 {
     protected $configProvider;
 
-    public function __construct(ConfigProviderInterface $configProvider)
+    protected $workflowService;
+
+    public function __construct(ConfigProviderInterface $configProvider, WorkflowServiceInterface $workflowService)
     {
         $this->configProvider = $configProvider;
+        $this->workflowService = $workflowService;
     }
 
     public function getName()
@@ -43,9 +46,9 @@ class TwigExtension extends Twig_Extension
                 return StringToolkit::asCamelCase($string);
             }),
             new Twig_SimpleFilter('accepts_event', function (ProjectionInterface $entity, $event) {
-                $stateMachine = $entity->getType()->getWorkflowStateMachine();
+                $stateMachine = $this->workflowService->getStateMachine($entity->getType());
                 try {
-                    $acceptedEvents = WorkflowSubject::getSupportedEventsFor(
+                    $acceptedEvents = $this->workflowService->getSupportedEventsFor(
                         $stateMachine,
                         $entity->getWorkflowState()
                     );
