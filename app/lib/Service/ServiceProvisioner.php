@@ -23,7 +23,6 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Trellis\CodeGen\Parser\Config\ConfigIniParser;
 use Trellis\CodeGen\Parser\Schema\EntityTypeSchemaXmlParser;
 use Trellis\CodeGen\Schema\EntityTypeDefinition;
-use Workflux\Builder\XmlStateMachineBuilder;
 
 class ServiceProvisioner implements ServiceProvisionerInterface
 {
@@ -88,26 +87,28 @@ class ServiceProvisioner implements ServiceProvisionerInterface
 
     protected function registerEntityTypeMaps(ServiceDefinitionMap $serviceDefinitions)
     {
-        $aggregateRootTypeMap = new AggregateRootTypeMap;
-        $projectionTypeMap = new ProjectionTypeMap;
+        $aggregateRootTypes = [];
+        $projectionTypes = [];
 
         foreach ($this->configProvider->getCrateMap() as $crate) {
-            foreach (glob($crate->getConfigDir() . '/*/entity_schema/aggregate_root.xml') as $schemaFile) {
+            foreach (glob($crate->getConfigDir().'/*/entity_schema/aggregate_root.xml') as $schemaFile) {
                 $aggregateRootType = $this->loadEntityType($crate->getConfigDir(), $schemaFile);
-                $aggregateRootTypeMap->setItem($aggregateRootType->getPrefix(), $aggregateRootType);
+                $aggregateRootTypes[$aggregateRootType->getPrefix()] = $aggregateRootType;
             }
-            foreach (glob($crate->getConfigDir() . '/*/entity_schema/projection/*.xml') as $schemaFile) {
+            foreach (glob($crate->getConfigDir().'/*/entity_schema/projection/*.xml') as $schemaFile) {
                 $projectionType = $this->loadEntityType($crate->getConfigDir(), $schemaFile);
-                $projectionTypeMap->setItem($projectionType->getVariantPrefix(), $projectionType);
+                $projectionTypes[$projectionType->getVariantPrefix()] = $projectionType;
             }
         }
-        $this->injector->share($aggregateRootTypeMap);
-        $this->injector->share($projectionTypeMap);
 
-        foreach ($aggregateRootTypeMap as $aggregateRootType) {
+        $this->injector->share(new AggregateRootTypeMap($aggregateRootTypes));
+        $this->injector->share(new ProjectionTypeMap($projectionTypes));
+
+        foreach ($aggregateRootTypes as $aggregateRootType) {
             $this->injector->share($aggregateRootType);
         }
-        foreach ($projectionTypeMap as $projectionType) {
+
+        foreach ($projectionTypes as $projectionType) {
             $this->injector->share($projectionType);
         }
     }
@@ -179,32 +180,7 @@ class ServiceProvisioner implements ServiceProvisionerInterface
         $entityType = $schema->getEntityTypeDefinition();
 
         $class = sprintf('%s\\%s%s', $schema->getNamespace(), $entityType->getName(), $config->getTypeSuffix('Type'));
-        $workflowFile = sprintf('%s/%s/workflows.xml', $crateConfigDir, $entityType->getName());
-        $workflow = $this->loadWorkflow($entityType, $workflowFile);
 
-        return new $class($workflow);
-    }
-
-    protected function loadWorkflow(EntityTypeDefinition $entityType, $workflowFile)
-    {
-        $vendor = $entityType->getOptions()->filterByName('vendor');
-        $package = $entityType->getOptions()->filterByName('package');
-        if (!$vendor || !$package) {
-            throw new RuntimeError(
-                'Missing vendor- and/or package-option for entity-type: ' . $entityType->getName()
-            );
-        }
-
-        $builderConfig = [
-            'state_machine_definition' => $workflowFile,
-            'name' => sprintf(
-                '%s_%s_%s_workflow_default',
-                strtolower($vendor->getValue()),
-                StringToolkit::asSnakeCase($package->getValue()),
-                StringToolkit::asSnakeCase($entityType->getName())
-            )
-        ];
-
-        return (new XmlStateMachineBuilder($builderConfig))->build();
+        return new $class;
     }
 }

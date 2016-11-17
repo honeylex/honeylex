@@ -25,9 +25,6 @@ class JobServiceProvisioner implements ProvisionerInterface
         ServiceDefinitionInterface $serviceDefinition,
         SettingsInterface $provisionerSettings
     ) {
-        $jobsConfig = $configProvider->provide(self::CONFIG_NAME);
-        $service = $serviceDefinition->getClass();
-
         $factoryDelegate = function (
             ConnectorServiceInterface $connectorService,
             ServiceLocatorInterface $serviceLocator,
@@ -36,8 +33,9 @@ class JobServiceProvisioner implements ProvisionerInterface
         ) use (
             $serviceDefinition,
             $provisionerSettings,
-            $jobsConfig
+            $configProvider
         ) {
+            $jobsConfig = $configProvider->provide(self::CONFIG_NAME);
             $connector = $connectorService->getConnector($provisionerSettings->get('connection'));
             $config = $serviceDefinition->getConfig();
             $service = $serviceDefinition->getClass();
@@ -51,6 +49,8 @@ class JobServiceProvisioner implements ProvisionerInterface
                 $logger
             );
         };
+
+        $service = $serviceDefinition->getClass();
 
         $injector
             ->delegate($service, $factoryDelegate)

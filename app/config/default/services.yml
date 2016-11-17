@@ -75,6 +75,16 @@ honeybee.infrastructure.command_enricher:
       enrichers:
         - Hlx\Security\User\AuditMetadataEnricher
 
+honeybee.infrastructure.state_machine_builder:
+  class: Honeybee\Infrastructure\Workflow\StateMachineBuilder
+  provisioner:
+    class: Honeybee\FrameworkBinding\Silex\Service\Provisioner\StateMachineBuilderProvisioner
+    
+honeybee.infrastructure.workflow_service:
+  class: Honeybee\Infrastructure\Workflow\WorkflowService
+  provisioner:
+    class: Honeybee\FrameworkBinding\Silex\Service\Provisioner\WorkflowServiceProvisioner
+
 honeylex.url_generator:
   class: Symfony\Component\Routing\Generator\UrlGenerator
   provisioner:
