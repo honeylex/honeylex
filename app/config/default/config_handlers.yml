@@ -7,62 +7,62 @@
 # Depending on the handler behavior concurring crate configs will be treated either as:
 # firstone-wins, lastone-wins, flat-merge or deep-merge.
 ---
-settings.yml: # merge behaviour: lastone-wins
+settings.yml:
   handler: Honeybee\FrameworkBinding\Silex\Config\Handler\SettingConfigHandler
   settings:
     parser: Symfony\Component\Yaml\Parser
 
-services.yml: # merge behaviour: lastone-wins
+services.yml:
   handler: Honeybee\FrameworkBinding\Silex\Config\Handler\ServiceConfigHandler
   settings:
     parser: Symfony\Component\Yaml\Parser
 
-connections.yml: # merge behaviour: lastone-wins
+connections.yml:
   handler: Honeybee\FrameworkBinding\Silex\Config\Handler\ConnectionConfigHandler
   settings:
     parser: Symfony\Component\Yaml\Parser
 
-data_access.yml: # merge behaviour: lastone-wins (topmost keys are merged)
+data_access.yml:
   handler: Honeybee\FrameworkBinding\Silex\Config\Handler\DataAccessConfigHandler
   settings:
     parser: Symfony\Component\Yaml\Parser
 
-migration.yml: # merge behaviour: lastone-wins
+migration.yml:
   handler: Honeybee\FrameworkBinding\Silex\Config\Handler\DefaultConfigHandler
   settings:
     parser: Symfony\Component\Yaml\Parser
 
-fixture.yml: # merge behaviour: lastone-wins
+fixture.yml:
   handler: Honeybee\FrameworkBinding\Silex\Config\Handler\DefaultConfigHandler
   settings:
     parser: Symfony\Component\Yaml\Parser
 
-filesystem.yml: # merge behaviour: lastone-wins
+filesystem.yml:
   handler: Honeybee\FrameworkBinding\Silex\Config\Handler\DefaultConfigHandler
   settings:
     parser: Symfony\Component\Yaml\Parser
 
-event_bus.yml: # merge behaviour: lastone-wins
+event_bus.yml:
   handler: Honeybee\FrameworkBinding\Silex\Config\Handler\EventBusConfigHandler
   settings:
     parser: Symfony\Component\Yaml\Parser
 
-command_bus.yml: # merge behaviour: lastone-wins
+command_bus.yml:
   handler: Honeybee\FrameworkBinding\Silex\Config\Handler\DefaultConfigHandler
   settings:
     parser: Symfony\Component\Yaml\Parser
 
-mail.yml: # merge behaviour: lastone-wins
+mail.yml:
   handler: Honeybee\FrameworkBinding\Silex\Config\Handler\DefaultConfigHandler
   settings:
     parser: Symfony\Component\Yaml\Parser
 
-translation.yml: # merge behaviour: lastone-wins
+translation.yml:
   handler: Honeybee\FrameworkBinding\Silex\Config\Handler\TranslationConfigHandler
   settings:
     parser: Symfony\Component\Yaml\Parser
 
-jobs.yml: # merge behaviour: lastone-wins
+jobs.yml:
   handler: Honeybee\FrameworkBinding\Silex\Config\Handler\DefaultConfigHandler
   settings:
     parser: Symfony\Component\Yaml\Parser

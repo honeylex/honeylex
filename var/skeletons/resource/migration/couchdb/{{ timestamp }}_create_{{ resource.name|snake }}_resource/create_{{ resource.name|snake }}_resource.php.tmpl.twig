@@ -21,9 +21,9 @@ class Migration_{{ timestamp }}_Create{{ resource.name }}Resource extends CouchD
     public function getDescription($direction = MigrationInterface::MIGRATE_UP)
     {
         if ($direction === MigrationInterface::MIGRATE_UP) {
-            return 'Will add design docs to the couchdb database for the {{ resource.name }} resource.';
+            return 'Will add design docs to the CouchDB database for the {{ resource.name }} resource.';
         }
-        return 'Will delete the design docs for the couchdb database {{ resource.name }} context.';
+        return 'Will delete the design docs for the CouchDB database {{ resource.name }} resource.';
     }
 
     public function isReversible()
