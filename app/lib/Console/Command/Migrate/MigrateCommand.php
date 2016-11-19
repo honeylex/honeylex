@@ -2,9 +2,10 @@
 
 namespace Honeybee\FrameworkBinding\Silex\Console\Command\Migrate;
 
+use Honeybee\FrameworkBinding\Silex\Console\Command\Command;
 use Honeybee\Infrastructure\Migration\MigrationServiceInterface;
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Output\OutputInterface;
+use Honeybee\FrameworkBinding\Silex\Config\ConfigProviderInterface;
 
 abstract class MigrateCommand extends Command
 {
@@ -16,11 +17,13 @@ abstract class MigrateCommand extends Command
 
     protected $migrationService;
 
-    public function __construct(MigrationServiceInterface $migrationService)
-    {
-        $this->migrationService = $migrationService;
+    public function __construct(
+        ConfigProviderInterface $configProvider,
+        MigrationServiceInterface $migrationService
+    ) {
+        parent::__construct($configProvider);
 
-        parent::__construct();
+        $this->migrationService = $migrationService;
     }
 
     protected function migrate(OutputInterface $output, $direction, $target = null, $toVersion = null)

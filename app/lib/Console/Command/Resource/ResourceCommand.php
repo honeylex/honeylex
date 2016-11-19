@@ -17,6 +17,7 @@ abstract class ResourceCommand extends Command
         Finder $fileFinder
     ) {
         parent::__construct($configProvider);
+
         $this->fileFinder = $fileFinder;
     }
 

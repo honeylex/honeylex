@@ -48,7 +48,7 @@ ASCII;
 
     public function getHelp()
     {
-        return self::getLogo() . parent::getHelp();
+        return self::getLogo().parent::getHelp();
     }
 
     public function getContainer()

@@ -3,7 +3,7 @@
 namespace Honeybee\FrameworkBinding\Silex\Console\Scaffold;
 
 use Honeybee\FrameworkBinding\Silex\Config\ConfigProviderInterface;
-use Honeybee\FrameworkBinding\Silex\Twig\TwigExtension;
+use Honeybee\FrameworkBinding\Silex\Renderer\Twig\ProjectExtension;
 use Honeybee\Infrastructure\Template\Twig\TwigRenderer;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
@@ -56,12 +56,12 @@ class SkeletonGenerator implements SkeletonGeneratorInterface
         $this->skeletonName = $skeletonName;
         $this->lookupPaths = $lookupPaths;
         $this->targetPath = $targetPath;
-        $this->fs = new Filesystem();
+        $this->fs = new Filesystem;
         $this->data = $data;
 
         $this->twigStringRenderer = TwigRenderer::create(
             [
-                'twig_extensions' => [ new TwigExtension($this->configProvider) ],
+                'twig_extensions' => [ new ProjectExtension($this->configProvider) ],
                 'twig_options' => [
                     'autoescape' => false,
                     'cache' => false,
@@ -121,9 +121,9 @@ class SkeletonGenerator implements SkeletonGeneratorInterface
     {
         foreach ($this->getFolderStructure() as $folder) {
             $newFolder = $this->twigStringRenderer->renderToString($folder, $this->data);
-            $this->fs->mkdir($this->targetPath . DIRECTORY_SEPARATOR . $newFolder, self::DIRECTORY_MODE);
+            $this->fs->mkdir($this->targetPath.DIRECTORY_SEPARATOR.$newFolder, self::DIRECTORY_MODE);
 
-            $msg = '[mkdir] ' . $this->targetPath . DIRECTORY_SEPARATOR . $newFolder;
+            $msg = '[mkdir] '.$this->targetPath.DIRECTORY_SEPARATOR.$newFolder;
             if ($this->reportingEnabled) {
                 $this->report[] =$msg;
             }
@@ -141,12 +141,12 @@ class SkeletonGenerator implements SkeletonGeneratorInterface
         $finder = $this->getFinderForFilesToCopy($sourcePath);
 
         foreach ($finder as $file) {
-            $targetFilePath = $this->targetPath . DIRECTORY_SEPARATOR . $file->getRelativePathname();
+            $targetFilePath = $this->targetPath.DIRECTORY_SEPARATOR.$file->getRelativePathname();
             $targetFilePath = $this->twigStringRenderer->renderToString($targetFilePath, $this->data);
 
             $this->fs->copy($file->getRealpath(), $targetFilePath, $this->overwriteEnabled);
 
-            $msg = '[copy] ' . $file->getRealpath() . ' => ' . $targetFilePath;
+            $msg = '[copy] '.$file->getRealpath().' => '.$targetFilePath;
 
             if ($this->reportingEnabled) {
                 $this->report[] = $msg;
@@ -161,7 +161,7 @@ class SkeletonGenerator implements SkeletonGeneratorInterface
      */
     protected function getFinderForFilesToCopy($sourcePath)
     {
-        $finder = new Finder();
+        $finder = new Finder;
         $finder->files()->in($sourcePath);
 
         return $finder;
@@ -175,13 +175,13 @@ class SkeletonGenerator implements SkeletonGeneratorInterface
      */
     protected function renderTemplates()
     {
-        $finder = new Finder();
+        $finder = new Finder;
 
-        $finder->files()->name('*' . self::TEMPLATE_FILENAME_EXTENSION)->in($this->targetPath);
+        $finder->files()->name('*'.self::TEMPLATE_FILENAME_EXTENSION)->in($this->targetPath);
 
         $twigRenderer = TwigRenderer::create(
             [
-                'twig_extensions' => [ new TwigExtension($this->configProvider) ],
+                'twig_extensions' => [ new ProjectExtension($this->configProvider) ],
                 'twig_options' => [
                     'autoescape' => false,
                     'cache' => false,
@@ -195,7 +195,7 @@ class SkeletonGenerator implements SkeletonGeneratorInterface
         );
 
         foreach ($finder as $template) {
-            $targetFilePath = $template->getPath() . DIRECTORY_SEPARATOR .
+            $targetFilePath = $template->getPath().DIRECTORY_SEPARATOR.
                 $template->getBasename(self::TEMPLATE_FILENAME_EXTENSION);
 
             if (!file_exists($targetFilePath) || (is_readable($targetFilePath) && $this->overwriteEnabled)) {
@@ -206,7 +206,7 @@ class SkeletonGenerator implements SkeletonGeneratorInterface
                 );
             }
 
-            $msg = '[render] ' . $template->getRelativePathname() . ' => ' . $targetFilePath;
+            $msg = '[render] '.$template->getRelativePathname().' => '.$targetFilePath;
 
             if ($this->reportingEnabled) {
                 $this->report[] = $msg;
