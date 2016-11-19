@@ -10,6 +10,8 @@ interface ConfigProviderInterface
 
     public function getCrateMap();
 
+    public function getHostPrefix();
+
     public function getAppContext();
 
     public function getAppEnv();

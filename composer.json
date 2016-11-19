@@ -53,7 +53,7 @@
             "echo 'Started web server on http://localhost:8888'",
             "php -S localhost:8888 -t web web/index_dev.php"
         ],
-        "code-sniffer": "vendor/bin/phpcs --extensions=php --standard=psr2 app tests/",
+        "code-sniffer": "vendor/bin/phpcs --extensions=php --standard=psr2 app tests",
         "docker:up": "docker-compose -f ./var/docker/docker-compose.yml -p ${PWD##*/} up -d",
         "docker:down": "docker-compose -f ./var/docker/docker-compose.yml -p ${PWD##*/} down",
         "docker:stop": "docker-compose -f ./var/docker/docker-compose.yml -p ${PWD##*/} stop",

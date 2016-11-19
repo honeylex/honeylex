@@ -32,6 +32,7 @@ class SettingConfigHandler extends YamlConfigHandler
         foreach ($localConfigs as $prefix => $localConfig) {
             $settings[$prefix] = $this->loadLocalSettings($localConfig);
         }
+
         foreach ($settingsConfig as $prefix => $rawSettings) {
             $settings[$prefix] = $rawSettings;
         }
@@ -46,11 +47,28 @@ class SettingConfigHandler extends YamlConfigHandler
 
     protected function loadLocalSettings(array $localConfig)
     {
-        $configFile = $this->configProvider->getLocalConfigDir().'/'.$localConfig['name'];
+        $localConfigDir = $this->configProvider->getLocalConfigDir().DIRECTORY_SEPARATOR;
+
         if ($localConfig['load'] === 'from_file') {
-            $settings = $this->handleFileBasedLocalConfig($configFile, $localConfig['type']);
+            $localConfigFile = $localConfigDir.$localConfig['name'];
+            $localConfigFiles = [ $localConfigFile ];
+
+            if ($hostPrefix = $this->configProvider->getHostPrefix()) {
+                $hostConfigDir = $localConfigDir.$hostPrefix.DIRECTORY_SEPARATOR;
+                $localConfigFiles[] = $hostConfigDir.$localConfig['name'];
+            }
+
+            $settings = [];
+            foreach (array_unique($localConfigFiles) as $configFile) {
+                if (is_readable($configFile)) {
+                    $settings = array_replace_recursive(
+                        $this->handleFileBasedLocalConfig($configFile, $localConfig['type'])
+                    );
+                }
+            }
         }
-        // @todo load from env
+
+        // @todo support loading from environment vars
 
         return $settings;
     }
@@ -59,9 +77,6 @@ class SettingConfigHandler extends YamlConfigHandler
     {
         if ($type === 'yaml') {
             $yamlString = file_get_contents($configFile);
-            if (!$yamlString) {
-                throw new ConfigError('Failed to read local configuration at: '.$configFile);
-            };
             try {
                 $settings = $yaml_parser->parse($yamlString);
             } catch (\Exception $parseError) {
@@ -72,9 +87,6 @@ class SettingConfigHandler extends YamlConfigHandler
             }
         } elseif ($type === 'json') {
             $jsonString = file_get_contents($configFile);
-            if (!$jsonString) {
-                throw new ConfigError('Failed to read local configuration at: '.$configFile);
-            }
             $settings = json_decode($jsonString, true);
 
             if (json_last_error() !== JSON_ERROR_NONE) {

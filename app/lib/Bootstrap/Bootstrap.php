@@ -40,8 +40,11 @@ class Bootstrap
     {
         $this->config = $this->bootstrapConfig($app, $this->injector, $settings);
 
+        $hostPrefix = $this->config->getHostPrefix();
+        $appContext = $this->config->getAppContext();
+        $appEnv = $this->config->getAppEnv();
         $app['version'] = $this->config->getVersion();
-        $app['debug'] = $this->config->getAppEnv() === 'development';
+        $app['debug'] = $appEnv === 'development';
         $this->bootstrapLogger($app, $this->config, $this->injector);
 
         // then kick off service provisioning
@@ -56,36 +59,54 @@ class Bootstrap
         $app->register(new ValidatorServiceProvider);
         $app->register(new SessionServiceProvider);
 
-        $localConfigDir = $this->config->getConfigDir();
-        $appContext = $this->config->getAppContext();
-        $this->loadProjectRoutes($localConfigDir.'/routing.php', $app);
-        $this->loadProjectRoutes($localConfigDir."/routing/$appContext.php", $app);
+        // load project and host routing
+        $localConfigDir = $this->config->getConfigDir().DIRECTORY_SEPARATOR;
+        $routingFiles = [
+            $localConfigDir.'routing.php',
+            $localConfigDir."routing.$appContext.php",
+            $localConfigDir."routing.$appEnv.php",
+            $localConfigDir."routing.$appContext.$appEnv.php"
+        ];
+        if ($hostPrefix) {
+            $hostConfigDir = $localConfigDir.$hostPrefix.DIRECTORY_SEPARATOR;
+            $routingFiles[] = $hostConfigDir.'routing.php';
+            $routingFiles[] = $hostConfigDir."routing.$appContext.php";
+            $routingFiles[] = $hostConfigDir."routing.$appEnv.php";
+            $routingFiles[] = $hostConfigDir."routing.$appContext.$appEnv.php";
+        }
+
+        foreach ($routingFiles as $routingFile) {
+            $this->loadProjectRoutes($routingFile, $app);
+        }
 
         return $app;
     }
 
-    protected function loadProjectRoutes($routesFile, Application $routing)
+    protected function loadProjectRoutes($routingFile, Application $routing)
     {
-        if (is_readable($routesFile)) {
+        if (is_readable($routingFile)) {
             $app = $routing;
-            require $routesFile;
+            require $routingFile;
         }
     }
 
     protected function bootstrapConfig(Application $app, Injector $injector, array $settings)
     {
         $app['settings'] = $settings;
+        $hostPrefix = $settings['hostPrefix'];
         $appContext = $settings['appContext'];
-        $configDir = $settings['core']['config_dir'];
-        $projectConfigDir = $settings['project']['config_dir'];
+        $appEnv = $settings['appEnv'];
+        $configDir = $settings['core']['config_dir'].DIRECTORY_SEPARATOR;
+        $projectConfigDir = $settings['project']['config_dir'].DIRECTORY_SEPARATOR;
 
         // default configs
         $configHandlers = (new Parser)->parse(
-            file_get_contents($configDir.'/config_handlers.yml')
+            file_get_contents($configDir.'config_handlers.yml')
         );
 
         // project configs
-        $projectConfigHandlersFile = $projectConfigDir.'/config_handlers.yml';
+        // @todo support project host specific config handlers
+        $projectConfigHandlersFile = $projectConfigDir.'config_handlers.yml';
         if (is_readable($projectConfigHandlersFile)) {
             $configHandlers = array_merge(
                 $configHandlers,
@@ -93,12 +114,22 @@ class Bootstrap
             );
         }
 
-        // crate configs
+        // project and host crate configs
         $cratesConfigFiles = [
-            $projectConfigDir.'/crates.yml',
-            $projectConfigDir."/crates/$appContext.yml"
+            $projectConfigDir.'crates.yml',
+            $projectConfigDir."crates.$appContext.yml",
+            $projectConfigDir."crates.$appEnv.yml",
+            $projectConfigDir."crates.$appContext.$appEnv.yml"
         ];
-        $crateManifestMap =  (new CrateConfigHandler)->handle($cratesConfigFiles);
+        if ($hostPrefix) {
+            $hostConfigDir = $projectConfigDir.$hostPrefix.DIRECTORY_SEPARATOR;
+            $cratesConfigFiles[] = $hostConfigDir.'crates.yml';
+            $cratesConfigFiles[] = $hostConfigDir."crates.$appContext.yml";
+            $cratesConfigFiles[] = $hostConfigDir."crates.$appEnv.yml";
+            $cratesConfigFiles[] = $hostConfigDir."crates.$appContext.$appEnv.yml";
+        }
+
+        $crateManifestMap = (new CrateConfigHandler)->handle($cratesConfigFiles);
         $crateMap = $crateManifestMap->count() > 0
             ? (new CrateLoader)->loadCrates($app, $crateManifestMap)
             : new CrateMap;

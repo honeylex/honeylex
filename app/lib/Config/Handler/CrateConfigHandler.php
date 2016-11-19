@@ -21,7 +21,7 @@ class CrateConfigHandler implements ConfigHandlerInterface
         $manifests = [];
 
         $crates = [];
-        foreach ($configFiles as $configFile) {
+        foreach (array_unique($configFiles) as $configFile) {
             if (is_readable($configFile)) {
                 $crates = array_replace_recursive(
                     $crates,
