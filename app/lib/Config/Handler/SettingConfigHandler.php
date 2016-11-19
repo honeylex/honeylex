@@ -9,7 +9,7 @@ class SettingConfigHandler extends YamlConfigHandler
     public function handle(array $configFiles)
     {
         return $this->interpolateConfigValues(
-            array_merge_recursive(
+            array_replace_recursive(
                 array_reduce(
                     array_map([ $this, 'handleConfigFile' ], $configFiles),
                     [ $this, 'mergeConfigs' ],
@@ -42,7 +42,7 @@ class SettingConfigHandler extends YamlConfigHandler
 
     protected function mergeConfigs(array $out, array $in)
     {
-        return array_merge_recursive($out, $in);
+        return array_replace_recursive($out, $in);
     }
 
     protected function loadLocalSettings(array $localConfig)
