@@ -47,8 +47,14 @@ class TwigRendererProvisioner implements ProvisionerInterface
 
         $namespacedPaths = $this->getCrateTemplatesPaths($configProvider);
         $projectTemplates = $configProvider->getProjectDir().'/app/templates';
-        $namespacedPaths['honeylex'] = $configProvider->getCoreDir().'/app/templates';
-        $namespacedPaths['project'] = $projectTemplates;
+        $namespacedPaths['honeylex'][] = $configProvider->getCoreDir().'/app/templates';
+        $namespacedPaths['project'][] = $projectTemplates;
+        if ($hostPrefix = $configProvider->getHostPrefix()) {
+            $projectHostTemplates = $projectTemplates.'/'.$hostPrefix;
+            if (is_readable($projectHostTemplates)) {
+                $namespacedPaths['project'][] = $projectHostTemplates;
+            }
+        }
 
         $app['twig.form.templates'] = [ 'bootstrap_3_layout.html.twig' ];
         $app['twig.options'] = [ 'cache' => $configProvider->getProjectDir().'/var/cache/twig' ];
