@@ -2,7 +2,6 @@
 
 namespace Honeybee\FrameworkBinding\Silex\Console\Command\Crate;
 
-use Honeybee\FrameworkBinding\Silex\Config\ConfigProviderInterface;
 use Honeybee\FrameworkBinding\Silex\Console\Command\Command;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Yaml\Yaml;

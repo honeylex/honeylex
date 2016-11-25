@@ -21,9 +21,9 @@ class Migration_{{ timestamp }}_InitEventSource extends CouchDbMigration
     public function getDescription($direction = MigrationInterface::MIGRATE_UP)
     {
         if ($direction === MigrationInterface::MIGRATE_UP) {
-            return 'Will initially setup a couchdb database for the {{ crate.name }}\'s context.';
+            return 'Will initially setup a CouchDB database for the {{ crate.name }}\'s context.';
         }
-        return 'Will deinit the couchdb database for the {{ crate.name }}\'s context.';
+        return 'Will deinit the CouchDB database for the {{ crate.name }}\'s context.';
     }
 
     public function isReversible()

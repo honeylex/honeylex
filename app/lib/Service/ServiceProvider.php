@@ -5,7 +5,6 @@ namespace Honeybee\FrameworkBinding\Silex\Service;
 use Honeybee\ServiceProvisionerInterface;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
-use Silex\Api\BootableProviderInterface;
 use Silex\Api\EventListenerProviderInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 

@@ -20,7 +20,7 @@ class Migration_{{ timestamp }}_Create{{ resource.name }}Resource extends Elasti
     public function getDescription($direction = MigrationInterface::MIGRATE_UP)
     {
         if ($direction === MigrationInterface::MIGRATE_UP) {
-            return 'Will create the elasticsearch type for the {{ resource.name }}\'s view data.';
+            return 'Will create the Elasticsearch type for the {{ resource.name }}\'s view data.';
         }
     }
 

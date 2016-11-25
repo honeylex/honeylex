@@ -2,8 +2,6 @@
 
 namespace Honeybee\FrameworkBinding\Silex\Config\Handler;
 
-use Honeybee\Common\Error\ConfigError;
-
 class TranslationConfigHandler extends ArrayConfigHandler
 {
     protected function handleConfigFile($configFile)

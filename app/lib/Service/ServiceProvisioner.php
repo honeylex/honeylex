@@ -4,7 +4,6 @@ namespace Honeybee\FrameworkBinding\Silex\Service;
 
 use Auryn\Injector;
 use Honeybee\Common\Error\ConfigError;
-use Honeybee\Common\Util\StringToolkit;
 use Honeybee\FrameworkBinding\Silex\Config\ConfigProviderInterface;
 use Honeybee\FrameworkBinding\Silex\Service\Provisioner\DefaultProvisioner;
 use Honeybee\FrameworkBinding\Silex\Service\Provisioner\ProvisionerInterface;
@@ -22,7 +21,6 @@ use SplFileInfo;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Trellis\CodeGen\Parser\Config\ConfigIniParser;
 use Trellis\CodeGen\Parser\Schema\EntityTypeSchemaXmlParser;
-use Trellis\CodeGen\Schema\EntityTypeDefinition;
 
 class ServiceProvisioner implements ServiceProvisionerInterface
 {

@@ -2,7 +2,6 @@
 
 namespace Honeybee\FrameworkBinding\Silex\Console\Command\Crate;
 
-use Honeybee\Common\Util\StringToolkit;
 use Honeybee\FrameworkBinding\Silex\Crate\CrateInterface;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
