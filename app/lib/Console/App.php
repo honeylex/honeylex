@@ -36,7 +36,7 @@ ASCII;
         parent::__construct('honeylex', $configProvider->getVersion());
 
         $this->getDefinition()->addOption(
-            new InputOption('--env', '-e', InputOption::VALUE_REQUIRED, 'The Environment name.', 'development')
+            new InputOption('--env', '-e', InputOption::VALUE_REQUIRED, 'The Environment name.', 'dev')
         );
 
         foreach (array_map([ $app['honeybee.service_locator'], 'createEntity'], $appCommands) as $command) {

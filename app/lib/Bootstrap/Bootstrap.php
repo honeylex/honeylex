@@ -44,7 +44,7 @@ class Bootstrap
         $appContext = $this->config->getAppContext();
         $appEnv = $this->config->getAppEnv();
         $app['version'] = $this->config->getVersion();
-        $app['debug'] = $appEnv === 'development';
+        $app['debug'] = strpos($appEnv, 'dev') === 0;
         $this->bootstrapLogger($app, $this->config, $this->injector);
 
         // then kick off service provisioning

@@ -14,7 +14,7 @@ class WebBootstrap extends Bootstrap
     {
         parent::__invoke($app, $settings);
 
-        if ($this->config->getAppEnv() === 'development') {
+        if (strpos($this->config->getAppEnv(), 'dev') === 0) {
             $app->register(
                 new WebProfilerServiceProvider,
                 [ 'profiler.cache_dir' => $this->config->getProjectDir().'/var/cache/profiler' ]
