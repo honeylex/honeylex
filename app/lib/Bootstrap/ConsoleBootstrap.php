@@ -10,6 +10,11 @@ class ConsoleBootstrap extends Bootstrap
     {
         parent::__invoke($app, $settings);
 
+        // Set host from environment for URL generation
+        if ($serverHost = getenv('SERVER_HOST')) {
+            $app['request_context']->setHost($serverHost);
+        }
+
         return $app;
     }
 }
