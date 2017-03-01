@@ -8,13 +8,13 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
 
-class InstallProject extends ProjectCommand
+class ConfigureProject extends ProjectCommand
 {
     protected function configure()
     {
         $this
-            ->setName('hlx:project:install')
-            ->setDescription('Install and configure a Honeylex project.')
+            ->setName('hlx:project:configure')
+            ->setDescription('Configure a Honeylex project.')
             ->addArgument(
                 'name',
                 InputArgument::OPTIONAL,
@@ -32,8 +32,8 @@ class InstallProject extends ProjectCommand
     protected function writeHeader(OutputInterface $output)
     {
         $output->writeln('');
-        $output->writeln('Honeylex projection installation');
-        $output->writeln('--------------------------------');
+        $output->writeln('Honeylex projection configuration');
+        $output->writeln('---------------------------------');
         $output->writeln('');
     }
 
@@ -52,8 +52,9 @@ class InstallProject extends ProjectCommand
             return false;
         }
 
-        $lcName = strtolower($name);
-        $this->install(
+        $lcName = $this->normalize($name);
+
+        $this->generateSettings(
             $output,
             [
                 'project' => [

@@ -20,7 +20,7 @@ Build a Honeylex project on Docker as follows:
 ```shell
 git clone git@github.com:honeylex/honeylex.git your-project
 cd your-project
-composer install
+composer install --ignore-platform-reqs
 composer docker:up
 ```
 
@@ -29,7 +29,7 @@ Now you can connect to the web server container and run commands to setup the pr
 # NOTE! docker may sanitize your container prefix, removing punctuation etc.
 docker exec -it -u 1000 yourproject_web_1 bash
 cd /var/www
-bin/console hlx:project:install
+bin/console hlx:project:configure
 bin/console hlx:migrate:up
 ```
 Your site will then be available at the IP address of your base machine (typically http://192.168.99.100).

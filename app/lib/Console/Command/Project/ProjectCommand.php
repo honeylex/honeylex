@@ -9,7 +9,13 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 abstract class ProjectCommand extends Command
 {
-    protected function install(OutputInterface $output, array $settings)
+    protected function normalize($name)
+    {
+        //@todo better name normalization
+        return strtolower($name);
+    }
+
+    protected function generateSettings(OutputInterface $output, array $settings)
     {
         $settingsFile = $this->configProvider->getConfigDir().'/settings.yml';
         (new Filesystem($adapter))->dumpFile(
