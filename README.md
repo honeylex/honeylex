@@ -14,7 +14,7 @@ Project template for building rapidly scalable applications based on the integra
 
 ### Docker
 
-You can have Honeylex running very quickly with [Docker][Docker]. 
+You can have Honeylex running very quickly with [Docker][Docker] and [Composer][Composer].
 > If you do not already have Docker, first install it then [create a machine](https://docs.docker.com/machine/get-started/) with [Virtualbox](https://www.virtualbox.org/) if required.
 
 Bring up the Honeylex project on Docker as follows:
