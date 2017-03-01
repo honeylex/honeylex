@@ -5,6 +5,7 @@ namespace Honeybee\FrameworkBinding\Silex\Bootstrap;
 use Auryn\Injector;
 use Silex\Application;
 use Silex\Provider\WebProfilerServiceProvider;
+use Symfony\Component\Debug\Debug;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -12,13 +13,18 @@ class WebBootstrap extends Bootstrap
 {
     public function __invoke(Application $app, array $settings)
     {
+        // start Symfony debug early for web context
+        if ($settings['appDebug']) {
+            Debug::enable();
+        }
+
         parent::__invoke($app, $settings);
 
         if ($this->config->getSetting('project.session.auto_start', true)) {
             $this->bootstrapSession($app);
         }
 
-        if (strpos($this->config->getAppEnv(), 'dev') === 0) {
+        if ($app['debug']) {
             $app->register(
                 new WebProfilerServiceProvider,
                 [ 'profiler.cache_dir' => $this->config->getProjectDir().'/var/cache/profiler' ]

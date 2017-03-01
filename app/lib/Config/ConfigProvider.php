@@ -63,6 +63,11 @@ class ConfigProvider implements ConfigProviderInterface
         return $this->settings->get('appEnv');
     }
 
+    public function getAppDebug()
+    {
+        return $this->settings->get('appDebug');
+    }
+
     public function getSetting($setting, $default = null, $ignorePath = false)
     {
         if ($ignorePath) {

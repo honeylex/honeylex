@@ -1,11 +1,11 @@
 <?php
 
-$hostPrefix = getenv('HOST_PREFIX');
-$appEnv = 'prod';
 $appContext = 'web';
-$localConfigDir = getenv('LOCAL_CONFIG_DIR') ?: '/usr/local/env';
 
-ini_set('display_errors', false);
+$appEnv = getenv('APP_ENV') ?: 'dev';
+$appDebug = getenv('APP_DEBUG') ?: true;
+$hostPrefix = getenv('HOST_PREFIX');
+$localConfigDir = getenv('LOCAL_CONFIG_DIR') ?: '/usr/local/env';
 
 require_once __DIR__.'/../vendor/autoload.php';
 
