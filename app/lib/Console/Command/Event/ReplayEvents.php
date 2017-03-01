@@ -37,12 +37,12 @@ class ReplayEvents extends EventCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        if (!$type =  $input->getArgument('type')) {
+        if (!$type = $input->getArgument('type')) {
             $this->writeHeader($output);
             $type = $this->listTypes($input, $output);
         }
 
-        if (!$channel =  $input->getArgument('channel')) {
+        if (!$channel = $input->getArgument('channel')) {
             $channel = $this->listChannels($input, $output);
         }
 

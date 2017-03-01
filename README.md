@@ -58,7 +58,7 @@ In order to get Honeylex running without virtualization you'll need to make sure
 
 * Run: ```composer create-project -sdev honeylex/honeylex your-project```
 * Install: ```cd your-project; bin/console hlx:project:install```
-* Create a directory: ```/usr/local/honeylex.local/```
+* Create a directory: ```/usr/local/env```
 * In this directory create a file named ```rabbitmq.json``` with the following contents: ```{ "user":"name", "password":"secret", "host": "localhost", "port": 5672 }```
 * Run: ```bin/console hlx:migrate:up```
 * Run: ```composer run```, this will start a local webserver that hosts the app [here](http://localhost:8888/)

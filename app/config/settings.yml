@@ -13,4 +13,10 @@ project:
     from_name: Honeylex
   translation:
     default_locale: en
-    locale_fallbacks: [ en ]
+    locale_fallbacks:
+      - en
+      - de
+      - fr
+      - es
+      - ja
+      - ar

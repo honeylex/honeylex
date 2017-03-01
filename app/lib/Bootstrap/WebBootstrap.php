@@ -14,6 +14,10 @@ class WebBootstrap extends Bootstrap
     {
         parent::__invoke($app, $settings);
 
+        if ($this->config->getSetting('project.session.auto_start', true)) {
+            $this->bootstrapSession($app);
+        }
+
         if (strpos($this->config->getAppEnv(), 'dev') === 0) {
             $app->register(
                 new WebProfilerServiceProvider,

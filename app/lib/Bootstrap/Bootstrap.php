@@ -57,7 +57,6 @@ class Bootstrap
         $app->register(new HttpFragmentServiceProvider);
         $app->register(new FormServiceProvider);
         $app->register(new ValidatorServiceProvider);
-        $app->register(new SessionServiceProvider);
 
         // load project and host routing
         $localConfigDir = $this->config->getConfigDir().DIRECTORY_SEPARATOR;
@@ -155,5 +154,15 @@ class Bootstrap
             ->alias(LoggerInterface::CLASS, get_class($logger));
 
         return $logger;
+    }
+
+    protected function bootstrapSession(Application $app)
+    {
+        // sessions are started explicitly when required
+        $app->register(new SessionServiceProvider);
+
+        $app->before(function ($request) {
+            $request->getSession()->start();
+        });
     }
 }
