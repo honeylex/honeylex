@@ -33,7 +33,7 @@ composer console:run hlx:migrate:up
 ```
 **Once containers are running your project will be ready and provisioned!**
 >Run `docker-machine ip default` to find the IP (typically http://192.168.99.100)
-> - Secure site https://192.168.99.100 #untrusted certs in dev mode
+> - Secure site https://192.168.99.100 (untrusted certs in dev mode)
 > - Elasticsearch at http://192.168.99.100:9200
 > - CouchDB admin at http://192.168.99.100:5984/_utils
 > - RabbitMQ admin at http://192.168.99.100:15672
