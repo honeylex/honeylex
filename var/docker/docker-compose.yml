@@ -7,7 +7,6 @@ services:
       - "443:443"
     environment:
       NGINX_REDIRECT_PORT80: "true"
-
       SERVER1SERVER_NAME: ${HOST_NAME}
       SERVER1HTTP_ENABLED: "false"
       SERVER1HTTPS_ENABLED: "true"
