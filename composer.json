@@ -12,12 +12,6 @@
     ],
     "license": "MIT",
     "type": "library",
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "git@github.com:FriendsOfHoneybee/php-amqplib.git"
-        }
-    ],
     "require": {
         "php": ">=5.6.1",
         "rdlowrey/auryn": "~1.1",

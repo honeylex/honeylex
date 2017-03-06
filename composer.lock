@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "cda0eee2c0de43b4865a43e68dcefa3a",
+    "content-hash": "a9ed2861481dda64f0052a1052b3f95c",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -1194,13 +1194,13 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/FriendsOfHoneybee/php-amqplib.git",
-                "reference": "e6dab50364ce5755f6554bf43fe8c956c2e88047"
+                "url": "https://github.com/php-amqplib/php-amqplib.git",
+                "reference": "2cf97f13acda9ed1a7c84db7ce2d437e294cd87c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfHoneybee/php-amqplib/zipball/e6dab50364ce5755f6554bf43fe8c956c2e88047",
-                "reference": "e6dab50364ce5755f6554bf43fe8c956c2e88047",
+                "url": "https://api.github.com/repos/php-amqplib/php-amqplib/zipball/2cf97f13acda9ed1a7c84db7ce2d437e294cd87c",
+                "reference": "2cf97f13acda9ed1a7c84db7ce2d437e294cd87c",
                 "shasum": ""
             },
             "require": {
@@ -1230,12 +1230,7 @@
                     "PhpAmqpLib\\": "PhpAmqpLib/"
                 }
             },
-            "autoload-dev": {
-                "psr-4": {
-                    "PhpAmqpLib\\Tests\\Functional\\": "tests/Functional",
-                    "PhpAmqpLib\\Tests\\Unit\\": "tests/Unit"
-                }
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "LGPL-2.1"
             ],
@@ -1262,10 +1257,7 @@
                 "queue",
                 "rabbitmq"
             ],
-            "support": {
-                "source": "https://github.com/FriendsOfHoneybee/php-amqplib/tree/master"
-            },
-            "time": "2016-07-27 14:55:50"
+            "time": "2017-02-19 17:20:09"
         },
         {
             "name": "pimple/pimple",

@@ -42,17 +42,17 @@ You can configure various environment files in the ```var/environment``` folder 
 
 The following docker commands are available via `composer` from your host machine:
 ```shell
-composer docker:up     # bring up the containers without building
-composer docker:down   # stops and removes the project containers
+composer docker:up     # create and start containers
+composer docker:down   # stop and remove containers
 composer docker:start  # start previously stopped containers
-composer docker:stop   # stop/suspend the docker containers
+composer docker:stop   # stop/suspend running containers
 composer docker:prune  # remove dangling volumes and stopped containers
 ```
 
 ##Console
 Honeylex comes with a number of convenient tools to help project setup and maintenance. A complete list of commands can be found by running:
 ```shell
-composer honeylex  # alias of docker-compose run --rm php_cli ./vendor/bin/honeylex
+composer honeylex  # alias of docker-compose run --rm php_cli ./bin/honeylex
 ```
 
 A useful set of commands are provided for managing the following system features:

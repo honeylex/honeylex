@@ -22,7 +22,8 @@ use Honeybee\FrameworkBinding\Silex\Console\Command\Route\ListRoutes;
 use Honeybee\FrameworkBinding\Silex\Console\Command\Worker\RunWorker;
 use Symfony\Component\Console\Input\ArgvInput;
 
-require_once __DIR__.'/../vendor/autoload.php';
+$basedir = getcwd() ?: dirname(__DIR__);
+require_once $basedir.'/vendor/autoload.php';
 
 $appContext = 'console';
 
@@ -31,7 +32,7 @@ $appDebug = (new ArgvInput)->getParameterOption('--debug', getenv('APP_DEBUG') ?
 $hostPrefix = (new ArgvInput)->getParameterOption([ '--host', '-h' ], getenv('HOST_PREFIX'));
 $localConfigDir = getenv('LOCAL_CONFIG_DIR') ?: '/usr/local/env';
 
-$app = require __DIR__.'/../app/bootstrap.php';
+$app = require $basedir.'/app/bootstrap.php';
 $app->boot();
 $app->flush();
 
