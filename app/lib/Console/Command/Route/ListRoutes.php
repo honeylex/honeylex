@@ -20,7 +20,7 @@ class ListRoutes extends Command
         $app = $this->getApplication()->getContainer();
         foreach ($app['routes']->all() as $binding => $route) {
             $methods = implode(',', $route->getMethods());
-            $output->writeln($binding.' => '.($methods ?: 'ANY').' '.$route->getPath());
+            $output->writeln("<info>$binding</info> => <comment>".($methods ?: 'ANY').'</comment> '.$route->getPath());
         }
     }
 }

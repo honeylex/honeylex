@@ -6,7 +6,9 @@ use Honeybee\FrameworkBinding\Silex\Console\Command\Command;
 use Honeybee\Infrastructure\Config\Settings;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Honeybee\Infrastructure\Config\SettingsInterface;
 
 class ListConfig extends Command
 {
@@ -18,13 +20,19 @@ class ListConfig extends Command
             ->addArgument(
                 'path',
                 InputArgument::OPTIONAL,
-                'Filter values for a given path'
+                'Filter values for a given path.'
+            )
+            ->addOption(
+                'keys',
+                null,
+                InputOption::VALUE_NONE,
+                'Show configuration keys only.'
             );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $settings = new Settings;
+        $settings = [];
         $handlerConfigs = $this->configProvider->getHandlerConfigs();
         $crateMap = $this->configProvider->getCrateMap();
 
@@ -34,43 +42,55 @@ class ListConfig extends Command
             if ($handlerConfigs->has($key.'.yml')) {
                 $settings = $this->configProvider->provide($key.'.yml');
                 $settings = is_array($settings) ? $settings : $settings->toArray();
-                // @todo support path searching
                 if ($subPath = implode('.', $pathParts)) {
-                    $settings = array_key_exists($subPath, $settings) ? $settings[$subPath] : null;
+                    if (array_key_exists($subPath, $settings)) {
+                        $settings = $settings[$subPath];
+                    } else {
+                        do {
+                            $key = array_shift($pathParts);
+                            $settings = $key && array_key_exists($key, (array)$settings) ? $settings[$key] : [];
+                        } while (!empty($pathParts));
+                    }
                 }
-                $settings = $settings ? Settings::createFromArray([ $path => $settings ]) : new Settings;
+                $settings = $settings ? [ $path => $settings ] : [];
             } elseif ($this->configProvider->hasSetting($path)) {
-                $settings = Settings::createFromArray([ $path => $this->configProvider->getSetting($path) ]);
+                $values = $this->configProvider->getSetting($path);
+                $settings = [ $path => !is_object($values) ? $values : $values->toArray() ];
             } elseif ($crateMap->hasKey($path)) {
-                $settings = Settings::createFromArray([ $path => $this->configProvider->getCrateSettings($path) ]);
+                $values = $this->configProvider->getCrateSettings($path);
+                $settings = [ $path => !is_object($values) ? $values : $values->toArray() ];
+            }
+
+            if (isset($settings[$path]) && $input->getOption('keys')) {
+                $settings = is_array($settings[$path]) ? array_keys($settings[$path]) : [];
             }
         } else {
             foreach ($handlerConfigs->getKeys() as $configFile) {
-                $settings = Settings::createFromArray(
-                    array_merge(
-                        $settings->toArray(),
-                        [ pathinfo($configFile, PATHINFO_FILENAME) => $this->configProvider->provide($configFile) ]
-                    )
+                $values = $this->configProvider->provide($configFile);
+                $settings = array_merge(
+                    $settings,
+                    [ pathinfo($configFile, PATHINFO_FILENAME) => $values ]
                 );
             }
 
-            foreach($crateMap as $crate) {
-                $settings = Settings::createFromArray(
-                    array_merge(
-                        $settings->toArray(),
-                        [ $crate->getPrefix() => $this->configProvider->getCrateSettings($crate->getPrefix())->toArray() ]
-                    )
+            foreach ($crateMap as $crate) {
+                $settings = array_merge(
+                    $settings,
+                    [ $crate->getPrefix() => $this->configProvider->getCrateSettings($crate->getPrefix()) ]
                 );
+            }
+
+            if ($input->getOption('keys')) {
+                $settings = array_keys($settings);
             }
         }
 
-        // Render values
-        $this->renderValues($output, $settings->toArray());
+        $this->renderValues($output, $settings);
     }
 
-    private function renderValues(OutputInterface $output, array $settings, $indent = 0)
+    private function renderValues(OutputInterface $output, $settings, $indent = 0)
     {
-        foreach($settings as $key => $value) {
+        foreach ($settings as $key => $value) {
             if (is_scalar($value) || is_null($value)) {
                 switch (true) {
                     case is_bool($value):
