@@ -99,6 +99,11 @@ class ConfigProvider implements ConfigProviderInterface
         return $this->settings;
     }
 
+    public function getHandlerConfigs()
+    {
+        return $this->handlerConfigs;
+    }
+
     public function getCrateSettings($cratePrefix)
     {
         $crateSettings = $this->crateMap->getItem($cratePrefix)->getSettings();
@@ -107,7 +112,7 @@ class ConfigProvider implements ConfigProviderInterface
 
     public function hasSetting($setting)
     {
-        return $this->settings->has($setting);
+        return $this->getSetting($setting) !== null;
     }
 
     public function getProjectDir()

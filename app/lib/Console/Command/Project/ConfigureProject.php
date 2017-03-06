@@ -93,7 +93,7 @@ class ConfigureProject extends ProjectCommand
             $projectDescription = $this->configProvider->getSetting('project.description');
         }
 
-        $this->configure(
+        $this->generateSettings(
             $output,
             [
                 'project' => [

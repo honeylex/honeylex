@@ -9,7 +9,7 @@ use Symfony\Component\Yaml\Yaml;
 
 abstract class ProjectCommand extends Command
 {
-    protected function configure(OutputInterface $output, array $settings)
+    protected function generateSettings(OutputInterface $output, array $settings)
     {
         $settingsFile = $this->configProvider->getConfigDir().'/settings.yml';
         $currentSettings = Yaml::parse(file_get_contents($settingsFile));

@@ -2,6 +2,7 @@
 <?php
 
 use Honeybee\FrameworkBinding\Silex\Console\App;
+use Honeybee\FrameworkBinding\Silex\Console\Command\Config\ListConfig;
 use Honeybee\FrameworkBinding\Silex\Console\Command\Crate\CrateInfo;
 use Honeybee\FrameworkBinding\Silex\Console\Command\Crate\ListCrates;
 use Honeybee\FrameworkBinding\Silex\Console\Command\Crate\MakeCrate;
@@ -37,28 +38,30 @@ $app->boot();
 $app->flush();
 
 $appCommands = [
+    // Config
+    ListConfig::CLASS,
     // Crate
     CrateInfo::CLASS,
     ListCrates::CLASS,
     MakeCrate::CLASS,
     RemoveCrate::CLASS,
+    // Fixture
+    ImportFixture::CLASS,
     // Migrate
     ListTargets::CLASS,
     MigrateDown::CLASS,
     MigrateUp::CLASS,
     TargetInfo::CLASS,
+    // Project
+    ConfigureProject::CLASS,
     // Replay
     ReplayEvents::CLASS,
-    // Fixture
-    ImportFixture::CLASS,
     // Resource
     GenerateCode::CLASS,
     ListResources::CLASS,
     MakeResource::CLASS,
     RemoveResource::CLASS,
     ResourceInfo::CLASS,
-    // Project
-    ConfigureProject::CLASS,
     // Route
     ListRoutes::CLASS,
     // Worker
