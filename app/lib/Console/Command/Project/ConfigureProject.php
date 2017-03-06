@@ -13,7 +13,7 @@ class ConfigureProject extends ProjectCommand
     protected function configure()
     {
         $this
-            ->setName('hlx:project:configure')
+            ->setName('project:configure')
             ->setDescription('Configure a Honeylex project.')
             ->addArgument(
                 'name',

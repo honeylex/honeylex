@@ -15,7 +15,7 @@ class MakeResource extends ResourceCommand
     protected function configure()
     {
         $this
-            ->setName('hlx:res:mk')
+            ->setName('resource:mk')
             ->setDescription('Makes a resource from a template.')
             ->addArgument(
                 'crate',

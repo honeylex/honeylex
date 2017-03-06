@@ -14,7 +14,7 @@ class RunWorker extends WorkerCommand
     protected function configure()
     {
         $this
-            ->setName('hlx:worker:run')
+            ->setName('worker:run')
             ->setDescription('Run an asynchronous job worker.')
             ->addArgument(
                 'queue',

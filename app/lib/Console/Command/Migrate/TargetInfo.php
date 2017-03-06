@@ -14,7 +14,7 @@ class TargetInfo extends MigrateCommand
     protected function configure()
     {
         $this
-            ->setName('hlx:migrate:info')
+            ->setName('migrate:info')
             ->setDescription('Displays migration target details.')
             ->addArgument(
                 'target',

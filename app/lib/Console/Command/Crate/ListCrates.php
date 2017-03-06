@@ -11,7 +11,7 @@ class ListCrates extends CrateCommand
     protected function configure()
     {
         $this
-            ->setName('hlx:crate:ls')
+            ->setName('crate:ls')
             ->setDescription('Lists currently installed crates.');
     }
 

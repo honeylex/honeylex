@@ -11,7 +11,7 @@ class MigrateUp extends MigrateCommand
     protected function configure()
     {
         $this
-            ->setName('hlx:migrate:up')
+            ->setName('migrate:up')
             ->setDescription('Migrate up to a specified migration version.')
             ->addOption(
                 'target',

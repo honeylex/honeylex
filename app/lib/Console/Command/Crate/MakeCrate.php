@@ -9,14 +9,13 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
-use Symfony\Component\Process\Process;
 
 class MakeCrate extends CrateCommand
 {
     protected function configure()
     {
         $this
-            ->setName('hlx:crate:mk')
+            ->setName('crate:mk')
             ->setDescription('Makes a crate from a template.')
             ->addArgument(
                 'vendor',
@@ -113,7 +112,8 @@ class MakeCrate extends CrateCommand
         foreach ($skeletonLocations as $skeletonLocation) {
             $output->writeln('  - '.$skeletonLocation);
         }
-        // variables that will be available within skeleton file- and directory-names and within file-contents.
+
+        // substitution vars that will be available for skeleton file/directory names and within templates
         $data = [
             'timestamp' => date('YmdHis'),
             'crate' => [
@@ -124,11 +124,14 @@ class MakeCrate extends CrateCommand
                 'description' => $description
             ]
         ];
+
         // generate crate from skeleton and deploy the resulting code to the target path
         $skeletonGenerator = new SkeletonGenerator($this->configProvider, 'crate', $skeletonLocations, $path, $data);
         $skeletonGenerator->generate();
+
         // update the composer.json's autoload
         $this->addAutoloadConfig($fqns, $path.'/lib/');
+
         // update the crates.yml
         $crates = [];
         foreach ($this->configProvider->getCrateMap() as $crateToLoad) {
@@ -136,13 +139,7 @@ class MakeCrate extends CrateCommand
         }
         $crates[$fqns.'\\'.$name.'Crate']['settings'] = [];
         $this->updateCratesConfig($crates);
-        // have composer dump it's autoloading
-        $process = new Process('composer dumpautoload');
-        $process->run();
-        if (!$process->isSuccessful()) {
-            $output->writeln('<error>Failed to dump composer autoloads.</error>');
-        } else {
-            $output->writeln('<info>'.$process->getOutput().'</info>');
-        }
+
+        $this->dumpAutoload($output);
     }
 }

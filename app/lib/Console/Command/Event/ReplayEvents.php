@@ -13,7 +13,7 @@ class ReplayEvents extends EventCommand
     protected function configure()
     {
         $this
-            ->setName('hlx:event:replay')
+            ->setName('event:replay')
             ->setDescription('Replay aggregate root domain events on a channel.')
             ->addArgument(
                 'type',

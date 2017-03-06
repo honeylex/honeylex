@@ -12,7 +12,7 @@ class ListResources extends ResourceCommand
     protected function configure()
     {
         $this
-            ->setName('hlx:res:ls')
+            ->setName('resource:ls')
             ->setDescription('Lists all resources within a crate.')
             ->addArgument(
                 'crate',

@@ -11,7 +11,7 @@ class ListRoutes extends Command
     protected function configure()
     {
         $this
-            ->setName('hlx:route:ls')
+            ->setName('route:ls')
             ->setDescription('List registered routes.');
     }
 

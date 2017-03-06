@@ -12,7 +12,7 @@ class MigrateDown extends MigrateCommand
     protected function configure()
     {
         $this
-            ->setName('hlx:migrate:down')
+            ->setName('migrate:down')
             ->setDescription('Migrate down to a specified migration version.')
             ->addArgument(
                 'target',

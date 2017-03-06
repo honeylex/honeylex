@@ -3,7 +3,9 @@
 namespace Honeybee\FrameworkBinding\Silex\Console\Command\Crate;
 
 use Honeybee\FrameworkBinding\Silex\Console\Command\Command;
+use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Process\Process;
 use Symfony\Component\Yaml\Yaml;
 
 abstract class CrateCommand extends Command
@@ -52,6 +54,17 @@ abstract class CrateCommand extends Command
             $cratesFile,
             sprintf($this->getCratesConfigTemplate(), Yaml::dump($crates, 8, 2))
         );
+    }
+
+    protected function dumpAutoload(OutputInterface $output)
+    {
+        $process = new Process('composer dump-autoload');
+        $process->run();
+        if (!$process->isSuccessful()) {
+            $output->writeln('<error>Please run `composer dump-autoload` to finish crate setup.</error>');
+        } else {
+            $output->writeln('<info>'.$process->getOutput().'</info>');
+        }
     }
 
     protected function getCratesConfigTemplate()

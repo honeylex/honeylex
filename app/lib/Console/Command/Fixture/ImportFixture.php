@@ -12,7 +12,7 @@ class ImportFixture extends FixtureCommand
     protected function configure()
     {
         $this
-            ->setName('hlx:fixture:import')
+            ->setName('fixture:import')
             ->setDescription('Import fixtures from a target.')
             ->addArgument(
                 'target',

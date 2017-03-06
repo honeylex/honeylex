@@ -12,7 +12,7 @@ class ListTargets extends MigrateCommand
     protected function configure()
     {
         $this
-            ->setName('hlx:migrate:ls')
+            ->setName('migrate:ls')
             ->setDescription('Lists available migration targets.');
     }
 

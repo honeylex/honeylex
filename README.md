@@ -28,8 +28,8 @@ composer docker:up
 
 Now you can run commands to setup the project:
 ```shell
-composer console:run hlx:project:configure
-composer console:run hlx:migrate:up
+composer honeylex project:configure
+composer honeylex migrate:up
 ```
 **Once containers are running your project will be ready and provisioned!**
 >Run `docker-machine ip default` to find the IP (typically http://192.168.99.100)
@@ -52,7 +52,7 @@ composer docker:prune  # remove dangling volumes and stopped containers
 ##Console
 Honeylex comes with a number of convenient tools to help project setup and maintenance. A complete list of commands can be found by running:
 ```shell
-composer console:run  # alias of docker-compose run --rm php_cli ./bin/console
+composer honeylex  # alias of docker-compose run --rm php_cli ./vendor/bin/honeylex
 ```
 
 A useful set of commands are provided for managing the following system features:

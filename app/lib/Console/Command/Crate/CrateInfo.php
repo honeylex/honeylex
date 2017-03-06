@@ -12,7 +12,7 @@ class CrateInfo extends CrateCommand
     protected function configure()
     {
         $this
-            ->setName('hlx:crate:info')
+            ->setName('crate:info')
             ->setDescription('Displays details for a crate.')
             ->addArgument(
                 'crate',

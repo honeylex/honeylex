@@ -13,7 +13,7 @@ class RemoveResource extends ResourceCommand
     protected function configure()
     {
         $this
-            ->setName('hlx:res:rm')
+            ->setName('resource:rm')
             ->setDescription('Removes a specific resource from a crate.')
             ->addArgument(
                 'crate',

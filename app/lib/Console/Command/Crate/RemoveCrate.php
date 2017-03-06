@@ -7,14 +7,13 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ChoiceQuestion;
 use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\Process\Process;
 
 class RemoveCrate extends CrateCommand
 {
     protected function configure()
     {
         $this
-            ->setName('hlx:crate:rm')
+            ->setName('crate:rm')
             ->setDescription(
                 'Removes a crate from the project.'
             )
@@ -62,22 +61,18 @@ class RemoveCrate extends CrateCommand
             $this->configProvider->getCrateMap()->removeItem($crate);
             $this->removeAutoloadConfig($crate->getNamespace().'\\');
             $output->writeln('<info>Removed crate from composer autoload.</info>');
+
             $crates = [];
             foreach ($this->configProvider->getCrateMap() as $crateToLoad) {
                 $crates[get_class($crateToLoad)]['settings'] = $crateToLoad->getSettings()->toArray();
             }
+
             $this->updateCratesConfig($crates);
             $output->writeln('<info>Removed crate from crates.yml config.</info>');
-            // have composer dump it's autoloading
-            $process = new Process('composer dumpautoload');
-            $process->run();
-            if (!$process->isSuccessful()) {
-                $output->writeln('<error>Failed to dump composer autoloads.</error>');
-            } else {
-                $output->writeln('<info>'.$process->getOutput().'</info>');
-            }
+
+            $this->dumpAutoload($output);
         } else {
-            $output->writeln('<error>not allowed to remove crate</error>');
+            $output->writeln('<error>Not allowed to remove crate.</error>');
         }
     }
 

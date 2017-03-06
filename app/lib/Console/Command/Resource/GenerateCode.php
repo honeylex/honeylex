@@ -13,7 +13,7 @@ class GenerateCode extends ResourceCommand
     protected function configure()
     {
         $this
-            ->setName('hlx:res:code')
+            ->setName('resource:gen')
             ->setDescription('Scaffold entities from a resource schema within a crate.')
             ->addArgument(
                 'crate',

@@ -31,7 +31,7 @@ class ResourceInfo extends ResourceCommand
     protected function configure()
     {
         $this
-            ->setName('hlx:res:info')
+            ->setName('resource:info')
             ->setDescription('Displays details about a resource within a crate.')
             ->addArgument(
                 'crate',
