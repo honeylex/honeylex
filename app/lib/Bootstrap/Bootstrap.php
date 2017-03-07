@@ -23,6 +23,7 @@ use Silex\Provider\MonologServiceProvider;
 use Silex\Provider\SessionServiceProvider;
 use Silex\Provider\ValidatorServiceProvider;
 use Symfony\Component\Finder\Finder;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Yaml\Parser;
 
 class Bootstrap
@@ -161,8 +162,14 @@ class Bootstrap
         // sessions are started explicitly when required
         $app->register(new SessionServiceProvider);
 
-        $app->before(function ($request) {
+        $app->before(function (Request $request) {
             $request->getSession()->start();
         });
+    }
+
+    protected function registerTrustedProxies(Application $app, array $trustedProxies)
+    {
+        Request::setTrustedHeaderName(Request::HEADER_FORWARDED, null);
+        Request::setTrustedProxies($trustedProxies);
     }
 }

@@ -8,6 +8,9 @@ project:
     prefix: honeylex
   database:
     prefix: honeylex
+  framework:
+    trusted_proxies:
+      - 0.0.0.0/0
   email:
     from_email: honeylex@honeylex.dev
     from_name: Honeylex

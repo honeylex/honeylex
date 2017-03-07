@@ -14,6 +14,8 @@ class ApiBootstrap extends Bootstrap
     {
         parent::__invoke($app, $settings);
 
+        $this->registerTrustedProxies($app, (array)$this->config->getSetting('project.framework.trusted_proxies'));
+
         $this->registerErrorHandler($app, $this->injector);
         $this->registerViewHandler($app, $this->injector);
 

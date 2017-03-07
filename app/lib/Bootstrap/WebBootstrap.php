@@ -20,6 +20,8 @@ class WebBootstrap extends Bootstrap
 
         parent::__invoke($app, $settings);
 
+        $this->registerTrustedProxies($app, (array)$this->config->getSetting('project.framework.trusted_proxies'));
+
         if ($this->config->getSetting('project.session.auto_start', true)) {
             $this->bootstrapSession($app);
         }

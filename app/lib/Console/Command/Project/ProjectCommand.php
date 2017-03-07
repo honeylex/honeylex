@@ -29,7 +29,7 @@ abstract class ProjectCommand extends Command
         $output->writeln('');
         $output->writeln('    Then you can generate resources with:');
         $output->writeln('');
-        $output->writeln('    composer honeylex res:mk vendor.package <Resource>');
+        $output->writeln('    composer honeylex resource:mk vendor.package <Resource>');
         $output->writeln('');
         $output->writeln('    Run the following command to review your pending migrations:');
         $output->writeln('');
