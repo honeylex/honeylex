@@ -4,11 +4,11 @@
 swiftmailer:
   transport: \Swift_NullTransport
   options:
-    host: ${mail.host}
-    port: ${mail.port}
-    username: ${mail.username}
-    password: ${mail.password}
-    encryption: ${mail.encryption}
+    host: ${swiftmailer.host}
+    port: ${swiftmailer.port}
+    username: ${swiftmailer.username}
+    password: ${swiftmailer.password}
+    encryption: ${swiftmailer.encryption}
   use_spool: false
 
 default_mailer:

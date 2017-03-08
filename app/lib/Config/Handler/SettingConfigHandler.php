@@ -62,6 +62,7 @@ class SettingConfigHandler extends YamlConfigHandler
             foreach (array_unique($localConfigFiles) as $configFile) {
                 if (is_readable($configFile)) {
                     $settings = array_replace_recursive(
+                        $settings,
                         $this->handleFileBasedLocalConfig($configFile, $localConfig['type'])
                     );
                 }

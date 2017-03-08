@@ -11,10 +11,10 @@ local_configs:
     type: json
     load: from_file
   elasticsearch:
+    load: from_file
     name: elasticsearch.json
     type: json
-    load: from_file
-  mail:
-    name: mail.json
+  swiftmailer:
+    name: swiftmailer.json
     type: json
     load: from_file

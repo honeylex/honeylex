@@ -4,9 +4,9 @@
 {{ crate.prefix }}.event_source:
   class: Honeybee\Infrastructure\DataAccess\Connector\GuzzleConnector
   settings:
-#    auth:
-#      username: ${couchdb.user}
-#      password: ${couchdb.password}
+    auth:
+      username: ${couchdb.user}
+      password: ${couchdb.password}
     host: ${couchdb.host}
     port: ${couchdb.port}
     transport: ${couchdb.transport}

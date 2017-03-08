@@ -1,4 +1,13 @@
-version: '3'
+version: "3.1"
+secrets:
+  couchdb.json:
+    file: ../secrets/default/couchdb.json
+  elasticsearch.json:
+    file: ../secrets/default/elasticsearch.json
+  rabbitmq.json:
+    file: ../secrets/default/rabbitmq.json
+  swiftmailer.json:
+    file: ../secrets/default/swiftmailer.json
 services:
   proxy:
     image: blacklabelops/nginx:latest
@@ -32,6 +41,11 @@ services:
       - couchdb:couchdb
       - elasticsearch:elasticsearch
       - rabbitmq:rabbitmq
+    secrets:
+      - couchdb.json
+      - elasticsearch.json
+      - rabbitmq.json
+      - swiftmailer.json
     environment:
       - APP_ENV
       - APP_DEBUG
@@ -51,6 +65,11 @@ services:
       - couchdb:couchdb
       - elasticsearch:elasticsearch
       - rabbitmq:rabbitmq
+    secrets:
+      - couchdb.json
+      - elasticsearch.json
+      - rabbitmq.json
+      - swiftmailer.json
     environment:
       - APP_ENV
       - APP_DEBUG
