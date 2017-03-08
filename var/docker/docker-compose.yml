@@ -49,7 +49,6 @@ services:
     environment:
       - APP_ENV
       - APP_DEBUG
-      - HOST_PREFIX
       - HOST_SCHEME
       - HOST_NAME
       - LOCAL_CONFIG_DIR
@@ -73,7 +72,6 @@ services:
     environment:
       - APP_ENV
       - APP_DEBUG
-      - HOST_PREFIX
       - LOCAL_CONFIG_DIR
       - PHP_INI_SCAN_DIR=var/docker/php/fpm/conf/conf.d
 
