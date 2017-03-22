@@ -5,7 +5,7 @@ Project template for building rapidly scalable applications based on the integra
 [![Code Climate](https://codeclimate.com/github/honeylex/honeylex/badges/gpa.svg)](https://codeclimate.com/github/honeylex/honeylex)
 [![Dependency Status](https://www.versioneye.com/user/projects/579b94f7aa78d500469f9701/badge.svg?style=flat)](https://www.versioneye.com/user/projects/579b94f7aa78d500469f9701)
 
-####Alternative Honeybee Integrations
+#### Alternative Honeybee Integrations
  - [Honeylex-CMF](https://github.com/honeylex/honeylex-cmf) (Honeylex + CMS tooling)
  - [Honeyquip](https://github.com/honeyquip/honeyquip) (Honeybee + [Equip](https://github.com/equip/framework))
  - [Honeygavi](https://github.com/honeybee/honeybee-agavi-cmf-project) (Honeybee + [Agavi](https://github.com/agavi/agavi))
@@ -49,7 +49,7 @@ composer docker:stop   # stop/suspend running containers
 composer docker:prune  # remove dangling volumes and stopped containers
 ```
 
-##Console
+## Console
 Honeylex comes with a number of convenient tools to help project setup and maintenance. A complete list of commands can be found by running:
 ```shell
 composer honeylex  # alias of docker-compose run --rm php_cli ./bin/honeylex
