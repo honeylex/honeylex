@@ -21,10 +21,8 @@
 
 namespace {{ crate.namespace }}\{{ resource.name }}\Model\Aggregate\Base;
 
-use Trellis\Common\Options;
-use Workflux\StateMachine\StateMachineInterface;
-use {{ crate.namespace }}\{{ resource.name }}\Model\Aggregate\Base;
 use Honeybee\Model\Aggregate\AggregateRootType;
+use Trellis\Common\Options;
 
 /**
  * Serves as the base class to the '{{ resource.name }}' type skeleton.
@@ -32,19 +30,10 @@ use Honeybee\Model\Aggregate\AggregateRootType;
 abstract class {{ resource.name }}Type extends AggregateRootType
 {
     /**
-     * StateMachineInterface $workflow_state_machine
-     */
-    protected $workflow_state_machine;
-
-    /**
      * Creates a new '{{ resource.name }}Type' instance.
-     *
-     * @param StateMachineInterface $workflow_state_machine
      */
-    public function __construct(StateMachineInterface $workflow_state_machine)
+    public function __construct()
     {
-        $this->workflow_state_machine = $workflow_state_machine;
-
         parent::__construct(
             '{{ resource.name }}',
             [],
@@ -54,16 +43,6 @@ abstract class {{ resource.name }}Type extends AggregateRootType
                 'is_hierarchical' => false,
             ])
         );
-    }
-
-    /**
-     * Returns an (immutable) state-machine instance responseable for controlling an entity's workflow.
-     *
-     * @return StateMachineInterface
-     */
-    public function getWorkflowStateMachine()
-    {
-        return $this->workflow_state_machine;
     }
 
     /**
