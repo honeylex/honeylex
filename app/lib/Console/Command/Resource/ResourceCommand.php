@@ -12,10 +12,8 @@ use Trellis\CodeGen\Parser\Schema\EntityTypeSchemaXmlParser;
 
 abstract class ResourceCommand extends Command
 {
-    public function __construct(
-        ConfigProviderInterface $configProvider,
-        Finder $fileFinder
-    ) {
+    public function __construct(ConfigProviderInterface $configProvider, Finder $fileFinder)
+    {
         parent::__construct($configProvider);
 
         $this->fileFinder = $fileFinder;
@@ -42,5 +40,24 @@ abstract class ResourceCommand extends Command
         }
         $question = new ChoiceQuestion('Please select a resource: ', $resource_names);
         return $helper->ask($input, $output, $question);
+    }
+
+    protected function getSkeletonLocations($locations)
+    {
+        if (!is_array($locations)) {
+            $skeletonLocations = [];
+            $projectSkeletonDir = $this->configProvider->getProjectDir().'/var/skeletons';
+            if (is_readable($projectSkeletonDir)) {
+                $skeletonLocations[] = $projectSkeletonDir;
+            }
+            $coreSkeletonDir = $this->configProvider->getCoreDir().'/var/skeletons';
+            if (is_readable($coreSkeletonDir)) {
+                $skeletonLocations[] = $coreSkeletonDir;
+            }
+        } else {
+            $skeletonLocations = $locations;
+        }
+
+        return array_unique($skeletonLocations);
     }
 }

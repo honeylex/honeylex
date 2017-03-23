@@ -1,0 +1,21 @@
+<?php
+
+namespace {{ crate.vendor }}\{{ crate.name }}\{{ resource.name }}\Model\Task\{{ command.name }};
+
+use {{ crate.vendor }}\{{ crate.name }}\{{ resource.name }}\Model\Aggregate\{{ resource.name }}Type;
+use Honeybee\Infrastructure\DataAccess\DataAccessServiceInterface;
+use Honeybee\Infrastructure\Event\Bus\EventBusInterface;
+use {{ parent.namespace }}\{{ parent.name }}CommandHandler;
+use Psr\Log\LoggerInterface;
+
+class {{ command.name }}CommandHandler extends {{ parent.name }}CommandHandler
+{
+    public function __construct(
+        {{ resource.name }}Type ${{ resource.name|camel }}Type,
+        DataAccessServiceInterface $dataAccessService,
+        EventBusInterface $eventBus,
+        LoggerInterface $logger
+    ) {
+        parent::__construct(${{ resource.name|camel }}Type, $dataAccessService, $eventBus, $logger);
+    }
+}

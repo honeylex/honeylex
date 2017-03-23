@@ -1,0 +1,13 @@
+<?php
+
+namespace {{ crate.vendor }}\{{ crate.name }}\{{ resource.name }}\Model\Task\{{ command.name }};
+
+use {{ parent.namespace }}\{{ parent.name }}Command;
+
+class {{ command.name }}Command extends {{ parent.name }}Command
+{
+    public function getEventClass()
+    {
+        return {{ event.name }}Event::CLASS;
+    }
+}

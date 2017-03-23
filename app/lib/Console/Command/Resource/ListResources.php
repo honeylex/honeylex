@@ -17,7 +17,7 @@ class ListResources extends ResourceCommand
             ->addArgument(
                 'crate',
                 InputArgument::OPTIONAL,
-                'The prefix of the crate to remove the resource from.'
+                'The prefix of the crate to list resources from.'
             );
     }
 

@@ -61,7 +61,7 @@ abstract class CrateCommand extends Command
         $process = new Process('composer dump-autoload');
         $process->run();
         if (!$process->isSuccessful()) {
-            $output->writeln('<error>Please run `composer dump-autoload` to finish crate setup.</error>');
+            $output->writeln('<error>Now run `composer dump-autoload` to finish crate setup.</error>');
         } else {
             $output->writeln('<info>'.$process->getOutput().'</info>');
         }

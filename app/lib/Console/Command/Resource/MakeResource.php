@@ -37,7 +37,7 @@ class MakeResource extends ResourceCommand
                 'location',
                 null,
                 InputOption::VALUE_IS_ARRAY | InputOption::VALUE_REQUIRED,
-                'Optional override of the locations that will be searched for (resource)skeletons.'
+                'Optional override of the locations that will be searched for skeletons.'
             );
     }
 
@@ -73,22 +73,7 @@ class MakeResource extends ResourceCommand
         $resourcePrefix = $cratePrefix.'.'.StringToolkit::asSnakeCase($resourceName);
         $crateDir = $crate->getRootDir();
         $description = $input->getOption('description');
-        $locations = $input->getOption('location') ?: null;
-
-        if (!is_array($locations)) {
-            $skeletonLocations = [];
-            $projectSkeletonDir = $this->configProvider->getProjectDir().'/var/skeletons';
-            if (is_readable($projectSkeletonDir)) {
-                $skeletonLocations[] = $projectSkeletonDir;
-            }
-            $coreSkeletonDir = $this->configProvider->getCoreDir().'/var/skeletons';
-            if (is_readable($coreSkeletonDir)) {
-                $skeletonLocations[] = $coreSkeletonDir;
-            }
-        } else {
-            $skeletonLocations = $locations;
-        }
-        $skeletonLocations = array_unique($skeletonLocations);
+        $skeletonLocations = $this->getSkeletonLocations($input->getOption('location') ?: null);
 
         $output->writeln('Target crate: '.$crate->getVendor().'/'.$crate->getName());
         $output->writeln('Resource prefix: '.$resourcePrefix);
