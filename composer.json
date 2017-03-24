@@ -11,7 +11,7 @@
         "event sourcing"
     ],
     "license": "MIT",
-    "type": "library",
+    "type": "project",
     "repositories": [
         {
             "type": "vcs",
