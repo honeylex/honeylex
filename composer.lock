@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "a9ed2861481dda64f0052a1052b3f95c",
+    "content-hash": "cda0eee2c0de43b4865a43e68dcefa3a",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -1141,13 +1141,13 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/php-amqplib/php-amqplib.git",
-                "reference": "2cf97f13acda9ed1a7c84db7ce2d437e294cd87c"
+                "url": "https://github.com/FriendsOfHoneybee/php-amqplib.git",
+                "reference": "06dbba0632594b9dc29d149d3ea39177d064da57"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-amqplib/php-amqplib/zipball/2cf97f13acda9ed1a7c84db7ce2d437e294cd87c",
-                "reference": "2cf97f13acda9ed1a7c84db7ce2d437e294cd87c",
+                "url": "https://api.github.com/repos/FriendsOfHoneybee/php-amqplib/zipball/06dbba0632594b9dc29d149d3ea39177d064da57",
+                "reference": "06dbba0632594b9dc29d149d3ea39177d064da57",
                 "shasum": ""
             },
             "require": {
@@ -1177,7 +1177,12 @@
                     "PhpAmqpLib\\": "PhpAmqpLib/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "PhpAmqpLib\\Tests\\Functional\\": "tests/Functional",
+                    "PhpAmqpLib\\Tests\\Unit\\": "tests/Unit"
+                }
+            },
             "license": [
                 "LGPL-2.1"
             ],
@@ -1204,7 +1209,10 @@
                 "queue",
                 "rabbitmq"
             ],
-            "time": "2017-02-19 17:20:09"
+            "support": {
+                "source": "https://github.com/FriendsOfHoneybee/php-amqplib/tree/master"
+            },
+            "time": "2017-03-10 15:51:44"
         },
         {
             "name": "pimple/pimple",
