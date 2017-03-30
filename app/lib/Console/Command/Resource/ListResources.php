@@ -33,10 +33,9 @@ class ListResources extends ResourceCommand
 
         foreach ($crates as $cratePrefix) {
             $crate = $this->configProvider->getCrateMap()->getItem($cratePrefix);
-            $finder = clone $this->fileFinder;
-            $foundSchemas = $finder->in($crate->getRootDir())->name('aggregate_root.xml');
+            $foundSchemas = $this->fileFinder->create()->in($crate->getRootDir())->name('aggregate_root.xml');
             $output->writeln($crate->getVendor().'/'.$crate->getName());
-            foreach (iterator_to_array($foundSchemas, true) as $fileInfo) {
+            foreach ($foundSchemas as $fileInfo) {
                 $entitySchema = (new EntityTypeSchemaXmlParser)->parse($fileInfo->getPathname());
                 $typeDefinition = $entitySchema->getEntityTypeDefinition();
                 $output->writeln('- Name: ' . $typeDefinition->getName());

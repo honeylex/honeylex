@@ -30,10 +30,9 @@ abstract class ResourceCommand extends Command
     {
         $helper = $this->getHelper('question');
         $crate = $this->configProvider->getCrateMap()->getItem($cratePrefix);
-        $finder = clone $this->fileFinder;
-        $foundSchemas = $finder->in($crate->getRootDir())->name('aggregate_root.xml');
+        $foundSchemas = $this->fileFinder->create()->in($crate->getRootDir())->name('aggregate_root.xml');
         $resource_names = [];
-        foreach (iterator_to_array($foundSchemas, true) as $fileInfo) {
+        foreach ($foundSchemas as $fileInfo) {
             $entitySchema = (new EntityTypeSchemaXmlParser)->parse($fileInfo->getPathname());
             $typeDefinition = $entitySchema->getEntityTypeDefinition();
             $resource_names[] = $typeDefinition->getName();

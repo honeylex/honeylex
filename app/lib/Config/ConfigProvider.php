@@ -158,10 +158,9 @@ class ConfigProvider implements ConfigProviderInterface
 
         foreach ($this->crateMap as $prefix => $crate) {
             // find crate configs
-            $finder = clone $this->fileFinder;
             $wildcard_name = substr_replace($name, '*.', strrpos($name, '.'), 1);
-            $foundConfigs = $finder->in($crate->getConfigDir())->name($wildcard_name); //@todo sort
-            foreach (iterator_to_array($foundConfigs, true) as $fileInfo) {
+            $foundConfigs = $this->fileFinder->create()->in($crate->getConfigDir())->name($wildcard_name); //@todo sort
+            foreach ($foundConfigs as $fileInfo) {
                 $handlerConfigsFiles[] = $fileInfo->getPathname();
             }
         }

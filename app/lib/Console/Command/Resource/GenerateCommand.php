@@ -88,15 +88,15 @@ class GenerateCommand extends ResourceCommand
         }
 
         $crate = $this->configProvider->getCrateMap()->getItem($cratePrefix);
-        $finder = clone $this->fileFinder;
         $parentPath = $this->configProvider->getProjectDir().'/vendor/honeybee/honeybee/src/Model/Task';
-        $foundParents = $finder->directories()->in($parentPath)->depth(0);
-        foreach (iterator_to_array($foundParents, true) as $fileInfo) {
+        $foundParents = $this->fileFinder->create()->directories()->in($parentPath)->depth(0);
+        foreach ($foundParents as $fileInfo) {
             $parentCommands[] = $fileInfo->getFilename();
         }
         $question = new ChoiceQuestion('Please select a parent type: ', $parentCommands);
         $selectedParent = $helper->ask($input, $output, $question);
-        $events = $finder->files()->name('*Event.php')->in($parentPath.'/'.$selectedParent)->depth(0);
+        $selectedParentPath = $parentPath.'/'.$selectedParent;
+        $events = $this->fileFinder->create()->files()->name('*Event.php')->in($selectedParentPath)->depth(0);
         $eventParent = pathinfo(current(iterator_to_array($events, true)), PATHINFO_FILENAME);
         $skeletonLocations = $this->getSkeletonLocations($input->getOption('location') ?: null);
 
