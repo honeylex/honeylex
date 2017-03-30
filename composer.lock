@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "cda0eee2c0de43b4865a43e68dcefa3a",
+    "content-hash": "6e1706e3321a8ec5a26c12f653e7fa26",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -656,16 +656,16 @@
         },
         {
             "name": "honeybee/honeybee",
-            "version": "dev-master",
+            "version": "dev-feature/ui_split",
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeybee/honeybee.git",
-                "reference": "a9c6064ddc9d0074998b5def5d8e0d348594333b"
+                "reference": "1611d1b1202517a99d68b4e688e374930273a9ca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/a9c6064ddc9d0074998b5def5d8e0d348594333b",
-                "reference": "a9c6064ddc9d0074998b5def5d8e0d348594333b",
+                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/1611d1b1202517a99d68b4e688e374930273a9ca",
+                "reference": "1611d1b1202517a99d68b4e688e374930273a9ca",
                 "shasum": ""
             },
             "require": {
@@ -676,6 +676,7 @@
                 "league/flysystem": "^1.0",
                 "mtdowling/jmespath.php": "^2.0",
                 "php": ">=5.6.0",
+                "psr/container": "~1.0",
                 "psr/log": "~1.0",
                 "ql/uri-template": "^1.0",
                 "rdlowrey/auryn": "~1.4",
@@ -747,20 +748,20 @@
                 "hexagonal",
                 "messaging"
             ],
-            "time": "2017-03-21 16:31:17"
+            "time": "2017-03-30 22:33:11"
         },
         {
             "name": "honeybee/trellis",
-            "version": "0.1.0",
+            "version": "0.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeybee/trellis.git",
-                "reference": "5d0b053fdd8a73d2f6551543584e50c2f6101c82"
+                "reference": "184c6f053e2455707bb572385a9d8ecb6be2b655"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeybee/trellis/zipball/5d0b053fdd8a73d2f6551543584e50c2f6101c82",
-                "reference": "5d0b053fdd8a73d2f6551543584e50c2f6101c82",
+                "url": "https://api.github.com/repos/honeybee/trellis/zipball/184c6f053e2455707bb572385a9d8ecb6be2b655",
+                "reference": "184c6f053e2455707bb572385a9d8ecb6be2b655",
                 "shasum": ""
             },
             "require": {
@@ -817,7 +818,7 @@
                 "entity",
                 "validation"
             ],
-            "time": "2016-10-26T10:59:34+00:00"
+            "time": "2017-03-28T11:05:20+00:00"
         },
         {
             "name": "league/flysystem",
@@ -1261,6 +1262,55 @@
             "time": "2015-09-11T15:10:35+00:00"
         },
         {
+            "name": "psr/container",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/container.git",
+                "reference": "b7ce3b176482dbbc1245ebf52b181af44c2cf55f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/container/zipball/b7ce3b176482dbbc1245ebf52b181af44c2cf55f",
+                "reference": "b7ce3b176482dbbc1245ebf52b181af44c2cf55f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Psr\\Container\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "http://www.php-fig.org/"
+                }
+            ],
+            "description": "Common Container Interface (PHP FIG PSR-11)",
+            "homepage": "https://github.com/php-fig/container",
+            "keywords": [
+                "PSR-11",
+                "container",
+                "container-interface",
+                "container-interop",
+                "psr"
+            ],
+            "time": "2017-02-14T16:28:37+00:00"
+        },
+        {
             "name": "psr/http-message",
             "version": "1.0.1",
             "source": {
@@ -1410,16 +1460,16 @@
         },
         {
             "name": "ramsey/uuid",
-            "version": "3.6.0",
+            "version": "3.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ramsey/uuid.git",
-                "reference": "0b7bdfb180e72c8d76e75a649ced67e392201458"
+                "reference": "4ae32dd9ab8860a4bbd750ad269cba7f06f7934e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ramsey/uuid/zipball/0b7bdfb180e72c8d76e75a649ced67e392201458",
-                "reference": "0b7bdfb180e72c8d76e75a649ced67e392201458",
+                "url": "https://api.github.com/repos/ramsey/uuid/zipball/4ae32dd9ab8860a4bbd750ad269cba7f06f7934e",
+                "reference": "4ae32dd9ab8860a4bbd750ad269cba7f06f7934e",
                 "shasum": ""
             },
             "require": {
@@ -1431,9 +1481,9 @@
             },
             "require-dev": {
                 "apigen/apigen": "^4.1",
-                "codeception/aspect-mock": "1.0.0",
+                "codeception/aspect-mock": "^1.0 | ^2.0",
                 "doctrine/annotations": "~1.2.0",
-                "goaop/framework": "1.0.0-alpha.2",
+                "goaop/framework": "1.0.0-alpha.2 | ^1.0 | ^2.1",
                 "ircmaxell/random-lib": "^1.1",
                 "jakub-onderka/php-parallel-lint": "^0.9.0",
                 "mockery/mockery": "^0.9.4",
@@ -1488,7 +1538,7 @@
                 "identifier",
                 "uuid"
             ],
-            "time": "2017-03-18T15:38:09+00:00"
+            "time": "2017-03-26T20:37:53+00:00"
         },
         {
             "name": "rdlowrey/auryn",
@@ -1553,20 +1603,23 @@
         },
         {
             "name": "react/promise",
-            "version": "v2.5.0",
+            "version": "v2.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/reactphp/promise.git",
-                "reference": "2760f3898b7e931aa71153852dcd48a75c9b95db"
+                "reference": "62785ae604c8d69725d693eb370e1d67e94c4053"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/reactphp/promise/zipball/2760f3898b7e931aa71153852dcd48a75c9b95db",
-                "reference": "2760f3898b7e931aa71153852dcd48a75c9b95db",
+                "url": "https://api.github.com/repos/reactphp/promise/zipball/62785ae604c8d69725d693eb370e1d67e94c4053",
+                "reference": "62785ae604c8d69725d693eb370e1d67e94c4053",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.8"
             },
             "type": "library",
             "autoload": {
@@ -1592,7 +1645,7 @@
                 "promise",
                 "promises"
             ],
-            "time": "2016-12-22T14:09:01+00:00"
+            "time": "2017-03-25T12:08:31+00:00"
         },
         {
             "name": "roave/security-advisories",

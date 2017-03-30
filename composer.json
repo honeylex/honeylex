@@ -40,7 +40,7 @@
         "beberlei/assert": "~2.5",
         "nesbot/carbon": "~1.21",
         "willdurand/negotiation": "~2.0",
-        "honeybee/honeybee": "master@dev",
+        "honeybee/honeybee": "dev-feature/ui_split",
         "php-amqplib/php-amqplib": "master@dev",
         "roave/security-advisories": "master@dev"
     },
