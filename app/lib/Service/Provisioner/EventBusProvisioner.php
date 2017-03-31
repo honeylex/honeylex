@@ -1,10 +1,9 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Silex\Service\Provisioner;
+namespace Honeylex\Service\Provisioner;
 
 use Auryn\Injector;
 use Honeybee\Common\Error\ConfigError;
-use Honeybee\FrameworkBinding\Silex\Config\ConfigProviderInterface;
 use Honeybee\Infrastructure\Config\ArrayConfig;
 use Honeybee\Infrastructure\Config\Settings;
 use Honeybee\Infrastructure\Config\SettingsInterface;
@@ -16,6 +15,7 @@ use Honeybee\Infrastructure\Event\Bus\Subscription\EventFilterList;
 use Honeybee\Infrastructure\Event\Bus\Subscription\LazyEventSubscription;
 use Honeybee\Infrastructure\Event\EventHandlerList;
 use Honeybee\ServiceDefinitionInterface;
+use Honeylex\Config\ConfigProviderInterface;
 use Pimple\Container;
 
 class EventBusProvisioner implements ProvisionerInterface

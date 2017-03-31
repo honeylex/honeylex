@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Silex\Crate;
+namespace Honeylex\Crate;
 
 use Trellis\Common\Collection\MandatoryKeyInterface;
 use Trellis\Common\Collection\TypedMap;

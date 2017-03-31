@@ -1,8 +1,8 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Silex\Console\Command\Crate;
+namespace Honeylex\Console\Command\Crate;
 
-use Honeybee\FrameworkBinding\Silex\Crate\CrateInterface;
+use Honeylex\Crate\CrateInterface;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 

@@ -1,11 +1,10 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Silex\Service\Provisioner;
+namespace Honeylex\Service\Provisioner;
 
 use Auryn\Injector;
 use Pimple\Container;
 use Honeybee\Common\Error\RuntimeError;
-use Honeybee\FrameworkBinding\Silex\Config\ConfigProviderInterface;
 use Honeybee\Infrastructure\Config\ArrayConfig;
 use Honeybee\Infrastructure\Config\SettingsInterface;
 use Honeybee\Infrastructure\Fixture\FixtureServiceInterface;
@@ -13,6 +12,7 @@ use Honeybee\Infrastructure\Fixture\FixtureTarget;
 use Honeybee\Infrastructure\Fixture\FixtureTargetMap;
 use Honeybee\ServiceDefinitionInterface;
 use Honeybee\Model\Aggregate\AggregateRootTypeMap;
+use Honeylex\Config\ConfigProviderInterface;
 
 class FixtureServiceProvisioner implements ProvisionerInterface
 {

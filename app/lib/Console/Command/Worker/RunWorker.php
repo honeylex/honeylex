@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Silex\Console\Command\Worker;
+namespace Honeylex\Console\Command\Worker;
 
 use Honeybee\Infrastructure\Config\ArrayConfig;
 use Honeybee\Infrastructure\Job\Worker\Worker;

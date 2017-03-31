@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Silex\Config\Handler;
+namespace Honeylex\Config\Handler;
 
 class TranslationConfigHandler extends ArrayConfigHandler
 {

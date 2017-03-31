@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Silex\Mail;
+namespace Honeylex\Mail;
 
 /**
  * Interface that represents a simplified mailer.

@@ -1,11 +1,11 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Silex\Console\Command\Migrate;
+namespace Honeylex\Console\Command\Migrate;
 
-use Honeybee\FrameworkBinding\Silex\Console\Command\Command;
 use Honeybee\Infrastructure\Migration\MigrationServiceInterface;
+use Honeylex\Config\ConfigProviderInterface;
+use Honeylex\Console\Command\Command;
 use Symfony\Component\Console\Output\OutputInterface;
-use Honeybee\FrameworkBinding\Silex\Config\ConfigProviderInterface;
 
 abstract class MigrateCommand extends Command
 {

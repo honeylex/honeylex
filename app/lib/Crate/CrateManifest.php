@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Silex\Crate;
+namespace Honeylex\Crate;
 
 use Honeybee\Common\Util\StringToolkit;
 use Honeybee\Infrastructure\Config\Settings;

@@ -1,13 +1,13 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Silex\Service\Provisioner;
+namespace Honeylex\Service\Provisioner;
 
 use Auryn\Injector;
-use Honeybee\FrameworkBinding\Silex\Config\ConfigProviderInterface;
 use Honeybee\Infrastructure\Command\Bus\CommandBusInterface;
 use Honeybee\Infrastructure\Command\Bus\Subscription\LazyCommandSubscription;
 use Honeybee\Infrastructure\Config\SettingsInterface;
 use Honeybee\ServiceDefinitionInterface;
+use Honeylex\Config\ConfigProviderInterface;
 use Pimple\Container;
 
 class CommandBusProvisioner implements ProvisionerInterface

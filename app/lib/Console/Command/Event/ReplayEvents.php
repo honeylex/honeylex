@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Silex\Console\Command\Event;
+namespace Honeylex\Console\Command\Event;
 
 use Honeybee\Model\Aggregate\AggregateRootTypeInterface;
 use Symfony\Component\Console\Input\InputArgument;

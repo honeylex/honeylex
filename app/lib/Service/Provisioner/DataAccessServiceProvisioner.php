@@ -1,10 +1,9 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Silex\Service\Provisioner;
+namespace Honeylex\Service\Provisioner;
 
 use Auryn\Injector;
 use Honeybee\Common\Error\RuntimeError;
-use Honeybee\FrameworkBinding\Silex\Config\ConfigProviderInterface;
 use Honeybee\Infrastructure\Config\ArrayConfig;
 use Honeybee\Infrastructure\Config\SettingsInterface;
 use Honeybee\Infrastructure\DataAccess\Connector\ConnectorServiceInterface;
@@ -16,6 +15,7 @@ use Honeybee\Infrastructure\DataAccess\Storage\StorageReaderMap;
 use Honeybee\Infrastructure\DataAccess\Storage\StorageWriterMap;
 use Honeybee\Infrastructure\DataAccess\UnitOfWork\UnitOfWorkMap;
 use Honeybee\ServiceDefinitionInterface;
+use Honeylex\Config\ConfigProviderInterface;
 use Pimple\Container;
 
 class DataAccessServiceProvisioner implements ProvisionerInterface

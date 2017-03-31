@@ -1,12 +1,12 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Silex\Console\Command\Event;
+namespace Honeylex\Console\Command\Event;
 
-use Honeybee\FrameworkBinding\Silex\Config\ConfigProviderInterface;
-use Honeybee\FrameworkBinding\Silex\Console\Command\Command;
 use Honeybee\Infrastructure\DataAccess\DataAccessServiceInterface;
 use Honeybee\Infrastructure\Event\Bus\EventBusInterface;
 use Honeybee\Model\Aggregate\AggregateRootTypeMap;
+use Honeylex\Config\ConfigProviderInterface;
+use Honeylex\Console\Command\Command;
 
 abstract class EventCommand extends Command
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Silex\Console\Scaffold;
+namespace Honeylex\Console\Scaffold;
 
-use Honeybee\FrameworkBinding\Silex\Config\ConfigProviderInterface;
-use Honeybee\FrameworkBinding\Silex\Renderer\Twig\ProjectExtension;
 use Honeybee\Infrastructure\Template\Twig\TwigRenderer;
+use Honeylex\Config\ConfigProviderInterface;
+use Honeylex\Renderer\Twig\ProjectExtension;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Silex\Renderer\Twig\Extension;
+namespace Honeylex\Renderer\Twig\Extension;
 
 use Honeybee\Common\Util\StringToolkit;
-use Honeybee\FrameworkBinding\Silex\Config\ConfigProviderInterface;
+use Honeylex\Config\ConfigProviderInterface;
 use Twig_Extension;
 use Twig_SimpleFilter;
 use Twig_SimpleFunction;

@@ -1,27 +1,27 @@
 #!/usr/bin/env php
 <?php
 
-use Honeybee\FrameworkBinding\Silex\Console\App;
-use Honeybee\FrameworkBinding\Silex\Console\Command\Config\ListConfig;
-use Honeybee\FrameworkBinding\Silex\Console\Command\Crate\CrateInfo;
-use Honeybee\FrameworkBinding\Silex\Console\Command\Crate\ListCrates;
-use Honeybee\FrameworkBinding\Silex\Console\Command\Crate\MakeCrate;
-use Honeybee\FrameworkBinding\Silex\Console\Command\Crate\RemoveCrate;
-use Honeybee\FrameworkBinding\Silex\Console\Command\Event\ReplayEvents;
-use Honeybee\FrameworkBinding\Silex\Console\Command\Fixture\ImportFixture;
-use Honeybee\FrameworkBinding\Silex\Console\Command\Migrate\ListTargets;
-use Honeybee\FrameworkBinding\Silex\Console\Command\Migrate\MigrateDown;
-use Honeybee\FrameworkBinding\Silex\Console\Command\Migrate\MigrateUp;
-use Honeybee\FrameworkBinding\Silex\Console\Command\Migrate\TargetInfo;
-use Honeybee\FrameworkBinding\Silex\Console\Command\Project\ConfigureProject;
-use Honeybee\FrameworkBinding\Silex\Console\Command\Resource\GenerateCode;
-use Honeybee\FrameworkBinding\Silex\Console\Command\Resource\GenerateCommand;
-use Honeybee\FrameworkBinding\Silex\Console\Command\Resource\ListResources;
-use Honeybee\FrameworkBinding\Silex\Console\Command\Resource\MakeResource;
-use Honeybee\FrameworkBinding\Silex\Console\Command\Resource\RemoveResource;
-use Honeybee\FrameworkBinding\Silex\Console\Command\Resource\ResourceInfo;
-use Honeybee\FrameworkBinding\Silex\Console\Command\Route\ListRoutes;
-use Honeybee\FrameworkBinding\Silex\Console\Command\Worker\RunWorker;
+use Honeylex\Console\App;
+use Honeylex\Console\Command\Config\ListConfig;
+use Honeylex\Console\Command\Crate\CrateInfo;
+use Honeylex\Console\Command\Crate\ListCrates;
+use Honeylex\Console\Command\Crate\MakeCrate;
+use Honeylex\Console\Command\Crate\RemoveCrate;
+use Honeylex\Console\Command\Event\ReplayEvents;
+use Honeylex\Console\Command\Fixture\ImportFixture;
+use Honeylex\Console\Command\Migrate\ListTargets;
+use Honeylex\Console\Command\Migrate\MigrateDown;
+use Honeylex\Console\Command\Migrate\MigrateUp;
+use Honeylex\Console\Command\Migrate\TargetInfo;
+use Honeylex\Console\Command\Project\ConfigureProject;
+use Honeylex\Console\Command\Resource\GenerateCode;
+use Honeylex\Console\Command\Resource\GenerateCommand;
+use Honeylex\Console\Command\Resource\ListResources;
+use Honeylex\Console\Command\Resource\MakeResource;
+use Honeylex\Console\Command\Resource\RemoveResource;
+use Honeylex\Console\Command\Resource\ResourceInfo;
+use Honeylex\Console\Command\Route\ListRoutes;
+use Honeylex\Console\Command\Worker\RunWorker;
 use Symfony\Component\Console\Input\ArgvInput;
 
 $basedir = getcwd() ?: dirname(__DIR__);

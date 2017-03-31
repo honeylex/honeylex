@@ -1,8 +1,8 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Silex\Console\Command\Route;
+namespace Honeylex\Console\Command\Route;
 
-use Honeybee\FrameworkBinding\Silex\Console\Command\Command;
+use Honeylex\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 

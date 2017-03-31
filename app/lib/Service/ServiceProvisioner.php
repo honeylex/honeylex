@@ -1,12 +1,9 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Silex\Service;
+namespace Honeylex\Service;
 
 use Auryn\Injector;
 use Honeybee\Common\Error\ConfigError;
-use Honeybee\FrameworkBinding\Silex\Config\ConfigProviderInterface;
-use Honeybee\FrameworkBinding\Silex\Service\Provisioner\DefaultProvisioner;
-use Honeybee\FrameworkBinding\Silex\Service\Provisioner\ProvisionerInterface;
 use Honeybee\Infrastructure\Config\Settings;
 use Honeybee\Model\Aggregate\AggregateRootTypeMap;
 use Honeybee\Projection\ProjectionTypeMap;
@@ -15,6 +12,9 @@ use Honeybee\ServiceDefinitionMap;
 use Honeybee\ServiceLocator;
 use Honeybee\ServiceLocatorInterface;
 use Honeybee\ServiceProvisionerInterface;
+use Honeylex\Config\ConfigProviderInterface;
+use Honeylex\Service\Provisioner\DefaultProvisioner;
+use Honeylex\Service\Provisioner\ProvisionerInterface;
 use Pimple\Container;
 use Silex\Api\EventListenerProviderInterface;
 use SplFileInfo;

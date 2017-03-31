@@ -1,12 +1,12 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Silex\Service\Provisioner;
+namespace Honeylex\Service\Provisioner;
 
 use Auryn\Injector;
-use Honeybee\FrameworkBinding\Silex\Config\ConfigProviderInterface;
-use Honeybee\FrameworkBinding\Silex\Renderer\TemplateRendererInterface;
 use Honeybee\Infrastructure\Config\SettingsInterface;
 use Honeybee\ServiceDefinitionInterface;
+use Honeylex\Config\ConfigProviderInterface;
+use Honeylex\Renderer\TemplateRendererInterface;
 use Pimple\Container;
 use Silex\Provider\TwigServiceProvider;
 use Symfony\Component\Filesystem\Filesystem;

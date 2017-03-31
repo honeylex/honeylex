@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Silex\Console\Command\Migrate;
+namespace Honeylex\Console\Command\Migrate;
 
 use Honeybee\Infrastructure\Migration\MigrationList;
 use Honeybee\Infrastructure\Migration\MigrationTargetInterface;

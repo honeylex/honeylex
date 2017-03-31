@@ -1,15 +1,15 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Silex\Service\Provisioner;
+namespace Honeylex\Service\Provisioner;
 
 use Auryn\Injector;
 use Honeybee\Common\Error\ConfigError;
-use Honeybee\FrameworkBinding\Silex\Config\ConfigProviderInterface;
-use Honeybee\FrameworkBinding\Silex\EventListener\HttpLocaleListener;
-use Honeybee\FrameworkBinding\Silex\EventListener\SessionLocaleListener;
 use Honeybee\Infrastructure\Config\Settings;
 use Honeybee\Infrastructure\Config\SettingsInterface;
 use Honeybee\ServiceDefinitionInterface;
+use Honeylex\Config\ConfigProviderInterface;
+use Honeylex\EventListener\HttpLocaleListener;
+use Honeylex\EventListener\SessionLocaleListener;
 use Pimple\Container;
 use Silex\Api\EventListenerProviderInterface;
 use Silex\Provider\LocaleServiceProvider;

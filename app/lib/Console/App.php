@@ -1,8 +1,8 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Silex\Console;
+namespace Honeylex\Console;
 
-use Honeybee\FrameworkBinding\Silex\Config\ConfigProviderInterface;
+use Honeylex\Config\ConfigProviderInterface;
 use Silex\Application as SilexApp;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Input\InputOption;

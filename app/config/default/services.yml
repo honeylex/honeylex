@@ -2,76 +2,76 @@
 # Honeylex default services configuration
 ---
 honeybee.environment:
-  class: Honeybee\FrameworkBinding\Silex\Environment
+  class: Honeylex\Environment
   provisioner:
-    class: Honeybee\FrameworkBinding\Silex\Service\Provisioner\EnvironmentProvisioner
+    class: Honeylex\Service\Provisioner\EnvironmentProvisioner
 
 honeybee.infrastructure.template_renderer:
-  class: Honeybee\FrameworkBinding\Silex\Renderer\Twig\TwigRenderer
+  class: Honeylex\Renderer\Twig\TwigRenderer
   provisioner:
-    class: Honeybee\FrameworkBinding\Silex\Service\Provisioner\TwigRendererProvisioner
+    class: Honeylex\Service\Provisioner\TwigRendererProvisioner
     settings:
       extensions:
-        - Honeybee\FrameworkBinding\Silex\Renderer\Twig\Extension\ProjectExtension
-        - Honeybee\FrameworkBinding\Silex\Renderer\Twig\Extension\WorkflowExtension
-        - Honeybee\FrameworkBinding\Silex\Renderer\Twig\Extension\LocaliseRouteExtension
+        - Honeylex\Renderer\Twig\Extension\ProjectExtension
+        - Honeylex\Renderer\Twig\Extension\WorkflowExtension
+        - Honeylex\Renderer\Twig\Extension\LocaliseRouteExtension
 
 honeybee.infrastructure.mail_service:
-  class: Honeybee\FrameworkBinding\Silex\Mail\SwiftMailer\LoggingSwiftMailer
+  class: Honeylex\Mail\SwiftMailer\LoggingSwiftMailer
   provisioner:
-    class: Honeybee\FrameworkBinding\Silex\Service\Provisioner\MailServiceProvisioner
+    class: Honeylex\Service\Provisioner\MailServiceProvisioner
 
 honeybee.infrastructure.connector_service:
   class: Honeybee\Infrastructure\DataAccess\Connector\ConnectorService
   provisioner:
-    class: Honeybee\FrameworkBinding\Silex\Service\Provisioner\ConnectorServiceProvisioner
+    class: Honeylex\Service\Provisioner\ConnectorServiceProvisioner
 
 honeybee.infrastructure.data_access_service:
   class: Honeybee\Infrastructure\DataAccess\DataAccessService
   provisioner:
-    class: Honeybee\FrameworkBinding\Silex\Service\Provisioner\DataAccessServiceProvisioner
+    class: Honeylex\Service\Provisioner\DataAccessServiceProvisioner
 
 honeybee.infrastructure.migration_service:
   class: Honeybee\Infrastructure\Migration\MigrationService
   provisioner:
-    class: Honeybee\FrameworkBinding\Silex\Service\Provisioner\MigrationServiceProvisioner
+    class: Honeylex\Service\Provisioner\MigrationServiceProvisioner
 
 honeybee.infrastructure.fixture_service:
   class: Honeybee\Infrastructure\Fixture\FixtureService
   provisioner:
-    class: Honeybee\FrameworkBinding\Silex\Service\Provisioner\FixtureServiceProvisioner
+    class: Honeylex\Service\Provisioner\FixtureServiceProvisioner
 
 honeybee.infrastructure.expression_service:
   class: Honeybee\Infrastructure\Expression\ExpressionService
   provisioner:
-    class: Honeybee\FrameworkBinding\Silex\Service\Provisioner\ExpressionServiceProvisioner
+    class: Honeylex\Service\Provisioner\ExpressionServiceProvisioner
 
 honeybee.infrastructure.event_bus:
   class: Honeybee\Infrastructure\Event\Bus\EventBus
   provisioner:
-    class: Honeybee\FrameworkBinding\Silex\Service\Provisioner\EventBusProvisioner
+    class: Honeylex\Service\Provisioner\EventBusProvisioner
 
 honeybee.infrastructure.command_bus:
   class: Honeybee\Infrastructure\Command\Bus\CommandBus
   provisioner:
-    class: Honeybee\FrameworkBinding\Silex\Service\Provisioner\CommandBusProvisioner
+    class: Honeylex\Service\Provisioner\CommandBusProvisioner
 
 honeybee.infrastructure.filesystem_service:
   class: Honeybee\Infrastructure\Filesystem\FilesystemService
   provisioner:
-    class: Honeybee\FrameworkBinding\Silex\Service\Provisioner\FilesystemServiceProvisioner
+    class: Honeylex\Service\Provisioner\FilesystemServiceProvisioner
 
 honeybee.infrastructure.job_service:
   class: Honeybee\Infrastructure\Job\JobService
   provisioner:
-    class: Honeybee\FrameworkBinding\Silex\Service\Provisioner\JobServiceProvisioner
+    class: Honeylex\Service\Provisioner\JobServiceProvisioner
     settings:
       connection: honeybee.msg_queue
 
 honeybee.infrastructure.command_enricher:
   class: Honeybee\Infrastructure\Command\CommandEnricher
   provisioner:
-    class: Honeybee\FrameworkBinding\Silex\Service\Provisioner\CommandEnricherProvisioner
+    class: Honeylex\Service\Provisioner\CommandEnricherProvisioner
     settings:
       enrichers:
         - Hlx\Security\User\AuditMetadataEnricher
@@ -79,17 +79,17 @@ honeybee.infrastructure.command_enricher:
 honeybee.infrastructure.state_machine_builder:
   class: Honeybee\Infrastructure\Workflow\StateMachineBuilder
   provisioner:
-    class: Honeybee\FrameworkBinding\Silex\Service\Provisioner\StateMachineBuilderProvisioner
+    class: Honeylex\Service\Provisioner\StateMachineBuilderProvisioner
     
 honeybee.infrastructure.workflow_service:
   class: Honeybee\Infrastructure\Workflow\WorkflowService
   provisioner:
-    class: Honeybee\FrameworkBinding\Silex\Service\Provisioner\WorkflowServiceProvisioner
+    class: Honeylex\Service\Provisioner\WorkflowServiceProvisioner
 
 honeylex.url_generator:
   class: Symfony\Component\Routing\Generator\UrlGenerator
   provisioner:
-    class: Honeybee\FrameworkBinding\Silex\Service\Provisioner\SilexServiceProvisioner
+    class: Honeylex\Service\Provisioner\SilexServiceProvisioner
     settings:
       app_key: url_generator
       share: true
@@ -98,7 +98,7 @@ honeylex.url_generator:
 honeylex.form_factory:
   class: Symfony\Component\Form\FormFactory
   provisioner:
-    class: Honeybee\FrameworkBinding\Silex\Service\Provisioner\SilexServiceProvisioner
+    class: Honeylex\Service\Provisioner\SilexServiceProvisioner
     settings:
       app_key: form.factory
       share: true
@@ -107,7 +107,7 @@ honeylex.form_factory:
 honeylex.validator:
   class: Symfony\Component\Validator\Validator\Validator
   provisioner:
-    class: Honeybee\FrameworkBinding\Silex\Service\Provisioner\SilexServiceProvisioner
+    class: Honeylex\Service\Provisioner\SilexServiceProvisioner
     settings:
       app_key: validator
       share: true
@@ -116,7 +116,7 @@ honeylex.validator:
 honeylex.request_stack:
   class: Symfony\Component\HttpFoundation\RequestStack
   provisioner:
-    class: Honeybee\FrameworkBinding\Silex\Service\Provisioner\SilexServiceProvisioner
+    class: Honeylex\Service\Provisioner\SilexServiceProvisioner
     settings:
       app_key: request_stack
       share: true
@@ -124,14 +124,14 @@ honeylex.request_stack:
 honeylex.translator:
   class: Symfony\Component\Translation\Translator
   provisioner:
-    class: Honeybee\FrameworkBinding\Silex\Service\Provisioner\TranslationServiceProvisioner
+    class: Honeylex\Service\Provisioner\TranslationServiceProvisioner
     settings:
       alias: Symfony\Component\Translation\TranslatorInterface
 
 honeylex.dispatcher:
   class: Symfony\Component\EventDispatcher\EventDispatcher
   provisioner:
-    class: Honeybee\FrameworkBinding\Silex\Service\Provisioner\SilexServiceProvisioner
+    class: Honeylex\Service\Provisioner\SilexServiceProvisioner
     settings:
       app_key: dispatcher
       share: true
@@ -140,7 +140,7 @@ honeylex.dispatcher:
 honeylex.serializer:
   class: Symfony\Component\Serializer\Serializer
   provisioner:
-    class: Honeybee\FrameworkBinding\Silex\Service\Provisioner\SerializerServiceProvisioner
+    class: Honeylex\Service\Provisioner\SerializerServiceProvisioner
     settings:
       normalizers:
-        - Honeybee\FrameworkBinding\Silex\Serializer\ProjectionNormalizer
+        - Honeylex\Serializer\ProjectionNormalizer

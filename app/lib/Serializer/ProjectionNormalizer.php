@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Silex\Serializer;
+namespace Honeylex\Serializer;
 
 use Honeybee\Projection\ProjectionInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;

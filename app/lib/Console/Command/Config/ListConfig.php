@@ -1,14 +1,13 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Silex\Console\Command\Config;
+namespace Honeylex\Console\Command\Config;
 
-use Honeybee\FrameworkBinding\Silex\Console\Command\Command;
 use Honeybee\Infrastructure\Config\Settings;
+use Honeylex\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Honeybee\Infrastructure\Config\SettingsInterface;
 
 class ListConfig extends Command
 {

@@ -8,61 +8,61 @@
 # firstone-wins, lastone-wins, flat-merge or deep-merge.
 ---
 settings.yml:
-  handler: Honeybee\FrameworkBinding\Silex\Config\Handler\SettingConfigHandler
+  handler: Honeylex\Config\Handler\SettingConfigHandler
   settings:
     parser: Symfony\Component\Yaml\Parser
 
 services.yml:
-  handler: Honeybee\FrameworkBinding\Silex\Config\Handler\ServiceConfigHandler
+  handler: Honeylex\Config\Handler\ServiceConfigHandler
   settings:
     parser: Symfony\Component\Yaml\Parser
 
 connections.yml:
-  handler: Honeybee\FrameworkBinding\Silex\Config\Handler\ConnectionConfigHandler
+  handler: Honeylex\Config\Handler\ConnectionConfigHandler
   settings:
     parser: Symfony\Component\Yaml\Parser
 
 data_access.yml:
-  handler: Honeybee\FrameworkBinding\Silex\Config\Handler\DataAccessConfigHandler
+  handler: Honeylex\Config\Handler\DataAccessConfigHandler
   settings:
     parser: Symfony\Component\Yaml\Parser
 
 migration.yml:
-  handler: Honeybee\FrameworkBinding\Silex\Config\Handler\DefaultConfigHandler
+  handler: Honeylex\Config\Handler\DefaultConfigHandler
   settings:
     parser: Symfony\Component\Yaml\Parser
 
 fixture.yml:
-  handler: Honeybee\FrameworkBinding\Silex\Config\Handler\DefaultConfigHandler
+  handler: Honeylex\Config\Handler\DefaultConfigHandler
   settings:
     parser: Symfony\Component\Yaml\Parser
 
 filesystem.yml:
-  handler: Honeybee\FrameworkBinding\Silex\Config\Handler\DefaultConfigHandler
+  handler: Honeylex\Config\Handler\DefaultConfigHandler
   settings:
     parser: Symfony\Component\Yaml\Parser
 
 event_bus.yml:
-  handler: Honeybee\FrameworkBinding\Silex\Config\Handler\EventBusConfigHandler
+  handler: Honeylex\Config\Handler\EventBusConfigHandler
   settings:
     parser: Symfony\Component\Yaml\Parser
 
 command_bus.yml:
-  handler: Honeybee\FrameworkBinding\Silex\Config\Handler\DefaultConfigHandler
+  handler: Honeylex\Config\Handler\DefaultConfigHandler
   settings:
     parser: Symfony\Component\Yaml\Parser
 
 mail.yml:
-  handler: Honeybee\FrameworkBinding\Silex\Config\Handler\DefaultConfigHandler
+  handler: Honeylex\Config\Handler\DefaultConfigHandler
   settings:
     parser: Symfony\Component\Yaml\Parser
 
 translation.yml:
-  handler: Honeybee\FrameworkBinding\Silex\Config\Handler\TranslationConfigHandler
+  handler: Honeylex\Config\Handler\TranslationConfigHandler
   settings:
     parser: Symfony\Component\Yaml\Parser
 
 jobs.yml:
-  handler: Honeybee\FrameworkBinding\Silex\Config\Handler\DefaultConfigHandler
+  handler: Honeylex\Config\Handler\DefaultConfigHandler
   settings:
     parser: Symfony\Component\Yaml\Parser

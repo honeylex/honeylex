@@ -1,11 +1,11 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Silex\Console\Command\Resource;
+namespace Honeylex\Console\Command\Resource;
 
 use Honeybee\Common\Util\StringToolkit;
-use Honeybee\FrameworkBinding\Silex\Config\ConfigProviderInterface;
 use Honeybee\Model\Aggregate\AggregateRootTypeMap;
 use Honeybee\Projection\ProjectionTypeMap;
+use Honeylex\Config\ConfigProviderInterface;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;

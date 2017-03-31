@@ -1,8 +1,8 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Silex\Renderer\Twig;
+namespace Honeylex\Renderer\Twig;
 
-use Honeybee\FrameworkBinding\Silex\Renderer\TemplateRendererInterface;
+use Honeylex\Renderer\TemplateRendererInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Twig_Environment;
 use Twig_Loader_String;

@@ -1,10 +1,10 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Silex\Config\Handler;
+namespace Honeylex\Config\Handler;
 
-use Honeybee\FrameworkBinding\Silex\Service\Provisioner\DefaultProvisioner;
 use Honeybee\ServiceDefinition;
 use Honeybee\ServiceDefinitionMap;
+use Honeylex\Service\Provisioner\DefaultProvisioner;
 
 class ServiceConfigHandler extends YamlConfigHandler
 {

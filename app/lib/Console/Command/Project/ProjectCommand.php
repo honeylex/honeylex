@@ -1,8 +1,8 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Silex\Console\Command\Project;
+namespace Honeylex\Console\Command\Project;
 
-use Honeybee\FrameworkBinding\Silex\Console\Command\Command;
+use Honeylex\Console\Command\Command;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Yaml\Yaml;

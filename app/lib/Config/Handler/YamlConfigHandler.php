@@ -1,9 +1,9 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Silex\Config\Handler;
+namespace Honeylex\Config\Handler;
 
-use Honeybee\FrameworkBinding\Silex\Config\ConfigProviderInterface;
 use Honeybee\Infrastructure\Config\ConfigInterface;
+use Honeylex\Config\ConfigProviderInterface;
 
 abstract class YamlConfigHandler implements ConfigHandlerInterface
 {

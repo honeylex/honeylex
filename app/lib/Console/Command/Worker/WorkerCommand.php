@@ -1,11 +1,11 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Silex\Console\Command\Worker;
+namespace Honeylex\Console\Command\Worker;
 
-use Honeybee\FrameworkBinding\Silex\Config\ConfigProviderInterface;
-use Honeybee\FrameworkBinding\Silex\Console\Command\Command;
 use Honeybee\Infrastructure\Job\JobServiceInterface;
 use Honeybee\ServiceLocatorInterface;
+use Honeylex\Config\ConfigProviderInterface;
+use Honeylex\Console\Command\Command;
 
 abstract class WorkerCommand extends Command
 {

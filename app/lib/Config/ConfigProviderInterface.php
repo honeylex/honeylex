@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Silex\Config;
+namespace Honeylex\Config;
 
 interface ConfigProviderInterface
 {

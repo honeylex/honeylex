@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Silex\Renderer;
+namespace Honeylex\Renderer;
 
 interface TemplateRendererInterface
 {

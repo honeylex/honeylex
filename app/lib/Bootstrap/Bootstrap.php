@@ -1,19 +1,19 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Silex\Bootstrap;
+namespace Honeylex\Bootstrap;
 
 use Auryn\Injector;
 use Auryn\StandardReflector;
-use Honeybee\FrameworkBinding\Silex\Config\ConfigProvider;
-use Honeybee\FrameworkBinding\Silex\Config\ConfigProviderInterface;
-use Honeybee\FrameworkBinding\Silex\Config\Handler\CrateConfigHandler;
-use Honeybee\FrameworkBinding\Silex\Controller\ControllerResolverServiceProvider;
-use Honeybee\FrameworkBinding\Silex\Crate\CrateLoader;
-use Honeybee\FrameworkBinding\Silex\Crate\CrateMap;
-use Honeybee\FrameworkBinding\Silex\Service\ServiceProvider;
-use Honeybee\FrameworkBinding\Silex\Service\ServiceProvisioner;
 use Honeybee\Infrastructure\Config\ArrayConfig;
 use Honeybee\Infrastructure\Config\Settings;
+use Honeylex\Config\ConfigProvider;
+use Honeylex\Config\ConfigProviderInterface;
+use Honeylex\Config\Handler\CrateConfigHandler;
+use Honeylex\Controller\ControllerResolverServiceProvider;
+use Honeylex\Crate\CrateLoader;
+use Honeylex\Crate\CrateMap;
+use Honeylex\Service\ServiceProvider;
+use Honeylex\Service\ServiceProvisioner;
 use Psr\Log\LoggerInterface;
 use Silex\Application;
 use Silex\Provider\AssetServiceProvider;

@@ -1,8 +1,8 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Silex\Crate;
+namespace Honeylex\Crate;
 
-use Honeybee\FrameworkBinding\Silex\Crate\CrateManifestMap;
+use Honeylex\Crate\CrateManifestMap;
 use Silex\Application;
 
 interface CrateLoaderInterface

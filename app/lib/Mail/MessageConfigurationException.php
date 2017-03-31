@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Silex\Mail;
+namespace Honeylex\Mail;
 
 use InvalidArgumentException;
 

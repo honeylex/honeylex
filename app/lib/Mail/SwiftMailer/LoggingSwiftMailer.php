@@ -1,13 +1,13 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Silex\Mail\SwiftMailer;
+namespace Honeylex\Mail\SwiftMailer;
 
-use Honeybee\FrameworkBinding\Silex\Mail\MailInterface;
-use Honeybee\FrameworkBinding\Silex\Mail\MailServiceInterface;
-use Honeybee\FrameworkBinding\Silex\Mail\MessageConfigurationException;
 use Honeybee\Infrastructure\Config\ArrayConfig;
 use Honeybee\Infrastructure\Config\ConfigInterface;
 use Honeybee\Infrastructure\Config\Settings;
+use Honeylex\Mail\MailInterface;
+use Honeylex\Mail\MailServiceInterface;
+use Honeylex\Mail\MessageConfigurationException;
 use InvalidArgumentException;
 use Psr\Log\LoggerInterface;
 use Swift_Attachment;

@@ -1,9 +1,9 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Silex\Console\Command\Resource;
+namespace Honeylex\Console\Command\Resource;
 
-use Honeybee\FrameworkBinding\Silex\Config\ConfigProviderInterface;
-use Honeybee\FrameworkBinding\Silex\Console\Command\Command;
+use Honeylex\Config\ConfigProviderInterface;
+use Honeylex\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ChoiceQuestion;

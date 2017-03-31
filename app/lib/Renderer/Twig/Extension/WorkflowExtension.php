@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Silex\Renderer\Twig\Extension;
+namespace Honeylex\Renderer\Twig\Extension;
 
 use Honeybee\Infrastructure\Workflow\WorkflowServiceInterface;
 use Honeybee\Projection\ProjectionInterface;

@@ -1,10 +1,10 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Silex\Config\Handler;
+namespace Honeylex\Config\Handler;
 
 use Honeybee\Infrastructure\Config\Settings;
-use Honeybee\FrameworkBinding\Silex\Crate\CrateManifest;
-use Honeybee\FrameworkBinding\Silex\Crate\CrateManifestMap;
+use Honeylex\Crate\CrateManifest;
+use Honeylex\Crate\CrateManifestMap;
 use ReflectionClass;
 use Symfony\Component\Yaml\Parser;
 

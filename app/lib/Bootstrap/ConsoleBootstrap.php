@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Silex\Bootstrap;
+namespace Honeylex\Bootstrap;
 
 use Silex\Application;
 

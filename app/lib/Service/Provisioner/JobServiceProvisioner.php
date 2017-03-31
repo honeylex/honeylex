@@ -1,7 +1,8 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Silex\Service\Provisioner;
+namespace Honeylex\Service\Provisioner;
 
+use Auryn\Injector;
 use Honeybee\Infrastructure\Config\SettingsInterface;
 use Honeybee\Infrastructure\DataAccess\Connector\ConnectorServiceInterface;
 use Honeybee\Infrastructure\Event\Bus\EventBusInterface;
@@ -9,10 +10,9 @@ use Honeybee\Infrastructure\Job\JobMap;
 use Honeybee\Infrastructure\Job\JobServiceInterface;
 use Honeybee\ServiceDefinitionInterface;
 use Honeybee\ServiceLocatorInterface;
-use Psr\Log\LoggerInterface;
+use Honeylex\Config\ConfigProviderInterface;
 use Pimple\Container;
-use Auryn\Injector;
-use Honeybee\FrameworkBinding\Silex\Config\ConfigProviderInterface;
+use Psr\Log\LoggerInterface;
 
 class JobServiceProvisioner implements ProvisionerInterface
 {

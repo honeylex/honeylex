@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Silex\Service;
+namespace Honeylex\Service;
 
 use Honeybee\ServiceProvisionerInterface;
 use Pimple\Container;

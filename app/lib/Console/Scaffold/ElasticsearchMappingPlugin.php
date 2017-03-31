@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Silex\Console\Scaffold;
+namespace Honeylex\Console\Scaffold;
 
 use Trellis\CodeGen\PluginInterface;
 use Trellis\CodeGen\Schema\EntityTypeDefinition;

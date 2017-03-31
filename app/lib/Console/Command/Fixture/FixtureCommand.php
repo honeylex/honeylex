@@ -1,10 +1,10 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Silex\Console\Command\Fixture;
+namespace Honeylex\Console\Command\Fixture;
 
-use Honeybee\FrameworkBinding\Silex\Config\ConfigProviderInterface;
-use Honeybee\FrameworkBinding\Silex\Console\Command\Command;
 use Honeybee\Infrastructure\Fixture\FixtureServiceInterface;
+use Honeylex\Config\ConfigProviderInterface;
+use Honeylex\Console\Command\Command;
 
 abstract class FixtureCommand extends Command
 {

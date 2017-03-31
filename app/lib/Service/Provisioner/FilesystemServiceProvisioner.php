@@ -1,16 +1,16 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Silex\Service\Provisioner;
+namespace Honeylex\Service\Provisioner;
 
 use Auryn\Injector;
 use Pimple\Container;
 use Honeybee\Common\Error\ConfigError;
-use Honeybee\FrameworkBinding\Silex\Config\ConfigProviderInterface;
 use Honeybee\Infrastructure\Config\SettingsInterface;
 use Honeybee\Infrastructure\DataAccess\Connector\ConnectorServiceInterface;
 use Honeybee\Infrastructure\Filesystem\FilesystemServiceInterface;
 use Honeybee\Model\Aggregate\AggregateRootTypeMap;
 use Honeybee\ServiceDefinitionInterface;
+use Honeylex\Config\ConfigProviderInterface;
 use League\Flysystem\FilesystemInterface;
 use League\Flysystem\MountManager;
 

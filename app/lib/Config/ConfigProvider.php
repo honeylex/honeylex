@@ -1,12 +1,12 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Silex\Config;
+namespace Honeylex\Config;
 
-use Honeybee\FrameworkBinding\Silex\Crate\CrateMap;
 use Honeybee\Infrastructure\Config\ArrayConfig;
 use Honeybee\Infrastructure\Config\ConfigInterface;
 use Honeybee\Infrastructure\Config\Settings;
 use Honeybee\Infrastructure\Config\SettingsInterface;
+use Honeylex\Crate\CrateMap;
 use Symfony\Component\Finder\Finder;
 
 class ConfigProvider implements ConfigProviderInterface

@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Silex\Controller;
+namespace Honeylex\Controller;
 
 use Honeybee\ServiceLocatorInterface;
 use Silex\CallbackResolver;

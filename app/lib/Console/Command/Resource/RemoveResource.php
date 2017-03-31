@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Silex\Console\Command\Resource;
+namespace Honeylex\Console\Command\Resource;
 
 use Honeybee\Common\Util\StringToolkit;
 use Symfony\Component\Console\Input\InputArgument;

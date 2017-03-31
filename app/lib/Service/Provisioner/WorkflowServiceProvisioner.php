@@ -1,15 +1,15 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Silex\Service\Provisioner;
+namespace Honeylex\Service\Provisioner;
 
 use Auryn\Injector;
-use Honeybee\FrameworkBinding\Silex\Config\ConfigProviderInterface;
-use Honeybee\FrameworkBinding\Silex\Service\Provisioner\ProvisionerInterface;
 use Honeybee\Infrastructure\Config\SettingsInterface;
 use Honeybee\Infrastructure\Workflow\StateMachineBuilder;
 use Honeybee\Infrastructure\Workflow\StateMachineBuilderInterface;
 use Honeybee\Infrastructure\Workflow\WorkflowServiceInterface;
 use Honeybee\ServiceDefinitionInterface;
+use Honeylex\Config\ConfigProviderInterface;
+use Honeylex\Service\Provisioner\ProvisionerInterface;
 use Pimple\Container;
 use Psr\Log\LoggerInterface;
 

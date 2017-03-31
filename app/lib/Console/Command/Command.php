@@ -1,8 +1,8 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Silex\Console\Command;
+namespace Honeylex\Console\Command;
 
-use Honeybee\FrameworkBinding\Silex\Config\ConfigProviderInterface;
+use Honeylex\Config\ConfigProviderInterface;
 use Symfony\Component\Console\Command\Command as BaseCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
