@@ -40,7 +40,7 @@ class RunWorker extends WorkerCommand
 
         $jobConfig = new ArrayConfig([ 'queue' => $queueName ]);
 
-        $worker = $this->serviceLocator->createEntity(Worker::CLASS, [ ':config' => $jobConfig ]);
+        $worker = $this->serviceLocator->make(Worker::CLASS, [ ':config' => $jobConfig ]);
         $worker->run();
     }
 

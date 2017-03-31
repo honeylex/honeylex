@@ -73,4 +73,4 @@ $appCommands = [
 set_time_limit(0);
 
 $appState = [ ':app' => $app, ':appCommands' => $appCommands ];
-$app['honeybee.service_locator']->createEntity(App::CLASS, $appState)->run();
+$app['honeybee.service_locator']->make(App::CLASS, $appState)->run();

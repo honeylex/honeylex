@@ -39,7 +39,7 @@ ASCII;
             new InputOption('--env', '-e', InputOption::VALUE_REQUIRED, 'The Environment name.', 'dev')
         );
 
-        foreach (array_map([ $app['honeybee.service_locator'], 'createEntity'], $appCommands) as $command) {
+        foreach (array_map([ $app['honeybee.service_locator'], 'make'], $appCommands) as $command) {
             $this->add($command);
         }
 

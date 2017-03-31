@@ -7,17 +7,17 @@ honeybee.environment:
     class: Honeybee\FrameworkBinding\Silex\Service\Provisioner\EnvironmentProvisioner
 
 honeybee.infrastructure.template_renderer:
-  class: Honeybee\Infrastructure\Template\Twig\TwigRenderer
+  class: Honeybee\FrameworkBinding\Silex\Renderer\Twig\TwigRenderer
   provisioner:
     class: Honeybee\FrameworkBinding\Silex\Service\Provisioner\TwigRendererProvisioner
     settings:
       extensions:
-        - Honeybee\FrameworkBinding\Silex\Renderer\Twig\ProjectExtension
-        - Honeybee\FrameworkBinding\Silex\Renderer\Twig\WorkflowExtension
-        - Honeybee\FrameworkBinding\Silex\Renderer\Twig\LocaliseRouteExtension
+        - Honeybee\FrameworkBinding\Silex\Renderer\Twig\Extension\ProjectExtension
+        - Honeybee\FrameworkBinding\Silex\Renderer\Twig\Extension\WorkflowExtension
+        - Honeybee\FrameworkBinding\Silex\Renderer\Twig\Extension\LocaliseRouteExtension
 
 honeybee.infrastructure.mail_service:
-  class: Honeybee\Infrastructure\Mail\LoggingSwiftMailer
+  class: Honeybee\FrameworkBinding\Silex\Mail\SwiftMailer\LoggingSwiftMailer
   provisioner:
     class: Honeybee\FrameworkBinding\Silex\Service\Provisioner\MailServiceProvisioner
 

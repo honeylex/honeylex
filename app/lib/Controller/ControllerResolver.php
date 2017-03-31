@@ -56,6 +56,6 @@ class ControllerResolver extends ServiceControllerResolver
             return false;
         }
 
-        return [ $this->serviceLocator->createEntity($controllerClass), $controllerMethod ];
+        return [ $this->serviceLocator->make($controllerClass), $controllerMethod ];
     }
 }

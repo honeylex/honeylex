@@ -4,8 +4,8 @@ namespace Honeybee\FrameworkBinding\Silex\Service\Provisioner;
 
 use Auryn\Injector;
 use Honeybee\FrameworkBinding\Silex\Config\ConfigProviderInterface;
+use Honeybee\FrameworkBinding\Silex\Renderer\TemplateRendererInterface;
 use Honeybee\Infrastructure\Config\SettingsInterface;
-use Honeybee\Infrastructure\Template\TemplateRendererInterface;
 use Honeybee\ServiceDefinitionInterface;
 use Pimple\Container;
 use Silex\Provider\TwigServiceProvider;
