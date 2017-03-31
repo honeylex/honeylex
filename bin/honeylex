@@ -29,6 +29,7 @@ require_once $basedir.'/vendor/autoload.php';
 
 $appContext = 'console';
 
+$appVersion = getEnv('APP_VERSION') ?: 'master';
 $appEnv = (new ArgvInput)->getParameterOption([ '--env', '-e' ], getenv('APP_ENV') ?: 'dev');
 $appDebug = (new ArgvInput)->getParameterOption('--debug', getenv('APP_DEBUG') ?: true);
 $hostPrefix = (new ArgvInput)->getParameterOption([ '--host', '-h' ], getenv('HOST_PREFIX'));

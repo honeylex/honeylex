@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "7963c0c6676e0d32009bf747b073b500",
+    "content-hash": "776cf68c67804de4425482d560cfcf3f",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -660,12 +660,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeybee/honeybee.git",
-                "reference": "fe2af17c9d0c59839ac9868e509899d022ee0be1"
+                "reference": "62060da6833ebb8e40e64855fbfa3c1493bf3c6d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/fe2af17c9d0c59839ac9868e509899d022ee0be1",
-                "reference": "fe2af17c9d0c59839ac9868e509899d022ee0be1",
+                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/62060da6833ebb8e40e64855fbfa3c1493bf3c6d",
+                "reference": "62060da6833ebb8e40e64855fbfa3c1493bf3c6d",
                 "shasum": ""
             },
             "require": {
@@ -716,16 +716,6 @@
             ],
             "authors": [
                 {
-                    "name": "Hasham Ahmad",
-                    "email": "mr.hash@gmail.com",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Steffen Gransow",
-                    "email": "honeybee@mivesto.de",
-                    "role": "Developer"
-                },
-                {
                     "name": "Honeybee Contributors",
                     "homepage": "https://github.com/honeybee/honeybee/graphs/contributors"
                 },
@@ -733,6 +723,18 @@
                     "name": "Thorsten Schmitt-Rink",
                     "email": "schmittrink@gmail.com",
                     "homepage": "https://github.com/shrink0r",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Hasham Ahmad",
+                    "email": "mr.hash@gmail.com",
+                    "homepage": "https://github.com/MrHash",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Steffen Gransow",
+                    "email": "honeybee@mivesto.de",
+                    "homepage": "https://github.com/graste",
                     "role": "Developer"
                 }
             ],
@@ -745,7 +747,7 @@
                 "hexagonal",
                 "messaging"
             ],
-            "time": "2017-03-31 14:26:08"
+            "time": "2017-03-31 15:26:58"
         },
         {
             "name": "honeybee/trellis",
@@ -5549,8 +5551,6 @@
     },
     "prefer-stable": true,
     "prefer-lowest": false,
-    "platform": {
-        "php": ">=5.6.0"
-    },
+    "platform": [],
     "platform-dev": []
 }
