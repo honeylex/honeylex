@@ -19,7 +19,7 @@
         }
     ],
     "require": {
-        "php": ">=5.6.1",
+        "php": ">=5.6.0",
         "rdlowrey/auryn": "~1.1",
         "silex/silex": "~2.0",
         "symfony/asset": "~2.8|~3.1",
@@ -42,6 +42,8 @@
         "willdurand/negotiation": "~2.0",
         "honeybee/honeybee": "dev-release/0.1",
         "php-amqplib/php-amqplib": "master@dev",
+        "swiftmailer/swiftmailer": "~5.4",
+        "twig/twig": "^1.30",
         "roave/security-advisories": "master@dev"
     },
     "require-dev": {

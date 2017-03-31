@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "c52b97e38b473cf0069fc285cb941e77",
+    "content-hash": "9dd8b0501a19b1054776d5ece1625d87",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -660,12 +660,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeybee/honeybee.git",
-                "reference": "a0e1e6906e8579ec4428d81d0c3e5b82e3d0097a"
+                "reference": "c8d408c0aa19b05d8bbf7173b5c34493a9e77fe6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/a0e1e6906e8579ec4428d81d0c3e5b82e3d0097a",
-                "reference": "a0e1e6906e8579ec4428d81d0c3e5b82e3d0097a",
+                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/c8d408c0aa19b05d8bbf7173b5c34493a9e77fe6",
+                "reference": "c8d408c0aa19b05d8bbf7173b5c34493a9e77fe6",
                 "shasum": ""
             },
             "require": {
@@ -678,15 +678,12 @@
                 "php": ">=5.6.0",
                 "psr/container": "~1.0",
                 "psr/log": "~1.0",
-                "ql/uri-template": "^1.0",
                 "rdlowrey/auryn": "~1.4",
                 "roave/security-advisories": "master@dev",
                 "shrink0r/monatic": "~0.2.1",
                 "shrink0r/workflux": "~0.5.3",
-                "swiftmailer/swiftmailer": "~5.4",
                 "symfony/expression-language": "~2.7",
                 "symfony/filesystem": "~2.7",
-                "twig/twig": "^1.30",
                 "zendframework/zend-permissions-acl": "~2.5"
             },
             "require-dev": {
@@ -748,7 +745,7 @@
                 "hexagonal",
                 "messaging"
             ],
-            "time": "2017-03-31 11:47:49"
+            "time": "2017-03-31 14:07:25"
         },
         {
             "name": "honeybee/trellis",
@@ -1406,57 +1403,6 @@
                 "psr-3"
             ],
             "time": "2016-10-10T12:19:37+00:00"
-        },
-        {
-            "name": "ql/uri-template",
-            "version": "1.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/QuickenLoans/uri-template.git",
-                "reference": "7506914fbbf6f74b85da69541d39d16a1a1fd533"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/QuickenLoans/uri-template/zipball/7506914fbbf6f74b85da69541d39d16a1a1fd533",
-                "reference": "7506914fbbf6f74b85da69541d39d16a1a1fd533",
-                "shasum": ""
-            },
-            "require": {
-                "ext-ctype": "*",
-                "ext-mbstring": "*",
-                "php": ">=5.5.0"
-            },
-            "require-dev": {
-                "phpunit/php-invoker": "*",
-                "phpunit/phpunit": "^5.7",
-                "satooshi/php-coveralls": "dev-master@dev"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "QL\\UriTemplate\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Matt Nagi",
-                    "email": "mattnagi@quickenloans.com"
-                }
-            ],
-            "description": "An implementation of RFC 6570 level 4",
-            "homepage": "https://github.com/QuickenLoans/uri-template",
-            "keywords": [
-                "URI Template",
-                "rfc6570",
-                "template",
-                "uri",
-                "url"
-            ],
-            "time": "2017-02-09T19:09:39+00:00"
         },
         {
             "name": "ramsey/uuid",
@@ -5605,7 +5551,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=5.6.1"
+        "php": ">=5.6.0"
     },
     "platform-dev": []
 }
