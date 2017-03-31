@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "6e1706e3321a8ec5a26c12f653e7fa26",
+    "content-hash": "c52b97e38b473cf0069fc285cb941e77",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -656,23 +656,23 @@
         },
         {
             "name": "honeybee/honeybee",
-            "version": "dev-feature/ui_split",
+            "version": "dev-release/0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeybee/honeybee.git",
-                "reference": "598a34398cc0988068da9311ffeee6e03aeda493"
+                "reference": "a0e1e6906e8579ec4428d81d0c3e5b82e3d0097a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/598a34398cc0988068da9311ffeee6e03aeda493",
-                "reference": "598a34398cc0988068da9311ffeee6e03aeda493",
+                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/a0e1e6906e8579ec4428d81d0c3e5b82e3d0097a",
+                "reference": "a0e1e6906e8579ec4428d81d0c3e5b82e3d0097a",
                 "shasum": ""
             },
             "require": {
                 "beberlei/assert": "~2.5",
                 "elasticsearch/elasticsearch": "^2.0",
                 "guzzlehttp/guzzle": "~6.2",
-                "honeybee/trellis": "~0.1.0",
+                "honeybee/trellis": "~0.1.1",
                 "league/flysystem": "^1.0",
                 "mtdowling/jmespath.php": "^2.0",
                 "php": ">=5.6.0",
@@ -748,7 +748,7 @@
                 "hexagonal",
                 "messaging"
             ],
-            "time": "2017-03-31 11:09:37"
+            "time": "2017-03-31 11:47:49"
         },
         {
             "name": "honeybee/trellis",

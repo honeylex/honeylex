@@ -34,7 +34,7 @@ finders:
       log_search_query: false
 
 query_services:
-  {{ crate.vendor|snake }}.{{ crate.name|snake }}.{{ resource.name|snake }}::projection.{{ resource.variant|snake }}::query_service:
+  {{ crate.vendor|snake }}.{{ crate.name|snake }}.{{ resource.name|snake }}::projection.{{ resource.variant|snake }}::view_store::query_service:
     class: Honeybee\Infrastructure\DataAccess\Query\ProjectionQueryService
     finder_mappings:
       default:
