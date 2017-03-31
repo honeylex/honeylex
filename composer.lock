@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "9dd8b0501a19b1054776d5ece1625d87",
+    "content-hash": "7963c0c6676e0d32009bf747b073b500",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -660,41 +660,41 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeybee/honeybee.git",
-                "reference": "c8d408c0aa19b05d8bbf7173b5c34493a9e77fe6"
+                "reference": "fe2af17c9d0c59839ac9868e509899d022ee0be1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/c8d408c0aa19b05d8bbf7173b5c34493a9e77fe6",
-                "reference": "c8d408c0aa19b05d8bbf7173b5c34493a9e77fe6",
+                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/fe2af17c9d0c59839ac9868e509899d022ee0be1",
+                "reference": "fe2af17c9d0c59839ac9868e509899d022ee0be1",
                 "shasum": ""
             },
             "require": {
-                "beberlei/assert": "~2.5",
+                "beberlei/assert": "^2.5",
                 "elasticsearch/elasticsearch": "^2.0",
-                "guzzlehttp/guzzle": "~6.2",
-                "honeybee/trellis": "~0.1.1",
+                "guzzlehttp/guzzle": "^6.2",
+                "honeybee/trellis": "^0.1.1",
                 "league/flysystem": "^1.0",
                 "mtdowling/jmespath.php": "^2.0",
                 "php": ">=5.6.0",
-                "psr/container": "~1.0",
-                "psr/log": "~1.0",
-                "rdlowrey/auryn": "~1.4",
+                "psr/container": "^1.0",
+                "psr/log": "^1.0",
+                "rdlowrey/auryn": "^1.4",
                 "roave/security-advisories": "master@dev",
-                "shrink0r/monatic": "~0.2.1",
-                "shrink0r/workflux": "~0.5.3",
-                "symfony/expression-language": "~2.7",
-                "symfony/filesystem": "~2.7",
-                "zendframework/zend-permissions-acl": "~2.5"
+                "shrink0r/monatic": "^0.2.1",
+                "shrink0r/workflux": "^0.5.3",
+                "symfony/expression-language": "^2.7",
+                "symfony/filesystem": "^2.7",
+                "zendframework/zend-permissions-acl": "^2.5"
             },
             "require-dev": {
                 "mockery/mockery": "master@dev",
                 "php-amqplib/php-amqplib": "master@dev",
-                "phpmd/phpmd": "~2.6",
+                "phpmd/phpmd": "^2.6",
                 "phpunit/phpunit": "^5.5",
-                "sami/sami": "~3.3",
+                "sami/sami": "^3.3",
                 "satooshi/php-coveralls": "master@dev",
-                "sebastian/phpcpd": "~2.0",
-                "squizlabs/php_codesniffer": "~2.8.1"
+                "sebastian/phpcpd": "^2.0",
+                "squizlabs/php_codesniffer": "^2.8.1"
             },
             "suggest": {
                 "cboden/Ratchet": "to handle messages over websocket",
@@ -745,7 +745,7 @@
                 "hexagonal",
                 "messaging"
             ],
-            "time": "2017-03-31 14:07:25"
+            "time": "2017-03-31 14:26:08"
         },
         {
             "name": "honeybee/trellis",
@@ -5545,8 +5545,7 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "honeybee/honeybee": 20,
-        "php-amqplib/php-amqplib": 20,
-        "roave/security-advisories": 20
+        "php-amqplib/php-amqplib": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

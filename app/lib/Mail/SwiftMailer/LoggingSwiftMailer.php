@@ -110,8 +110,8 @@ class LoggingSwiftMailer implements MailServiceInterface
                 sprintf(
                     'Mail not sent as "send_messages" setting is disabled for %s.',
                     $mailer_str
-                    )
-                );
+                )
+            );
         }
 
         if (false !== $settings->get('logging_enabled', false)) {

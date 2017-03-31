@@ -550,7 +550,7 @@ class Message implements MailInterface
                 if (!$this->shouldIgnoreValidationErrors()) {
                     throw new MessageConfigurationException(
                         'The given array has a key "' . $email . '" that is not a valid email address.'
-                        );
+                    );
                 }
             }
         }
