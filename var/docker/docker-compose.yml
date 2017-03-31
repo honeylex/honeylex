@@ -47,6 +47,7 @@ services:
       - rabbitmq.json
       - swiftmailer.json
     environment:
+      - APP_VERSION
       - APP_ENV
       - APP_DEBUG
       - HOST_SCHEME
@@ -70,6 +71,7 @@ services:
       - rabbitmq.json
       - swiftmailer.json
     environment:
+      - APP_VERSION
       - APP_ENV
       - APP_DEBUG
       - LOCAL_CONFIG_DIR
