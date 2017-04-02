@@ -1,0 +1,34 @@
+<?php
+
+namespace {{ crate.namespace }}\View;
+
+use Honeylex\Renderer\TemplateRendererInterface;
+use Silex\Application;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
+
+class IndexSuccessView
+{
+    protected $templateRenderer;
+
+    public function __construct(TemplateRendererInterface $templateRenderer)
+    {
+        $this->templateRenderer = $templateRenderer;
+    }
+
+    public function renderHtml(Request $request, Application $app)
+    {
+        return $this->templateRenderer->render(
+            '@{{ crate.vendor|snake }}-{{ crate.name|snake }}/index.html.twig',
+            [ 'title' => '{{ crate.namespace }} Crate' ]
+        );
+    }
+
+    public function renderJson(Request $request, Application $app)
+    {
+        return new JsonResponse(
+            [ 'title' => '{{ crate.namespace }} Crate' ],
+            JsonResponse::HTTP_OK
+        );
+    }
+}

@@ -2,7 +2,11 @@
 
 namespace Honeylex\Renderer\Twig;
 
+use Honeybee\Common\Error\RuntimeError;
+use Honeybee\Infrastructure\Config\Settings;
 use Honeylex\Renderer\TemplateRendererInterface;
+use Honeylex\Renderer\Twig\Extension\ToolkitExtension;
+use Honeylex\Renderer\Twig\Loader\FilesystemLoader;
 use Symfony\Component\Filesystem\Filesystem;
 use Twig_Environment;
 use Twig_Loader_String;
@@ -10,8 +14,20 @@ use Twig_Loader_String;
 class TwigRenderer implements TemplateRendererInterface
 {
     protected $twig;
-
     protected $filesystem;
+
+    protected static $default_settings = [
+        'twig_options' => [
+            'autoescape' => true,
+            'cache' => false,
+            'debug' => false,
+            'strict_variables' => true
+        ],
+        'twig_extensions' => [
+            ToolkitExtension::CLASS
+        ],
+        'template_paths' => []
+    ];
 
     /**
      * @param Twig_Environment $twig configured twig instance
@@ -70,5 +86,73 @@ class TwigRenderer implements TemplateRendererInterface
         $this->twig->setLoader($original_loader);
 
         return $content;
+    }
+
+    /**
+     * Available settings:
+     *
+     * - 'twig_options'                 array of twig environment options that will be merged with the default options
+     * - 'twig_extensions'              array of instances or fully qualified class names for twig extensions to add
+     * - 'template_paths'               array of locations to lookup templates in
+     * - 'allowed_template_extensions'  array of allowed template filename extensions
+     * - 'cache_scope'                  string to use for twig loader cache key generation
+     *
+     * Default twig environment options used are:
+     *
+     * - 'autoescape': true
+     * - 'cache': false
+     * - 'debug': false
+     * - 'strict_variables: true
+     *
+     * Default twig extension added: Honeygavi\Template\Twig\Extensions\ToolkitExtension
+     *
+     * @param array $settings configuration for the renderer and its default twig instance
+     */
+    public static function create(array $settings = [])
+    {
+        $settings = new Settings(array_replace_recursive(static::$default_settings, $settings));
+
+        return new static(static::createTwigRenderer($settings), new Filesystem());
+    }
+
+    protected static function createTwigRenderer(Settings $settings)
+    {
+        $loader = static::createTwigLoader($settings);
+
+        $twig_options = (array)$settings->get('twig_options', []);
+        $twig = new Twig_Environment($loader, $twig_options);
+
+        $twig_extensions = (array)$settings->get('twig_extensions', []);
+        foreach ($twig_extensions as $extension_class) {
+            if (is_object($extension_class)) {
+                $twig->addExtension($extension_class);
+            } else {
+                $twig->addExtension(new $extension_class());
+            }
+        }
+
+        return $twig;
+    }
+
+    protected static function createTwigLoader(Settings $settings)
+    {
+        if (!$settings->has('template_paths')) {
+            throw new RuntimeError('Missing "template_paths" settings with template lookup locations.');
+        }
+
+        $template_paths = (array)$settings->get('template_paths', []);
+
+        $loader = new FilesystemLoader($template_paths);
+        if ($settings->has('allowed_template_extensions')) {
+            $loader->setAllowedExtensions((array)$settings->get('allowed_template_extensions'));
+        }
+
+        if (!$settings->has('cache_scope')) {
+            $loader->setScope(spl_object_hash($loader)); // unique scope for each new loader instance
+        } else {
+            $loader->setScope($settings->get('cache_scope', FilesystemLoader::SCOPE_DEFAULT));
+        }
+
+        return $loader;
     }
 }

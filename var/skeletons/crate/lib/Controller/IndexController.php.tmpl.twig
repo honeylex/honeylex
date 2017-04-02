@@ -2,19 +2,14 @@
 
 namespace {{ crate.namespace }}\Controller;
 
-use Honeylex\Renderer\TemplateRendererInterface;
+use {{ crate.namespace }}\View\IndexSuccessView;
+use Silex\Application;
+use Symfony\Component\HttpFoundation\Request;
 
 class IndexController
 {
-    protected $templateRenderer;
-
-    public function __construct(TemplateRendererInterface $templateRenderer)
+    public function read(Request $request, Application $app)
     {
-        $this->templateRenderer = $templateRenderer;
-    }
-
-    public function read()
-    {
-        return $this->templateRenderer->render('@{{ crate.vendor|snake }}-{{ crate.name|snake }}/index.html.twig', [ 'title' => __METHOD__ ]);
+        return [ IndexSuccessView::CLASS ];
     }
 }

@@ -2,9 +2,9 @@
 
 namespace Honeylex\Console\Scaffold;
 
-use Honeybee\Infrastructure\Template\Twig\TwigRenderer;
 use Honeylex\Config\ConfigProviderInterface;
-use Honeylex\Renderer\Twig\ProjectExtension;
+use Honeylex\Renderer\Twig\Extension\ProjectExtension;
+use Honeylex\Renderer\Twig\TwigRenderer;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 
