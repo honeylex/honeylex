@@ -1,6 +1,6 @@
 # Honeylex
 
-Project template for building rapidly scalable applications based on the integration of the [Honeybee][Honeybee] CQRS & ES framework with the [Silex][Silex] micro framework.
+Project template for building rapidly scalable applications based on the integration of the [Honeybee][Honeybee] CQRS & ES framework with the [Silex][Silex] micro framework based on Symfony components.
 
 [![Code Climate](https://codeclimate.com/github/honeylex/honeylex/badges/gpa.svg)](https://codeclimate.com/github/honeylex/honeylex)
 [![Dependency Status](https://www.versioneye.com/user/projects/579b94f7aa78d500469f9701/badge.svg?style=flat)](https://www.versioneye.com/user/projects/579b94f7aa78d500469f9701)
@@ -34,11 +34,11 @@ composer honeylex migrate:up
 **Once containers are running your project will be ready and provisioned!**
 >Run `docker-machine ip default` to find the IP (typically http://192.168.99.100)
 > - Secure site https://192.168.99.100 (untrusted certs in dev mode)
-> - Elasticsearch at http://192.168.99.100:9200
+> - Elasticsearch admin at http://192.168.99.100:9100
 > - CouchDB admin at http://192.168.99.100:5984/_utils
 > - RabbitMQ admin at http://192.168.99.100:15672
 
-You can configure various environment files in the ```var/environment``` folder of your host machine. The `.env` and `var/docker/docker-composer.yml` files also contain additional global project environment configuration.
+You can add application secrets in the ```var/secrets``` folder of your docker machine. The `.env` and `var/docker/docker-compose.yml` files also contain additional global project environment and secrets configuration.
 
 The following docker commands are available via `composer` from your host machine:
 ```shell
@@ -50,6 +50,7 @@ composer docker:prune  # remove dangling volumes and stopped containers
 ```
 
 ## Console
+
 Honeylex comes with a number of convenient tools to help project setup and maintenance. A complete list of commands can be found by running:
 ```shell
 composer honeylex  # alias of docker-compose run --rm php_cli ./bin/honeylex
@@ -67,7 +68,7 @@ A useful set of commands are provided for managing the following system features
 
 ## Registered Silex service providers
 
-The bootstrapped Silex app is configured with the following service providers:
+The bootstrapped Silex app is configured with support for the following service providers:
 
 * [AssetServiceProvider][AssetServiceProvider]
 * [FormServiceProvider][FormServiceProvider]
@@ -83,30 +84,36 @@ The bootstrapped Silex app is configured with the following service providers:
 * [ValidatorServiceProvider][ValidatorServiceProvider]
 * [WebProfilerServiceProvider][WebProfilerServiceProvider]
 
+Additional security services are provided in [Hlx\Security](https://github.com/honeylex/hlx-security) crate:
+
+* [RememberMeServiceProvider][RememberMeServiceProvider]
+* [SecurityServiceProvider][SecurityServiceProvider]
+
 Read the [Providers][Providers] documentation for more details about Silex Service Providers.
 
 ## Questions?
 
 Join us in building awesome scalable applications or ask questions here:
- - IRC [freenode #honeybee](http://webchat.freenode.net?randomnick=1&channels=%23honeybee&uio=d4)
  - Gitter [honeybee #Lobby](https://gitter.im/honeybee/Lobby)
- - Slack [honeybee-cmf #development](https://honeybee-cmf.slack.com/messages/development)
+ - IRC [freenode #honeybee](http://webchat.freenode.net?randomnick=1&channels=%23honeybee&uio=d4)
 
-[AssetServiceProvider]: http://silex.sensiolabs.org/doc/master/providers/asset.html
+[AssetServiceProvider]: http://silex.sensiolabs.org/doc/providers/asset.html
 [Composer]: http://getcomposer.org/
 [Docker]: https://docs.docker.com/engine/installation/
-[FormServiceProvider]: http://silex.sensiolabs.org/doc/master/providers/form.html
+[FormServiceProvider]: http://silex.sensiolabs.org/doc/providers/form.html
 [Honeybee]: http://github.com/honeybee/honeybee
 [LocaleServiceProvider]: http://silex.sensiolabs.org/doc/master/providers/locale.html
-[MonologServiceProvider]: http://silex.sensiolabs.org/doc/master/providers/monolog.html
-[Providers]: http://silex.sensiolabs.org/doc/master/providers.html
-[ServiceControllerServiceProvider]: http://silex.sensiolabs.org/doc/master/providers/service_controller.html
-[Silex]: http://silex.sensiolabs.org/doc/master/
+[MonologServiceProvider]: http://silex.sensiolabs.org/doc/providers/monolog.html
+[Providers]: http://silex.sensiolabs.org/doc/providers.html
+[RememberMeServiceProvider]: http://silex.sensiolabs.org/doc/2.0/providers/remember_me.html
+[SecurityServiceProvider]: http://silex.sensiolabs.org/doc/providers/security.html
+[SerializerServiceProvider]: http://silex.sensiolabs.org/doc/2.0/providers/serializer.html
 [SessionServiceProvider]: http://silex.sensiolabs.org/doc/master/providers/session.html
-[SerializerServiceProvider]: http://silex.sensiolabs.org/doc/master/providers/serializer.html
-[SwiftmailerServiceProvider]: http://silex.sensiolabs.org/doc/master/providers/swiftmailer.html
-[TranslationServiceProvider]: http://silex.sensiolabs.org/doc/master/providers/translation.html
-[TwigServiceProvider]: http://silex.sensiolabs.org/doc/master/providers/twig.html
+[ServiceControllerServiceProvider]: http://silex.sensiolabs.org/doc/providers/service_controller.html
+[Silex]: http://silex.sensiolabs.org/documentation
+[SwiftmailerServiceProvider]: http://silex.sensiolabs.org/doc/providers/swiftmailer.html
+[TranslationServiceProvider]: http://silex.sensiolabs.org/doc/providers/translation.html
+[TwigServiceProvider]: http://silex.sensiolabs.org/doc/providers/twig.html
 [UrlGeneratorServiceProvider]: http://silex.sensiolabs.org/doc/providers/url_generator.html
-[ValidatorServiceProvider]: http://silex.sensiolabs.org/doc/master/providers/validator.html
+[ValidatorServiceProvider]: http://silex.sensiolabs.org/doc/providers/validator.html
 [WebProfilerServiceProvider]: http://github.com/silexphp/Silex-WebProfiler
