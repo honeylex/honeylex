@@ -44,7 +44,9 @@ honeybee.infrastructure.fixture_service:
 honeybee.infrastructure.expression_service:
   class: Honeybee\Infrastructure\Expression\ExpressionService
   provisioner:
-    class: Honeylex\Service\Provisioner\ExpressionServiceProvisioner
+    class: Honeylex\Service\Provisioner\DefaultProvisioner
+    settings:
+      alias: Honeybee\Infrastructure\Expression\ExpressionServiceInterface
 
 honeybee.infrastructure.event_bus:
   class: Honeybee\Infrastructure\Event\Bus\EventBus
