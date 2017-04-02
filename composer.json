@@ -4,7 +4,7 @@
     "description": "Honeybee CQRS & ES integration with the Silex framework.",
     "keywords": [ "honeybee", "silex", "symfony", "cqrs", "framework", "event sourcing" ],
     "homepage": "https://github.com/honeylex/honeylex",
-    "license": "MIT",
+    "license": "MPL-2.0",
     "authors": [
         {
             "name": "Hasham Ahmad",
@@ -29,7 +29,6 @@
         "gitter": "https://gitter.im/honeybee/Lobby"
     },
     "prefer-stable": true,
-    "minimum-stability": "dev",
     "repositories": [
         {
             "type": "vcs",
@@ -37,9 +36,10 @@
         }
     ],
     "require": {
-        "honeybee/honeybee": "dev-release/0.1",
+        "honeybee/honeybee": "^0.1",
         "nesbot/carbon": "^1.21",
         "php-amqplib/php-amqplib": "master@dev",
+        "roave/security-advisories": "master@dev",
         "silex/silex": "^2.0",
         "swiftmailer/swiftmailer": "^5.4",
         "symfony/asset": "^2.7|^3.1",
