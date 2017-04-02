@@ -101,7 +101,6 @@ honeylex.form_factory:
     class: Honeylex\Service\Provisioner\SilexServiceProvisioner
     settings:
       app_key: form.factory
-      share: true
       alias: Symfony\Component\Form\FormFactoryInterface
 
 honeylex.validator:
@@ -110,7 +109,6 @@ honeylex.validator:
     class: Honeylex\Service\Provisioner\SilexServiceProvisioner
     settings:
       app_key: validator
-      share: true
       alias: Symfony\Component\Validator\Validator\ValidatorInterface
 
 honeylex.request_stack:
@@ -119,7 +117,6 @@ honeylex.request_stack:
     class: Honeylex\Service\Provisioner\SilexServiceProvisioner
     settings:
       app_key: request_stack
-      share: true
 
 honeylex.translator:
   class: Symfony\Component\Translation\Translator
@@ -134,7 +131,6 @@ honeylex.dispatcher:
     class: Honeylex\Service\Provisioner\SilexServiceProvisioner
     settings:
       app_key: dispatcher
-      share: true
       alias: Symfony\Component\EventDispatcher\EventDispatcherInterface
 
 honeylex.serializer:
