@@ -29,6 +29,7 @@
         "gitter": "https://gitter.im/honeybee/Lobby"
     },
     "prefer-stable": true,
+    "minimum-stability": "dev",
     "repositories": [
         {
             "type": "vcs",
@@ -36,9 +37,11 @@
         }
     ],
     "require": {
-        "honeybee/honeybee": "^0.1",
+        "honeybee/couchdb": "dev-master",
+        "honeybee/elasticsearch2": "dev-master",
+        "honeybee/honeybee": "dev-feature/disconnect as 0.2",
+        "honeybee/rabbitmq3": "dev-master",
         "nesbot/carbon": "^1.21",
-        "php-amqplib/php-amqplib": "master@dev",
         "roave/security-advisories": "master@dev",
         "silex/silex": "^2.0",
         "swiftmailer/swiftmailer": "^5.4",

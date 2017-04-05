@@ -2,7 +2,7 @@
 # {{ crate.name }} specific connections.
 ---
 {{ crate.prefix }}.event_source:
-  class: Honeybee\Infrastructure\DataAccess\Connector\GuzzleConnector
+  class: Honeybee\CouchDb\Connector\CouchDbConnector
   settings:
     auth:
       username: ${couchdb.user}

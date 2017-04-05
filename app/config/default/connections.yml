@@ -2,7 +2,7 @@
 # Honeylex default connections configuration
 ---
 honeybee.view_store:
-  class: Honeybee\Infrastructure\DataAccess\Connector\ElasticsearchConnector
+  class: Honeybee\Elasticsearch2\Connector\ElasticsearchConnector
   settings:
     transport: ${elasticsearch.transport}
     host: ${elasticsearch.host}
@@ -10,18 +10,12 @@ honeybee.view_store:
     index: honeylex.domain_events
 
 honeybee.msg_queue:
-  class: Honeybee\Infrastructure\DataAccess\Connector\RabbitMqConnector
+  class: Honeybee\RabbitMq3\Connector\RabbitMqConnector
   settings:
     host: ${rabbitmq.host}
     port: ${rabbitmq.port}
     user: ${rabbitmq.user}
     password: ${rabbitmq.password}
-
-honeybee.mailer:
-  class: Honeybee\Infrastructure\DataAccess\Connector\SwiftMailer\LocalSendmailConnector
-
-honeybee.mailer.null:
-  class: Honeybee\Infrastructure\DataAccess\Connector\SwiftMailer\NullConnector
 
 honeybee.files.local:
   class: Honeybee\Infrastructure\DataAccess\Connector\Flysystem\LocalConnector
@@ -32,11 +26,3 @@ honeybee.files.local.tmp:
   class: Honeybee\Infrastructure\DataAccess\Connector\Flysystem\LocalConnector
   settings:
     directory: ${project.dir}/data/tmp_files
-
-honeybee.process_state.store:
-  class: Honeybee\Infrastructure\DataAccess\Connector\Flysystem\LocalConnector
-  settings:
-    directory: ${project.dir}/data/process_states
-
-honeybee.process_state.cache:
-  class: Honeybee\Infrastructure\DataAccess\Connector\Memory\ArrayConnector

@@ -64,7 +64,7 @@ honeybee.infrastructure.filesystem_service:
     class: Honeylex\Service\Provisioner\FilesystemServiceProvisioner
 
 honeybee.infrastructure.job_service:
-  class: Honeybee\Infrastructure\Job\JobService
+  class: Honeybee\RabbitMq3\Job\RabbitMqJobService
   provisioner:
     class: Honeylex\Service\Provisioner\JobServiceProvisioner
     settings:

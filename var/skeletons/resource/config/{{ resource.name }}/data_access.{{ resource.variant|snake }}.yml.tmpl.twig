@@ -3,7 +3,7 @@
 ---
 storage_writers:
   {{ crate.vendor|snake }}.{{ crate.name|snake }}.{{ resource.name|snake }}::projection.{{ resource.variant|snake }}::view_store::writer:
-    class: Honeybee\Infrastructure\DataAccess\Storage\Elasticsearch\Projection\ProjectionWriter
+    class: Honeybee\Elasticsearch2\Storage\Projection\ProjectionWriter
     connection: honeybee.view_store
     settings:
       index: ${project.database.prefix}.{{ crate.vendor|snake }}-{{ crate.name|snake }}
@@ -16,7 +16,7 @@ storage_writers:
 
 storage_readers:
   {{ crate.vendor|snake }}.{{ crate.name|snake }}.{{ resource.name|snake }}::projection.{{ resource.variant|snake }}::view_store::reader:
-    class: Honeybee\Infrastructure\DataAccess\Storage\Elasticsearch\Projection\ProjectionReader
+    class: Honeybee\Elasticsearch2\Storage\Projection\ProjectionReader
     connection: honeybee.view_store
     settings:
       index: ${project.database.prefix}.{{ crate.vendor|snake }}-{{ crate.name|snake }}
@@ -26,7 +26,7 @@ storage_readers:
 
 finders:
   {{ crate.vendor|snake }}.{{ crate.name|snake }}.{{ resource.name|snake }}::projection.{{ resource.variant|snake }}::view_store::finder:
-    class: Honeybee\Infrastructure\DataAccess\Finder\Elasticsearch\Projection\ProjectionFinder
+    class: Honeybee\Elasticsearch2\Finder\Projection\ProjectionFinder
     connection: honeybee.view_store
     settings:
       index: ${project.database.prefix}.{{ crate.vendor|snake }}-{{ crate.name|snake }}
@@ -40,8 +40,8 @@ query_services:
       default:
         finder: {{ crate.vendor|snake }}.{{ crate.name|snake }}.{{ resource.name|snake }}::projection.{{ resource.variant|snake }}::view_store::finder
         query_translation:
-          class: Honeybee\Infrastructure\DataAccess\Finder\Elasticsearch\CriteriaQueryTranslation
+          class: Honeybee\Elasticsearch2\Finder\CriteriaQueryTranslation
       custom:
         finder: {{ crate.vendor|snake }}.{{ crate.name|snake }}.{{ resource.name|snake }}::projection.{{ resource.variant|snake }}::view_store::finder
         query_translation:
-          class: Honeybee\Infrastructure\DataAccess\Finder\Elasticsearch\CustomQueryTranslation
+          class: Honeybee\Elasticsearch2\Finder\CustomQueryTranslation

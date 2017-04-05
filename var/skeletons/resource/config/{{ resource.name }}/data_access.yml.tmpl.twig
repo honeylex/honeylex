@@ -3,18 +3,18 @@
 ---
 storage_writers:
   {{ crate.vendor|snake }}.{{ crate.name|snake }}.{{ resource.name|snake }}::domain_event::event_source::writer:
-    class: Honeybee\Infrastructure\DataAccess\Storage\CouchDb\EventStream\EventStreamAppender
+    class: Honeybee\CouchDb\Storage\EventStream\EventStreamAppender
     connection: {{ crate.vendor|snake }}.{{ crate.name|snake }}.event_source
 
 storage_readers:
   {{ crate.vendor|snake }}.{{ crate.name|snake }}.{{ resource.name|snake }}::event_stream::event_source::reader:
-    class: Honeybee\Infrastructure\DataAccess\Storage\CouchDb\EventStream\EventStreamReader
+    class: Honeybee\CouchDb\Storage\EventStream\EventStreamReader
     connection: {{ crate.vendor|snake }}.{{ crate.name|snake }}.event_source
     settings:
       design_doc: {{ crate.vendor|snake }}-{{ crate.name|snake }}-{{ resource.name|snake }}
 
   {{ crate.vendor|snake }}.{{ crate.name|snake }}.{{ resource.name|snake }}::domain_event::event_source::reader:
-    class: Honeybee\Infrastructure\DataAccess\Storage\CouchDb\DomainEvent\DomainEventReader
+    class: Honeybee\CouchDb\Storage\DomainEvent\DomainEventReader
     connection: {{ crate.vendor|snake }}.{{ crate.name|snake }}.event_source
     settings:
       design_doc: {{ crate.vendor|snake }}-{{ crate.name|snake }}-{{ resource.name|snake }}

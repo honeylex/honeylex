@@ -3,31 +3,14 @@
 ---
 storage_writers:
   honeybee::domain_event::view_store::writer:
-    class: Honeybee\Infrastructure\DataAccess\Storage\Elasticsearch\DomainEvent\DomainEventWriter
+    class: Honeybee\Elasticsearch2\Storage\DomainEvent\DomainEventWriter
     connection: honeybee.view_store
     settings:
       type: domain_event
 
-  honeybee.core::process_state::process_store::writer:
-    class: Honeybee\Infrastructure\DataAccess\Storage\Filesystem\ProcessState\ProcessStateWriter
-    connection: honeybee.process_state.store
-
-  honeybee.core::process_state::process_cache::writer:
-    class: Honeybee\Infrastructure\DataAccess\Storage\Memory\ProcessState\ProcessStateWriter
-    connection: honeybee.process_state.cache
-
-storage_readers:
-  honeybee.core::process_state::process_store::reader:
-    class: Honeybee\Infrastructure\DataAccess\Storage\Filesystem\ProcessState\ProcessStateReader
-    connection: honeybee.process_state.store
-
-  honeybee.core::process_state::process_cache::reader:
-    class: Honeybee\Infrastructure\DataAccess\Storage\Memory\ProcessState\ProcessStateReader
-    connection: honeybee.process_state.cache
-
 finders:
   honeybee::domain_event::view_store::finder:
-    class: Honeybee\Infrastructure\DataAccess\Finder\Elasticsearch\DomainEvent\DomainEventFinder
+    class: Honeybee\Elasticsearch2\Finder\DomainEvent\DomainEventFinder
     connection: honeybee.view_store
     settings:
       type: domain_event
@@ -39,4 +22,4 @@ query_services:
       default:
         finder: honeybee::domain_event::view_store::finder
         query_translation:
-          class: Honeybee\Infrastructure\DataAccess\Finder\Elasticsearch\CriteriaQueryTranslation
+          class: Honeybee\Elasticsearch2\Finder\CriteriaQueryTranslation

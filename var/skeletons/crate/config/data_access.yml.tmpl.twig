@@ -3,10 +3,10 @@
 ---
 storage_writers:
   {{ crate.prefix }}::version_list::event_source::writer:
-    class: Honeybee\Infrastructure\DataAccess\Storage\CouchDb\StructureVersionList\StructureVersionListWriter
+    class: Honeybee\CouchDb\Storage\StructureVersionList\StructureVersionListWriter
     connection: {{ crate.prefix }}.event_source
   {{ crate.prefix }}::version_list::view_store::writer:
-    class: Honeybee\Infrastructure\DataAccess\Storage\Elasticsearch\StructureVersionList\StructureVersionListWriter
+    class: Honeybee\Elasticsearch2\Storage\StructureVersionList\StructureVersionListWriter
     connection: honeybee.view_store
     settings:
       index: ${project.database.prefix}.{{ crate.vendor|snake }}-{{ crate.name|snake }}
@@ -14,10 +14,10 @@ storage_writers:
 
 storage_readers:
   {{ crate.prefix }}::version_list::event_source::reader:
-    class: Honeybee\Infrastructure\DataAccess\Storage\CouchDb\StructureVersionList\StructureVersionListReader
+    class: Honeybee\CouchDb\Storage\StructureVersionList\StructureVersionListReader
     connection: {{ crate.prefix }}.event_source
   {{ crate.prefix }}::version_list::view_store::reader:
-    class: Honeybee\Infrastructure\DataAccess\Storage\Elasticsearch\StructureVersionList\StructureVersionListReader
+    class: Honeybee\Elasticsearch2\Storage\StructureVersionList\StructureVersionListReader
     connection: honeybee.view_store
     settings:
       index: ${project.database.prefix}.{{ crate.vendor|snake }}-{{ crate.name|snake }}
