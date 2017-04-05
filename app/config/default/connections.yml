@@ -7,7 +7,6 @@ honeybee.view_store:
     transport: ${elasticsearch.transport}
     host: ${elasticsearch.host}
     port: ${elasticsearch.port}
-    index: honeylex.domain_events
 
 honeybee.msg_queue:
   class: Honeybee\RabbitMq3\Connector\RabbitMqConnector
