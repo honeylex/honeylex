@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "4fa2a8a8cc926a56c0d3be303ed7891d",
+    "content-hash": "bdbfc4eb71c2da56560ee959541b2620",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -660,17 +660,17 @@
             "time": "2014-10-12T19:18:40+00:00"
         },
         {
-            "name": "honeybee/couchdb",
+            "name": "honeybee/couchdb-adapter",
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/honeybee/couchdb.git",
-                "reference": "81c373c134c613315ba35f47537836efd321e1fb"
+                "url": "https://github.com/honeybee/couchdb-adapter.git",
+                "reference": "20043375e098170c93590ba54ef56fba2e09f399"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeybee/couchdb/zipball/81c373c134c613315ba35f47537836efd321e1fb",
-                "reference": "81c373c134c613315ba35f47537836efd321e1fb",
+                "url": "https://api.github.com/repos/honeybee/couchdb-adapter/zipball/20043375e098170c93590ba54ef56fba2e09f399",
+                "reference": "20043375e098170c93590ba54ef56fba2e09f399",
                 "shasum": ""
             },
             "require": {
@@ -700,20 +700,20 @@
                 "couchdb",
                 "honeybee"
             ],
-            "time": "2017-04-05 22:18:03"
+            "time": "2017-04-08 22:22:32"
         },
         {
-            "name": "honeybee/elasticsearch2",
+            "name": "honeybee/elasticsearch2-adapter",
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/honeybee/elasticsearch2.git",
-                "reference": "3cd0c3bc03b4c71f0642490dc7eafd0b94e7fdf0"
+                "url": "https://github.com/honeybee/elasticsearch2-adapter.git",
+                "reference": "e89a5d051b054aa442a068efd5ad523cbe84f8e0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeybee/elasticsearch2/zipball/3cd0c3bc03b4c71f0642490dc7eafd0b94e7fdf0",
-                "reference": "3cd0c3bc03b4c71f0642490dc7eafd0b94e7fdf0",
+                "url": "https://api.github.com/repos/honeybee/elasticsearch2-adapter/zipball/e89a5d051b054aa442a068efd5ad523cbe84f8e0",
+                "reference": "e89a5d051b054aa442a068efd5ad523cbe84f8e0",
                 "shasum": ""
             },
             "require": {
@@ -743,7 +743,7 @@
                 "elasticsearch",
                 "honeybee"
             ],
-            "time": "2017-04-05 22:17:15"
+            "time": "2017-04-08 22:22:46"
         },
         {
             "name": "honeybee/honeybee",
@@ -751,12 +751,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeybee/honeybee.git",
-                "reference": "d55ac844b0300a31652e84ea71552bb4b67e8479"
+                "reference": "bef8b52d7164538f3ab3524665ce73644e59dd70"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/d55ac844b0300a31652e84ea71552bb4b67e8479",
-                "reference": "d55ac844b0300a31652e84ea71552bb4b67e8479",
+                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/bef8b52d7164538f3ab3524665ce73644e59dd70",
+                "reference": "bef8b52d7164538f3ab3524665ce73644e59dd70",
                 "shasum": ""
             },
             "require": {
@@ -833,20 +833,20 @@
                 "hexagonal",
                 "messaging"
             ],
-            "time": "2017-04-05 22:29:49"
+            "time": "2017-04-05 23:27:55"
         },
         {
-            "name": "honeybee/rabbitmq3",
+            "name": "honeybee/rabbitmq3-adapter",
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/honeybee/rabbitmq3.git",
-                "reference": "a0be2c159c8e80328c5064897b6f349657180f31"
+                "url": "https://github.com/honeybee/rabbitmq3-adapter.git",
+                "reference": "692367df7bd76309e26c485e70b57ec7684c62cc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeybee/rabbitmq3/zipball/a0be2c159c8e80328c5064897b6f349657180f31",
-                "reference": "a0be2c159c8e80328c5064897b6f349657180f31",
+                "url": "https://api.github.com/repos/honeybee/rabbitmq3-adapter/zipball/692367df7bd76309e26c485e70b57ec7684c62cc",
+                "reference": "692367df7bd76309e26c485e70b57ec7684c62cc",
                 "shasum": ""
             },
             "require": {
@@ -876,7 +876,7 @@
                 "honeybee",
                 "rabbitmq"
             ],
-            "time": "2017-04-05 22:31:12"
+            "time": "2017-04-08 22:23:04"
         },
         {
             "name": "honeybee/trellis",
@@ -1679,16 +1679,16 @@
         },
         {
             "name": "rdlowrey/auryn",
-            "version": "v1.4.0",
+            "version": "v1.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rdlowrey/auryn.git",
-                "reference": "2e4240791162dfe073d59654d8dc06df0eb0b73f"
+                "reference": "c6c92ec081c707f7e9e0a69185665147b30d66de"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rdlowrey/auryn/zipball/2e4240791162dfe073d59654d8dc06df0eb0b73f",
-                "reference": "2e4240791162dfe073d59654d8dc06df0eb0b73f",
+                "url": "https://api.github.com/repos/rdlowrey/auryn/zipball/c6c92ec081c707f7e9e0a69185665147b30d66de",
+                "reference": "c6c92ec081c707f7e9e0a69185665147b30d66de",
                 "shasum": ""
             },
             "require": {
@@ -1736,7 +1736,7 @@
                 "dic",
                 "ioc"
             ],
-            "time": "2016-03-14T20:10:19+00:00"
+            "time": "2017-04-07T16:12:28+00:00"
         },
         {
             "name": "react/promise",
@@ -5380,17 +5380,16 @@
         },
         {
             "name": "silex/web-profiler",
-            "version": "v2.0.5",
-            "target-dir": "Silex/Provider",
+            "version": "v2.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/silexphp/Silex-WebProfiler.git",
-                "reference": "b44c4c8e70a43eb5e98372cffbeb6de3770c5805"
+                "reference": "5497bd2be84bf31a11bea9f15f72280b9ab06c5d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silexphp/Silex-WebProfiler/zipball/b44c4c8e70a43eb5e98372cffbeb6de3770c5805",
-                "reference": "b44c4c8e70a43eb5e98372cffbeb6de3770c5805",
+                "url": "https://api.github.com/repos/silexphp/Silex-WebProfiler/zipball/5497bd2be84bf31a11bea9f15f72280b9ab06c5d",
+                "reference": "5497bd2be84bf31a11bea9f15f72280b9ab06c5d",
                 "shasum": ""
             },
             "require": {
@@ -5406,6 +5405,7 @@
                 "symfony/browser-kit": "^2.8|^3.0",
                 "symfony/css-selector": "^2.8|^3.0",
                 "symfony/debug-bundle": "^2.8|^3.0",
+                "symfony/phpunit-bridge": "~3.2",
                 "symfony/security": "^2.8|^3.0",
                 "symfony/security-bundle": "^2.8|^3.0",
                 "symfony/translation": "^2.8|^3.0"
@@ -5417,7 +5417,7 @@
                 }
             },
             "autoload": {
-                "psr-0": {
+                "psr-4": {
                     "Silex\\Provider\\": ""
                 }
             },
@@ -5433,7 +5433,7 @@
             ],
             "description": "A WebProfiler for Silex",
             "homepage": "http://silex.sensiolabs.org/",
-            "time": "2016-11-21T23:51:53+00:00"
+            "time": "2017-04-08T17:23:38+00:00"
         },
         {
             "name": "squizlabs/php_codesniffer",
@@ -5808,10 +5808,10 @@
     ],
     "minimum-stability": "dev",
     "stability-flags": {
-        "honeybee/couchdb": 20,
-        "honeybee/elasticsearch2": 20,
+        "honeybee/couchdb-adapter": 20,
+        "honeybee/elasticsearch2-adapter": 20,
         "honeybee/honeybee": 20,
-        "honeybee/rabbitmq3": 20,
+        "honeybee/rabbitmq3-adapter": 20,
         "roave/security-advisories": 20
     },
     "prefer-stable": true,

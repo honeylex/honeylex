@@ -37,10 +37,10 @@
         }
     ],
     "require": {
-        "honeybee/couchdb": "dev-master",
-        "honeybee/elasticsearch2": "dev-master",
+        "honeybee/couchdb-adapter": "dev-master",
+        "honeybee/elasticsearch2-adapter": "dev-master",
         "honeybee/honeybee": "dev-feature/disconnect as 0.2",
-        "honeybee/rabbitmq3": "dev-master",
+        "honeybee/rabbitmq3-adapter": "dev-master",
         "nesbot/carbon": "^1.21",
         "roave/security-advisories": "master@dev",
         "silex/silex": "^2.0",

@@ -6,7 +6,6 @@ storage_writers:
     class: Honeybee\Elasticsearch2\Storage\DomainEvent\DomainEventWriter
     connection: honeybee.view_store
     settings:
-      index: honeylex.domain_events
       type: domain_event
 
 finders:
@@ -14,7 +13,6 @@ finders:
     class: Honeybee\Elasticsearch2\Finder\DomainEvent\DomainEventFinder
     connection: honeybee.view_store
     settings:
-      index: honeylex.domain_events
       type: domain_event
 
 query_services:
