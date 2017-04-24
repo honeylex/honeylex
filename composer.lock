@@ -5380,16 +5380,16 @@
         },
         {
             "name": "silex/web-profiler",
-            "version": "v2.0.8",
+            "version": "v2.0.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/silexphp/Silex-WebProfiler.git",
-                "reference": "77823025d684ffcb8800382f7a38894aebd1e693"
+                "reference": "cd76e55490d556a81378b8230e28f55536811418"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silexphp/Silex-WebProfiler/zipball/77823025d684ffcb8800382f7a38894aebd1e693",
-                "reference": "77823025d684ffcb8800382f7a38894aebd1e693",
+                "url": "https://api.github.com/repos/silexphp/Silex-WebProfiler/zipball/cd76e55490d556a81378b8230e28f55536811418",
+                "reference": "cd76e55490d556a81378b8230e28f55536811418",
                 "shasum": ""
             },
             "require": {
@@ -5433,7 +5433,7 @@
             ],
             "description": "A WebProfiler for Silex",
             "homepage": "http://silex.sensiolabs.org/",
-            "time": "2017-04-08T17:30:17+00:00"
+            "time": "2017-04-23T23:11:39+00:00"
         },
         {
             "name": "squizlabs/php_codesniffer",
