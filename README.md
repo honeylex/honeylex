@@ -22,14 +22,13 @@ Bring up the Honeylex project on Docker as follows:
 git clone git@github.com:honeylex/honeylex.git your-project
 cd your-project
 composer install --ignore-platform-reqs
-# don't forget to connect your shell with `eval $(docker-machine env default)`
-composer docker:up
+eval $(docker-machine env default)
+docker-compose up -d
 ```
 
 Now you can run commands to setup the project:
 ```shell
-composer honeylex project:configure
-composer honeylex migrate:up
+bin/honeylex project:configure
 ```
 **Once containers are running your project will be ready and provisioned!**
 >Run `docker-machine ip default` to find the IP (typically http://192.168.99.100)
@@ -38,21 +37,22 @@ composer honeylex migrate:up
 > - CouchDB admin at http://192.168.99.100:5984/_utils
 > - RabbitMQ admin at http://192.168.99.100:15672
 
-You can configure various environment files in the ```var/environment``` folder of your host machine. The `.env` and `var/docker/docker-composer.yml` files also contain additional global project environment configuration.
+The `.env` and `var/docker/docker-composer.yml` files also allow additional global project environment configuration. You can also provide application secrets in the ```var/secrets``` folder.
 
-The following docker commands are available via `composer` from your host machine:
+The following docker commands can be used to manage your containers:
 ```shell
-composer docker:up     # create and start containers
-composer docker:down   # stop and remove containers
-composer docker:start  # start previously stopped containers
-composer docker:stop   # stop/suspend running containers
-composer docker:prune  # remove dangling volumes and stopped containers
+docker-compose up -d          # create and start containers
+docker-compose down           # stop and remove containers
+docker-compose start          # start previously stopped containers
+docker-compose stop           # stop/suspend running containers
+docker-compose logs php       # inspect container logs
+docker-compose exec php bash  # start a bash session in a container
 ```
 
 ## Console
 Honeylex comes with a number of convenient tools to help project setup and maintenance. A complete list of commands can be found by running:
 ```shell
-composer honeylex  # alias of docker-compose run --rm php_cli ./bin/honeylex
+bin/honeylex
 ```
 
 A useful set of commands are provided for managing the following system features:
