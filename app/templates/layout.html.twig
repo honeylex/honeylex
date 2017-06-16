@@ -50,7 +50,7 @@
                 <button type="button" class="btn btn-xs btn-default">Debug: on</button>
                 <button type="button" class="btn btn-xs btn-default">Version: {{ config('appVersion') }}@{{ config('appEnv') }}</button>
                 <button type="button" class="btn btn-xs btn-default"><a href="http://{{ app.request_stack.currentRequest.host }}:5984/_utils" target="_blank">CouchDb</a></button>
-                <button type="button" class="btn btn-xs btn-default"><a href="http://{{ app.request_stack.currentRequest.host }}:9100" target="_blank">Elasticsearch</a></button>
+                <button type="button" class="btn btn-xs btn-default"><a href="http://{{ app.request_stack.currentRequest.host }}:9100/?base_uri=http://{{ app.request_stack.currentRequest.host }}:9200" target="_blank">Elasticsearch</a></button>
                 <button type="button" class="btn btn-xs btn-default"><a href="http://{{ app.request_stack.currentRequest.host }}:15672" target="_blank">RabbitMQ</a></button>
             </div>
             {% endif %}
