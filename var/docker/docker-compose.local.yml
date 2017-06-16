@@ -14,7 +14,6 @@ services:
   php:
     volumes:
       - ../../:/var/www
-      - logs:/var/www/var/logs
 
   couchdb:
     volumes:
@@ -23,3 +22,8 @@ services:
   elasticsearch:
     volumes:
       - ./elasticsearch:/usr/local/elasticsearch
+
+  elasticsearch-head:
+    image: mobz/elasticsearch-head:2
+    ports:
+      - "9100:9100"
