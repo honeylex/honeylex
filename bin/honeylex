@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker-compose run --no-deps php php bin/honeylex.php $@
+docker-compose run --rm --no-deps php php bin/honeylex.php $@
